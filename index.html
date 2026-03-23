@@ -189,11 +189,93 @@
   .footer-logo { font-size: 15px; font-weight: 800; }
   footer p { font-size: 13px; color: var(--muted); }
 
+  /* Contact form section */
+  .contact-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 104px 28px;
+    border-top: 1px solid var(--border);
+  }
+  .contact-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 13px; font-weight: 700; color: var(--text); }
+  .form-input,
+  .form-select,
+  .form-textarea {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 15px;
+    width: 100%;
+    transition: outline 0.15s;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666870' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+  .form-textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus { outline: 2px solid var(--text); }
+  .form-submit { margin-top: 8px; }
+  .btn-form {
+    background: var(--btnBg);
+    color: var(--btnText);
+    border: none;
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: var(--font);
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-form:hover { opacity: 0.92; transform: translateY(-1px); }
+  .btn-form:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .form-message {
+    margin-top: 14px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    display: none;
+  }
+  .form-message.success {
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+    display: block;
+  }
+  .form-message.error {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    display: block;
+  }
 
   @media (max-width: 720px) {
     .industries, .proof-grid { grid-template-columns: 1fr 1fr; }
     .bar-row { grid-template-columns: 1fr; gap: 8px; }
     .bar-val { text-align: left; }
+    .form-row { grid-template-columns: 1fr; }
   }
   @media (max-width: 560px) {
     .nav-right .nav-link { display: none; }
@@ -203,6 +285,7 @@
     .industries, .proof-grid { grid-template-columns: 1fr; }
     .score-card { padding: 28px; }
     .cta-block { margin: 0 16px 60px; padding: 58px 22px; }
+    .contact-card { padding: 28px; }
   }
 </style>
 </head>
@@ -214,7 +297,7 @@
     <a href="#proof" class="nav-link">What you get</a>
     <a href="#faq" class="nav-link">FAQ</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">Dark mode</span></button>
-    <a href="mailto:hello@aiscite.com?subject=Free AI Visibility Walkthrough" class="nav-btn" target="_blank">Free walkthrough</a>
+    <a href="#contact" class="nav-btn">Free walkthrough</a>
   </div>
 </nav>
 <div class="hero">
@@ -222,7 +305,7 @@
   <h1>If AI cannot find you, clients will not find you.</h1>
   <p>Aiscite helps you understand how leading AI assistants see your business and what needs to change if you want to be found, trusted, and cited in AI search.</p>
   <div class="hero-actions">
-    <a href="mailto:hello@aiscite.com?subject=Free AI Visibility Walkthrough" class="btn-dark" target="_blank">Book your free walkthrough</a>
+    <a href="#contact" class="btn-dark">Book your free walkthrough</a>
     <a href="#proof" class="btn-ghost">See what you get</a>
   </div>
   <div class="hero-micro">Free 10-minute walkthrough. Audit report from $288. Delivery within 48 hours.</div>
@@ -260,7 +343,7 @@
   <div class="steps">
     <div class="step-item"><div class="step-num">01</div><div class="step-content"><h3>We run your AI visibility audit</h3><p>We test how major AI systems interpret, summarize, and cite your business across five core dimensions.</p></div></div>
     <div class="step-item"><div class="step-num">02</div><div class="step-content"><h3>You get an Aiscite score and report</h3><p>Your report includes your AI Visibility Score, issue breakdown, category benchmark, and prioritized opportunities. Reports start at $288.</p></div></div>
-    <div class="step-item"><div class="step-num">03</div><div class="step-content"><h3>We show you what to change</h3><p>We give you clear, prioritized fixes your team can act on right away. No technical expertise needed.</p></div></div>
+    <div class="step-item"><div class="step-num">03</div><div class="step-content"><h3>We show you what to change</h3><p>We give you clear, prioritized fixes your team can act on right away. No expertise needed.</p></div></div>
   </div>
 </div>
 <div class="section" style="padding-top:0;border-top:1px solid var(--border)">
@@ -296,7 +379,7 @@
     <div class="faq-item"><h3>What is an AI visibility audit?</h3><p>An AI visibility audit measures how well leading AI assistants and answer engines can understand, trust, and cite your business.</p></div>
     <div class="faq-item"><h3>How is this different from SEO?</h3><p>Traditional SEO focuses on search rankings. Aiscite focuses on how AI systems understand, describe, and recommend your business. It is a different problem that needs a different approach.</p></div>
     <div class="faq-item"><h3>Which businesses is this for?</h3><p>Aiscite works best for businesses where trust, expertise, and local discovery strongly influence buyer decisions.</p></div>
-    <div class="faq-item"><h3>Do I need a developer?</h3><p>No. We prioritize fixes that can often be made with copy, structure, and straightforward website edits. If technical help is needed, we make the brief clear and simple.</p></div>
+    <div class="faq-item"><h3>Do I need a developer?</h3><p>No. We prioritize fixes that can often be made with copy, structure, and straightforward website edits. If help is needed, we make the brief clear and simple.</p></div>
     <div class="faq-item"><h3>How long does it take?</h3><p>Your audit and recommendations are typically delivered within 48 hours after kickoff.</p></div>
   </div>
 </div>
@@ -340,7 +423,52 @@
     </div>
   </div>
 </div>
-<div class="cta-block"><h2>See how AI sees your business.</h2><p>Free walkthrough. No setup. No technical work. Just a clear view of how AI understands, trusts, and cites you today.</p><a href="mailto:hello@aiscite.com?subject=Free AI Visibility Walkthrough" class="btn-white" target="_blank">Get your free Aiscite walkthrough</a><div class="cta-note">Free 10-minute walkthrough. Audit report from $288. Delivery within 48 hours.</div></div>
+<div class="cta-block"><h2>See how AI sees your business.</h2><p>Free walkthrough. No setup. No work on your end. Just a clear view of how AI understands, trusts, and cites you today.</p><a href="#contact" class="btn-white">Get your free Aiscite walkthrough</a><div class="cta-note">Free 10-minute walkthrough. Audit report from $288. Delivery within 48 hours.</div></div>
+
+<!-- Contact form -->
+<section id="contact" class="contact-section">
+  <p class="section-sm">Get in touch</p>
+  <h2>Start with a free conversation.</h2>
+  <p class="lead">Tell us about your business. We will review your AI visibility and get back to you within 24 hours.</p>
+  <div class="contact-card">
+    <form class="contact-form" id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" class="form-input" placeholder="Jane Smith" required>
+        </div>
+        <div class="form-group">
+          <label for="business">Business name</label>
+          <input type="text" id="business" name="business" class="form-input" placeholder="Acme Co." required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" class="form-input" placeholder="jane@yourcompany.com" required>
+      </div>
+      <div class="form-group">
+        <label for="service">Service interested in</label>
+        <select id="service" name="service" class="form-select" required>
+          <option value="" disabled selected>Please select...</option>
+          <option value="AI Visibility Audit ($288)">AI Visibility Audit ($288)</option>
+          <option value="AI-Ready Website ($488)">AI-Ready Website ($488)</option>
+          <option value="Full Implementation ($688)">Full Implementation ($688)</option>
+          <option value="Audit + Implementation Bundle ($888)">Audit + Implementation Bundle ($888)</option>
+          <option value="Not sure yet">Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message <span style="font-weight:500;color:var(--muted)">(optional)</span></label>
+        <textarea id="message" name="message" class="form-textarea" placeholder="Tell us about your business and what you are looking to achieve"></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit" class="btn-form" id="submitBtn">Get in touch</button>
+      </div>
+      <div class="form-message" id="formMessage"></div>
+    </form>
+  </div>
+</section>
+
 <footer><div class="footer-logo">Aiscite</div><p>AI visibility audits for trust-driven businesses</p><p>© 2026 Aiscite</p></footer>
 <script>
 (function () {
@@ -351,7 +479,6 @@
   function sync() {
     const dark = root.getAttribute('data-theme') === 'dark';
     document.getElementById('themeIcon').textContent = dark ? 'Light mode' : 'Dark mode';
-
   }
   function toggleTheme() {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -361,6 +488,50 @@
   }
   btn.addEventListener('click', toggleTheme);
   sync();
+})();
+
+(function () {
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formMessage = document.getElementById('formMessage');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    formMessage.className = 'form-message';
+    formMessage.textContent = '';
+
+    const data = {
+      name: form.name.value,
+      business: form.business.value,
+      email: form.email.value,
+      service: form.service.value,
+      message: form.message.value
+    };
+
+    try {
+      const response = await fetch('https://formspree.io/f/xpwzgqdk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        formMessage.className = 'form-message success';
+        formMessage.textContent = 'We will be in touch within 24 hours.';
+        form.reset();
+      } else {
+        throw new Error('Server error');
+      }
+    } catch (err) {
+      formMessage.className = 'form-message error';
+      formMessage.innerHTML = 'Something went wrong. Please email us directly at <a href="mailto:hello@aiscite.com" style="color:inherit">hello@aiscite.com</a>';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Get in touch';
+    }
+  });
 })();
 </script>
 </body>
