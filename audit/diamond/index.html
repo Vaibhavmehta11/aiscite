@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Citeable — Diamond & Diamond Lawyers</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- PostHog Analytics -->
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init me people identify alias capture register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+
+// Parse tracked URL params
+const _params = new URLSearchParams(window.location.search);
+const _trackCtx = {
+  prospect:  _params.get('prospect')  || 'unknown',
+  campaign:  _params.get('campaign')  || 'unknown',
+  channel:   _params.get('channel')   || 'unknown',
+  variant:   _params.get('variant')   || 'v1',
+  page:      'citeable_diamond_audit'
+};
+
+// Init PostHog — replace key below after creating free account at posthog.com
+const POSTHOG_KEY = 'phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb';
+const POSTHOG_HOST = 'https://app.posthog.com';
+
+if (POSTHOG_KEY !== 'phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb') {
+  posthog.init(POSTHOG_KEY, { api_host: POSTHOG_HOST, person_profiles: 'identified_only' });
+  // Identify by prospect so sessions are grouped
+  if (_trackCtx.prospect !== 'unknown') {
+    posthog.identify('prospect_' + _trackCtx.prospect, { prospect: _trackCtx.prospect });
+  }
+}
+
+function track(event, extra) {
+  try {
+    if (POSTHOG_KEY !== 'phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb') {
+      posthog.capture(event, Object.assign({}, _trackCtx, extra || {}));
+    }
+    // Always log to console so we can verify manually
+    console.log('[citeable]', event, Object.assign({}, _trackCtx, extra || {}));
+  } catch(e) {}
+}
+
+// Fire page view immediately
+document.addEventListener('DOMContentLoaded', function() {
+  track('citeable_page_viewed');
+  track('citeable_session_started');
+
+  // Track all CTA clicks
+  document.querySelectorAll('[data-cta]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      track('citeable_cta_clicked', {
+        cta_type: el.getAttribute('data-cta'),
+        cta_location: el.getAttribute('data-location') || 'unknown'
+      });
+    });
+  });
+
+  // Track scroll depth (25 / 50 / 75 / 100)
+  var depths = {25: false, 50: false, 75: false, 100: false};
+  window.addEventListener('scroll', function() {
+    var pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    [25,50,75,100].forEach(function(d) {
+      if (!depths[d] && pct >= d) { depths[d] = true; track('citeable_scroll_depth', {depth: d}); }
+    });
+  }, {passive: true});
+});
+</script>
+
+<style>
+:root{--navy:#0f1f3d;--navy2:#1a3261;--blue:#2563eb;--blue2:#60a5fa;--blueLt:#eff6ff;--gold:#d97706;--gold2:#f59e0b;--red:#dc2626;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--bg:#f8fafc;--white:#fff;--shadow:0 14px 36px rgba(15,31,61,.08)}
+*{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth} body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6} a{text-decoration:none}
+nav{position:sticky;top:0;z-index:100;background:rgba(15,31,61,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:900;color:#fff;font-size:16px}.brand em{font-style:normal;color:var(--gold2)}.nav-note{font-size:12px;color:rgba(255,255,255,.5)}.nav-btn{background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);padding:10px 16px;border-radius:999px;font-weight:900;font-size:13px;box-shadow:0 8px 20px rgba(245,158,11,.24)}
+.hero{background:linear-gradient(155deg,#091426 0%,#0f1f3d 56%,#1e3a6e 100%);color:#fff;position:relative;overflow:hidden}.hero:before{content:'';position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,.18) 0%, transparent 68%)}
+.hero-inner{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:60px 24px 40px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(220,38,38,.12);border:1px solid rgba(248,113,113,.24);font-size:12px;font-weight:800;color:#fecaca;margin-bottom:18px}.dot{width:8px;height:8px;border-radius:50%;background:#ef4444}
+.hero h1{font-size:46px;line-height:1.04;letter-spacing:-.04em;margin-bottom:16px}.hero h1 span{color:#7dd3fc}.lead{font-size:18px;color:rgba(255,255,255,.8);max-width:660px;margin-bottom:18px}.pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}.pill{padding:8px 12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);border-radius:999px;font-size:12px;color:rgba(255,255,255,.82)}
+.hero-points{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.hero-point{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:18px}.hero-point .k{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#93c5fd;font-weight:800;margin-bottom:6px}.hero-point .v{font-size:28px;font-weight:900;line-height:1.05;margin-bottom:4px}.hero-point .t{font-size:12px;color:rgba(255,255,255,.7)}
+.side{background:linear-gradient(180deg,#ffffff 0%, #f8fbff 100%);color:var(--text);border-radius:26px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column}.score-head{display:flex;gap:18px;align-items:center;margin-bottom:18px}.ring{position:relative;width:124px;height:124px;flex-shrink:0}.ring canvas{width:124px !important;height:124px !important}.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.ring-center strong{font-size:36px;font-weight:900;line-height:1;color:var(--blue)}.ring-center span{font-size:12px;color:var(--muted);font-weight:800}.side h2{font-size:24px;line-height:1.08;color:var(--navy);margin-bottom:8px}.side p{font-size:14px;color:var(--muted)}
+.score-list{display:grid;gap:10px;margin:16px 0 18px}.score-item{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--border)}.score-item:first-child{border-top:none;padding-top:0}.score-item span{font-size:13px;color:var(--muted)}.score-item strong{font-size:13px;color:var(--navy)}.side-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}.btn-main{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-weight:900;padding:14px 18px;border-radius:14px;box-shadow:0 10px 20px rgba(245,158,11,.22)}.btn-sub{display:inline-block;border:1.5px solid var(--border);color:var(--navy);font-weight:800;padding:13px 16px;border-radius:14px;background:#fff}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}.section{padding:48px 0;border-bottom:1px solid var(--border)}.section h2{font-size:32px;line-height:1.08;letter-spacing:-.04em;color:var(--navy);margin-bottom:10px}.intro{font-size:15px;color:var(--muted);max-width:760px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:24px}.card{background:#fff;border:1px solid var(--border);border-radius:22px;padding:24px;box-shadow:var(--shadow);min-width:0}.card.premium{border-color:#dbeafe;background:linear-gradient(180deg,#ffffff 0%, #f8fbff 100%)}.card h3{font-size:20px;color:var(--navy);margin-bottom:8px}.card p{font-size:14px;color:var(--muted)}
+.chart-shell{margin-top:16px;border:1px solid #e2e8f0;border-radius:18px;background:linear-gradient(180deg,#fff 0%, #f8fbff 100%);padding:14px;overflow:hidden}.chart-frame{position:relative;height:310px;min-height:310px}.chart-frame.tall{height:340px;min-height:340px}.chart-frame canvas{width:100% !important;height:100% !important;display:block}.insight{margin-top:14px;background:var(--blueLt);border:1px solid #bfdbfe;border-radius:14px;padding:13px 14px;font-size:13px;color:var(--navy)}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.problem{background:#fff;border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:var(--shadow)}.tag{display:inline-flex;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}.tag.red{background:#fef2f2;color:var(--red)}.tag.gold{background:#fff7ed;color:var(--gold)}.problem h4{font-size:18px;line-height:1.22;color:var(--navy);margin-bottom:10px}.problem p{font-size:14px;color:var(--muted);margin-bottom:12px}.fix{padding-top:12px;border-top:1px solid var(--border);font-size:13px;color:var(--text)}
+.offer{display:grid;grid-template-columns:.92fr 1.08fr;gap:20px;margin-top:24px}.offer-main{background:linear-gradient(160deg,#0f1f3d 0%,#18366b 100%);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}.offer-main .small{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#fcd34d;font-weight:800;margin-bottom:10px}.offer-main h3{font-size:30px;line-height:1.06;margin-bottom:10px}.offer-main p{font-size:14px;color:rgba(255,255,255,.78)}.price{font-size:58px;font-weight:900;line-height:1;color:var(--gold2);margin:18px 0 6px}.price-note{font-size:14px;color:#dbeafe}
+.offer-list{display:grid;gap:12px}.offer-item{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:16px;padding:15px;box-shadow:var(--shadow)}.offer-item b{display:block;font-size:14px;color:var(--navy)}.offer-item span{font-size:13px;color:var(--muted)}
+.process{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.step{background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px}.step strong{display:block;font-size:12px;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}.step p{font-size:13px;color:var(--muted)}
+.cta{padding:52px 0}.cta-box{background:linear-gradient(180deg,#ffffff 0%, #f8fbff 100%);border:1px solid var(--border);border-radius:26px;padding:30px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}.cta-box h3{font-size:30px;line-height:1.08;color:var(--navy);margin-bottom:10px}.cta-box p{font-size:15px;color:var(--muted);max-width:760px}.cta-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+footer{padding:28px 24px 50px;text-align:center;font-size:12px;color:var(--muted)}
+@media (max-width:940px){.hero-inner,.grid-2,.offer,.cta-box{grid-template-columns:1fr}.hero-points,.problem-grid,.process{grid-template-columns:1fr}.cta-actions{justify-content:flex-start}}
+</style>
+</head>
+<body data-page-type="desktop_final">
+<nav><div class="nav-inner"><div class="brand"><em>Citeable</em> · Diamond & Diamond Lawyers</div><div class="nav-note">Private visibility review · March 2026</div><a class="nav-btn" href="https://calendly.com/vaibhavmeh/citeable-10-min-walkthrough" data-cta="book-call" data-location="nav">Book the 10-minute call</a></div></nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> Private finding: your firm looks stronger to the market than it does to AI.</div>
+      <h1>You have recovered over a billion dollars. <span>AI does not know that yet.</span></h1>
+      <p class="lead">When someone asks for the best personal injury lawyer in Toronto or who to call after a car accident in Ontario, Diamond and Diamond should be the first name AI gives. The brand strength is real. The AI packaging is not.</p>
+      <div class="pill-row"><div class="pill">Current score: 46 / 100</div><div class="pill">Acceptable score: 75 / 100</div><div class="pill">Implementation window: 2 to 3 weeks</div></div>
+      <div class="hero-points">
+        <div class="hero-point"><div class="k">Current position</div><div class="v">Recognized, not cited enough</div><div class="t">The firm has strong awareness, but AI still sees too little structured legal proof to recommend it consistently.</div></div>
+        <div class="hero-point"><div class="k">Main weakness</div><div class="v">Answer-engine proof</div><div class="t">Marketing claims are visible, but machine-readable case-type, lawyer, and outcome signals are too thin.</div></div>
+        <div class="hero-point"><div class="k">Best next move</div><div class="v">Short call</div><div class="t">A quick walkthrough is enough to confirm the highest-value pages and entities to strengthen first.</div></div>
+      </div>
+    </div>
+    <aside class="side">
+      <div class="score-head">
+        <div class="ring"><canvas id="scoreRing"></canvas><div class="ring-center"><strong>46</strong><span>Current score</span></div></div>
+        <div><h2>The authority exists. The citation structure does not.</h2><p>This is not about changing the brand. It is about translating existing reputation into answer-ready legal authority AI systems can quote directly.</p></div>
+      </div>
+      <div class="score-list">
+        <div class="score-item"><span>Competing practices</span><strong>38 / 100</strong></div>
+        <div class="score-item"><span>Acceptable score</span><strong>75 / 100</strong></div>
+        <div class="score-item"><span>Likely upside from this work</span><strong>+20 to +29 points</strong></div>
+        <div class="score-item"><span>Best next step</span><strong>10-minute private walkthrough</strong></div>
+      </div>
+      <div class="side-actions"><a class="btn-main" href="https://calendly.com/vaibhavmeh/citeable-10-min-walkthrough" data-cta="book-call" data-location="hero-side">Book the 10-minute call</a><a class="btn-sub" href="mailto:hello@citeable.ai?subject=Diamond%20%26%20Diamond%20%E2%80%94%20AI%20Visibility%20Walkthrough" data-cta="reply-email" data-location="hero-side">Reply by email</a></div>
+    </aside>
+  </div>
+</section>
+<div class="wrap">
+  <section class="section">
+    <h2>Where you stand today</h2>
+    <p class="intro">Diamond & Diamond is stronger than many competing firms on brand awareness, but still below the level where AI confidently treats it as a default recommendation for high-intent injury queries.</p>
+    <div class="grid-2">
+      <div class="card premium">
+        <h3>Position in the market</h3>
+        <p>The firm has years in market, strong recovery claims, and broad practice coverage. The gap is that too little of that proof is packaged into clean answer blocks, lawyer entities, and citeable case-type authority.</p>
+        <div class="chart-shell"><div class="chart-frame"><canvas id="benchmarkChart"></canvas></div></div>
+        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong> the upside is not inventing trust. It is packaging existing legal authority in the format AI uses to recommend firms.</div>
+      </div>
+      <div class="card premium">
+        <h3>Where the biggest improvements are</h3>
+        <p>The biggest gains come from clearer proof architecture: lawyer pages, case-type pages, jurisdiction signals, and concise facts that LLMs can quote without guessing.</p>
+        <div class="chart-shell"><div class="chart-frame tall"><canvas id="radarChart"></canvas></div></div>
+        <div class="insight" id="radarInsight"><strong>What this means:</strong> the fastest improvement comes from stronger evidence packaging, not more brand copy.</div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <h2>The three things holding the site back</h2>
+    <p class="intro">These are authority-packaging issues. The firm already has brand strength, but AI still needs clearer proof on who you help, where you lead, and why you should be cited.</p>
+    <div class="problem-grid">
+      <div class="problem"><div class="tag red">Priority</div><h4>Brand marketing copy, not answer-engine proof</h4><p>The site leads with broad brand claims, but high-intent prompts require concise, query-shaped answers around injury types, timing, jurisdictions, and why to call the firm.</p><div class="fix"><b>Fix:</b> Add answer-led blocks to commercial pages so AI can lift direct, factual statements for injury and accident prompts.</div></div>
+      <div class="problem"><div class="tag red">Priority</div><h4>Schema exists but too shallow for AI citation</h4><p>There are legal-service signals on the site, but not enough deep entity structure around lawyers, practice areas, locations served, FAQs, and case-result proof.</p><div class="fix"><b>Fix:</b> Expand LegalService, Person, FAQ, and practice-area entity markup so AI can connect lawyers, claims, and geography with more certainty.</div></div>
+      <div class="problem"><div class="tag gold">High value</div><h4>Proof assets not organized for machine citation</h4><p>The firm has reviews, outcomes, lawyers, and years of market presence, but too little of that proof is packaged into concise, citeable assets AI can quote cleanly.</p><div class="fix"><b>Fix:</b> Create tighter fact blocks and internal links around outcomes, lawyer profiles, regions served, and injury-specific authority.</div></div>
+    </div>
+  </section>
+  <section class="section">
+    <h2>A premium, low-risk way to fix it</h2>
+    <p class="intro">The right first step is a short private review focused on the fastest legal-authority upgrades, not a broad marketing proposal.</p>
+    <div class="offer">
+      <div class="offer-main"><div class="small">Recommended next step</div><h3>Book the 10-minute call.</h3><p>We show where Diamond & Diamond is leaving high-intent AI lead share on the table and what a focused authority upgrade would change.</p><div class="price">$750</div><div class="price-note">One-time implementation · 2-week delivery · 30-day improvement guarantee</div></div>
+      <div class="offer-list">
+        <div class="offer-item"><div>✓</div><div><b>What you get</b><span>A prioritized plan for answer blocks, lawyer entities, case-type proof, and site structure that makes the firm easier for AI systems to cite.</span></div></div>
+        <div class="offer-item"><div>✓</div><div><b>What you do not need</b><span>No repositioning exercise, no generic SEO busywork, and no long discovery process just to confirm the opportunity.</span></div></div>
+        <div class="offer-item"><div>✓</div><div><b>Why the short call matters</b><span>It quickly shows whether the strongest ROI sits in Toronto injury prompts, Ontario-wide authority pages, or a narrower pilot scope first.</span></div></div>
+      </div>
+    </div>
+    <div class="process"><div class="step"><strong>Step 1</strong><p>Review the biggest gap in plain English.</p></div><div class="step"><strong>Step 2</strong><p>Confirm what would change over the next two weeks.</p></div><div class="step"><strong>Step 3</strong><p>Decide whether to move forward.</p></div></div>
+  </section>
+  <section class="cta" id="cta"><div class="cta-box"><div><h3>If this were my firm, I would take the call.</h3><p>Diamond & Diamond already owns meaningful market authority. The missed opportunity is that AI still lacks the structured proof needed to recommend that authority with confidence.</p></div><div class="cta-actions"><a class="btn-main" href="https://calendly.com/vaibhavmeh/citeable-10-min-walkthrough" data-cta="book-call" data-location="bottom-cta">Book the 10-minute call</a><a class="btn-sub" href="mailto:hello@citeable.ai?subject=Diamond%20%26%20Diamond%20%E2%80%94%20AI%20Visibility%20Walkthrough" data-cta="reply-email" data-location="bottom-cta">Reply by email</a></div></div></section>
+</div>
+<footer>Prepared privately for Diamond & Diamond Lawyers · Citeable · March 2026</footer>
+<script>
+const BLUE='#2563eb', NAVY='#0f1f3d', GREY='#94a3b8', GOLD='#d97706', BORDER='#e5e7eb';
+new Chart(document.getElementById('scoreRing'),{type:'doughnut',data:{datasets:[{data:[46,54],backgroundColor:[BLUE,'#dbeafe'],borderWidth:0,cutout:'76%'}]},options:{plugins:{legend:{display:false},tooltip:{enabled:false}},rotation:-120,circumference:240,animation:{duration:900}}});
+const benchmarkInsight=document.getElementById('benchmarkInsight'); const radarInsight=document.getElementById('radarInsight');
+const benchmarkMessages=["<strong>Target:</strong> this is the range where a personal injury firm starts to look like a strong, citeable answer across legal prompts.", "<strong>Competing firms:</strong> many rivals have smaller brands but can still win if their proof is packaged more cleanly.", "<strong>Diamond & Diamond today:</strong> the authority is real, but the site still does not package enough legal evidence for consistent AI citation."];
+const radarMessages={0:"<strong>Authority proof:</strong> case outcomes and lawyer credibility need clearer packaging on commercial pages.",1:"<strong>Access:</strong> the site is discoverable, but that is not enough to secure recommendation share.",2:"<strong>Trust structure:</strong> machine-readable legal entities are still too shallow for the firm\u2019s scale.",3:"<strong>Answers:</strong> high-intent injury questions need tighter, query-shaped responses.",4:"<strong>Positioning:</strong> the brand story needs more explicit direction for AI citation, not just human persuasion."};
+const bctx=document.getElementById('benchmarkChart').getContext('2d'); const g1=bctx.createLinearGradient(0,0,560,0); g1.addColorStop(0,'#fde68a'); g1.addColorStop(1,'#f59e0b'); const g2=bctx.createLinearGradient(0,0,560,0); g2.addColorStop(0,'#e5e7eb'); g2.addColorStop(1,'#94a3b8'); const g3=bctx.createLinearGradient(0,0,560,0); g3.addColorStop(0,'#7dd3fc'); g3.addColorStop(1,BLUE);
+new Chart(document.getElementById('benchmarkChart'),{type:'bar',data:{labels:["Acceptable score", "Competing practices", "Diamond & Diamond today"],datasets:[{data:[75, 38, 46],backgroundColor:[g1,g2,g3],borderRadius:14,borderSkipped:false,barThickness:30,maxBarThickness:30}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{top:18,right:18,bottom:8,left:8}},onHover:(e,els)=>{e.native.target.style.cursor=els.length?'pointer':'default'; if(els.length) benchmarkInsight.innerHTML=benchmarkMessages[els[0].index];},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(15,31,61,.96)',displayColors:false,padding:12,callbacks:{label:c=>` Score: ${c.raw}`}}},scales:{x:{max:100,grid:{color:'rgba(229,231,235,.65)'},border:{color:BORDER},ticks:{color:GREY,font:{size:11}}},y:{grid:{display:false},border:{display:false},ticks:{color:NAVY,font:{weight:'700',size:12}}}},animation:{duration:1000,easing:'easeOutQuart'}},plugins:[{id:'threshold',afterDraw(chart){const {ctx,scales,chartArea}=chart; const x=scales.x.getPixelForValue(75); ctx.save(); ctx.strokeStyle='rgba(217,119,6,.8)'; ctx.setLineDash([6,6]); ctx.beginPath(); ctx.moveTo(x,chartArea.top+2); ctx.lineTo(x,chartArea.bottom-2); ctx.stroke(); ctx.setLineDash([]); ctx.fillStyle=GOLD; ctx.font='700 11px Inter'; ctx.textAlign='center'; ctx.fillText('Acceptable score',x,chartArea.top-8); ctx.restore();}}]});
+const rctx=document.getElementById('radarChart').getContext('2d'); const fill=rctx.createRadialGradient(180,170,20,180,170,200); fill.addColorStop(0,'rgba(37,99,235,.26)'); fill.addColorStop(1,'rgba(37,99,235,.08)');
+new Chart(document.getElementById('radarChart'),{type:'radar',data:{labels:['Expertise','Visibility','Trust','Questions','Positioning'],datasets:[{label:'Stronger position',data:[90, 88, 94, 89, 91],borderColor:'#94a3b8',backgroundColor:'rgba(148,163,184,.08)',borderWidth:2,pointRadius:3,pointBackgroundColor:'#cbd5e1'},{label:'Today',data:[42, 71, 44, 39, 33],borderColor:BLUE,backgroundColor:fill,borderWidth:3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#fff',pointBorderColor:BLUE,pointBorderWidth:2.5}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:16,right:18,bottom:8,left:18}},onHover:(e,els)=>{e.native.target.style.cursor=els.length?'pointer':'default'; if(els.length) radarInsight.innerHTML=radarMessages[els[0].index];},plugins:{legend:{position:'bottom',labels:{boxWidth:12,color:'#6b7280',padding:16}},tooltip:{backgroundColor:'rgba(15,31,61,.96)',padding:12,callbacks:{label:c=>` ${c.dataset.label}: ${c.raw}`}}},scales:{r:{min:0,max:100,ticks:{stepSize:25,showLabelBackdrop:false,color:GREY,font:{size:10}},grid:{color:'rgba(229,231,235,.95)'},angleLines:{color:'rgba(148,163,184,.35)'},pointLabels:{color:NAVY,font:{weight:'700',size:11}}}},animation:{duration:1000,easing:'easeOutCubic'}}});
+</script>
+</body>
+</html>
