@@ -215,13 +215,18 @@ footer p { font-size: 13px; color: var(--muted); }
   .cta-block { padding: 48px 24px; margin: 48px 0; }
 }
 </style>
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https://us.i.posthog.com",person_profiles:"identified_only"});
+posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
+</script>
 </head>
 <body>
 <nav>
-  <a href="https://vaibhavmehta11.github.io/aiscite/" class="nav-logo">Aiscite <span>· Carlton Dental</span></a>
+  <a href="https://aiscite.com" class="nav-logo">Aiscite <span>· Carlton Dental</span></a>
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle">Dark mode</button>
-    <a href="https://calendly.com/vaibhavmeh/citeable-10-min-walkthrough" class="nav-btn" target="_blank">Book walkthrough</a>
+    <a href="https://aiscite.com/#contact" class="nav-btn">Get in touch</a>
   </div>
 </nav>
 
@@ -244,8 +249,8 @@ footer p { font-size: 13px; color: var(--muted); }
         <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">60</span></div>
       </div>
       <div class="score-actions">
-        <a href="https://calendly.com/vaibhavmeh/citeable-10-min-walkthrough" class="btn-primary" target="_blank">Book your free 10-minute walkthrough</a>
-        <a href="mailto:hello@aiscite.ai?subject=Carlton Dental — Visibility Review" class="btn-ghost">Reply by email</a>
+        <a href="https://aiscite.com/#contact" class="btn-primary">Get in touch</a>
+        <a href="mailto:vm@aiscite.com?subject=Carlton Dental — Visibility Review" class="btn-ghost">Reply by email</a>
       </div>
     </div>
     <div class="score-context">
@@ -318,8 +323,7 @@ footer p { font-size: 13px; color: var(--muted); }
         <div class="offer-tag">Recommended next step</div>
         <h3>Book a 10-minute walkthrough.</h3>
         <p>We review the opportunity, explain exactly what would change, and confirm whether the 2-week upgrade is the right move for the practice.</p>
-        <div class="price-big">$750</div>
-        <div class="price-note">One-time implementation · 2-week delivery · 30-day improvement guarantee</div>
+        <div class="price-note" style="font-size:15px;margin-top:8px">See pricing at <a href="https://aiscite.com" style="color:var(--text);font-weight:700">aiscite.com</a> — audit, implementation, or full bundle options available.</div>
       </div>
       <div class="offer-items">
         <div class="offer-item">
@@ -348,7 +352,7 @@ footer p { font-size: 13px; color: var(--muted); }
   <div class="cta-block">
     <h2>If this were my business, I would take the call.</h2>
     <p>The quality is already in Carlton Dental. The website is just not helping AI understand it well enough yet. A 10-minute call is the fastest way to decide if that is worth fixing now.</p>
-    <a href="https://calendly.com/vaibhavmeh/citeable-10-min-walkthrough" class="btn-white" target="_blank">Book the 10-minute walkthrough</a>
+    <a href="https://aiscite.com/#contact" class="btn-white" target="_blank">Get in touch</a>
     <div class="cta-note">Free · No commitment · Audit delivery within 48 hours</div>
   </div>
 </div>
@@ -403,7 +407,7 @@ function buildCharts() {
   benchmarkChart = new Chart(benchmarkCtx, {
     type: 'bar',
     data: {
-      labels: ['Target score', 'Competing practices', 'Bloor West today'],
+      labels: ['Target score', 'Competing practices', 'Carlton Dental today'],
       datasets: [{
         data: [78, 40, 52],
         backgroundColor: [c.gold, c.muted, c.barFill],
