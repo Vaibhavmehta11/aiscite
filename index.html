@@ -435,7 +435,10 @@ posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https:
   <h2>Start with a free conversation.</h2>
   <p class="lead">Tell us about your business. We will review your AI visibility and get back to you within 24 hours.</p>
   <div class="contact-card">
-    <form class="contact-form" id="contactForm">
+    <form class="contact-form" id="contactForm" action="https://formsubmit.co/vm@aiscite.com" method="POST">
+      <input type="hidden" name="_subject" value="Aiscite inquiry">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://aiscite.com/?thanks=1">
       <div class="form-row">
         <div class="form-group">
           <label for="name">Your name</label>
@@ -499,44 +502,7 @@ posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https:
   const submitBtn = document.getElementById('submitBtn');
   const formMessage = document.getElementById('formMessage');
 
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-    formMessage.className = 'form-message';
-    formMessage.textContent = '';
-
-    const data = {
-      name: form.name.value,
-      business: form.business.value,
-      email: form.email.value,
-      service: form.service.value,
-      message: form.message.value
-    };
-
-    try {
-      const response = await fetch('https://formsubmit.co/ajax/45dd78cff8c41d02d6531ec326703c63', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
-      });
-
-      if (response.ok) {
-        formMessage.className = 'form-message success';
-        formMessage.textContent = 'We will be in touch within 24 hours.';
-        form.reset();
-      } else {
-        throw new Error('Server error');
-      }
-    } catch (err) {
-      formMessage.className = 'form-message error';
-      formMessage.innerHTML = 'Something went wrong. Please email us directly at <a href="mailto:vm@aiscite.com" style="color:inherit">vm@aiscite.com</a>';
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Get in touch';
-    }
-  });
-})();
+  // Form handled by standard POST to FormSubmit
 </script>
 </body>
 </html>
