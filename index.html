@@ -502,7 +502,33 @@ posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https:
   const submitBtn = document.getElementById('submitBtn');
   const formMessage = document.getElementById('formMessage');
 
-  // Form handled by standard POST to FormSubmit
+  // Show confirmation if redirected back after submission
+  if (window.location.search.includes('thanks=1')) {
+    formMessage.className = 'form-message success';
+    formMessage.textContent = 'Message received. We will be in touch within 24 hours.';
+    if (form) form.style.display = 'none';
+    if (submitBtn) submitBtn.style.display = 'none';
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
+  // Duplicate email prevention
+  if (form) {
+    const emailInput = form.querySelector('input[name="email"]');
+    form.addEventListener('submit', function (e) {
+      const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
+      const used = JSON.parse(localStorage.getItem('aiscite_submitted') || '[]');
+      if (email && used.includes(email)) {
+        e.preventDefault();
+        formMessage.className = 'form-message error';
+        formMessage.textContent = 'This email has already been submitted. Please use a different email address.';
+        return;
+      }
+      if (email) {
+        used.push(email);
+        localStorage.setItem('aiscite_submitted', JSON.stringify(used));
+      }
+    });
+  }
 </script>
 </body>
 </html>
