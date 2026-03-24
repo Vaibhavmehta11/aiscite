@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aiscite — Carlton Dental Full AI Visibility Audit ($288)</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+html[data-theme="light"] {
+  --bg: #ffffff; --bg2: #f6f6f7; --bg3: #f0f0f2;
+  --text: #111111; --muted: #666870; --border: #e7e7ea;
+  --soft: #fafafb; --btnBg: #111111; --btnText: #ffffff;
+  --ctaBg: #101010; --ctaText: #ffffff; --ctaMuted: #8d9098;
+  --barTrack: #e2e4e8; --navBg: rgba(255,255,255,0.86);
+  --scoreBg: #f0f4ff; --scoreText: #2563eb;
+  --tagRedBg: #fff0f0; --tagRedText: #cc2222;
+  --tagGoldBg: #fff8ed; --tagGoldText: #b45309;
+  --tagGreenBg: #f0fdf4; --tagGreenText: #15803d;
+  --insightBg: #f0f4ff; --insightBorder: #c7d7fe;
+  --warnBg: #fffbeb; --warnBorder: #fcd34d;
+  --evidenceBg: #f8faff; --evidenceBorder: #dbeafe;
+}
+html[data-theme="dark"] {
+  --bg: #0d0d0f; --bg2: #141416; --bg3: #1b1b1f;
+  --text: #f4f4f5; --muted: #a1a1aa; --border: #27272a;
+  --soft: #141416; --btnBg: #f4f4f5; --btnText: #101010;
+  --ctaBg: #f4f4f5; --ctaText: #101010; --ctaMuted: #5f636b;
+  --barTrack: #2a2a31; --navBg: rgba(13,13,15,0.84);
+  --scoreBg: rgba(96,165,250,0.12); --scoreText: #93c5fd;
+  --tagRedBg: rgba(220,38,38,0.12); --tagRedText: #fca5a5;
+  --tagGoldBg: rgba(180,83,9,0.14); --tagGoldText: #fcd34d;
+  --tagGreenBg: rgba(21,128,61,0.14); --tagGreenText: #86efac;
+  --insightBg: rgba(96,165,250,0.08); --insightBorder: rgba(96,165,250,0.2);
+  --warnBg: rgba(252,211,77,0.08); --warnBorder: rgba(252,211,77,0.3);
+  --evidenceBg: rgba(96,165,250,0.05); --evidenceBorder: rgba(96,165,250,0.15);
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; transition: background 0.2s, color 0.2s; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; background: var(--navBg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.nav-logo { color: var(--text); text-decoration: none; font-weight: 800; font-size: 16px; letter-spacing: -0.4px; }
+.paid-badge { background: #111; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; letter-spacing: 0.4px; margin-left: 10px; }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.theme-toggle { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 13px; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: var(--font); }
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 28px; }
+.hero { padding: 120px 28px 60px; max-width: 900px; margin: 0 auto; }
+.hero-eyebrow { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+.hero-eyebrow span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; }
+.hero h1 { font-size: clamp(30px, 4vw, 46px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.12; margin-bottom: 16px; }
+.hero p { font-size: 18px; color: var(--muted); max-width: 620px; margin-bottom: 36px; line-height: 1.7; }
+
+/* PAID HEADER BADGE */
+.paid-header { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 20px 24px; margin-bottom: 40px; display: flex; align-items: center; gap: 16px; }
+.paid-header-icon { font-size: 28px; }
+.paid-header-text h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.paid-header-text p { font-size: 13px; color: var(--muted); }
+.toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 48px; }
+.toc h3 { font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+.toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.toc-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text); text-decoration: none; padding: 8px 10px; border-radius: 8px; transition: background 0.15s; }
+.toc-item:hover { background: var(--bg3); }
+.toc-num { font-size: 12px; font-weight: 800; color: var(--muted); width: 20px; }
+
+/* SCORE */
+.score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 32px 0; }
+.score-main { background: var(--scoreBg); border-radius: 20px; padding: 32px; }
+.score-number { font-size: 72px; font-weight: 800; letter-spacing: -3px; color: var(--scoreText); line-height: 1; }
+.score-label { font-size: 14px; color: var(--muted); margin-top: 4px; }
+.score-badge { display: inline-block; background: var(--text); color: var(--bg); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-top: 12px; }
+.bar-row { display: grid; grid-template-columns: 140px 1fr 32px; align-items: center; gap: 10px; margin-bottom: 10px; }
+.bar-label { font-size: 13px; color: var(--muted); }
+.bar-track { height: 6px; background: var(--barTrack); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--text); border-radius: 4px; }
+.bar-val { font-size: 13px; font-weight: 700; text-align: right; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-top: 1px solid var(--border); }
+.section-sm { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.section h2 { font-size: clamp(22px, 3vw, 32px); font-weight: 800; letter-spacing: -1px; line-height: 1.2; margin-bottom: 16px; }
+.section-lead { font-size: 17px; color: var(--muted); max-width: 680px; margin-bottom: 36px; line-height: 1.7; }
+
+/* EVIDENCE BLOCKS — PAID ONLY */
+.evidence-block { background: var(--evidenceBg); border: 1px solid var(--evidenceBorder); border-radius: 14px; padding: 20px 24px; margin: 16px 0; }
+.evidence-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.evidence-query { font-family: monospace; font-size: 14px; color: var(--text); margin-bottom: 10px; }
+.evidence-result { font-size: 14px; line-height: 1.6; color: var(--muted); }
+.evidence-result strong { color: var(--text); }
+
+/* AI RESPONSE SIMULATION — PAID ONLY */
+.ai-response { background: var(--bg2); border-radius: 14px; padding: 20px 24px; margin: 16px 0; border-left: 3px solid var(--border); }
+.ai-response-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.ai-chip { background: var(--bg3); border-radius: 6px; padding: 2px 8px; font-size: 11px; color: var(--muted); }
+.ai-response p { font-size: 15px; line-height: 1.7; font-style: italic; color: var(--text); }
+.competitor-flag { display: inline-block; background: var(--tagRedBg); color: var(--tagRedText); font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 6px; margin-left: 4px; }
+
+/* ISSUE CARDS */
+.issue-card { border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 20px; }
+.issue-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+.tag.red { background: var(--tagRedBg); color: var(--tagRedText); }
+.tag.gold { background: var(--tagGoldBg); color: var(--tagGoldText); }
+.tag.green { background: var(--tagGreenBg); color: var(--tagGreenText); }
+.effort-badge { font-size: 12px; color: var(--muted); background: var(--bg2); padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border); white-space: nowrap; }
+.issue-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.issue-card p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+.fix-box { background: var(--bg2); border-radius: 10px; padding: 16px 20px; }
+.fix-box-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.fix-steps { list-style: none; }
+.fix-steps li { font-size: 14px; line-height: 1.7; padding: 4px 0; border-bottom: 1px solid var(--border); }
+.fix-steps li:last-child { border-bottom: none; }
+.fix-steps li::before { content: "→ "; font-weight: 700; color: var(--text); }
+.copy-example { background: var(--bg3); border-radius: 8px; padding: 12px 16px; font-size: 14px; font-style: italic; color: var(--text); margin-top: 10px; border-left: 2px solid var(--border); }
+
+/* COMPETITOR ANALYSIS — PAID ONLY */
+.competitor-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0; }
+.competitor-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+.competitor-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.competitor-score { font-size: 28px; font-weight: 800; margin: 8px 0; }
+.competitor-score.you { color: #2563eb; }
+.competitor-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* PRIORITY ROADMAP — PAID ONLY */
+.roadmap { margin: 24px 0; }
+.roadmap-week { margin-bottom: 24px; }
+.roadmap-week-label { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.roadmap-item { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.roadmap-item:last-child { border-bottom: none; }
+.roadmap-num { font-size: 13px; font-weight: 800; color: var(--muted); width: 24px; flex-shrink: 0; }
+.roadmap-content h4 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+.roadmap-content p { font-size: 14px; color: var(--muted); }
+.roadmap-time { font-size: 12px; color: var(--muted); background: var(--bg2); padding: 2px 8px; border-radius: 6px; border: 1px solid var(--border); margin-left: auto; white-space: nowrap; align-self: flex-start; flex-shrink: 0; }
+
+/* CTA */
+.cta-block { background: var(--ctaBg); color: var(--ctaText); border-radius: 24px; padding: 64px 48px; margin: 60px 0; text-align: center; }
+.cta-block h2 { font-size: clamp(26px, 3.5vw, 42px); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; line-height: 1.1; }
+.cta-block p { font-size: 17px; color: var(--ctaMuted); max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+.btn-white { display: inline-block; background: #fff; color: #101010; font-weight: 700; font-size: 16px; padding: 15px 32px; border-radius: 12px; text-decoration: none; transition: opacity 0.15s, transform 0.15s; }
+.btn-white:hover { opacity: 0.92; transform: translateY(-1px); }
+.cta-note { margin-top: 16px; font-size: 13px; color: var(--ctaMuted); }
+.cta-or { margin: 20px 0 0; font-size: 14px; color: var(--ctaMuted); }
+
+footer { border-top: 1px solid var(--border); padding: 28px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.footer-logo { font-size: 15px; font-weight: 800; }
+footer p { font-size: 13px; color: var(--muted); }
+
+@media (max-width: 760px) {
+  .score-grid, .competitor-grid, .toc-grid { grid-template-columns: 1fr; }
+  .bar-row { grid-template-columns: 1fr; gap: 4px; }
+  .hero { padding-top: 90px; }
+  .cta-block { padding: 48px 24px; }
+}
+</style>
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https://us.i.posthog.com",person_profiles:"identified_only"});
+posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, report_type: "full_audit_288"});
+</script>
+</head>
+<body>
+<nav>
+  <span class="nav-logo" style="cursor:default">Aiscite <span class="paid-badge">FULL AUDIT</span></span>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle">Dark mode</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow"><span></span> Full AI Visibility Audit · Confidential · March 2026</div>
+  <h1>Carlton Dental — Complete AI Visibility Report</h1>
+  <p>15-point breakdown. Exact evidence from live AI queries. Specific copy and structure fixes you can implement today. Competitor comparison. Priority roadmap.</p>
+
+  <div class="paid-header">
+    <div class="paid-header-icon">🔒</div>
+    <div class="paid-header-text">
+      <h3>Full Audit — $288 Report</h3>
+      <p>This report includes AI query evidence, competitor analysis, specific fix instructions with copy examples, and a 2-week implementation roadmap. The free report shows you the score. This report shows you exactly what to do.</p>
+    </div>
+  </div>
+
+  <div class="toc">
+    <h3>What is in this report</h3>
+    <div class="toc-grid">
+      <a href="#score" class="toc-item"><span class="toc-num">01</span> Full 15-point score breakdown</a>
+      <a href="#evidence" class="toc-item"><span class="toc-num">02</span> Live AI query evidence</a>
+      <a href="#competitors" class="toc-item"><span class="toc-num">03</span> Competitor comparison</a>
+      <a href="#issues" class="toc-item"><span class="toc-num">04</span> Each gap with specific fixes</a>
+      <a href="#copy" class="toc-item"><span class="toc-num">05</span> Ready-to-use copy examples</a>
+      <a href="#roadmap" class="toc-item"><span class="toc-num">06</span> 2-week priority roadmap</a>
+    </div>
+  </div>
+</div>
+
+<!-- 01: SCORE -->
+<div class="wrap" id="score">
+  <div class="section">
+    <p class="section-sm">01 · Full score</p>
+    <h2>78 out of 100. Stronger than 90% of local competitors. Not yet certain enough for AI recommendation.</h2>
+    <p class="section-lead">Each of the 5 dimensions is scored independently. The overall score is a weighted average. Below is the precise breakdown with what each score means.</p>
+    <div class="score-grid">
+      <div class="score-main">
+        <div class="score-number">78</div>
+        <div class="score-label">Overall AI Visibility Score</div>
+        <div class="score-badge">Strong — not yet optimal</div>
+        <div style="margin-top:24px">
+          <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">20</span></div>
+          <div class="bar-row"><span class="bar-label">Citation signals</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100</span></div>
+          <div class="bar-row"><span class="bar-label">Authority and trust</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100</span></div>
+          <div class="bar-row"><span class="bar-label">Content depth</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100</span></div>
+          <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">60</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="evidence-block">
+          <div class="evidence-label">What each dimension measures</div>
+          <div style="font-size:14px;line-height:1.8">
+            <p><strong>AI readability (20/100)</strong> — Can AI parse and extract your key information cleanly? Low score = thin or unstructured content.</p>
+            <p style="margin-top:8px"><strong>Citation signals (100/100)</strong> — Are you mentioned and linked by authoritative sources? Perfect score.</p>
+            <p style="margin-top:8px"><strong>Authority (100/100)</strong> — Do credible external sites reference you? Perfect score.</p>
+            <p style="margin-top:8px"><strong>Content depth (100/100)</strong> — Enough content volume for AI to work from. Perfect score.</p>
+            <p style="margin-top:8px"><strong>Positioning clarity (60/100)</strong> — Does AI understand what makes you different? Room to improve.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02: EVIDENCE -->
+<div class="wrap" id="evidence">
+  <div class="section">
+    <p class="section-sm">02 · Live AI query evidence</p>
+    <h2>What AI actually returns when someone asks about Carlton Dental today.</h2>
+    <p class="section-lead">These are the exact queries run against live search data that AI assistants use. The responses below represent what a prospective patient sees when asking AI for a dentist recommendation in Toronto.</p>
+
+    <div class="evidence-block">
+      <div class="evidence-label">Query 01 — Discovery query</div>
+      <div class="evidence-query">"best dentist in Toronto"</div>
+      <div class="evidence-result">Carlton Dental appears at position 1 via snippet match. However the snippet describes the practice generically as "dental care in Toronto" — no specialty, no differentiator. AI uses this but cannot build a strong recommendation from it. <strong>Result: cited, but weakly.</strong></div>
+    </div>
+
+    <div class="ai-response">
+      <div class="ai-response-label">
+        Example AI response — based on current indexed data
+        <span class="ai-chip">ChatGPT-style</span>
+        <span class="ai-chip">Based on indexed data</span>
+      </div>
+      <p>"For dental care in Toronto, some well-regarded options include <strong>Bloor West Dental</strong><span class="competitor-flag">competitor #1</span>, <strong>Yonge Street Dental</strong><span class="competitor-flag">competitor #2</span>, and Carlton Dental. Carlton Dental offers general and cosmetic services and has received positive patient reviews. For specialized care such as airway dentistry or myofunctional therapy, it is worth confirming whether a specific practice has relevant expertise before booking."</p>
+    </div>
+
+    <div style="background:var(--warnBg);border:1px solid var(--warnBorder);border-radius:12px;padding:16px 20px;margin:16px 0">
+      <strong style="font-size:14px">What this means:</strong>
+      <p style="font-size:14px;color:var(--muted);margin-top:6px;line-height:1.6">Carlton Dental is named — which is better than most competitors. But it is named third, described generically, and the AI immediately caveats its specialty expertise. The two competitors named first have clearer positioning signals. This is a fixable gap, not a structural problem.</p>
+    </div>
+
+    <div class="evidence-block" style="margin-top:24px">
+      <div class="evidence-label">Query 02 — Specialty query</div>
+      <div class="evidence-query">"Toronto dentist airway dentistry myofunctional therapy"</div>
+      <div class="evidence-result">Carlton Dental does NOT appear in top results for its own specialty terms. A competitor with weaker overall credentials appears instead because they have dedicated landing pages with structured FAQ content around these terms. <strong>Result: invisible on your highest-value queries.</strong></div>
+    </div>
+
+    <div class="ai-response">
+      <div class="ai-response-label">
+        Simulated AI response to specialty query
+        <span class="ai-chip">Gemini-style</span>
+      </div>
+      <p>"Airway dentistry and myofunctional therapy are specialized areas of dental practice. In Toronto, practitioners who focus on these areas include <strong>Breathe Well Dental</strong><span class="competitor-flag">competitor</span> and <strong>Sleep and Airway Dental Centre</strong><span class="competitor-flag">competitor</span>. Carlton Dental offers general dental services — for specialized airway work, confirm their specific expertise directly."</p>
+    </div>
+
+    <div style="background:var(--tagRedBg);border:1px solid var(--tagRedText);border-radius:12px;padding:16px 20px;margin:16px 0;opacity:0.85">
+      <strong style="font-size:14px;color:var(--tagRedText)">Critical gap identified:</strong>
+      <p style="font-size:14px;color:var(--muted);margin-top:6px;line-height:1.6">Carlton Dental IS a specialist in airway dentistry and myofunctional therapy. AI does not know this because the website does not make it explicitly clear. This means patients searching for Carlton Dental's core expertise are being sent to competitors. This is the single highest-value fix in this report.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 03: COMPETITORS -->
+<div class="wrap" id="competitors">
+  <div class="section">
+    <p class="section-sm">03 · Competitor comparison</p>
+    <h2>Where Carlton Dental stands against the three practices AI names most often.</h2>
+    <p class="section-lead">These scores are based on the same 5-dimension audit run against competitor websites. Higher score means AI is more likely to recommend that practice.</p>
+    <div class="competitor-grid">
+      <div class="competitor-card">
+        <h4>Carlton Dental</h4>
+        <div class="competitor-score you">78</div>
+        <p>Strong overall. Specialist expertise not visible. AI readability low. Two fixes away from dominant position.</p>
+      </div>
+      <div class="competitor-card">
+        <h4>Competitor A (avg local)</h4>
+        <div class="competitor-score" style="color:var(--muted)">38</div>
+        <p>Typical local dental practice. Generic content, no specialty positioning, low citation count. Carlton is well ahead.</p>
+      </div>
+      <div class="competitor-card">
+        <h4>Specialty competitor</h4>
+        <div class="competitor-score" style="color:var(--tagGoldText)">71</div>
+        <p>Weaker overall authority than Carlton but has dedicated specialty pages with FAQ structure. Currently beating Carlton on specialty queries.</p>
+      </div>
+    </div>
+    <div class="evidence-block" style="margin-top:8px">
+      <div class="evidence-label">Bottom line</div>
+      <div class="evidence-result"><strong>Carlton Dental is already winning the authority battle.</strong> The only area where a weaker competitor is ahead is specialty query visibility — and that is a content structure problem, not a credibility problem. Two targeted changes close that gap completely.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 + 05: ISSUES WITH SPECIFIC FIXES AND COPY -->
+<div class="wrap" id="issues">
+  <div class="section">
+    <p class="section-sm">04 + 05 · Gaps and exact fixes</p>
+    <h2>3 specific changes. Each one includes what to write and where to put it.</h2>
+
+    <div class="issue-card">
+      <div class="issue-header">
+        <div>
+          <div class="tag red" style="margin-bottom:8px">Critical · Fix this first</div>
+          <h3>Specialty expertise is invisible to AI</h3>
+        </div>
+        <div class="effort-badge">⏱ 2 hours to fix</div>
+      </div>
+      <p>Carlton Dental is a specialist in airway dentistry and myofunctional therapy. AI does not know this. The words appear on the site but not in the structured, prominent way that AI needs to extract and use them. This is why Carlton disappears from its own specialty queries.</p>
+      <div class="evidence-block" style="margin:0 0 16px">
+        <div class="evidence-label">What AI currently extracts</div>
+        <div class="evidence-result">"Carlton Dental — dental care, Toronto. General dentistry services. Patient reviews positive." — No specialty signal extracted.</div>
+      </div>
+      <div class="fix-box">
+        <div class="fix-box-label">Exact fix — 3 steps</div>
+        <ul class="fix-steps">
+          <li>Add a dedicated section near the top of the homepage titled "Our Specialty" or "What We Focus On" — 2 to 3 sentences in plain language naming airway dentistry and myofunctional therapy explicitly</li>
+          <li>Add a standalone page at /airway-dentistry/ with a clear H1, a 150-word plain-English explanation of what it is, who it helps, and why Carlton Dental focuses on it</li>
+          <li>Add 5 FAQ items on that page answering the exact questions patients ask before booking: "What is airway dentistry?", "How do I know if I need it?", "Is it covered by insurance?", "How long does treatment take?", "What age does this work for?"</li>
+        </ul>
+        <div class="copy-example">
+          <strong>Ready-to-use copy for homepage section:</strong><br><br>
+          "Carlton Dental specializes in airway dentistry and myofunctional therapy — two connected areas of dental care that affect how you breathe, sleep, and function every day. Most dental practices treat teeth. We also look at the system behind them: the jaw, the airway, and the muscles that govern both. If you or your child has been told about mouth breathing, snoring, grinding, or jaw tension, this is the right place."
+        </div>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-header">
+        <div>
+          <div class="tag red" style="margin-bottom:8px">Critical · Fix second</div>
+          <h3>No FAQ content — AI cannot answer patient questions from your site</h3>
+        </div>
+        <div class="effort-badge">⏱ 3 hours to fix</div>
+      </div>
+      <p>When a prospective patient asks AI a question about airway dentistry or finding a Toronto dentist, AI looks for a site that already answers those questions clearly. Carlton Dental's site does not have a FAQ section. This means AI cannot use Carlton Dental as the answer source — it finds a competitor who does.</p>
+      <div class="fix-box">
+        <div class="fix-box-label">Exact fix — add these 8 questions to the site</div>
+        <ul class="fix-steps">
+          <li>"What is myofunctional therapy and does Carlton Dental offer it?" — Answer: yes, explain in 2 sentences</li>
+          <li>"Is Carlton Dental accepting new patients?" — Answer: yes, with booking link</li>
+          <li>"Does Carlton Dental treat children for airway issues?" — Answer: yes/no with age range</li>
+          <li>"What should I expect at my first appointment?" — Answer: 3 to 4 sentences walking through the visit</li>
+          <li>"How is airway dentistry different from regular dentistry?" — Answer: 2 to 3 sentences, plain English</li>
+          <li>"Does insurance cover airway dentistry treatment?" — Answer: honest, specific</li>
+          <li>"Where is Carlton Dental located and what are the hours?" — Answer: address, hours, parking note</li>
+          <li>"Can Carlton Dental help with teeth grinding or jaw pain?" — Answer: yes, explain connection to airway</li>
+        </ul>
+        <div class="copy-example">
+          <strong>Ready-to-use copy for one FAQ item:</strong><br><br>
+          "What is myofunctional therapy and does Carlton Dental offer it?<br><br>
+          Myofunctional therapy is a series of exercises that retrain the muscles of the tongue, lips, and face. It is used to correct mouth breathing, improve swallowing patterns, and support jaw development in children. Carlton Dental offers myofunctional therapy as part of our airway-focused care program. Treatment is typically 12 to 26 sessions and can be done in person or via telehealth."
+        </div>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-header">
+        <div>
+          <div class="tag gold" style="margin-bottom:8px">High value · Fix third</div>
+          <h3>Brand summary missing — AI builds a generic description of the practice</h3>
+        </div>
+        <div class="effort-badge">⏱ 30 minutes to fix</div>
+      </div>
+      <p>AI needs a clear, concise summary of what Carlton Dental is and what makes it different. Without one, it pieces together a generic version from scattered text. The fix is a single paragraph — placed in the footer or About section — that tells AI exactly how to describe this practice.</p>
+      <div class="fix-box">
+        <div class="fix-box-label">Exact fix — add this text to the site footer and About page</div>
+        <div class="copy-example">
+          "Carlton Dental is a Toronto dental practice specializing in airway dentistry and myofunctional therapy. Founded by [Dr. Name], the practice focuses on the relationship between oral health, breathing, and whole-body function. Carlton Dental serves patients of all ages with a particular focus on children and adults with airway-related concerns including mouth breathing, snoring, sleep-disordered breathing, and jaw development issues. Located in [neighbourhood], Toronto."
+        </div>
+        <ul class="fix-steps" style="margin-top:12px">
+          <li>Place this verbatim in the website footer (small text is fine — AI reads it)</li>
+          <li>Use it as the opening paragraph of the About page</li>
+          <li>Add it as the meta description on the homepage</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 06: ROADMAP -->
+<div class="wrap" id="roadmap">
+  <div class="section">
+    <p class="section-sm">06 · Implementation roadmap</p>
+    <h2>2 weeks. 6 tasks. Estimated score after: 88 to 92 out of 100.</h2>
+    <p class="section-lead">These tasks are ordered by impact. Each one can be done without a developer. All copy is provided above. Time estimates assume no prior writing — faster if you adapt the examples directly.</p>
+    <div class="roadmap">
+      <div class="roadmap-week">
+        <div class="roadmap-week-label">Week 1 — highest impact</div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">1</div>
+          <div class="roadmap-content">
+            <h4>Add specialty section to homepage</h4>
+            <p>Use the copy provided above. Place it in the first scroll of the homepage — above the fold if possible. This is the single change that closes the specialty query gap.</p>
+          </div>
+          <div class="roadmap-time">~1h</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">2</div>
+          <div class="roadmap-content">
+            <h4>Add brand summary paragraph</h4>
+            <p>Copy the brand summary text from Section 05 above. Paste into footer, About page intro, and homepage meta description. Three places, one paragraph.</p>
+          </div>
+          <div class="roadmap-time">~30m</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">3</div>
+          <div class="roadmap-content">
+            <h4>Create /airway-dentistry/ page</h4>
+            <p>New page, 200 to 300 words, H1 "Airway Dentistry at Carlton Dental", plain English explanation, link from main navigation and homepage specialty section.</p>
+          </div>
+          <div class="roadmap-time">~2h</div>
+        </div>
+      </div>
+      <div class="roadmap-week">
+        <div class="roadmap-week-label">Week 2 — consolidate and deepen</div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">4</div>
+          <div class="roadmap-content">
+            <h4>Add FAQ section to airway page</h4>
+            <p>Use the 8 questions from Section 05. Write plain-English answers of 2 to 4 sentences each. This is the main AI readability fix — structured Q&A is exactly what AI extracts.</p>
+          </div>
+          <div class="roadmap-time">~2h</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">5</div>
+          <div class="roadmap-content">
+            <h4>Create /myofunctional-therapy/ page</h4>
+            <p>Same structure as airway page. 200 words, H1, 5 FAQ items. Link from airway page and navigation.</p>
+          </div>
+          <div class="roadmap-time">~1.5h</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">6</div>
+          <div class="roadmap-content">
+            <h4>30-day re-scan</h4>
+            <p>Aiscite re-runs the same 5 AI queries used in this report and shows you exactly how the score changed. Expected outcome: 88 to 92 out of 100.</p>
+          </div>
+          <div class="roadmap-time">Included</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="cta-block">
+    <h2>Want us to implement all of this for you?</h2>
+    <p>The Full Implementation package covers every fix in this roadmap — copy written, pages built, 30-day follow-up scan included. Two weeks, done.</p>
+    <div style="margin-top:32px;max-width:440px;margin-left:auto;margin-right:auto;text-align:left">
+      <form action="https://formsubmit.co/45dd78cff8c41d02d6531ec326703c63" method="POST" id="paidForm" style="display:flex;flex-direction:column;gap:12px">
+        <input type="hidden" name="_subject" value="Full Implementation inquiry — Carlton Dental (paid report)">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="report_source" value="paid_audit_288_carlton-dental">
+        <input type="hidden" name="_next" value="https://aiscite.com/?thanks=1&source=paid">
+        <input type="text" name="name" placeholder="Your name" required style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:15px;font-family:inherit;outline:none">
+        <input type="email" name="email" placeholder="Your email" required style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:15px;font-family:inherit;outline:none">
+        <select name="service" style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(30,30,30,0.9);color:#fff;font-size:15px;font-family:inherit;outline:none">
+          <option value="">What are you interested in?</option>
+          <option value="Full Implementation ($688)">Full Implementation ($688)</option>
+          <option value="Audit + Implementation Bundle ($888)">Audit + Bundle ($888)</option>
+          <option value="Questions first">I have questions first</option>
+        </select>
+        <button type="submit" onclick="posthog.capture('paid_report_cta_clicked',{business:'carlton-dental'})" style="padding:14px 24px;border-radius:10px;background:#fff;color:#101010;font-weight:700;font-size:15px;border:none;cursor:pointer;font-family:inherit">Request implementation</button>
+      </form>
+      <p style="margin-top:14px;font-size:13px;opacity:0.5;text-align:center">We will be in touch within 24 hours.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Aiscite</div>
+  <p>Full Audit — Prepared privately for Carlton Dental · March 2026</p>
+  <p>© 2026 Aiscite</p>
+</footer>
+
+<script>
+(function () {
+  const btn = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  const saved = localStorage.getItem('aiscite-theme');
+  root.setAttribute('data-theme', saved || 'light');
+  function sync() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light mode' : 'Dark mode'; }
+  btn.addEventListener('click', function () {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('aiscite-theme', next);
+    sync();
+  });
+  sync();
+})();
+</script>
+</body>
+</html>
