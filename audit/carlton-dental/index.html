@@ -262,7 +262,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
             <option value="Audit + Full Implementation Bundle ($888)">Audit + Full Implementation Bundle ($888)</option>
             <option value="Questions first">I have questions first</option>
           </select>
-          <button type="submit" onclick="posthog.capture('free_report_cta_clicked',{business:'carlton-dental',score:78})" style="padding:13px 20px;border-radius:10px;background:var(--text);color:var(--bg);font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:inherit">Get in touch</button>
+          <button type="submit" onclick="posthog.capture('free_report_cta_clicked',{business:'carlton-dental',score:78})" style="padding:13px 20px;border-radius:10px;background:var(--btnBg);color:var(--btnText);font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:inherit">Get in touch</button>
         </form>
       </div>
     </div>
@@ -284,13 +284,13 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   <div class="section">
     <p class="section-sm">Where you stand</p>
     <h2>Strong — but not untouchable — room to improve.</h2>
-    <p class="section-lead">Carlton Dental sits at 78/100. Most local dentist businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
+    <p class="section-lead">Carlton Dental scores 78/100 — well above most local practices which average below 40. One structural gap is holding the site back from becoming an obvious default recommendation.</p>
     <div class="chart-grid">
       <div class="chart-card">
         <h3>Position in the market</h3>
-        <p>Carlton Dental is ahead of the local pack, but not yet in the range where a specialist practice becomes an obvious AI recommendation.</p>
+        <p>Carlton Dental scores 78/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
         <div class="chart-shell"><div class="chart-frame"><canvas id="benchmarkChart"></canvas></div></div>
-        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong> you are not starting from behind. This is an upgrade in presentation and trust.</div>
+        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong> Carlton Dental is one of the stronger practices in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
       </div>
       <div class="chart-card">
         <h3>Where the biggest improvements are</h3>
@@ -345,7 +345,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
             <span style="font-size:14px;font-weight:700">Full Implementation</span>
             <span style="font-size:18px;font-weight:800">$688</span>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--text);color:var(--bg);border-radius:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--btnBg);color:var(--btnText);border-radius:10px">
             <div><span style="font-size:14px;font-weight:700">Audit + Full Implementation Bundle</span><div style="font-size:12px;opacity:0.6;margin-top:2px">Includes 30-day re-scan</div></div>
             <span style="font-size:18px;font-weight:800">$888</span>
           </div>
@@ -450,7 +450,7 @@ function buildCharts() {
     data: {
       labels: ['Target score', 'Competing practices', 'Carlton Dental today'],
       datasets: [{
-        data: [78, 40, 52],
+        data: [90, 40, 78],
         backgroundColor: [c.gold, c.muted, c.barFill],
         borderRadius: 12, borderSkipped: false, barThickness: 28,
       }]
