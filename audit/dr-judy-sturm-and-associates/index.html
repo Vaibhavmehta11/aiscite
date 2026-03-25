@@ -158,6 +158,20 @@ nav {
 .problem-item p { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
 .fix-row { padding-top: 14px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text); }
 .fix-row b { font-weight: 700; }
+/* pricing tier rows inside dark/light offer-main */
+.price-row-muted {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px; border-radius: 10px;
+  background: rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.12); color: var(--ctaText);
+}
+html[data-theme="dark"] .price-row-muted {
+  background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.12);
+}
+.price-row-highlight {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px; border-radius: 10px;
+  background: var(--ctaText); color: var(--ctaBg);
+}
 /* OFFER */
 .offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
 .offer-main {
@@ -253,8 +267,8 @@ footer p { font-size: 13px; color: var(--muted); }
       <p>This is not about reinventing the practice. It is about presenting its strengths with more clarity, confidence, and structure so AI can work from them.</p>
       <div class="context-stats">
         <div class="stat-row"><span class="stat-label">Competing practices</span><span class="stat-val">~40 / 100</span></div>
-        <div class="stat-row"><span class="stat-label">Target score</span><span class="stat-val">78+ / 100</span></div>
-        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+0 to +5 points</span></div>
+        <div class="stat-row"><span class="stat-label">Target score</span><span class="stat-val">90+ / 100</span></div>
+        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+10 to +15 points</span></div>
         <div class="stat-row"><span class="stat-label">Implementation window</span><span class="stat-val">2 weeks</span></div>
         <div class="stat-row"><span class="stat-label">Best next step</span><span class="stat-val">10-min private walkthrough</span></div>
       </div>
@@ -318,8 +332,20 @@ footer p { font-size: 13px; color: var(--muted); }
         <div class="offer-tag">Recommended next step</div>
         <h3>Book a 10-minute walkthrough.</h3>
         <p>We review the opportunity, explain exactly what would change, and confirm whether the 2-week upgrade is the right move for the practice.</p>
-        <div class="price-big">$750</div>
-        <div class="price-note">One-time implementation · 2-week delivery · 30-day improvement guarantee</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+          <div class="price-row-muted">
+            <span style="font-size:14px;font-weight:700">Audit</span>
+            <span style="font-size:18px;font-weight:800">$288</span>
+          </div>
+          <div class="price-row-muted">
+            <span style="font-size:14px;font-weight:700">Full Implementation</span>
+            <span style="font-size:18px;font-weight:800">$688</span>
+          </div>
+          <div class="price-row-highlight">
+            <div><span style="font-size:14px;font-weight:700">Audit + Full Implementation Bundle</span><div style="font-size:12px;opacity:0.5;margin-top:2px">Includes 30-day re-scan</div></div>
+            <span style="font-size:18px;font-weight:800">$888</span>
+          </div>
+        </div>
       </div>
       <div class="offer-items">
         <div class="offer-item">
