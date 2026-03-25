@@ -157,11 +157,11 @@ html[data-theme="dark"] .cta-input {
   color: #101010;
 }
 html[data-theme="dark"] .cta-input::placeholder { color: rgba(0,0,0,0.4); }
-/* Submit button — matches page mode (NOT inverted like CTA block bg) */
+/* Submit button — contrasts against CTA block: light=white btn, dark=dark btn */
 .cta-submit {
   padding: 14px 24px; border-radius: 10px; font-weight: 700; font-size: 15px;
   border: none; cursor: pointer; font-family: inherit; width: 100%;
-  background: var(--btnBg); color: var(--btnText);
+  background: var(--ctaText); color: var(--ctaBg);
   transition: opacity 0.15s;
 }
 .cta-submit:hover { opacity: 0.85; }
