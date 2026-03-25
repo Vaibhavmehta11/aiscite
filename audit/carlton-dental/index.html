@@ -336,7 +336,20 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
         <div class="offer-tag">Recommended next step</div>
         <h3>Book a 10-minute walkthrough.</h3>
         <p>We review the opportunity, explain exactly what would change, and confirm whether the 2-week upgrade is the right move for the practice.</p>
-        <div class="price-note" style="font-size:15px;margin-top:8px">See pricing at <a href="https://aiscite.com" style="color:var(--text);font-weight:700">aiscite.com</a> — audit, implementation, or full bundle options available.</div>
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px">
+            <span style="font-size:14px;font-weight:700">Audit</span>
+            <span style="font-size:18px;font-weight:800">$288</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px">
+            <span style="font-size:14px;font-weight:700">Full Implementation</span>
+            <span style="font-size:18px;font-weight:800">$688</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--text);color:var(--bg);border-radius:10px">
+            <div><span style="font-size:14px;font-weight:700">Audit + Full Implementation Bundle</span><div style="font-size:12px;opacity:0.6;margin-top:2px">Includes 30-day re-scan</div></div>
+            <span style="font-size:18px;font-weight:800">$888</span>
+          </div>
+        </div>
       </div>
       <div class="offer-items">
         <div class="offer-item">
