@@ -157,6 +157,19 @@ html[data-theme="dark"] .cta-input {
   color: #101010;
 }
 html[data-theme="dark"] .cta-input::placeholder { color: rgba(0,0,0,0.4); }
+/* Submit button — matches page mode (NOT inverted like CTA block bg) */
+.cta-submit {
+  padding: 14px 24px; border-radius: 10px; font-weight: 700; font-size: 15px;
+  border: none; cursor: pointer; font-family: inherit; width: 100%;
+  background: var(--btnBg); color: var(--btnText);
+  transition: opacity 0.15s;
+}
+.cta-submit:hover { opacity: 0.85; }
+/* Select option bg — must match page bg so options are readable in dropdown */
+.cta-input option {
+  background: var(--bg);
+  color: var(--text);
+}
 .cta-note { margin-top: 16px; font-size: 13px; color: var(--ctaMuted); }
 .cta-or { margin: 20px 0 0; font-size: 14px; color: var(--ctaMuted); }
 
@@ -494,7 +507,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
           <option value="Full Bundle ($888)">Full Bundle — implementation + 30-day re-scan ($888)</option>
           <option value="Questions first">Ask a question first</option>
         </select>
-        <button type="submit" onclick="posthog.capture('paid_report_cta_clicked',{business:'carlton-dental'})" style="padding:14px 24px;border-radius:10px;background:#fff;color:#101010;font-weight:700;font-size:15px;border:none;cursor:pointer;font-family:inherit">Request implementation</button>
+        <button type="submit" onclick="posthog.capture('paid_report_cta_clicked',{business:'carlton-dental'})" class="cta-submit">Request implementation</button>
       </form>
       <p style="margin-top:14px;font-size:13px;opacity:0.5;text-align:center">We will be in touch within 24 hours.</p>
     </div>
