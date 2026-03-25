@@ -466,13 +466,14 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
         <input type="hidden" name="_subject" value="Full Implementation inquiry — Carlton Dental (paid report)">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="report_source" value="paid_audit_288_carlton-dental">
+        <input type="hidden" name="source" value="paid_report_carlton-dental">
         <input type="hidden" name="_next" value="https://aiscite.com/?thanks=1&source=paid">
         <input type="text" name="name" placeholder="Your name" required style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:15px;font-family:inherit;outline:none">
         <input type="email" name="email" placeholder="Your email" required style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:15px;font-family:inherit;outline:none">
-        <select name="service" style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(30,30,30,0.9);color:#fff;font-size:15px;font-family:inherit;outline:none">
+        <select name="service" style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(20,20,22,0.95);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' viewBox=\'0 0 12 12\'%3E%3Cpath fill=\'%23ffffff\' d=\'M6 8L1 3h10z\'/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 16px center">
           <option value="">What are you interested in?</option>
-          <option value="Full Implementation ($688)">Full Implementation ($688)</option>
-          <option value="Audit + Implementation Bundle ($888)">Audit + Bundle ($888)</option>
+          <option value="Audit ($288)">Audit ($288)</option>
+          <option value="Audit + Full Implementation Bundle ($888)">Audit + Full Implementation Bundle ($888)</option>
           <option value="Questions first">I have questions first</option>
         </select>
         <button type="submit" onclick="posthog.capture('paid_report_cta_clicked',{business:'carlton-dental'})" style="padding:14px 24px;border-radius:10px;background:#fff;color:#101010;font-weight:700;font-size:15px;border:none;cursor:pointer;font-family:inherit">Request implementation</button>
