@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pricing | Aiscite AI Visibility Audits</title>
-<meta name="description" content="Simple, transparent pricing for AI visibility audits. Full audit or monthly monitoring. No hidden fees.">
+<meta name="description" content="Simple, transparent pricing for AI visibility audits. Audit, implementation, or the full bundle. No hidden fees.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -79,18 +79,12 @@
     background: var(--bg);
     color: var(--text);
     height: 40px;
-    width: auto;
-    display:flex; align-items:center; justify-content:center;
-    padding: 0;
-    font-size: 13px;
-    margin-left: -4px;
-    width: auto;
+    display: flex; align-items: center; justify-content: center;
     padding: 0 10px;
-    filter: none;
-    border-radius: 10px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
+    border-radius: 10px;
   }
   .nav-btn, .btn-dark, .btn-white {
     text-decoration: none; border-radius: 12px; font-weight: 700; transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s; display: inline-block;
@@ -104,7 +98,7 @@
   }
   .btn-ghost:hover { background: var(--bg2); }
   .hero {
-    max-width: 860px; margin: 0 auto; padding: 162px 28px 118px; text-align: center;
+    max-width: 860px; margin: 0 auto; padding: 162px 28px 80px; text-align: center;
   }
   .hero-tag {
     display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-size: 13px; font-weight: 600; margin-bottom: 34px; background: transparent;
@@ -118,55 +112,10 @@
   }
   .hero-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
   .hero-micro { margin-top: 18px; font-size: 13px; color: var(--muted); }
-  .platforms {
-    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 28px; text-align: center;
-  }
-  .platforms p { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
-  .platforms-list { display: flex; justify-content: center; gap: 38px; flex-wrap: wrap; }
-  .platforms-list span { color: var(--platformMuted); font-size: 14px; font-weight: 600; }
-  .section { max-width: 860px; margin: 0 auto; padding: 104px 28px; }
+  .section { max-width: 960px; margin: 0 auto; padding: 80px 28px; }
   .section-sm { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
   .section h2 { font-size: clamp(30px, 4vw, 46px); font-weight: 800; line-height: 1.12; letter-spacing: -1.9px; margin-bottom: 14px; max-width: 760px; }
   .lead { max-width: 680px; color: var(--muted); font-size: 18px; line-height: 1.75; margin-bottom: 44px; }
-  .problem-list { border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
-  .problem-item { display: flex; gap: 18px; padding: 28px 30px; border-bottom: 1px solid var(--border); background: var(--bg); }
-  .problem-item:last-child { border-bottom: none; }
-  .problem-item:hover { background: var(--soft); }
-  .problem-icon { font-size: 18px; margin-top: 2px; }
-  .problem-text h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.3px; }
-  .problem-text p { font-size: 14px; color: var(--muted); }
-  .steps { border-top: 1px solid var(--border); }
-  .step-item { display: grid; grid-template-columns: 52px 1fr; gap: 18px; padding: 30px 0; border-bottom: 1px solid var(--border); }
-  .step-num { font-size: 13px; font-weight: 800; color: var(--muted); padding-top: 4px; }
-  .step-content h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.4px; }
-  .step-content p { font-size: 15px; color: var(--muted); }
-  .industries { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 10px; }
-  .industry-box { border: 1px solid var(--border); border-radius: 14px; padding: 20px 16px; font-size: 14px; font-weight: 700; text-align: center; background: var(--bg); }
-  .industry-box span { display: block; font-size: 12px; color: var(--muted); font-weight: 500; margin-top: 5px; line-height: 1.45; }
-  .score-card {
-    background: var(--bg2); border: 1px solid var(--border); border-radius: 24px; padding: 44px; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-  }
-  .score-header { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; margin-bottom: 32px; flex-wrap: wrap; }
-  .score-meta h3 { font-size: 24px; font-weight: 800; letter-spacing: -0.8px; }
-  .score-meta p { font-size: 14px; color: var(--muted); margin-top: 3px; }
-  .score-big { font-size: 72px; line-height: 0.95; font-weight: 800; letter-spacing: -4px; }
-  .score-of { font-size: 13px; color: var(--muted); font-weight: 700; }
-  .score-badge { margin-top: 8px; display: inline-block; padding: 5px 10px; border-radius: 999px; background: var(--scoreBadgeBg); color: var(--scoreBadgeText); font-size: 12px; font-weight: 700; }
-  .score-summary { font-size: 15px; color: var(--muted); margin-bottom: 26px; max-width: 660px; }
-  .score-bars { display: flex; flex-direction: column; gap: 14px; }
-  .bar-row { display: grid; grid-template-columns: 180px 1fr 36px; gap: 12px; align-items: center; }
-  .bar-label { font-size: 13px; color: var(--muted); font-weight: 700; }
-  .bar-track { height: 6px; background: var(--barTrack); border-radius: 999px; overflow: hidden; }
-  .bar-fill { height: 100%; background: var(--text); border-radius: 999px; }
-  .bar-val { font-size: 13px; font-weight: 800; text-align: right; }
-  .proof-intro { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; }
-  .proof-stat { border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; background: var(--bg); min-width: 180px; }
-  .proof-stat strong { font-size: 26px; font-weight: 800; display: block; line-height: 1; }
-  .proof-stat span { font-size: 13px; color: var(--muted); }
-  .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .proof-card { border: 1px solid var(--border); border-radius: 16px; padding: 24px; background: var(--bg); }
-  .proof-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.3px; }
-  .proof-card p { font-size: 14px; color: var(--muted); }
   .faq-list { border-top: 1px solid var(--border); }
   .faq-item { padding: 26px 0; border-bottom: 1px solid var(--border); }
   .faq-item h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.2px; }
@@ -182,24 +131,41 @@
   .footer-logo { font-size: 15px; font-weight: 800; }
   footer p { font-size: 13px; color: var(--muted); }
 
-  /* Pricing page specific styles */
+  /* Pricing grid */
   .pricing-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-top: 44px;
   }
   .pricing-card {
     border: 1px solid var(--border);
     border-radius: 24px;
-    padding: 40px 36px;
+    padding: 40px 32px;
     background: var(--bg);
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   .pricing-card.featured {
     background: var(--bg2);
-    border-color: var(--border);
+    border-color: var(--text);
+    border-width: 2px;
+  }
+  .popular-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text);
+    color: var(--btnText);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
   }
   .pricing-label {
     font-size: 12px;
@@ -210,9 +176,9 @@
     margin-bottom: 12px;
   }
   .pricing-card h3 {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 800;
-    letter-spacing: -0.8px;
+    letter-spacing: -0.6px;
     margin-bottom: 8px;
   }
   .pricing-price {
@@ -237,7 +203,7 @@
     flex: 1;
   }
   .pricing-features li {
-    font-size: 15px;
+    font-size: 14px;
     color: var(--muted);
     display: flex;
     align-items: flex-start;
@@ -254,25 +220,20 @@
     text-align: center;
     font-size: 14px;
     color: var(--muted);
-    margin-top: 28px;
+    margin-top: 32px;
     font-weight: 500;
   }
 
-  @media (max-width: 720px) {
-    .industries, .proof-grid { grid-template-columns: 1fr 1fr; }
-    .bar-row { grid-template-columns: 1fr; gap: 8px; }
-    .bar-val { text-align: left; }
-    .pricing-grid { grid-template-columns: 1fr; }
+  @media (max-width: 860px) {
+    .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
   }
   @media (max-width: 560px) {
     .nav-right .nav-link { display: none; }
     .hero { padding-top: 132px; }
     .hero h1 { letter-spacing: -2.4px; }
     .hero p, .lead { font-size: 17px; }
-    .industries, .proof-grid { grid-template-columns: 1fr; }
-    .score-card { padding: 28px; }
     .cta-block { margin: 0 16px 60px; padding: 58px 22px; }
-    .pricing-card { padding: 28px 24px; }
+    .pricing-card { padding: 32px 24px; }
     .pricing-price { font-size: 42px; }
   }
 </style>
@@ -283,7 +244,7 @@
   <div class="nav-right">
     <a href="/#how" class="nav-link">How it works</a>
     <a href="/#proof" class="nav-link">What you get</a>
-    <a href="/#faq" class="nav-link">FAQ</a>
+    <a href="/pricing/" class="nav-link">Pricing</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">Dark mode</span></button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Free walkthrough</a>
   </div>
@@ -292,44 +253,61 @@
 <div class="hero">
   <div class="hero-tag"><span></span> Simple, transparent pricing</div>
   <h1>Invest in being found by AI.</h1>
-  <p>One audit to understand where you stand. Ongoing monitoring to stay ahead as AI search keeps evolving.</p>
-  <div class="hero-micro">No setup fees. No contracts required. Cancel any time on the monthly plan.</div>
+  <p>Start with an audit to see where you stand. Get full implementation if you want us to fix it.</p>
+  <div class="hero-micro">No contracts. No hidden fees. Delivered within 48 hours.</div>
 </div>
 
 <div class="section" style="padding-top: 0;">
   <p class="section-sm">Plans</p>
-  <h2>Two ways to work with Aiscite.</h2>
-  <p class="lead">Start with a full audit to get your score, your gaps, and your roadmap. Add monthly monitoring to track progress and stay ahead of competitors.</p>
+  <h2>Three ways to work with Aiscite.</h2>
+  <p class="lead">Every engagement starts with understanding exactly how AI assistants see your business today. Choose the level of involvement that fits where you are.</p>
 
   <div class="pricing-grid">
-    <!-- Card 1: Full Audit -->
+    <!-- Card 1: AI Visibility Audit -->
     <div class="pricing-card">
       <p class="pricing-label">One time</p>
-      <h3>Full Audit</h3>
-      <div class="pricing-price">$499</div>
+      <h3>AI Visibility Audit</h3>
+      <div class="pricing-price">$288</div>
       <p class="pricing-period">one time payment</p>
       <ul class="pricing-features">
-        <li>Complete AI visibility audit across all major AI platforms</li>
-        <li>Competitor gap analysis (up to 5 competitors)</li>
-        <li>12-month improvement roadmap</li>
-        <li>One implementation call (30 minutes)</li>
-        <li>Report delivered in 48 hours</li>
+        <li>Full AI visibility audit across major AI assistants</li>
+        <li>Scored breakdown of where you appear and where you are missing</li>
+        <li>Competitor gap analysis</li>
+        <li>Written findings report with specific gaps identified</li>
+        <li>Delivered within 48 hours</li>
       </ul>
-      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-dark" target="_blank" style="text-align:center;">Get started</a>
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-ghost" target="_blank" style="text-align:center;">Get started</a>
     </div>
 
-    <!-- Card 2: Monthly Monitoring -->
-    <div class="pricing-card featured">
-      <p class="pricing-label">Monthly</p>
-      <h3>Monthly Monitoring</h3>
-      <div class="pricing-price">$299</div>
-      <p class="pricing-period">per month</p>
+    <!-- Card 2: Full Implementation -->
+    <div class="pricing-card">
+      <p class="pricing-label">One time</p>
+      <h3>Full Implementation</h3>
+      <div class="pricing-price">$688</div>
+      <p class="pricing-period">one time payment</p>
       <ul class="pricing-features">
-        <li>Monthly AI visibility score tracking</li>
-        <li>Alert when your score drops or competitors improve</li>
-        <li>Quarterly report refresh</li>
-        <li>Priority support</li>
-        <li>Cancel any time</li>
+        <li>We fix your website and content to improve AI visibility</li>
+        <li>Schema markup, citations, and authority signals added</li>
+        <li>Content rewrites targeting AI citation patterns</li>
+        <li>Implementation call to walk through every change</li>
+        <li>Delivered within 5 business days</li>
+      </ul>
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-ghost" target="_blank" style="text-align:center;">Get started</a>
+    </div>
+
+    <!-- Card 3: Bundle (Most Popular) -->
+    <div class="pricing-card featured">
+      <div class="popular-badge">Most Popular</div>
+      <p class="pricing-label">One time</p>
+      <h3>Audit + Implementation Bundle</h3>
+      <div class="pricing-price">$888</div>
+      <p class="pricing-period">one time payment</p>
+      <ul class="pricing-features">
+        <li>Everything in the Audit</li>
+        <li>Everything in Full Implementation</li>
+        <li>30 day follow up to track visibility improvements</li>
+        <li>Priority support throughout</li>
+        <li>Best value for businesses serious about AI search</li>
       </ul>
       <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-dark" target="_blank" style="text-align:center;">Get started</a>
     </div>
@@ -339,36 +317,36 @@
 </div>
 
 <div class="section" id="faq" style="padding-top:0; border-top:1px solid var(--border)">
-  <p class="section-sm" style="margin-top:104px">FAQ</p>
+  <p class="section-sm" style="margin-top:80px">FAQ</p>
   <h2>Questions about pricing and delivery.</h2>
   <p class="lead">Everything you need to know before getting started.</p>
   <div class="faq-list">
     <div class="faq-item">
-      <h3>How is this different from the free report?</h3>
-      <p>The free walkthrough gives you a high-level overview of your AI visibility gaps. The Full Audit is a complete diagnostic: a scored breakdown across all major AI platforms, a competitor gap analysis against up to five competitors, a 12-month improvement roadmap, and a 30-minute call to walk you through the findings. It is built for businesses that want to act, not just get a snapshot.</p>
+      <h3>What is included in the audit?</h3>
+      <p>The audit covers a full scan of how major AI assistants including ChatGPT, Gemini, Claude, and Perplexity currently describe and cite your business. You receive a scored breakdown across key visibility dimensions, a written findings report identifying your specific gaps, and a competitor comparison showing where you stand relative to similar businesses in your market.</p>
     </div>
     <div class="faq-item">
-      <h3>How long does delivery take?</h3>
-      <p>Your audit report is delivered within 48 hours of your kickoff call. Monthly monitoring reports are delivered on a rolling monthly schedule. If anything needs clarification before we begin, we will reach out quickly to keep things moving.</p>
+      <h3>How long does implementation take?</h3>
+      <p>The audit report is delivered within 48 hours of your kickoff call. Full implementation is completed within 5 business days. The bundle includes a 30 day follow up period so we can verify that the changes are improving your AI visibility scores over time.</p>
     </div>
     <div class="faq-item">
-      <h3>What if I am not satisfied?</h3>
-      <p>If you complete the Full Audit and feel the report did not deliver clear, actionable value, reach out within 7 days and we will make it right. Your satisfaction matters to us and we stand behind the quality of our work. Monthly monitoring can be cancelled at any time with no penalties.</p>
+      <h3>Do you guarantee results?</h3>
+      <p>AI search is probabilistic and no one can guarantee exact ranking outcomes. What we do guarantee is that every recommendation is based on documented AI citation patterns and real visibility data from your industry. If you complete the audit and feel the findings did not deliver clear, actionable value, reach out within 7 days and we will make it right.</p>
     </div>
   </div>
 </div>
 
 <div class="cta-block">
   <h2>Ready to see how AI sees your business?</h2>
-  <p>Book a free 10-minute walkthrough. No setup. No commitment. Just a clear picture of where you stand today.</p>
+  <p>Book a free 10 minute walkthrough. No setup. No commitment. Just a clear picture of where you stand today.</p>
   <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank">Book your free walkthrough</a>
-  <div class="cta-note">Free 10-minute walkthrough. Audit delivery within 48 hours.</div>
+  <div class="cta-note">Free 10 minute walkthrough. Audit delivery within 48 hours.</div>
 </div>
 
 <footer>
   <div class="footer-logo">Aiscite</div>
   <p>AI visibility audits for trust-driven businesses</p>
-  <p>© 2026 Aiscite</p>
+  <p>&#169; 2026 Aiscite</p>
 </footer>
 
 <script>
