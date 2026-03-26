@@ -204,6 +204,21 @@
     .score-card { padding: 28px; }
     .cta-block { margin: 0 16px 60px; padding: 58px 22px; }
   }
+
+  .btn-send-message {
+    padding: 14px 24px;
+    border-radius: 10px;
+    background: var(--btnBg);
+    color: var(--btnText);
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    width: 100%;
+    transition: opacity 0.15s;
+  }
+  .btn-send-message:hover { opacity: 0.88; }
 </style>
 </head>
 <body>
@@ -322,7 +337,7 @@
       <input type="email" name="email" placeholder="Your email" required
         style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:inherit; font-size:15px; outline:none; font-family:inherit;">
       <button type="submit"
-        style="padding:14px 24px; border-radius:10px; background:#ffffff; color:#101010; font-weight:700; font-size:15px; border:none; cursor:pointer; font-family:inherit;">Send message</button>
+        class="btn-send-message">Send message</button>
       <p id="formSuccess" style="display:none; color:#6ee7b7; font-size:14px; text-align:center; margin:4px 0 0;">Message sent. We will be in touch within 24 hours.</p>
     </form>
     <script>
