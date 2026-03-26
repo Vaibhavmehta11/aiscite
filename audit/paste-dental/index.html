@@ -158,6 +158,11 @@ nav {
 .problem-item p { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
 .fix-row { padding-top: 14px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text); }
 .fix-row b { font-weight: 700; }
+/* OFFER */
+.offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+.offer-main {
+  background: var(--ctaBg); color: var(--ctaText); border-radius: 24px; padding: 32px;
+}
 /* pricing tier rows inside dark/light offer-main */
 .price-row-muted {
   display: flex; justify-content: space-between; align-items: center;
@@ -171,11 +176,6 @@ html[data-theme="dark"] .price-row-muted {
   display: flex; justify-content: space-between; align-items: center;
   padding: 12px 16px; border-radius: 10px;
   background: var(--ctaText); color: var(--ctaBg);
-}
-/* OFFER */
-.offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
-.offer-main {
-  background: var(--ctaBg); color: var(--ctaText); border-radius: 24px; padding: 32px;
 }
 .offer-main .offer-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--ctaMuted); font-weight: 700; margin-bottom: 14px; }
 .offer-main h3 { font-size: 26px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; line-height: 1.1; }
@@ -229,10 +229,15 @@ footer p { font-size: 13px; color: var(--muted); }
   .cta-block { padding: 48px 24px; margin: 48px 0; }
 }
 </style>
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https://us.i.posthog.com",person_profiles:"identified_only"});
+posthog.capture("free_report_view", {business: "paste-dental", score: 78});
+</script>
 </head>
 <body>
 <nav>
-  <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px">· Paste Dental</span>
+  <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Paste Dental</span>
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle">Dark mode</button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book walkthrough</a>
@@ -246,9 +251,9 @@ footer p { font-size: 13px; color: var(--muted); }
   <div class="score-hero">
     <div class="score-main">
       <div>
-        <div class="score-number">90</div>
+        <div class="score-number">58</div>
         <div class="score-label">AI Visibility Score · out of 100</div>
-        <div class="score-badge" style="margin-top:12px">Strong — but not untouchable</div>
+        <div class="score-badge" style="margin-top:12px">Above average — not yet obvious</div>
       </div>
       <div class="score-bars">
         <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">80</span></div>
@@ -268,7 +273,7 @@ footer p { font-size: 13px; color: var(--muted); }
       <div class="context-stats">
         <div class="stat-row"><span class="stat-label">Competing practices</span><span class="stat-val">~40 / 100</span></div>
         <div class="stat-row"><span class="stat-label">Target score</span><span class="stat-val">90+ / 100</span></div>
-        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+10 to +15 points</span></div>
+        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+30 to +37 points</span></div>
         <div class="stat-row"><span class="stat-label">Implementation window</span><span class="stat-val">2 weeks</span></div>
         <div class="stat-row"><span class="stat-label">Best next step</span><span class="stat-val">10-min private walkthrough</span></div>
       </div>
@@ -280,13 +285,13 @@ footer p { font-size: 13px; color: var(--muted); }
   <div class="section">
     <p class="section-sm">Where you stand</p>
     <h2>Strong — but not untouchable — room to improve.</h2>
-    <p class="section-lead">Paste Dental sits at 90/100. Most local dentist businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
+    <p class="section-lead">Paste Dental scores 78/100 — well above most local practices which average below 40. One structural gap is holding the site back from becoming an obvious default recommendation.</p>
     <div class="chart-grid">
       <div class="chart-card">
         <h3>Position in the market</h3>
-        <p>Paste Dental is ahead of the local pack, but not yet in the range where a specialist practice becomes an obvious AI recommendation.</p>
+        <p>Paste Dental scores 78/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
         <div class="chart-shell"><div class="chart-frame"><canvas id="benchmarkChart"></canvas></div></div>
-        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong> you are not starting from behind. This is an upgrade in presentation and trust.</div>
+        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong> Paste Dental is one of the stronger practices in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
       </div>
       <div class="chart-card">
         <h3>Where the biggest improvements are</h3>
@@ -299,7 +304,7 @@ footer p { font-size: 13px; color: var(--muted); }
 
   <div class="section">
     <p class="section-sm">The gaps</p>
-    <h2>0 things holding Paste Dental back from AI recommendation.</h2>
+    <h2>1 things holding Paste Dental back from AI recommendation.</h2>
     <p class="section-lead">These are clarity problems, not technical ones. The site is not doing enough to prove expertise, answer likely questions, or tell AI what matters most about Paste Dental.</p>
     <div class="problem-list">
       <div class="problem-item">
@@ -332,7 +337,8 @@ footer p { font-size: 13px; color: var(--muted); }
         <div class="offer-tag">Recommended next step</div>
         <h3>Book a 10-minute walkthrough.</h3>
         <p>We review the opportunity, explain exactly what would change, and confirm whether the 2-week upgrade is the right move for the practice.</p>
-        <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="margin-top:8px;display:inline-block">Book the 10-minute walkthrough →</a>
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px">
           <div class="price-row-muted">
             <span style="font-size:14px;font-weight:700">Audit</span>
             <span style="font-size:18px;font-weight:800">$288</span>
@@ -372,12 +378,14 @@ footer p { font-size: 13px; color: var(--muted); }
 
 <div class="wrap">
   <div class="cta-block">
-    <h2>If this were my business, I would take the call.</h2>
-    <p>The quality is already in Paste Dental. The website is just not helping AI understand it well enough yet. A 10-minute call is the fastest way to decide if that is worth fixing now.</p>
-    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank">Book the 10-minute walkthrough</a>
-    <div class="cta-note">Free · No commitment · Audit delivery within 48 hours</div>
+    <h2>See how much further you can go.</h2>
+    <p>The foundation is strong. Two targeted fixes and Paste Dental becomes the obvious AI recommendation for airway dentistry in Toronto.</p>
+    <div style="max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="text-align:center">Book the 10-minute walkthrough →</a>
+      <a href="mailto:hello@aiscite.com?subject=Paste Dental — Visibility Review" style="color:rgba(255,255,255,0.6);font-size:13px;text-align:center;text-decoration:none">Or reply by email</a>
+    </div>
+    <div class="cta-note">No obligation. 10 minutes. We confirm whether the opportunity is real.</div>
   </div>
-</div>
 
 <footer>
   <div class="footer-logo">Aiscite</div>
@@ -431,7 +439,7 @@ function buildCharts() {
     data: {
       labels: ['Target score', 'Competing practices', 'Paste Dental'],
       datasets: [{
-        data: [90, 40, 90],
+        data: [90, 40, 58],
         backgroundColor: [c.gold, c.muted, c.barFill],
         borderRadius: 12, borderSkipped: false, barThickness: 28,
       }]
