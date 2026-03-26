@@ -108,6 +108,23 @@ nav {
   font-weight: 600; text-align: center; display: block;
 }
 .btn-ghost:hover { background: var(--bg2); }
+.btn-ghost-cta {
+  text-decoration: none;
+  color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.25);
+  background: transparent;
+  padding: 11px 20px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  display: block;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-ghost-cta:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.95);
+}
 .score-context {
   background: var(--bg2); border: 1px solid var(--border); border-radius: 24px; padding: 36px;
 }
@@ -383,7 +400,7 @@ posthog.capture("free_report_view", {business: "mortgage-brokers-toronto", score
     <p>The foundation is strong. Two targeted fixes and Mortgage Brokers Toronto becomes the obvious AI recommendation in Toronto.</p>
     <div style="max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
       <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="text-align:center">Book the 10-minute walkthrough →</a>
-      <a href="mailto:hello@aiscite.com?subject=Mortgage Brokers Toronto — Visibility Review" class="btn-ghost" style="font-size:13px;text-align:center">Or reply by email</a>
+      <a href="mailto:hello@aiscite.com?subject=Mortgage Brokers Toronto — Visibility Review" class="btn-ghost-cta">Or reply by email</a>
     </div>
     <div class="cta-note">No obligation. 10 minutes. We confirm whether the opportunity is real.</div>
   </div>
