@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing | Aiscite — AI Visibility Audits</title>
+<meta name="description" content="Full AI visibility audit and monthly monitoring plans for local businesses. Get found by AI assistants like ChatGPT, Gemini, and Perplexity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+  html[data-theme="light"] {
+    --bg: #ffffff;
+    --bg2: #f6f6f7;
+    --bg3: #f0f0f2;
+    --text: #111111;
+    --muted: #666870;
+    --border: #e7e7ea;
+    --soft: #fafafb;
+    --btnText: #ffffff;
+    --btnBg: #111111;
+    --ctaBg: #101010;
+    --ctaText: #ffffff;
+    --ctaMuted: #8d9098;
+    --invBg: #ffffff;
+    --invText: #101010;
+    --scoreBadgeBg: #eef2ff;
+    --scoreBadgeText: #3730a3;
+    --barTrack: #e2e4e8;
+    --navBg: rgba(255,255,255,0.86);
+    --cardBorder: #e7e7ea;
+    --accentBg: #eef2ff;
+    --accentText: #3730a3;
+    --accentBorder: #c7d2fe;
+    --faqBg: #f6f6f7;
+  }
+  html[data-theme="dark"] {
+    --bg: #0d0d0f;
+    --bg2: #141416;
+    --bg3: #1b1b1f;
+    --text: #f4f4f5;
+    --muted: #a1a1aa;
+    --border: #27272a;
+    --soft: #141416;
+    --btnText: #101010;
+    --btnBg: #f4f4f5;
+    --ctaBg: #f4f4f5;
+    --ctaText: #101010;
+    --ctaMuted: #5f636b;
+    --invBg: #101010;
+    --invText: #ffffff;
+    --scoreBadgeBg: rgba(96,165,250,0.14);
+    --scoreBadgeText: #93c5fd;
+    --barTrack: #2a2a31;
+    --navBg: rgba(13,13,15,0.84);
+    --cardBorder: #27272a;
+    --accentBg: rgba(99,102,241,0.12);
+    --accentText: #a5b4fc;
+    --accentBorder: rgba(99,102,241,0.3);
+    --faqBg: #141416;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 60px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px; background: var(--navBg); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { color: var(--text); text-decoration: none; font-weight: 800; font-size: 16px; letter-spacing: -0.4px; }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-link { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .nav-link:hover { color: var(--text); }
+  .theme-toggle {
+    border: 1px solid var(--border); background: var(--bg); color: var(--text);
+    height: 36px; padding: 0 12px; border-radius: 10px; font-size: 13px;
+    font-weight: 600; cursor: pointer; font-family: var(--font);
+  }
+  .nav-btn {
+    text-decoration: none; background: var(--btnBg); color: var(--btnText);
+    padding: 9px 16px; border-radius: 12px; font-weight: 700; font-size: 13px;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .nav-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    max-width: 900px; margin: 0 auto; padding: 120px 28px 72px;
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px;
+    border: 1px solid var(--border); border-radius: 999px; color: var(--muted);
+    font-size: 13px; font-weight: 600; margin-bottom: 28px;
+  }
+  .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: #6366f1; display: inline-block; }
+  .hero h1 {
+    font-size: clamp(36px, 5.5vw, 62px); line-height: 1.04; letter-spacing: -2.8px;
+    font-weight: 800; margin-bottom: 18px;
+  }
+  .hero p {
+    max-width: 580px; margin: 0 auto 20px; color: var(--muted);
+    font-size: 18px; line-height: 1.72;
+  }
+  .trust-badge {
+    display: inline-block; padding: 8px 16px; background: var(--bg2);
+    border: 1px solid var(--border); border-radius: 999px;
+    font-size: 13px; color: var(--muted); font-weight: 500;
+    margin-top: 4px;
+  }
+
+  /* PRICING GRID */
+  .pricing-wrap { max-width: 900px; margin: 0 auto; padding: 0 28px 80px; }
+  .pricing-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 8px;
+  }
+  .plan-card {
+    background: var(--bg2); border: 1px solid var(--cardBorder); border-radius: 24px;
+    padding: 36px; display: flex; flex-direction: column; gap: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .plan-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .plan-card.featured {
+    background: var(--ctaBg); color: var(--ctaText); border-color: transparent;
+    position: relative; overflow: hidden;
+  }
+  .plan-card.featured::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #6366f1, #818cf8);
+  }
+  .plan-tag {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
+  }
+  .plan-card.featured .plan-tag { color: var(--ctaMuted); }
+  .plan-name {
+    font-size: 24px; font-weight: 800; letter-spacing: -0.8px; margin-bottom: 6px;
+  }
+  .plan-desc {
+    font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 28px;
+  }
+  .plan-card.featured .plan-desc { color: var(--ctaMuted); }
+  .plan-price {
+    display: flex; align-items: baseline; gap: 4px; margin-bottom: 8px;
+  }
+  .plan-price-amount {
+    font-size: 52px; font-weight: 800; letter-spacing: -3px; line-height: 1;
+  }
+  .plan-price-suffix {
+    font-size: 16px; font-weight: 600; color: var(--muted);
+  }
+  .plan-card.featured .plan-price-suffix { color: var(--ctaMuted); }
+  .plan-price-note {
+    font-size: 13px; color: var(--muted); margin-bottom: 28px;
+  }
+  .plan-card.featured .plan-price-note { color: var(--ctaMuted); }
+  .plan-divider {
+    height: 1px; background: var(--border); margin-bottom: 28px;
+  }
+  .plan-card.featured .plan-divider { background: rgba(255,255,255,0.1); }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; flex: 1; }
+  .plan-feature {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 14px; line-height: 1.5;
+  }
+  .feature-check {
+    width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg3); margin-top: 1px;
+  }
+  .plan-card.featured .feature-check { background: rgba(255,255,255,0.12); }
+  .feature-check svg { width: 11px; height: 11px; }
+  .btn-plan {
+    display: block; text-decoration: none; text-align: center;
+    padding: 15px 24px; border-radius: 14px; font-weight: 700; font-size: 15px;
+    transition: opacity 0.15s, transform 0.15s; margin-top: auto;
+  }
+  .btn-plan:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-plan-dark {
+    background: var(--btnBg); color: var(--btnText);
+  }
+  .btn-plan-light {
+    background: #ffffff; color: #101010;
+  }
+
+  /* TRUST BAR */
+  .trust-bar {
+    max-width: 900px; margin: 0 auto 80px; padding: 0 28px;
+  }
+  .trust-bar-inner {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 20px;
+    padding: 28px 36px; display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+  }
+  .trust-item { text-align: center; }
+  .trust-item-num { font-size: 28px; font-weight: 800; letter-spacing: -1.5px; }
+  .trust-item-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .trust-divider { width: 1px; height: 40px; background: var(--border); }
+
+  /* FAQ */
+  .faq-wrap { max-width: 720px; margin: 0 auto; padding: 0 28px 80px; }
+  .section-label {
+    font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 14px;
+  }
+  .faq-wrap h2 {
+    font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; letter-spacing: -1.6px;
+    line-height: 1.1; margin-bottom: 8px;
+  }
+  .faq-lead {
+    color: var(--muted); font-size: 16px; line-height: 1.75; margin-bottom: 40px;
+    max-width: 520px;
+  }
+  .faq-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    width: 100%; background: none; border: none; text-align: left;
+    padding: 22px 24px; font-family: var(--font); font-size: 15px; font-weight: 700;
+    color: var(--text); cursor: pointer; display: flex; justify-content: space-between;
+    align-items: center; gap: 16px;
+  }
+  .faq-q:hover { background: var(--soft); }
+  .faq-icon { font-size: 18px; flex-shrink: 0; transition: transform 0.2s; color: var(--muted); }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+    font-size: 14px; color: var(--muted); line-height: 1.75; padding: 0 24px;
+    background: var(--faqBg);
+  }
+  .faq-item.open .faq-a { max-height: 400px; padding: 4px 24px 22px; }
+
+  /* CTA BLOCK */
+  .cta-block {
+    max-width: 900px; margin: 0 auto 80px; padding: 0 28px;
+  }
+  .cta-inner {
+    background: var(--ctaBg); color: var(--ctaText); border-radius: 24px;
+    padding: 64px 48px; text-align: center;
+  }
+  .cta-inner h2 {
+    font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -2px;
+    line-height: 1.08; margin-bottom: 12px;
+  }
+  .cta-inner p { color: var(--ctaMuted); max-width: 440px; margin: 0 auto 28px; font-size: 16px; line-height: 1.72; }
+  .cta-btns { display: flex; flex-direction: column; gap: 12px; max-width: 360px; margin: 0 auto; }
+  .btn-white {
+    display: block; text-decoration: none; text-align: center;
+    background: #ffffff; color: #101010; padding: 15px 24px;
+    border-radius: 14px; font-weight: 700; font-size: 15px;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .btn-white:hover { opacity: 0.9; transform: translateY(-1px); }
+  .cta-note { margin-top: 20px; font-size: 13px; color: var(--ctaMuted); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border); padding: 40px 28px; text-align: center;
+  }
+  .footer-logo { font-weight: 800; font-size: 16px; letter-spacing: -0.4px; margin-bottom: 8px; }
+  footer p { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    nav { padding: 0 16px; }
+    .hero { padding: 96px 20px 56px; }
+    .pricing-wrap, .trust-bar, .faq-wrap, .cta-block { padding-left: 20px; padding-right: 20px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .trust-bar-inner { flex-direction: column; gap: 16px; text-align: center; }
+    .trust-divider { display: none; }
+    .plan-card { padding: 28px 24px; }
+    .cta-inner { padding: 48px 28px; }
+    .plan-price-amount { font-size: 44px; }
+    .nav-link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://aiscite.com" class="nav-logo">Aiscite</a>
+  <div class="nav-right">
+    <a href="https://aiscite.com" class="nav-link">Home</a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">☀ / ☾</button>
+    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank" rel="noopener">Book intro call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow"><span class="eyebrow-dot"></span> Simple, transparent pricing</div>
+  <h1>Know exactly where<br>AI sends your customers.</h1>
+  <p>Two ways to work with us. One goal: make sure AI assistants recommend you first.</p>
+  <div class="trust-badge">Used by dental practices, law firms, and accounting firms across Toronto</div>
+</div>
+
+<!-- PRICING CARDS -->
+<div class="pricing-wrap">
+  <div class="pricing-grid">
+
+    <!-- PLAN 1: ONE-TIME AUDIT -->
+    <div class="plan-card">
+      <div class="plan-tag">One time</div>
+      <div class="plan-name">Full Audit</div>
+      <div class="plan-desc">A complete picture of your AI visibility with a clear plan to close the gaps.</div>
+      <div class="plan-price">
+        <span class="plan-price-amount">$499</span>
+      </div>
+      <div class="plan-price-note">One payment. Lifetime access to your report.</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li class="plan-feature">
+          <span class="feature-check">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          Full AI visibility audit report
+        </li>
+        <li class="plan-feature">
+          <span class="feature-check">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          Competitor gap analysis
+        </li>
+        <li class="plan-feature">
+          <span class="feature-check">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          12-month visibility roadmap
+        </li>
+        <li class="plan-feature">
+          <span class="feature-check">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          1 implementation call (30 min)
+        </li>
+      </ul>
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-plan btn-plan-dark" target="_blank" rel="noopener">
+        Get Your Full Audit →
+      </a>
+    </div>
+
+    <!-- PLAN 2: MONTHLY MONITORING -->
+    <div class="plan-card featured">
+      <div class="plan-tag">Most popular</div>
+      <div class="plan-name">Monthly Monitoring</div>
+      <div class="plan-desc">Stay ahead as AI platforms evolve. We track your visibility every month so you always know where you stand.</div>
+      <div class="plan-price">
+        <span class="plan-price-amount">$299</span>
+        <span class="plan-price-suffix">/mo</span>
+      </div>
+      <div class="plan-price-note">Cancel anytime. No long-term contract.</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li class="plan-feature">
+          <span class="feature-check">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          Monthly AI visibility score tracking
+        </li>
+        <li class="plan-feature">
+          <span class="feature-check">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          Alerts when competitors improve
+        </li>
+        <li class="plan-feature">
+          <span class="feature-check">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          Quarterly report refresh
+        </li>
+        <li class="plan-feature">
+          <span class="feature-check">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          Priority support
+        </li>
+      </ul>
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-plan btn-plan-light" target="_blank" rel="noopener">
+        Start Monitoring →
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item">
+      <div class="trust-item-num">3</div>
+      <div class="trust-item-label">AI platforms audited</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <div class="trust-item-num">48h</div>
+      <div class="trust-item-label">Report delivery</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <div class="trust-item-num">100%</div>
+      <div class="trust-item-label">Satisfaction guarantee</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item" style="max-width:280px">
+      <div style="font-size:14px;font-weight:600;line-height:1.5">Trusted by dental practices, law firms, and accounting firms across Toronto</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-wrap">
+  <div class="section-label">Questions</div>
+  <h2>Everything you need to know.</h2>
+  <p class="faq-lead">Straight answers. No fluff.</p>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How is this different from the free report?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        The free report gives you a score and a preview of your AI visibility gaps. The paid audit goes deeper: a full competitor gap analysis, a 12-month roadmap with prioritized actions, and a 1-on-1 call where we walk you through exactly what to fix and in what order. The free report shows you the problem. The paid audit gives you the solution.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How long does it take?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        We deliver the full audit within 48 hours of your intro call. The 30-minute implementation call is typically scheduled within 3 to 5 business days. Monthly monitoring clients receive their first report at the end of their first full month and then on a recurring monthly basis.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What if I am not satisfied?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        If you feel the audit did not deliver clear, actionable insight, we will either redo it at no charge or issue a full refund. No questions asked. We stand behind the work completely.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What AI platforms do you audit?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        We audit your visibility across ChatGPT, Google Gemini, and Perplexity AI. These are the three dominant AI assistants where consumers are increasingly searching for local service providers. Our methodology checks citation frequency, mention quality, and how AI models position you relative to competitors.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Can I start with the audit and add monitoring later?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        Yes. Many clients start with a one-time audit to understand their baseline, then add monthly monitoring once they see the value. If you upgrade within 30 days of your audit, the audit fee is credited toward your first two months of monitoring.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<div class="cta-block">
+  <div class="cta-inner">
+    <h2>Not sure which plan is right for you?</h2>
+    <p>Book a free 10-minute intro call. We will review your current AI visibility and tell you exactly which option makes sense.</p>
+    <div class="cta-btns">
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" rel="noopener">Book your free intro call →</a>
+    </div>
+    <div class="cta-note">No obligation. 10 minutes. We confirm whether the opportunity is real.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Aiscite</div>
+  <p>Helping local businesses get found by AI assistants.</p>
+  <p style="margin-top:8px"><a href="https://aiscite.com">Home</a> &nbsp;·&nbsp; <a href="mailto:hello@aiscite.com">hello@aiscite.com</a></p>
+  <p style="margin-top:12px">© 2026 Aiscite</p>
+</footer>
+
+<script>
+// Theme toggle
+(function () {
+  const root = document.documentElement;
+  const stored = localStorage.getItem('aiscite-theme');
+  if (stored) root.setAttribute('data-theme', stored);
+})();
+
+function toggleTheme() {
+  const root = document.documentElement;
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('aiscite-theme', next);
+}
+
+// FAQ accordion
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
