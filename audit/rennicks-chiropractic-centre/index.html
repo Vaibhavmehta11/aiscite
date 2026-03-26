@@ -232,7 +232,7 @@ footer p { font-size: 13px; color: var(--muted); }
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https://us.i.posthog.com",person_profiles:"identified_only"});
-posthog.capture("free_report_view", {business: "rennicks-chiropractic-centre", score: 78});
+posthog.capture("free_report_view", {business: "rennicks-chiropractic-centre", score: 58});
 </script>
 </head>
 <body>
@@ -256,11 +256,11 @@ posthog.capture("free_report_view", {business: "rennicks-chiropractic-centre", s
         <div class="score-badge" style="margin-top:12px">Above average — not yet obvious</div>
       </div>
       <div class="score-bars">
-        <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:45%"></div></div><span class="bar-val">45</span></div>
-        <div class="bar-row"><span class="bar-label">Citation signals</span><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div><span class="bar-val">65</span></div>
-        <div class="bar-row"><span class="bar-label">Authority and trust</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><span class="bar-val">68</span></div>
-        <div class="bar-row"><span class="bar-label">Content depth</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">48</span></div>
-        <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:52%"></div></div><span class="bar-val">52</span></div>
+        <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">20</span></div>
+        <div class="bar-row"><span class="bar-label">Citation signals</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100</span></div>
+        <div class="bar-row"><span class="bar-label">Authority and trust</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100</span></div>
+        <div class="bar-row"><span class="bar-label">Content depth</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100</span></div>
+        <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">60</span></div>
       </div>
       <div class="score-actions">
         <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-primary" target="_blank">Book your free 10-minute walkthrough</a>
@@ -285,13 +285,13 @@ posthog.capture("free_report_view", {business: "rennicks-chiropractic-centre", s
   <div class="section">
     <p class="section-sm">Where you stand</p>
     <h2>Strong — but not untouchable — room to improve.</h2>
-    <p class="section-lead">Rennicks Chiropractic Centre scores 78/100 — well above most local practices which average below 40. One structural gap is holding the site back from becoming an obvious default recommendation.</p>
+    <p class="section-lead">Rennicks Chiropractic Centre scores 58/100 — well above most local chiropractic clinics which average below 40. One structural gap is holding the site back from becoming an obvious default recommendation.</p>
     <div class="chart-grid">
       <div class="chart-card">
         <h3>Position in the market</h3>
-        <p>Rennicks Chiropractic Centre scores 78/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
+        <p>Rennicks Chiropractic Centre scores 58/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
         <div class="chart-shell"><div class="chart-frame"><canvas id="benchmarkChart"></canvas></div></div>
-        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong> Rennicks Chiropractic Centre is one of the stronger practices in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
+        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong>Rennicks Chiropractic Centre is one of the stronger chiropractic clinics in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
       </div>
       <div class="chart-card">
         <h3>Where the biggest improvements are</h3>
@@ -315,7 +315,7 @@ posthog.capture("free_report_view", {business: "rennicks-chiropractic-centre", s
       </div>
       <div class="problem-item">
         <div class="tag red">Priority</div>
-        <h3>The site is not answering the questions patients are already asking</h3>
+        <h3>The site is not answering the questions clients are already asking</h3>
         <p>People ask AI simple questions before they choose a provider. If the site does not answer those clearly, another source gets recommended instead.</p>
         <div class="fix-row"><b>Fix:</b> Add clear, plain-English answers around your services, specialties, and the questions clients ask most often.</div>
       </div>
@@ -356,7 +356,7 @@ posthog.capture("free_report_view", {business: "rennicks-chiropractic-centre", s
       <div class="offer-items">
         <div class="offer-item">
           <div class="offer-item-check">✓</div>
-          <div><b>What you get</b><span>A stronger website presentation, clearer answers for prospective patients, and a cleaner brand story for AI to work from.</span></div>
+          <div><b>What you get</b><span>A stronger website presentation, clearer answers for prospective clients, and a cleaner brand story for AI to work from.</span></div>
         </div>
         <div class="offer-item">
           <div class="offer-item-check">✓</div>
