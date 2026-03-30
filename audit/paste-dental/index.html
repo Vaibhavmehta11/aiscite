@@ -2,7 +2,6 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8" />
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Aiscite — Paste Dental AI Visibility Audit</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -108,23 +107,6 @@ nav {
   font-weight: 600; text-align: center; display: block;
 }
 .btn-ghost:hover { background: var(--bg2); }
-.btn-ghost-cta {
-  text-decoration: none;
-  color: rgba(255,255,255,0.75);
-  border: 1px solid rgba(255,255,255,0.25);
-  background: transparent;
-  padding: 11px 20px;
-  border-radius: 14px;
-  font-size: 13px;
-  font-weight: 600;
-  text-align: center;
-  display: block;
-  transition: background 0.15s, color 0.15s;
-}
-.btn-ghost-cta:hover {
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.95);
-}
 .score-context {
   background: var(--bg2); border: 1px solid var(--border); border-radius: 24px; padding: 36px;
 }
@@ -250,6 +232,7 @@ footer p { font-size: 13px; color: var(--muted); }
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https://us.i.posthog.com",person_profiles:"identified_only"});
+(function(){var p=new URLSearchParams(window.location.search),s=p.get("utm_source")||"",m=p.get("utm_medium")||"";var i=(s==="internal")||(s===""&&m===""&&document.referrer==="");if(i){posthog.identify("vm-internal",{is_internal:true});posthog.register({is_internal:true});}else{posthog.register({is_internal:false,utm_source:s||null,utm_medium:m||null,utm_campaign:p.get("utm_campaign")||null,utm_content:p.get("utm_content")||null});}})();
 posthog.capture("free_report_view", {business: "paste-dental", score: 78});
 </script>
 </head>
@@ -400,7 +383,7 @@ posthog.capture("free_report_view", {business: "paste-dental", score: 78});
     <p>The foundation is strong. Two targeted fixes and Paste Dental becomes the obvious AI recommendation for airway dentistry in Toronto.</p>
     <div style="max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
       <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="text-align:center">Book the 10-minute walkthrough →</a>
-      <a href="mailto:hello@aiscite.com?subject=Paste Dental — Visibility Review" class="btn-ghost-cta">Or reply by email</a>
+      <a href="mailto:hello@aiscite.com?subject=Paste Dental — Visibility Review" style="color:rgba(255,255,255,0.6);font-size:13px;text-align:center;text-decoration:none">Or reply by email</a>
     </div>
     <div class="cta-note">No obligation. 10 minutes. We confirm whether the opportunity is real.</div>
   </div>

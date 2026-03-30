@@ -2,7 +2,6 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8" />
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Aiscite — Family & Cosmetic Dentist in Yorkville, Dental Office AI Visibility Audit</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -13,14 +12,14 @@
 :root { --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 html[data-theme="light"] {
   --bg: #ffffff; --bg2: #f6f6f7; --bg3: #f0f0f2;
-  --text: #111111; --muted: #666870; --border: #d1d5db;
+  --text: #111111; --muted: #666870; --border: #e7e7ea;
   --soft: #fafafb; --btnBg: #111111; --btnText: #ffffff;
   --ctaBg: #101010; --ctaText: #ffffff; --ctaMuted: #8d9098;
   --invBg: #ffffff; --invText: #101010;
   --barTrack: #e2e4e8; --navBg: rgba(255,255,255,0.86);
   --scoreBg: #f0f4ff; --scoreText: #2563eb;
-  --tagRedBg: #fee2e2; --tagRedText: #cc2222;
-  --tagGoldBg: #fef3c7; --tagGoldText: #b45309;
+  --tagRedBg: #fff0f0; --tagRedText: #cc2222;
+  --tagGoldBg: #fff8ed; --tagGoldText: #b45309;
   --insightBg: #f0f4ff; --insightBorder: #c7d7fe; --insightText: #1e3a8a;
 }
 html[data-theme="dark"] {
@@ -108,23 +107,6 @@ nav {
   font-weight: 600; text-align: center; display: block;
 }
 .btn-ghost:hover { background: var(--bg2); }
-.btn-ghost-cta {
-  text-decoration: none;
-  color: rgba(255,255,255,0.75);
-  border: 1px solid rgba(255,255,255,0.25);
-  background: transparent;
-  padding: 11px 20px;
-  border-radius: 14px;
-  font-size: 13px;
-  font-weight: 600;
-  text-align: center;
-  display: block;
-  transition: background 0.15s, color 0.15s;
-}
-.btn-ghost-cta:hover {
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.95);
-}
 .score-context {
   background: var(--bg2); border: 1px solid var(--border); border-radius: 24px; padding: 36px;
 }
@@ -176,20 +158,6 @@ nav {
 .problem-item p { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
 .fix-row { padding-top: 14px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text); }
 .fix-row b { font-weight: 700; }
-/* pricing tier rows inside dark/light offer-main */
-.price-row-muted {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 16px; border-radius: 10px;
-  background: rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.12); color: var(--ctaText);
-}
-html[data-theme="dark"] .price-row-muted {
-  background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.12);
-}
-.price-row-highlight {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 16px; border-radius: 10px;
-  background: var(--ctaText); color: var(--ctaBg);
-}
 /* OFFER */
 .offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
 .offer-main {
@@ -250,7 +218,7 @@ footer p { font-size: 13px; color: var(--muted); }
 </head>
 <body>
 <nav>
-  <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Family & Cosmetic Dentist in Yorkville, Dental Office</span>
+  <a href="https://aiscite.com" class="nav-logo">Aiscite <span>· Family & Cosmetic Dentist in Yorkville, Dental Office</span></a>
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle">Dark mode</button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book walkthrough</a>
@@ -285,8 +253,8 @@ footer p { font-size: 13px; color: var(--muted); }
       <p>This is not about reinventing the practice. It is about presenting its strengths with more clarity, confidence, and structure so AI can work from them.</p>
       <div class="context-stats">
         <div class="stat-row"><span class="stat-label">Competing practices</span><span class="stat-val">~40 / 100</span></div>
-        <div class="stat-row"><span class="stat-label">Target score</span><span class="stat-val">90+ / 100</span></div>
-        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+10 to +15 points</span></div>
+        <div class="stat-row"><span class="stat-label">Target score</span><span class="stat-val">78+ / 100</span></div>
+        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+0 to +0 points</span></div>
         <div class="stat-row"><span class="stat-label">Implementation window</span><span class="stat-val">2 weeks</span></div>
         <div class="stat-row"><span class="stat-label">Best next step</span><span class="stat-val">10-min private walkthrough</span></div>
       </div>
@@ -350,20 +318,8 @@ footer p { font-size: 13px; color: var(--muted); }
         <div class="offer-tag">Recommended next step</div>
         <h3>Book a 10-minute walkthrough.</h3>
         <p>We review the opportunity, explain exactly what would change, and confirm whether the 2-week upgrade is the right move for the practice.</p>
-        <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
-          <div class="price-row-muted">
-            <span style="font-size:14px;font-weight:700">Audit</span>
-            <span style="font-size:18px;font-weight:800">$288</span>
-          </div>
-          <div class="price-row-muted">
-            <span style="font-size:14px;font-weight:700">Full Implementation</span>
-            <span style="font-size:18px;font-weight:800">$688</span>
-          </div>
-          <div class="price-row-highlight">
-            <div><span style="font-size:14px;font-weight:700">Audit + Full Implementation Bundle</span><div style="font-size:12px;opacity:0.5;margin-top:2px">Includes 30-day re-scan</div></div>
-            <span style="font-size:18px;font-weight:800">$888</span>
-          </div>
-        </div>
+        <div class="price-big">$750</div>
+        <div class="price-note">One-time implementation · 2-week delivery · 30-day improvement guarantee</div>
       </div>
       <div class="offer-items">
         <div class="offer-item">
