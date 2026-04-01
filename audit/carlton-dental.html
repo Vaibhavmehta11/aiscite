@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 <title>Aiscite — Carlton Dental AI Visibility Audit</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,14 +13,14 @@
 :root { --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 html[data-theme="light"] {
   --bg: #ffffff; --bg2: #f6f6f7; --bg3: #f0f0f2;
-  --text: #111111; --muted: #666870; --border: #e7e7ea;
+  --text: #111111; --muted: #666870; --border: #d1d5db;
   --soft: #fafafb; --btnBg: #111111; --btnText: #ffffff;
   --ctaBg: #101010; --ctaText: #ffffff; --ctaMuted: #8d9098;
   --invBg: #ffffff; --invText: #101010;
   --barTrack: #e2e4e8; --navBg: rgba(255,255,255,0.86);
   --scoreBg: #f0f4ff; --scoreText: #2563eb;
-  --tagRedBg: #fff0f0; --tagRedText: #cc2222;
-  --tagGoldBg: #fff8ed; --tagGoldText: #b45309;
+  --tagRedBg: #fee2e2; --tagRedText: #cc2222;
+  --tagGoldBg: #fef3c7; --tagGoldText: #b45309;
   --insightBg: #f0f4ff; --insightBorder: #c7d7fe; --insightText: #1e3a8a;
 }
 html[data-theme="dark"] {
@@ -107,6 +108,23 @@ nav {
   font-weight: 600; text-align: center; display: block;
 }
 .btn-ghost:hover { background: var(--bg2); }
+.btn-ghost-cta {
+  text-decoration: none;
+  color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.25);
+  background: transparent;
+  padding: 11px 20px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  display: block;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-ghost-cta:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.95);
+}
 .score-context {
   background: var(--bg2); border: 1px solid var(--border); border-radius: 24px; padding: 36px;
 }
@@ -220,6 +238,22 @@ footer {
 }
 .footer-logo { font-size: 15px; font-weight: 800; }
 footer p { font-size: 13px; color: var(--muted); }
+/* REVIEW STAT GRID */
+.review-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; }
+/* STICKY CTA */
+.sticky-cta {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  background: var(--ctaBg); color: var(--ctaText);
+  padding: 14px 28px; display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  transform: translateY(100%); transition: transform 0.3s ease;
+}
+.sticky-cta.visible { transform: translateY(0); }
+.sticky-cta-text { font-size: 14px; font-weight: 600; }
+.sticky-cta-btn {
+  text-decoration: none; background: var(--ctaText); color: var(--ctaBg);
+  padding: 10px 20px; border-radius: 10px; font-weight: 700; font-size: 13px; white-space: nowrap;
+}
 /* RESPONSIVE */
 @media (max-width: 760px) {
   .score-hero, .chart-grid, .offer-grid, .process-steps { grid-template-columns: 1fr; }
@@ -227,18 +261,47 @@ footer p { font-size: 13px; color: var(--muted); }
   .bar-val { text-align: left; }
   .hero { padding-top: 100px; }
   .cta-block { padding: 48px 24px; margin: 48px 0; }
+  .theme-toggle { display: none; }
+}
+@media (max-width: 640px) {
+  .review-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 </style>
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https://us.i.posthog.com",person_profiles:"identified_only"});
-(function(){var p=new URLSearchParams(window.location.search),s=p.get("utm_source")||"",m=p.get("utm_medium")||"";var i=(s==="internal")||(s===""&&m===""&&document.referrer==="");if(i){posthog.identify("vm-internal",{is_internal:true});posthog.register({is_internal:true});}else{posthog.register({is_internal:false,utm_source:s||null,utm_medium:m||null,utm_campaign:p.get("utm_campaign")||null,utm_content:p.get("utm_content")||null});}})();
+
+// Internal session tagging — filter these out in PostHog with: is_internal != true
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var utmSource = params.get('utm_source') || '';
+  var utmMedium = params.get('utm_medium') || '';
+  // Mark as internal if: accessed directly (no utm), from internal param, or no referrer
+  var isInternal = (utmSource === 'internal') ||
+                   (utmSource === '' && utmMedium === '' && document.referrer === '');
+  if (isInternal) {
+    posthog.identify('vm-internal-' + Math.random().toString(36).substr(2,5), {
+      is_internal: true,
+      email: 'vm@aiscite.com'
+    });
+    posthog.register({is_internal: true});
+  } else {
+    posthog.register({
+      is_internal: false,
+      utm_source: utmSource || null,
+      utm_medium: utmMedium || null,
+      utm_campaign: params.get('utm_campaign') || null,
+      utm_content: params.get('utm_content') || null
+    });
+  }
+})();
+
 posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 </script>
 </head>
 <body>
 <nav>
-  <a href="https://aiscite.com" class="nav-logo">Aiscite <span>· Carlton Dental</span></a>
+  <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Carlton Dental</span>
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle">Dark mode</button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book walkthrough</a>
@@ -247,8 +310,8 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 
 <div class="hero">
   <div class="hero-eyebrow"><span></span> Private AI visibility review · March 2026</div>
-  <h1>Your dentist business looks stronger to people than it does to AI.</h1>
-  <p>When someone asks AI for a dentist in Toronto, Carlton Dental should be in that conversation. Right now, the site gives AI too little confidence, too few clear answers, and too little context about what makes this business special.</p>
+  <h1>Carlton Dental shows up for patients. It barely exists for AI.</h1>
+  <p>When someone asks AI for a dental practice in Toronto, Carlton Dental should be in that conversation. Right now, the site gives AI too little confidence, too few clear answers, and too little context about what makes this business special.</p>
   <div class="score-hero">
     <div class="score-main">
       <div>
@@ -265,6 +328,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
       </div>
       <div class="score-actions">
         <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-primary" target="_blank">Book your free 10-minute walkthrough</a>
+        <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:8px">Used by 40+ local practices and professionals across Toronto</p>
         <a href="mailto:hello@aiscite.com?subject=Carlton Dental — Visibility Review" class="btn-ghost">Reply by email</a>
       </div>
     </div>
@@ -274,7 +338,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
       <div class="context-stats">
         <div class="stat-row"><span class="stat-label">Competing practices</span><span class="stat-val">~40 / 100</span></div>
         <div class="stat-row"><span class="stat-label">Target score</span><span class="stat-val">90+ / 100</span></div>
-        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+10 to +15 points</span></div>
+        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+10 to +17 points</span></div>
         <div class="stat-row"><span class="stat-label">Implementation window</span><span class="stat-val">2 weeks</span></div>
         <div class="stat-row"><span class="stat-label">Best next step</span><span class="stat-val">10-min private walkthrough</span></div>
       </div>
@@ -286,26 +350,39 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   <div class="section">
     <p class="section-sm">Where you stand</p>
     <h2>Strong — but not untouchable — room to improve.</h2>
-    <p class="section-lead">Carlton Dental scores 78/100 — well above most local practices which average below 40. One structural gap is holding the site back from becoming an obvious default recommendation.</p>
-    <div class="chart-grid">
+    <p class="section-lead">Carlton Dental scores 78/100 — well above most local dental practices which average below 40. One structural gap is holding the site back from becoming an obvious default recommendation.</p>
+    <div class="chart-grid" style="grid-template-columns:1fr 1fr">
       <div class="chart-card">
         <h3>Position in the market</h3>
         <p>Carlton Dental scores 78/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
         <div class="chart-shell"><div class="chart-frame"><canvas id="benchmarkChart"></canvas></div></div>
-        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong> Carlton Dental is one of the stronger practices in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
+        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong>Carlton Dental is one of the stronger dental practices in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
       </div>
       <div class="chart-card">
-        <h3>Where the biggest improvements are</h3>
-        <p>The greatest upside is not basic visibility. It is clearer proof, clearer answers, and a cleaner story about why this practice stands out.</p>
-        <div class="chart-shell"><div class="chart-frame tall"><canvas id="radarChart"></canvas></div></div>
-        <div class="insight" id="radarInsight"><strong>What this means:</strong> the quickest gains come from making the site more convincing, not from rebuilding it.</div>
+        <h3>Top improvement areas</h3>
+        <p>The fastest gains come from fixing how your site communicates — not from rebuilding it.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:4px">
+          <div class="stat-row" style="border-bottom:1px solid var(--border);padding-bottom:12px">
+            <span style="font-size:28px;font-weight:800;color:var(--muted);line-height:1;margin-right:16px;flex-shrink:0">1</span>
+            <div><div style="font-size:14px;font-weight:700;margin-bottom:2px">AI readability</div><div style="font-size:13px;color:var(--muted)">AI cannot parse your credentials or services clearly from the current structure.</div></div>
+          </div>
+          <div class="stat-row" style="border-bottom:1px solid var(--border);padding-bottom:12px">
+            <span style="font-size:28px;font-weight:800;color:var(--muted);line-height:1;margin-right:16px;flex-shrink:0">2</span>
+            <div><div style="font-size:14px;font-weight:700;margin-bottom:2px">Content depth</div><div style="font-size:13px;color:var(--muted)">Not enough structured answers to questions patients actually ask AI first.</div></div>
+          </div>
+          <div class="stat-row" style="padding-bottom:4px">
+            <span style="font-size:28px;font-weight:800;color:var(--muted);line-height:1;margin-right:16px;flex-shrink:0">3</span>
+            <div><div style="font-size:14px;font-weight:700;margin-bottom:2px">Positioning clarity</div><div style="font-size:13px;color:var(--muted)">Your unique strengths are not being communicated in a way AI can act on.</div></div>
+          </div>
+        </div>
+        <div class="insight" style="margin-top:14px"><strong>What this means:</strong> the quickest gains come from making the site more convincing, not from rebuilding it.</div>
       </div>
     </div>
   </div>
 
   <div class="section">
     <p class="section-sm">The gaps</p>
-    <h2>1 things holding Carlton Dental back from AI recommendation.</h2>
+    <h2>3 things holding Carlton Dental back from AI recommendation.</h2>
     <p class="section-lead">These are clarity problems, not technical ones. The site is not doing enough to prove expertise, answer likely questions, or tell AI what matters most about Carlton Dental.</p>
     <div class="problem-list">
       <div class="problem-item">
@@ -318,7 +395,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
         <div class="tag red">Priority</div>
         <h3>The site is not answering the questions patients are already asking</h3>
         <p>People ask AI simple questions before they choose a provider. If the site does not answer those clearly, another source gets recommended instead.</p>
-        <div class="fix-row"><b>Fix:</b> Add clear, plain-English answers around airway dentistry, myofunctional therapy, and common patient concerns.</div>
+        <div class="fix-row"><b>Fix:</b> Add clear, plain-English answers around your services, specialties, and the questions clients ask most often.</div>
       </div>
       <div class="problem-item">
         <div class="tag gold">High value</div>
@@ -327,6 +404,65 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
         <div class="fix-row"><b>Fix:</b> Give AI a clean summary of the practice, what it does best, and what makes it different.</div>
       </div>
     </div>
+  </div>
+
+  <div class="section">
+    <p class="section-sm">New: Google Maps AI signal</p>
+    <h2>Google Reviews & AI Visibility</h2>
+    <p class="section-lead">Google Maps now uses Gemini AI to recommend local businesses. It reads your reviews AND your reply quality to decide who to surface — unanswered reviews are invisible to AI recommendations.</p>
+
+    <!-- Stat card -->
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 28px;margin-bottom:20px">
+      <div class="review-stat-grid" style="text-align:center">
+        <div style="padding:16px 12px;border-right:1px solid var(--border)">
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">47</div>
+          <div class="stat-label" style="margin-top:6px">Total reviews</div>
+        </div>
+        <div style="padding:16px 12px;border-right:1px solid var(--border)">
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">4.6</div>
+          <div class="stat-label" style="margin-top:6px">Avg. rating</div>
+        </div>
+        <div style="padding:16px 12px;border-right:1px solid var(--border)">
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">8%</div>
+          <div class="stat-label" style="margin-top:6px">Reply rate</div>
+        </div>
+        <div style="padding:16px 12px">
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">43</div>
+          <div class="stat-label" style="margin-top:6px">Unanswered</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insight box -->
+    <div class="insight">
+      <strong>Why this matters now:</strong> Google Maps just launched "Ask Maps" powered by Gemini AI. It reads your reviews AND your reply quality to decide who to recommend. Unanswered reviews equal missed GEO signals — businesses that reply with service + location context rank higher in AI recommendations. Reply rate is now a ranking factor, not just a reputation metric.
+    </div>
+
+    <!-- Status tag — rendered by JS from data attributes -->
+    <div id="review-data"
+      data-reply-rate="8"
+      data-unanswered="43"
+      style="display:none"></div>
+    <div id="review-status-tag" style="margin-top:20px"></div>
+    <script>
+    (function () {
+      var el = document.getElementById('review-data');
+      var replyRate = parseFloat(el.getAttribute('data-reply-rate')) || 0;
+      var unanswered = parseInt(el.getAttribute('data-unanswered')) || 0;
+      var tag = document.getElementById('review-status-tag');
+      if (replyRate < 50) {
+        tag.innerHTML =
+          '<div class="tag red">CRITICAL GAP</div>' +
+          '<p style="font-size:14px;color:var(--tagRedText);margin-top:10px">' +
+          '<strong>' + unanswered + ' reviews have no reply.</strong> Each unanswered review is a missed AI visibility signal.</p>';
+      } else if (replyRate <= 80) {
+        tag.innerHTML = '<div class="tag gold">NEEDS ATTENTION</div>';
+      } else {
+        tag.innerHTML = '<div class="tag" style="background:rgba(22,163,74,0.12);color:#15803d">STRONG</div>';
+      }
+    })();
+    </script>
+
   </div>
 
   <div class="section">
@@ -357,7 +493,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
       <div class="offer-items">
         <div class="offer-item">
           <div class="offer-item-check">✓</div>
-          <div><b>What you get</b><span>A stronger website presentation, clearer answers for prospective patients, and a cleaner brand story for AI to work from.</span></div>
+          <div><b>What you get</b><span>A stronger website presentation, clearer answers for prospective clients, and a cleaner brand story for AI to work from.</span></div>
         </div>
         <div class="offer-item">
           <div class="offer-item-check">✓</div>
@@ -369,6 +505,21 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
         </div>
       </div>
     </div>
+    <!-- Review Reply Management CTA — placed between offer-grid and process-steps -->
+    <div class="offer-main" style="margin-top:20px;padding:28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center">
+      <div>
+        <div class="offer-tag">Not ready for full implementation? Start here.</div>
+        <h3 style="font-size:22px;margin-bottom:10px;line-height:1.15">We reply to every Google review.</h3>
+        <p style="margin-bottom:0">We reply to every Google review mentioning your service and location — the exact signals Gemini Maps uses to recommend your business. Written for your practice, reviewed by our team.</p>
+      </div>
+      <div style="text-align:center;flex-shrink:0">
+        <div style="margin-bottom:8px">
+          <span style="font-size:48px;font-weight:800;letter-spacing:-3px;line-height:1">$188</span><span style="font-size:15px;color:var(--ctaMuted);margin-left:6px">/month</span>
+        </div>
+        <div class="price-note" style="margin-bottom:14px">Written for your practice, reviewed by our team. Cancel anytime.</div>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="display:inline-block;white-space:nowrap">Add Review Replies →</a>
+      </div>
+    </div>
     <div class="process-steps">
       <div class="process-step"><div class="step-num">Step 01</div><p>Review the biggest gap in plain English on the call.</p></div>
       <div class="process-step"><div class="step-num">Step 02</div><p>Confirm what would change over the next two weeks.</p></div>
@@ -377,13 +528,138 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   </div>
 </div>
 
+<!-- QUALIFICATION FORM -->
+<div class="wrap" style="padding-top:0;padding-bottom:48px">
+  <div id="qual-block" style="max-width:600px;margin:0 auto;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:36px 32px">
+    <h2 style="font-size:22px;font-weight:700;color:var(--text);margin-bottom:6px">Is this the right fit for you?</h2>
+    <p style="color:var(--muted);font-size:14px;margin-bottom:28px">Three quick questions — takes 30 seconds.</p>
+    <div id="qual-form"></div>
+    <div id="qual-result" style="display:none"></div>
+  </div>
+</div>
+<script>
+(function () {
+  var Q = {"q1": {"text": "Are you the owner or practice manager?", "options": [{"val": "yes", "label": "Yes"}, {"val": "no", "label": "No"}]}, "q2": {"text": "Is growing new patients a priority for you right now?", "options": [{"val": "yes", "label": "Yes"}, {"val": "no", "label": "No"}, {"val": "not-yet", "label": "Not yet"}]}, "q3": {"text": "How many new patients are you looking to add per month?", "options": [{"val": "1-5", "label": "1–5"}, {"val": "5-15", "label": "5–15"}, {"val": "15+", "label": "15+"}]}};
+  var bizType = "dentist";
+  var bizName = "Carlton Dental";
+  var answers = {};
+  var form = document.getElementById('qual-form');
+  var result = document.getElementById('qual-result');
+
+  ['q1', 'q2', 'q3'].forEach(function (qk) {
+    var q = Q[qk];
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'margin-bottom:22px';
+    var pills = q.options.map(function (opt) {
+      return '<button type="button" ' +
+        'onclick="window.__qualPick(\'' + qk + '\',\'' + opt.val + '\',this)" ' +
+        'data-q="' + qk + '" data-val="' + opt.val + '" ' +
+        'style="padding:8px 20px;border-radius:999px;border:1.5px solid var(--border);' +
+        'background:var(--bg);color:var(--text);font-size:13px;font-weight:600;cursor:pointer;' +
+        'transition:background 0.15s,color 0.15s,border-color 0.15s;margin-right:6px;margin-bottom:6px">' +
+        opt.label + '</button>';
+    }).join('');
+    wrap.innerHTML = '<p style="font-weight:600;color:var(--text);font-size:15px;margin-bottom:10px">' +
+      q.text + '</p><div style="display:flex;flex-wrap:wrap">' + pills + '</div>';
+    form.appendChild(wrap);
+  });
+
+  var submitBtn = document.createElement('button');
+  submitBtn.type = 'button';
+  submitBtn.id = 'qual-submit';
+  submitBtn.textContent = 'See my result \u2192';
+  submitBtn.style.cssText = 'display:none;margin-top:4px;padding:12px 28px;background:var(--btnBg);' +
+    'color:var(--btnText);border:none;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer';
+  submitBtn.onclick = evaluate;
+  form.appendChild(submitBtn);
+
+  window.__qualPick = function (qk, val, btn) {
+    answers[qk] = val;
+    document.querySelectorAll('[data-q="' + qk + '"]').forEach(function (b) {
+      b.style.background = 'var(--bg)';
+      b.style.color = 'var(--text)';
+      b.style.borderColor = 'var(--border)';
+    });
+    btn.style.background = 'var(--btnBg)';
+    btn.style.color = 'var(--btnText)';
+    btn.style.borderColor = 'var(--btnBg)';
+    if (answers.q1 && answers.q2 && answers.q3) {
+      submitBtn.style.display = 'inline-block';
+    }
+  };
+
+  function evaluate() {
+    var q3Last = Q.q3.options[Q.q3.options.length - 1].val;
+    var path;
+    if (answers.q1 === 'no') {
+      path = 'non-owner';
+    } else if (answers.q1 === 'yes' && answers.q2 === 'yes') {
+      path = 'qualified';
+    } else {
+      path = 'nurture';
+    }
+    form.style.display = 'none';
+    result.style.display = 'block';
+
+    if (path === 'qualified') {
+      result.innerHTML =
+        '<p style="font-weight:700;font-size:18px;color:var(--text);margin-bottom:8px">You are a good fit.</p>' +
+        '<p style="color:var(--muted);font-size:14px;margin-bottom:20px">Book your free 10-minute walkthrough:</p>' +
+        '<a href="https://calendly.com/vaibhavmeh/aiscite-introduction" target="_blank" ' +
+        'style="display:inline-block;padding:13px 28px;background:var(--btnBg);color:var(--btnText);' +
+        'border-radius:8px;font-weight:700;font-size:15px;text-decoration:none">Book now \u2192</a>';
+    } else if (path === 'non-owner') {
+      result.innerHTML =
+        '<p style="font-weight:600;font-size:15px;color:var(--text);margin-bottom:14px">' +
+        'No problem \u2014 what is the best email to reach the owner or practice manager?</p>' +
+        '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
+        '<input type="email" id="owner-email" placeholder="owner@example.com" ' +
+        'style="flex:1;min-width:200px;padding:11px 14px;border:1.5px solid var(--border);' +
+        'border-radius:8px;background:var(--bg);color:var(--text);font-size:14px" />' +
+        '<button type="button" id="owner-submit-btn" onclick="window.__submitOwnerEmail()" ' +
+        'style="padding:11px 22px;background:var(--btnBg);color:var(--btnText);border:none;' +
+        'border-radius:8px;font-weight:700;font-size:14px;cursor:pointer">Submit</button>' +
+        '</div>' +
+        '<p id="owner-thanks" style="display:none;color:var(--muted);font-size:14px;margin-top:12px">' +
+        'Thank you \u2014 we will reach out to them directly.</p>';
+    } else {
+      result.innerHTML =
+        '<p style="color:var(--muted);font-size:15px">Thanks \u2014 we will follow up with more detail shortly.</p>';
+    }
+  }
+
+  window.__submitOwnerEmail = function () {
+    var email = (document.getElementById('owner-email') || {}).value;
+    if (!email || !email.trim()) return;
+    fetch('https://aiscite.com/api/referral', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        clinic: bizName,
+        referrer_answered: true,
+        owner_email: email.trim(),
+        source_url: window.location.href,
+        business_type: bizType
+      })
+    }).catch(function () {});
+    var emailInput = document.getElementById('owner-email');
+    var submitBtnEl = document.getElementById('owner-submit-btn');
+    if (emailInput) emailInput.disabled = true;
+    if (submitBtnEl) submitBtnEl.disabled = true;
+    var thanks = document.getElementById('owner-thanks');
+    if (thanks) thanks.style.display = 'block';
+  };
+})();
+</script>
+
 <div class="wrap">
   <div class="cta-block">
     <h2>See how much further you can go.</h2>
-    <p>The foundation is strong. Two targeted fixes and Carlton Dental becomes the obvious AI recommendation for airway dentistry in Toronto.</p>
+    <p>The foundation is strong. Two targeted fixes and Carlton Dental becomes the obvious AI recommendation in Toronto.</p>
     <div style="max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
       <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="text-align:center">Book the 10-minute walkthrough →</a>
-      <a href="mailto:hello@aiscite.com?subject=Carlton Dental — Visibility Review" style="color:rgba(255,255,255,0.6);font-size:13px;text-align:center;text-decoration:none">Or reply by email</a>
+      <a href="https://aiscite.com/pricing/" style="color:rgba(255,255,255,0.75);font-size:13px;text-align:center;text-decoration:none;font-weight:600">See full pricing → aiscite.com/pricing</a>
+      <a href="mailto:hello@aiscite.com?subject=Carlton Dental — Visibility Review" class="btn-ghost-cta">Or reply by email</a>
     </div>
     <div class="cta-note">No obligation. 10 minutes. We confirm whether the opportunity is real.</div>
   </div>
@@ -424,12 +700,10 @@ function getThemeColors() {
     tooltipBg: dark ? 'rgba(20,20,22,0.96)' : 'rgba(17,17,17,0.94)',
     gridColor: dark ? 'rgba(255,255,255,0.06)' : 'rgba(229,231,235,0.8)',
     angleLines: dark ? 'rgba(255,255,255,0.1)' : 'rgba(148,163,184,0.35)',
-    radarFill: dark ? 'rgba(96,165,250,0.18)' : 'rgba(37,99,235,0.12)',
-    radarBorder: dark ? '#60a5fa' : '#2563eb',
   };
 }
 
-let benchmarkChart, radarChart;
+let benchmarkChart;
 
 function buildCharts() {
   const c = getThemeColors();
@@ -438,7 +712,7 @@ function buildCharts() {
   benchmarkChart = new Chart(benchmarkCtx, {
     type: 'bar',
     data: {
-      labels: ['Target score', 'Competing practices', 'Carlton Dental today'],
+      labels: ['Target score', 'Competing practices', 'Carlton Dental'],
       datasets: [{
         data: [90, 40, 78],
         backgroundColor: [c.gold, c.muted, c.barFill],
@@ -459,56 +733,29 @@ function buildCharts() {
       animation: { duration: 900, easing: 'easeOutQuart' }
     }
   });
-
-  const radarCtx = document.getElementById('radarChart').getContext('2d');
-  radarChart = new Chart(radarCtx, {
-    type: 'radar',
-    data: {
-      labels: ['Expertise', 'Visibility', 'Trust', 'Q&A depth', 'Positioning'],
-      datasets: [
-        {
-          label: 'Target',
-          data: [87, 95, 95, 85, 90],
-          borderColor: c.muted, backgroundColor: 'rgba(148,163,184,0.06)',
-          borderWidth: 2, pointRadius: 3, pointBackgroundColor: c.muted,
-        },
-        {
-          label: 'Today',
-          data: [47, 80, 60, 35, 30],
-          borderColor: c.radarBorder, backgroundColor: c.radarFill,
-          borderWidth: 3, pointRadius: 5, pointHoverRadius: 8,
-          pointBackgroundColor: '#fff', pointBorderColor: c.radarBorder, pointBorderWidth: 2.5,
-        }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      layout: { padding: { top: 16, right: 16, bottom: 8, left: 16 } },
-      plugins: {
-        legend: { position: 'bottom', labels: { boxWidth: 10, color: c.muted, padding: 14 } },
-        tooltip: { backgroundColor: c.tooltipBg, padding: 12, callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}` } }
-      },
-      scales: {
-        r: {
-          min: 0, max: 100,
-          ticks: { stepSize: 25, showLabelBackdrop: false, color: c.muted, font: { size: 10 } },
-          grid: { color: c.gridColor },
-          angleLines: { color: c.angleLines },
-          pointLabels: { color: c.text, font: { weight: '700', size: 11 } }
-        }
-      },
-      animation: { duration: 1000, easing: 'easeOutCubic' }
-    }
-  });
 }
 
 function updateChartColors() {
   if (benchmarkChart) benchmarkChart.destroy();
-  if (radarChart) radarChart.destroy();
   buildCharts();
 }
 
 buildCharts();
+</script>
+
+<div class="sticky-cta" id="stickyCta">
+  <span class="sticky-cta-text">AI visibility gaps found — book your free walkthrough</span>
+  <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="sticky-cta-btn" target="_blank">Book 10-min call →</a>
+</div>
+
+<script>
+(function(){
+  var bar = document.getElementById("stickyCta");
+  window.addEventListener("scroll", function(){
+    if(window.scrollY > 400){ bar.classList.add("visible"); }
+    else { bar.classList.remove("visible"); }
+  }, {passive:true});
+})();
 </script>
 </body>
 </html>
