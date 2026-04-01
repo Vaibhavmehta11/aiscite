@@ -314,6 +314,7 @@ html[data-theme="light"] .qual-pill:not(.selected) {
   .hero { padding-top: 100px; }
   .cta-block { padding: 48px 24px; margin: 48px 0; }
   .theme-toggle { display: none; }
+  .nav-right .nav-link { display: none; }
 }
 @media (max-width: 640px) {
   .review-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
@@ -355,6 +356,10 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 <nav>
   <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Carlton Dental</span>
   <div class="nav-right">
+    <a href="/" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none">Home</a>
+    <a href="/#how" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none">How it works</a>
+    <a href="/#proof" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none">What you get</a>
+    <a href="/#faq" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none">FAQ</a>
     <a href="/pricing.html" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none">Pricing</a>
     <button class="theme-toggle" id="themeToggle"><span id="themeIcon">Dark</span></button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
