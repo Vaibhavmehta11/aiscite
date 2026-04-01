@@ -187,6 +187,7 @@
 <nav>
   <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a>
   <div class="nav-right">
+    <a href="#" id="backToReport" class="nav-link" style="display:none;font-size:14px;font-weight:600;color:var(--muted);text-decoration:none" onclick="history.back();return false;">← Back</a>
     <a href="https://aiscite.com" class="nav-link">Home</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">Dark mode</span></button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
@@ -195,7 +196,7 @@
 
 <div class="hero">
   <div class="hero-tag">Pricing</div>
-  <h1>Clear pricing.<br>No subscriptions to figure out.</h1>
+  <h1>Clear pricing.<br>One audit. One monthly plan. One build. No complexity.</h1>
   <p>Start with an audit, add implementation if you want the work done for you, or keep AI signals strong month-to-month. All three are independent — pick what fits.</p>
 </div>
 
@@ -307,6 +308,9 @@
 </footer>
 
 <script>
+if (document.referrer && document.referrer.includes("/audit/")) {
+  document.getElementById("backToReport").style.display = "inline";
+}
 (function () {
   const root = document.documentElement;
   const btn = document.getElementById('themeToggle');
