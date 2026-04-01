@@ -52,14 +52,18 @@ nav {
 .nav-logo span { color: var(--muted); font-weight: 500; font-size: 14px; margin-left: 10px; }
 .nav-right { display: flex; align-items: center; gap: 12px; }
 .theme-toggle {
-  border: 1px solid var(--border); background: var(--bg); color: var(--text);
-  height: 36px; padding: 0 12px; border-radius: 10px; font-size: 13px;
+  display: inline-flex; align-items: center; gap: 5px;
+  border: 1.5px solid var(--border); background: var(--bg); color: var(--text);
+  height: 34px; padding: 0 14px; border-radius: 999px; font-size: 13px;
   font-weight: 600; cursor: pointer; font-family: var(--font);
+  transition: border-color 0.15s, background 0.15s;
 }
+.theme-toggle:hover { background: var(--bg2); }
+.nav-link { cursor: pointer; }
 .nav-btn {
   text-decoration: none; background: var(--btnBg); color: var(--btnText);
   padding: 9px 16px; border-radius: 12px; font-weight: 700; font-size: 13px;
-  transition: opacity 0.15s, transform 0.15s;
+  transition: opacity 0.15s, transform 0.15s; cursor: pointer;
 }
 .nav-btn:hover { opacity: 0.88; transform: translateY(-1px); }
 /* HERO */
@@ -110,8 +114,8 @@ nav {
 .btn-ghost:hover { background: var(--bg2); }
 .btn-ghost-cta {
   text-decoration: none;
-  color: rgba(255,255,255,0.75);
-  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--ctaText);
+  border: 1px solid var(--ctaMuted);
   background: transparent;
   padding: 11px 20px;
   border-radius: 14px;
@@ -120,11 +124,22 @@ nav {
   text-align: center;
   display: block;
   transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+  opacity: 0.85;
 }
 .btn-ghost-cta:hover {
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.95);
+  opacity: 1;
+  background: rgba(128,128,128,0.1);
 }
+.cta-muted-link {
+  color: var(--ctaMuted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  display: block;
+}
+.cta-muted-link:hover { opacity: 0.8; }
 .score-context {
   background: var(--bg2); border: 1px solid var(--border); border-radius: 24px; padding: 36px;
 }
@@ -208,7 +223,7 @@ html[data-theme="dark"] .price-row-muted {
 }
 .offer-item-check { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
 .offer-item b { display: block; font-size: 14px; font-weight: 700; margin-bottom: 3px; }
-.offer-item span { font-size: 13px; color: var(--muted); }
+.offer-item span { font-size: 13px; color: var(--ctaMuted); }
 /* PROCESS */
 .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
 .process-step {
@@ -254,9 +269,46 @@ footer p { font-size: 13px; color: var(--muted); }
   text-decoration: none; background: var(--ctaText); color: var(--ctaBg);
   padding: 10px 20px; border-radius: 10px; font-weight: 700; font-size: 13px; white-space: nowrap;
 }
+/* QUAL PILL BUTTONS */
+.qual-pill {
+  padding: 8px 20px; border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: var(--bg); color: var(--text);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  margin-right: 6px; margin-bottom: 6px;
+  font-family: var(--font);
+}
+html[data-theme="light"] .qual-pill:not(.selected) {
+  border-color: #c2c5cc;
+  background: #f4f5f7;
+}
+.qual-pill.selected {
+  background: var(--btnBg);
+  color: var(--btnText);
+  border-color: var(--btnBg);
+}
+/* NEXT STEPS */
+.next-steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+.next-step-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 16px; padding: 22px;
+}
+.next-step-card.done { border-color: var(--border); }
+.next-step-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.08em; margin-bottom: 12px;
+}
+.next-step-badge.included { background: rgba(22,163,74,0.12); color: #15803d; }
+.next-step-badge.optional { background: var(--bg3); color: var(--muted); }
+.next-step-badge.recommended { background: var(--scoreBg); color: var(--scoreText); }
+.next-step-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.next-step-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 /* RESPONSIVE */
 @media (max-width: 760px) {
-  .score-hero, .chart-grid, .offer-grid, .process-steps { grid-template-columns: 1fr; }
+  .score-hero, .chart-grid, .offer-grid, .process-steps, .next-steps-grid { grid-template-columns: 1fr; }
   .bar-row { grid-template-columns: 1fr; gap: 6px; }
   .bar-val { text-align: left; }
   .hero { padding-top: 100px; }
@@ -303,8 +355,9 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 <nav>
   <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Carlton Dental</span>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle">Dark mode</button>
-    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book walkthrough</a>
+    <button class="theme-toggle" id="themeToggle"><span id="themeIcon">🌙</span><span id="themeLabel"> Dark</span></button>
+    <a href="https://aiscite.com/pricing.html" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;margin-right:8px" target="_blank">Pricing</a>
+    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
   </div>
 </nav>
 
@@ -327,9 +380,9 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
         <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">60</span></div>
       </div>
       <div class="score-actions">
-        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-primary" target="_blank">Book your free 10-minute walkthrough</a>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-primary" target="_blank">Book free walkthrough</a>
         <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:8px">Used by 40+ local practices and professionals across Toronto</p>
-        <a href="mailto:hello@aiscite.com?subject=Carlton Dental — Visibility Review" class="btn-ghost">Reply by email</a>
+        <a href="mailto:hello@aiscite.com?subject=Carlton Dental — GEO Audit Follow-up" class="btn-ghost">Reply by email</a>
       </div>
     </div>
     <div class="score-context">
@@ -347,6 +400,11 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 </div>
 
 <div class="wrap">
+  <div style="padding: 16px 0 20px">
+    <div class="insight">
+      <strong>Note:</strong> This audit covers your primary location. If your practice has multiple locations, each location has its own AI visibility profile — contact us to audit additional locations.
+    </div>
+  </div>
   <div class="section">
     <p class="section-sm">Where you stand</p>
     <h2>Strong — but not untouchable — room to improve.</h2>
@@ -407,9 +465,77 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   </div>
 
   <div class="section">
+    <p class="section-sm">Next step</p>
+    <h2>A premium, low-risk way to fix it.</h2>
+    <p class="section-lead">The right first step is not a long proposal. It is a short conversation to confirm the opportunity is real, the scope is right, and the implementation is worth doing.</p>
+    <div class="offer-grid">
+      <div class="offer-main">
+        <div class="offer-tag">Recommended next step</div>
+        <h3>Book a 10-minute walkthrough.</h3>
+        <p>We review the opportunity, explain exactly what would change, and confirm whether the 2-week upgrade is the right move for the practice.</p>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="margin-top:8px;display:inline-block">Book free walkthrough →</a>
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px">
+          <div class="price-row-muted">
+            <span style="font-size:14px;font-weight:700">GEO Audit</span>
+            <span style="font-size:18px;font-weight:800">$388</span>
+          </div>
+          <div class="price-row-muted">
+            <span style="font-size:14px;font-weight:700">GEO Build</span>
+            <span style="font-size:18px;font-weight:800">$688</span>
+          </div>
+          <div class="price-row-highlight">
+            <div><span style="font-size:14px;font-weight:700">GEO Audit + GEO Build</span><div style="font-size:12px;opacity:0.5;margin-top:2px">Save $188 vs buying separately</div></div>
+            <span style="font-size:18px;font-weight:800">$888</span>
+          </div>
+        </div>
+      </div>
+      <div class="offer-items">
+        <div class="offer-item">
+          <div class="offer-item-check">✓</div>
+          <div><b>What you get</b><span>A stronger website presentation, clearer answers for prospective clients, and a cleaner brand story for AI to work from.</span></div>
+        </div>
+        <div class="offer-item">
+          <div class="offer-item-check">✓</div>
+          <div><b>What you do not need</b><span>No site rebuild, no complicated handoff, and no need to become technical just to understand the value.</span></div>
+        </div>
+        <div class="offer-item">
+          <div class="offer-item-check">✓</div>
+          <div><b>Why the short call matters</b><span>It keeps the decision simple: is this a real opportunity for the practice, and do you want to act on it now?</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- Review Reply Management CTA — placed between offer-grid and process-steps -->
+    <div class="offer-main" style="margin-top:20px;padding:28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center">
+      <div>
+        <div class="offer-tag">Not ready for full implementation? Start here.</div>
+        <h3 style="font-size:22px;margin-bottom:10px;line-height:1.15">AI Management — $288/month</h3>
+        <p style="margin-bottom:12px">Quarterly re-audit + unlimited AI-optimized review replies. Track your score improving over time.</p>
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);font-size:12px;font-weight:700;color:var(--ctaText)">$288/month · Quarterly re-audit + unlimited replies · Cancel anytime</div>
+      </div>
+      <div style="text-align:center;flex-shrink:0">
+        <div style="margin-bottom:8px">
+          <span style="font-size:48px;font-weight:800;letter-spacing:-3px;line-height:1">$288</span><span style="font-size:15px;color:var(--ctaMuted);margin-left:6px">/month</span>
+        </div>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="display:inline-block;white-space:nowrap">Add Review Replies →</a>
+      </div>
+    </div>
+    <div class="process-steps">
+      <div class="process-step"><div class="step-num">Step 01</div><p>Review the biggest gap in plain English on the call.</p></div>
+      <div class="process-step"><div class="step-num">Step 02</div><p>Confirm what would change over the next two weeks.</p></div>
+      <div class="process-step"><div class="step-num">Step 03</div><p>Decide whether to move forward. No pressure either way.</p></div>
+    </div>
+  </div>
+
+  <div class="section">
     <p class="section-sm">New: Google Maps AI signal</p>
     <h2>Google Reviews & AI Visibility</h2>
     <p class="section-lead">Google Maps now uses Gemini AI to recommend local businesses. It reads your reviews AND your reply quality to decide who to surface — unanswered reviews are invisible to AI recommendations.</p>
+
+    <div style="background:var(--insightBg);border:1px solid var(--insightBorder);border-radius:14px;padding:20px 24px;margin:20px 0">
+      <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--insightText);margin-bottom:10px">Why unanswered reviews cost you patients</div>
+      <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:12px">Google Maps AI reads your reply <strong>content</strong> — not just whether you replied. A reply that says "Thank you!" scores zero AI signal. A reply that says "Thank you for choosing Carlton Dental for your teeth cleaning in downtown Toronto — we look forward to seeing you again" gives Gemini Maps three strong signals: your practice name, your service, and your location.</p>
+      <p style="font-size:14px;color:var(--text);line-height:1.7;margin:0">Every unanswered review is a missed recommendation. When someone asks AI for a dentist in Toronto, Gemini Maps surfaces practices that have replied with service and location context — and skips the ones that have not.</p>
+    </div>
 
     <!-- Stat card -->
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 28px;margin-bottom:20px">
@@ -464,66 +590,30 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
     </script>
 
   </div>
+</div>
 
+<!-- WHAT HAPPENS NEXT -->
+<div class="wrap">
   <div class="section">
-    <p class="section-sm">Next step</p>
-    <h2>A premium, low-risk way to fix it.</h2>
-    <p class="section-lead">The right first step is not a long proposal. It is a short conversation to confirm the opportunity is real, the scope is right, and the implementation is worth doing.</p>
-    <div class="offer-grid">
-      <div class="offer-main">
-        <div class="offer-tag">Recommended next step</div>
-        <h3>Book a 10-minute walkthrough.</h3>
-        <p>We review the opportunity, explain exactly what would change, and confirm whether the 2-week upgrade is the right move for the practice.</p>
-        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="margin-top:8px;display:inline-block">Book the 10-minute walkthrough →</a>
-        <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px">
-          <div class="price-row-muted">
-            <span style="font-size:14px;font-weight:700">Audit</span>
-            <span style="font-size:18px;font-weight:800">$288</span>
-          </div>
-          <div class="price-row-muted">
-            <span style="font-size:14px;font-weight:700">Full Implementation</span>
-            <span style="font-size:18px;font-weight:800">$688</span>
-          </div>
-          <div class="price-row-highlight">
-            <div><span style="font-size:14px;font-weight:700">Audit + Full Implementation Bundle</span><div style="font-size:12px;opacity:0.5;margin-top:2px">Includes 30-day re-scan</div></div>
-            <span style="font-size:18px;font-weight:800">$888</span>
-          </div>
-        </div>
+    <p class="section-sm">Your path forward</p>
+    <h2>What happens next</h2>
+    <p class="section-lead">The audit is step one. Here is the full picture of where you can go from here.</p>
+    <div class="next-steps-grid">
+      <div class="next-step-card done">
+        <div class="next-step-badge included">✓ Included Free</div>
+        <h3>Free GEO Audit</h3>
+        <p>Your AI visibility score, issue breakdown, and priority fixes. This is your report.</p>
       </div>
-      <div class="offer-items">
-        <div class="offer-item">
-          <div class="offer-item-check">✓</div>
-          <div><b>What you get</b><span>A stronger website presentation, clearer answers for prospective clients, and a cleaner brand story for AI to work from.</span></div>
-        </div>
-        <div class="offer-item">
-          <div class="offer-item-check">✓</div>
-          <div><b>What you do not need</b><span>No site rebuild, no complicated handoff, and no need to become technical just to understand the value.</span></div>
-        </div>
-        <div class="offer-item">
-          <div class="offer-item-check">✓</div>
-          <div><b>Why the short call matters</b><span>It keeps the decision simple: is this a real opportunity for the practice, and do you want to act on it now?</span></div>
-        </div>
+      <div class="next-step-card">
+        <div class="next-step-badge recommended">Recommended</div>
+        <h3>GEO Build — $688</h3>
+        <p>We implement every fix from your audit. Schema, content, structure — done for you, once. Or combine with the Free GEO Audit for the full GEO Audit + GEO Build package at $888.</p>
       </div>
-    </div>
-    <!-- Review Reply Management CTA — placed between offer-grid and process-steps -->
-    <div class="offer-main" style="margin-top:20px;padding:28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center">
-      <div>
-        <div class="offer-tag">Not ready for full implementation? Start here.</div>
-        <h3 style="font-size:22px;margin-bottom:10px;line-height:1.15">We reply to every Google review.</h3>
-        <p style="margin-bottom:0">We reply to every Google review mentioning your service and location — the exact signals Gemini Maps uses to recommend your business. Written for your practice, reviewed by our team.</p>
+      <div class="next-step-card">
+        <div class="next-step-badge optional">Optional</div>
+        <h3>AI Management — $288/month</h3>
+        <p>Quarterly re-audit to track progress + unlimited AI-optimized review replies. Cancel anytime.</p>
       </div>
-      <div style="text-align:center;flex-shrink:0">
-        <div style="margin-bottom:8px">
-          <span style="font-size:48px;font-weight:800;letter-spacing:-3px;line-height:1">$188</span><span style="font-size:15px;color:var(--ctaMuted);margin-left:6px">/month</span>
-        </div>
-        <div class="price-note" style="margin-bottom:14px">Written for your practice, reviewed by our team. Cancel anytime.</div>
-        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="display:inline-block;white-space:nowrap">Add Review Replies →</a>
-      </div>
-    </div>
-    <div class="process-steps">
-      <div class="process-step"><div class="step-num">Step 01</div><p>Review the biggest gap in plain English on the call.</p></div>
-      <div class="process-step"><div class="step-num">Step 02</div><p>Confirm what would change over the next two weeks.</p></div>
-      <div class="process-step"><div class="step-num">Step 03</div><p>Decide whether to move forward. No pressure either way.</p></div>
     </div>
   </div>
 </div>
@@ -551,12 +641,9 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
     var wrap = document.createElement('div');
     wrap.style.cssText = 'margin-bottom:22px';
     var pills = q.options.map(function (opt) {
-      return '<button type="button" ' +
+      return '<button type="button" class="qual-pill" ' +
         'onclick="window.__qualPick(\'' + qk + '\',\'' + opt.val + '\',this)" ' +
-        'data-q="' + qk + '" data-val="' + opt.val + '" ' +
-        'style="padding:8px 20px;border-radius:999px;border:1.5px solid var(--border);' +
-        'background:var(--bg);color:var(--text);font-size:13px;font-weight:600;cursor:pointer;' +
-        'transition:background 0.15s,color 0.15s,border-color 0.15s;margin-right:6px;margin-bottom:6px">' +
+        'data-q="' + qk + '" data-val="' + opt.val + '">' +
         opt.label + '</button>';
     }).join('');
     wrap.innerHTML = '<p style="font-weight:600;color:var(--text);font-size:15px;margin-bottom:10px">' +
@@ -576,13 +663,12 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   window.__qualPick = function (qk, val, btn) {
     answers[qk] = val;
     document.querySelectorAll('[data-q="' + qk + '"]').forEach(function (b) {
-      b.style.background = 'var(--bg)';
-      b.style.color = 'var(--text)';
-      b.style.borderColor = 'var(--border)';
+      b.classList.remove('selected');
     });
-    btn.style.background = 'var(--btnBg)';
-    btn.style.color = 'var(--btnText)';
-    btn.style.borderColor = 'var(--btnBg)';
+    btn.classList.add('selected');
+    // Hide standalone CTA when quiz is started
+    var ctaBlock = document.getElementById('standalone-cta-block');
+    if (ctaBlock) { ctaBlock.style.display = 'none'; }
     if (answers.q1 && answers.q2 && answers.q3) {
       submitBtn.style.display = 'inline-block';
     }
@@ -604,7 +690,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
     if (path === 'qualified') {
       result.innerHTML =
         '<p style="font-weight:700;font-size:18px;color:var(--text);margin-bottom:8px">You are a good fit.</p>' +
-        '<p style="color:var(--muted);font-size:14px;margin-bottom:20px">Book your free 10-minute walkthrough:</p>' +
+        '<p style="color:var(--muted);font-size:14px;margin-bottom:20px">Book free walkthrough:</p>' +
         '<a href="https://calendly.com/vaibhavmeh/aiscite-introduction" target="_blank" ' +
         'style="display:inline-block;padding:13px 28px;background:var(--btnBg);color:var(--btnText);' +
         'border-radius:8px;font-weight:700;font-size:15px;text-decoration:none">Book now \u2192</a>';
@@ -653,16 +739,17 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 </script>
 
 <div class="wrap">
-  <div class="cta-block">
+  <div class="cta-block" id="standalone-cta-block">
     <h2>See how much further you can go.</h2>
     <p>The foundation is strong. Two targeted fixes and Carlton Dental becomes the obvious AI recommendation in Toronto.</p>
     <div style="max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
-      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="text-align:center">Book the 10-minute walkthrough →</a>
-      <a href="https://aiscite.com/pricing/" style="color:rgba(255,255,255,0.75);font-size:13px;text-align:center;text-decoration:none;font-weight:600">See full pricing → aiscite.com/pricing</a>
-      <a href="mailto:hello@aiscite.com?subject=Carlton Dental — Visibility Review" class="btn-ghost-cta">Or reply by email</a>
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="text-align:center">Book free walkthrough →</a>
+      <a href="https://aiscite.com/pricing.html" class="cta-muted-link" target="_blank">See full pricing → aiscite.com/pricing</a>
+      <a href="mailto:hello@aiscite.com?subject=Carlton Dental — GEO Audit Follow-up" class="btn-ghost-cta">Or reply by email</a>
     </div>
     <div class="cta-note">No obligation. 10 minutes. We confirm whether the opportunity is real.</div>
   </div>
+</div>
 
 <footer>
   <div class="footer-logo">Aiscite</div>
@@ -677,7 +764,11 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   const btn = document.getElementById('themeToggle');
   const saved = localStorage.getItem('aiscite-theme');
   root.setAttribute('data-theme', saved || 'light');
-  function sync() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light mode' : 'Dark mode'; }
+  function sync() {
+    const dark = root.getAttribute('data-theme') === 'dark';
+    document.getElementById('themeIcon').textContent = dark ? '☀️' : '🌙';
+    document.getElementById('themeLabel').textContent = dark ? ' Light' : ' Dark';
+  }
   btn.addEventListener('click', function () {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
@@ -692,13 +783,13 @@ function getThemeColors() {
   const dark = document.documentElement.getAttribute('data-theme') === 'dark';
   return {
     text: dark ? '#f4f4f5' : '#111111',
-    muted: dark ? '#a1a1aa' : '#6b7280',
-    border: dark ? 'rgba(255,255,255,0.08)' : 'rgba(229,231,235,0.9)',
+    muted: dark ? '#a1a1aa' : '#666870',
+    border: dark ? 'rgba(255,255,255,0.08)' : '#d1d5db',
     barFill: dark ? '#93c5fd' : '#2563eb',
     barEmpty: dark ? 'rgba(255,255,255,0.06)' : '#e5e7eb',
     gold: dark ? '#fcd34d' : '#d97706',
     tooltipBg: dark ? 'rgba(20,20,22,0.96)' : 'rgba(17,17,17,0.94)',
-    gridColor: dark ? 'rgba(255,255,255,0.06)' : 'rgba(229,231,235,0.8)',
+    gridColor: dark ? 'rgba(255,255,255,0.06)' : '#d1d5db',
     angleLines: dark ? 'rgba(255,255,255,0.1)' : 'rgba(148,163,184,0.35)',
   };
 }
@@ -744,7 +835,7 @@ buildCharts();
 </script>
 
 <div class="sticky-cta" id="stickyCta">
-  <span class="sticky-cta-text">AI visibility gaps found — book your free walkthrough</span>
+  <span class="sticky-cta-text">AI visibility gaps found — Book free walkthrough</span>
   <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="sticky-cta-btn" target="_blank">Book 10-min call →</a>
 </div>
 
