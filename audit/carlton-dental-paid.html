@@ -153,7 +153,9 @@ footer p { font-size: 13px; color: var(--muted); }
   .bar-row { grid-template-columns: 1fr; gap: 4px; }
   .hero { padding-top: 90px; }
   .cta-block { padding: 48px 24px; }
+  .review-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
+.review-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; }
 </style>
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -504,6 +506,56 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
     <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:12px">Google Maps AI reads your reply <strong>content</strong> — not just whether you replied. A reply that says "Thank you!" scores zero AI signal. A reply that says "Thank you for choosing Carlton Dental for your teeth cleaning in downtown Toronto — we look forward to seeing you again" gives Gemini Maps three strong signals: your practice name, your service, and your location.</p>
     <p style="font-size:14px;color:var(--text);line-height:1.7;margin:0">Every unanswered review is a missed recommendation. When someone asks AI for a dentist in Toronto, Gemini Maps surfaces practices that have replied with service and location context — and skips the ones that have not.</p>
   </div>
+
+  <!-- Review analytics stat card -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 28px;margin:24px 0 20px">
+    <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Carlton Dental — Google review signals</div>
+    <div class="review-stat-grid" style="text-align:center">
+      <div style="padding:16px 12px;border-right:1px solid var(--border)">
+        <div style="font-size:36px;font-weight:800;letter-spacing:-2px;line-height:1;color:var(--text)">47</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-top:6px">Total reviews</div>
+      </div>
+      <div style="padding:16px 12px;border-right:1px solid var(--border)">
+        <div style="font-size:36px;font-weight:800;letter-spacing:-2px;line-height:1;color:var(--text)">4.6</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-top:6px">Avg. rating</div>
+      </div>
+      <div style="padding:16px 12px;border-right:1px solid var(--border)">
+        <div style="font-size:36px;font-weight:800;letter-spacing:-2px;line-height:1;color:var(--tagRedText)">8%</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-top:6px">Reply rate</div>
+      </div>
+      <div style="padding:16px 12px">
+        <div style="font-size:36px;font-weight:800;letter-spacing:-2px;line-height:1;color:var(--tagRedText)">43</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-top:6px">Unanswered</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic status tag -->
+  <div id="paid-review-data" data-reply-rate="8" data-unanswered="43" style="display:none"></div>
+  <div id="paid-review-status-tag" style="margin-top:20px"></div>
+  <script>
+  (function () {
+    var el = document.getElementById("paid-review-data");
+    var replyRate = parseFloat(el.getAttribute("data-reply-rate")) || 0;
+    var unanswered = parseInt(el.getAttribute("data-unanswered")) || 0;
+    var tag = document.getElementById("paid-review-status-tag");
+    if (replyRate < 50) {
+      tag.innerHTML =
+        "<div style=\"display:inline-block;background:var(--tagRedBg);color:var(--tagRedText);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:10px\">CRITICAL GAP</div>" +
+        "<p style=\"font-size:14px;color:var(--tagRedText);margin-top:4px\">" +
+        "<strong>" + unanswered + " reviews have no reply.</strong> Each unanswered review is a missed AI visibility signal — Gemini Maps skips practices with low reply rates when generating recommendations.</p>";
+    } else if (replyRate <= 80) {
+      tag.innerHTML =
+        "<div style=\"display:inline-block;background:var(--tagGoldBg);color:var(--tagGoldText);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:10px\">NEEDS ATTENTION</div>" +
+        "<p style=\"font-size:14px;color:var(--tagGoldText);margin-top:4px\">" +
+        unanswered + " unanswered reviews. Reply rate above 80% is needed for strong AI signal.</p>";
+    } else {
+      tag.innerHTML =
+        "<div style=\"display:inline-block;background:rgba(22,163,74,0.12);color:#15803d;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:10px\">GOOD SIGNAL</div>" +
+        "<p style=\"font-size:14px;color:#15803d;margin-top:4px\">Reply rate is strong. Focus on reply quality — use service and location keywords in every response.</p>";
+    }
+  })();
+  </script>
 
   <p style="color:var(--muted);font-size:15px;margin-bottom:24px;max-width:680px">Google Maps now uses Gemini AI to decide which businesses to surface in response to natural language queries. It reads your reviews AND your reply quality — businesses that reply with service and location context get surfaced more consistently.</p>
   <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px 32px;margin-bottom:20px">
