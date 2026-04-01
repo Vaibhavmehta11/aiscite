@@ -254,9 +254,45 @@ footer p { font-size: 13px; color: var(--muted); }
   text-decoration: none; background: var(--ctaText); color: var(--ctaBg);
   padding: 10px 20px; border-radius: 10px; font-weight: 700; font-size: 13px; white-space: nowrap;
 }
+/* QUAL PILL BUTTONS */
+.qual-pill {
+  padding: 8px 20px; border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: var(--bg); color: var(--text);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  margin-right: 6px; margin-bottom: 6px;
+  font-family: var(--font);
+}
+html[data-theme="light"] .qual-pill:not(.selected) {
+  border-color: #c2c5cc;
+  background: #f4f5f7;
+}
+.qual-pill.selected {
+  background: var(--btnBg);
+  color: var(--btnText);
+  border-color: var(--btnBg);
+}
+/* NEXT STEPS */
+.next-steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+.next-step-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 16px; padding: 22px;
+}
+.next-step-card.done { border-color: var(--border); }
+.next-step-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.08em; margin-bottom: 12px;
+}
+.next-step-badge.included { background: rgba(22,163,74,0.12); color: #15803d; }
+.next-step-badge.optional { background: var(--bg3); color: var(--muted); }
+.next-step-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.next-step-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 /* RESPONSIVE */
 @media (max-width: 760px) {
-  .score-hero, .chart-grid, .offer-grid, .process-steps { grid-template-columns: 1fr; }
+  .score-hero, .chart-grid, .offer-grid, .process-steps, .next-steps-grid { grid-template-columns: 1fr; }
   .bar-row { grid-template-columns: 1fr; gap: 6px; }
   .bar-val { text-align: left; }
   .hero { padding-top: 100px; }
@@ -329,7 +365,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
       <div class="score-actions">
         <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-primary" target="_blank">Book your free 10-minute walkthrough</a>
         <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:8px">Used by 40+ local practices and professionals across Toronto</p>
-        <a href="mailto:hello@aiscite.com?subject=Carlton Dental — Visibility Review" class="btn-ghost">Reply by email</a>
+        <a href="mailto:hello@aiscite.com?subject=Carlton Dental — GEO Audit Follow-up" class="btn-ghost">Reply by email</a>
       </div>
     </div>
     <div class="score-context">
@@ -509,14 +545,14 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
     <div class="offer-main" style="margin-top:20px;padding:28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center">
       <div>
         <div class="offer-tag">Not ready for full implementation? Start here.</div>
-        <h3 style="font-size:22px;margin-bottom:10px;line-height:1.15">We reply to every Google review.</h3>
-        <p style="margin-bottom:0">We reply to every Google review mentioning your service and location — the exact signals Gemini Maps uses to recommend your business. Written for your practice, reviewed by our team.</p>
+        <h3 style="font-size:22px;margin-bottom:10px;line-height:1.15">Monthly AI signal management — $188/month</h3>
+        <p style="margin-bottom:12px">We write AI-optimized replies to every Google review — using your service and location keywords as the exact signals Gemini Maps reads to recommend your business. Unlimited replies. Cancel anytime.</p>
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);font-size:12px;font-weight:700;color:var(--ctaText)">$188/month · Unlimited replies · Cancel anytime</div>
       </div>
       <div style="text-align:center;flex-shrink:0">
         <div style="margin-bottom:8px">
           <span style="font-size:48px;font-weight:800;letter-spacing:-3px;line-height:1">$188</span><span style="font-size:15px;color:var(--ctaMuted);margin-left:6px">/month</span>
         </div>
-        <div class="price-note" style="margin-bottom:14px">Written for your practice, reviewed by our team. Cancel anytime.</div>
         <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="display:inline-block;white-space:nowrap">Add Review Replies →</a>
       </div>
     </div>
@@ -524,6 +560,32 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
       <div class="process-step"><div class="step-num">Step 01</div><p>Review the biggest gap in plain English on the call.</p></div>
       <div class="process-step"><div class="step-num">Step 02</div><p>Confirm what would change over the next two weeks.</p></div>
       <div class="process-step"><div class="step-num">Step 03</div><p>Decide whether to move forward. No pressure either way.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT HAPPENS NEXT -->
+<div class="wrap">
+  <div class="section">
+    <p class="section-sm">Your path forward</p>
+    <h2>What happens next</h2>
+    <p class="section-lead">The audit is step one. Here is the full picture of where you can go from here.</p>
+    <div class="next-steps-grid">
+      <div class="next-step-card done">
+        <div class="next-step-badge included">✓ Included</div>
+        <h3>GEO Audit</h3>
+        <p>Your AI Visibility Score, issue breakdown, and priority fixes — this report. Delivered within 48 hours.</p>
+      </div>
+      <div class="next-step-card">
+        <div class="next-step-badge optional">Optional</div>
+        <h3>Monthly Review Reply — $188/month</h3>
+        <p>AI-optimized Google review replies using your service and location keywords — the exact signals Gemini Maps reads for recommendations. Unlimited replies. Cancel anytime.</p>
+      </div>
+      <div class="next-step-card">
+        <div class="next-step-badge optional">Optional</div>
+        <h3>Full Implementation — $688</h3>
+        <p>One-time. We fix everything identified in the audit for you over two weeks. No technical work on your end.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -551,12 +613,9 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
     var wrap = document.createElement('div');
     wrap.style.cssText = 'margin-bottom:22px';
     var pills = q.options.map(function (opt) {
-      return '<button type="button" ' +
+      return '<button type="button" class="qual-pill" ' +
         'onclick="window.__qualPick(\'' + qk + '\',\'' + opt.val + '\',this)" ' +
-        'data-q="' + qk + '" data-val="' + opt.val + '" ' +
-        'style="padding:8px 20px;border-radius:999px;border:1.5px solid var(--border);' +
-        'background:var(--bg);color:var(--text);font-size:13px;font-weight:600;cursor:pointer;' +
-        'transition:background 0.15s,color 0.15s,border-color 0.15s;margin-right:6px;margin-bottom:6px">' +
+        'data-q="' + qk + '" data-val="' + opt.val + '">' +
         opt.label + '</button>';
     }).join('');
     wrap.innerHTML = '<p style="font-weight:600;color:var(--text);font-size:15px;margin-bottom:10px">' +
@@ -576,13 +635,12 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   window.__qualPick = function (qk, val, btn) {
     answers[qk] = val;
     document.querySelectorAll('[data-q="' + qk + '"]').forEach(function (b) {
-      b.style.background = 'var(--bg)';
-      b.style.color = 'var(--text)';
-      b.style.borderColor = 'var(--border)';
+      b.classList.remove('selected');
     });
-    btn.style.background = 'var(--btnBg)';
-    btn.style.color = 'var(--btnText)';
-    btn.style.borderColor = 'var(--btnBg)';
+    btn.classList.add('selected');
+    // Hide standalone CTA when quiz is started
+    var ctaBlock = document.getElementById('standalone-cta-block');
+    if (ctaBlock) { ctaBlock.style.display = 'none'; }
     if (answers.q1 && answers.q2 && answers.q3) {
       submitBtn.style.display = 'inline-block';
     }
@@ -653,16 +711,17 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 </script>
 
 <div class="wrap">
-  <div class="cta-block">
+  <div class="cta-block" id="standalone-cta-block">
     <h2>See how much further you can go.</h2>
     <p>The foundation is strong. Two targeted fixes and Carlton Dental becomes the obvious AI recommendation in Toronto.</p>
     <div style="max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
       <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="text-align:center">Book the 10-minute walkthrough →</a>
       <a href="https://aiscite.com/pricing/" style="color:rgba(255,255,255,0.75);font-size:13px;text-align:center;text-decoration:none;font-weight:600">See full pricing → aiscite.com/pricing</a>
-      <a href="mailto:hello@aiscite.com?subject=Carlton Dental — Visibility Review" class="btn-ghost-cta">Or reply by email</a>
+      <a href="mailto:hello@aiscite.com?subject=Carlton Dental — GEO Audit Follow-up" class="btn-ghost-cta">Or reply by email</a>
     </div>
     <div class="cta-note">No obligation. 10 minutes. We confirm whether the opportunity is real.</div>
   </div>
+</div>
 
 <footer>
   <div class="footer-logo">Aiscite</div>
