@@ -164,6 +164,40 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 60px; di
 .cta-note { margin-top: 16px; font-size: 13px; color: var(--ctaMuted); }
 .cta-or { margin: 20px 0 0; font-size: 14px; color: var(--ctaMuted); }
 
+/* CTA FORM INPUTS — SOP compliant, theme-aware */
+.cta-input {
+  padding: 13px 16px; border-radius: 10px; font-size: 15px; font-family: inherit;
+  outline: none; width: 100%;
+}
+html[data-theme="light"] .cta-input {
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+}
+html[data-theme="light"] .cta-input::placeholder { color: rgba(255,255,255,0.45); }
+html[data-theme="dark"] .cta-input {
+  border: 1px solid rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.07);
+  color: #101010;
+}
+html[data-theme="dark"] .cta-input::placeholder { color: rgba(0,0,0,0.4); }
+.cta-submit {
+  padding: 14px 24px; border-radius: 10px; font-weight: 700; font-size: 15px;
+  border: none; cursor: pointer; font-family: inherit; width: 100%;
+  background: var(--ctaText); color: var(--ctaBg);
+  transition: opacity 0.15s;
+}
+.cta-submit:hover { opacity: 0.85; }
+.cta-input option { background: var(--bg); color: var(--text); }
+/* CTA SELECT custom arrow */
+.cta-select {
+  -webkit-appearance: none; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center;
+}
+html[data-theme="dark"] .cta-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23101010' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+}
 footer { border-top: 1px solid var(--border); padding: 28px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .footer-logo { font-size: 15px; font-weight: 800; }
 footer p { font-size: 13px; color: var(--muted); }
@@ -191,7 +225,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
     <span class="paid-badge">FULL AUDIT</span>
   </div>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle"><span id="themeIcon">🌙</span><span id="themeLabel"> Dark</span></button>
+    <button class="theme-toggle" id="themeToggle"><span id="themeIcon">Dark</span></button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
   </div>
 </nav>
@@ -647,8 +681,8 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
         <input type="hidden" name="report_source" value="paid_audit_388_carlton-dental">
         <input type="hidden" name="source" value="paid_report_carlton-dental">
         <input type="hidden" name="_next" value="https://aiscite.com/?thanks=1&source=paid">
-        <input type="text" name="name" placeholder="Your name" required style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:15px;font-family:inherit;outline:none">
-        <input type="email" name="email" placeholder="Your email" required style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:15px;font-family:inherit;outline:none">
+        <input type="text" name="name" placeholder="Your name" required class="cta-input">
+        <input type="email" name="email" placeholder="Your email" required class="cta-input">
         <select name="service" style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(20,20,22,0.95);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' viewBox=\'0 0 12 12\'%3E%3Cpath fill=\'%23ffffff\' d=\'M6 8L1 3h10z\'/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 16px center">
           <option value="">I want to...</option>
           <option value="GEO Build ($688)">GEO Build — we implement everything ($688)</option>
@@ -656,7 +690,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
           <option value="AI Management ($288/month)">AI Management — quarterly re-audit + review replies ($288/month)</option>
           <option value="Questions first">Ask a question first</option>
         </select>
-        <button type="submit" onclick="posthog.capture('paid_report_cta_clicked',{business:'carlton-dental'})" style="padding:14px 24px;border-radius:10px;background:#fff;color:#101010;font-weight:700;font-size:15px;border:none;cursor:pointer;font-family:inherit">Request implementation</button>
+        <button type="submit" class="cta-submit" onclick="posthog.capture('paid_report_cta_clicked',{business:'carlton-dental'})">Request implementation</button>
       </form>
       <p style="margin-top:14px;font-size:13px;opacity:0.5;text-align:center">We will be in touch within 24 hours.</p>
     </div>
@@ -677,8 +711,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   root.setAttribute('data-theme', saved || 'light');
   function sync() {
     const dark = root.getAttribute('data-theme') === 'dark';
-    document.getElementById('themeIcon').textContent = dark ? '☀️' : '🌙';
-    document.getElementById('themeLabel').textContent = dark ? ' Light' : ' Dark';
+    document.getElementById('themeIcon').textContent = dark ? 'Light' : 'Dark';
   }
   btn.addEventListener('click', function () {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -687,6 +720,25 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
     sync();
   });
   sync();
+})();
+</script>
+
+<script>
+(function(){
+  var form = document.getElementById('paidForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type=submit]');
+    if (btn) btn.disabled = true;
+    fetch(form.action, {method:'POST', body: new FormData(form), headers:{Accept:'application/json'}})
+      .then(function(r) {
+        if (r.ok) {
+          form.reset();
+          form.innerHTML = '<p style="color:#6ee7b7;font-size:16px;font-weight:600;text-align:center;padding:20px 0">✓ Sent. We will be in touch within 24 hours.</p>';
+        }
+      });
+  });
 })();
 </script>
 </body>
