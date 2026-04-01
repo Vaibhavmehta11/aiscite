@@ -238,6 +238,22 @@ footer {
 }
 .footer-logo { font-size: 15px; font-weight: 800; }
 footer p { font-size: 13px; color: var(--muted); }
+/* REVIEW STAT GRID */
+.review-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; }
+/* STICKY CTA */
+.sticky-cta {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  background: var(--ctaBg); color: var(--ctaText);
+  padding: 14px 28px; display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  transform: translateY(100%); transition: transform 0.3s ease;
+}
+.sticky-cta.visible { transform: translateY(0); }
+.sticky-cta-text { font-size: 14px; font-weight: 600; }
+.sticky-cta-btn {
+  text-decoration: none; background: var(--ctaText); color: var(--ctaBg);
+  padding: 10px 20px; border-radius: 10px; font-weight: 700; font-size: 13px; white-space: nowrap;
+}
 /* RESPONSIVE */
 @media (max-width: 760px) {
   .score-hero, .chart-grid, .offer-grid, .process-steps { grid-template-columns: 1fr; }
@@ -245,6 +261,10 @@ footer p { font-size: 13px; color: var(--muted); }
   .bar-val { text-align: left; }
   .hero { padding-top: 100px; }
   .cta-block { padding: 48px 24px; margin: 48px 0; }
+  .theme-toggle { display: none; }
+}
+@media (max-width: 640px) {
+  .review-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 </style>
 <script>
@@ -276,7 +296,7 @@ posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https:
   }
 })();
 
-posthog.capture("free_report_view", {business: "carlton-dental", score: 52});
+posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 </script>
 </head>
 <body>
@@ -290,24 +310,25 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 52});
 
 <div class="hero">
   <div class="hero-eyebrow"><span></span> Private AI visibility review · March 2026</div>
-  <h1>Your dental practice looks stronger to people than it does to AI.</h1>
+  <h1>Carlton Dental shows up for patients. It barely exists for AI.</h1>
   <p>When someone asks AI for a dental practice in Toronto, Carlton Dental should be in that conversation. Right now, the site gives AI too little confidence, too few clear answers, and too little context about what makes this business special.</p>
   <div class="score-hero">
     <div class="score-main">
       <div>
-        <div class="score-number">52</div>
+        <div class="score-number">78</div>
         <div class="score-label">AI Visibility Score · out of 100</div>
-        <div class="score-badge" style="margin-top:12px">Below average — significant gaps</div>
+        <div class="score-badge" style="margin-top:12px">Strong — but not untouchable</div>
       </div>
       <div class="score-bars">
-        <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div><span class="bar-val">15</span></div>
+        <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">20</span></div>
         <div class="bar-row"><span class="bar-label">Citation signals</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100</span></div>
         <div class="bar-row"><span class="bar-label">Authority and trust</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100</span></div>
         <div class="bar-row"><span class="bar-label">Content depth</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100</span></div>
-        <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">40</span></div>
+        <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">60</span></div>
       </div>
       <div class="score-actions">
         <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-primary" target="_blank">Book your free 10-minute walkthrough</a>
+        <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:8px">Used by 40+ local practices and professionals across Toronto</p>
         <a href="mailto:hello@aiscite.com?subject=Carlton Dental — Visibility Review" class="btn-ghost">Reply by email</a>
       </div>
     </div>
@@ -317,7 +338,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 52});
       <div class="context-stats">
         <div class="stat-row"><span class="stat-label">Competing practices</span><span class="stat-val">~40 / 100</span></div>
         <div class="stat-row"><span class="stat-label">Target score</span><span class="stat-val">90+ / 100</span></div>
-        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+36 to +43 points</span></div>
+        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+10 to +17 points</span></div>
         <div class="stat-row"><span class="stat-label">Implementation window</span><span class="stat-val">2 weeks</span></div>
         <div class="stat-row"><span class="stat-label">Best next step</span><span class="stat-val">10-min private walkthrough</span></div>
       </div>
@@ -329,26 +350,39 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 52});
   <div class="section">
     <p class="section-sm">Where you stand</p>
     <h2>Strong — but not untouchable — room to improve.</h2>
-    <p class="section-lead">Carlton Dental scores 52/100 — well above most local dental practices which average below 40. One structural gap is holding the site back from becoming an obvious default recommendation.</p>
-    <div class="chart-grid">
+    <p class="section-lead">Carlton Dental scores 78/100 — well above most local dental practices which average below 40. One structural gap is holding the site back from becoming an obvious default recommendation.</p>
+    <div class="chart-grid" style="grid-template-columns:1fr 1fr">
       <div class="chart-card">
         <h3>Position in the market</h3>
-        <p>Carlton Dental scores 52/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
+        <p>Carlton Dental scores 78/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
         <div class="chart-shell"><div class="chart-frame"><canvas id="benchmarkChart"></canvas></div></div>
         <div class="insight" id="benchmarkInsight"><strong>What this means:</strong>Carlton Dental is one of the stronger dental practices in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
       </div>
       <div class="chart-card">
-        <h3>Where the biggest improvements are</h3>
-        <p>The greatest upside is not basic visibility. It is clearer proof, clearer answers, and a cleaner story about why this practice stands out.</p>
-        <div class="chart-shell"><div class="chart-frame tall"><canvas id="radarChart"></canvas></div></div>
-        <div class="insight" id="radarInsight"><strong>What this means:</strong> the quickest gains come from making the site more convincing, not from rebuilding it.</div>
+        <h3>Top improvement areas</h3>
+        <p>The fastest gains come from fixing how your site communicates — not from rebuilding it.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:4px">
+          <div class="stat-row" style="border-bottom:1px solid var(--border);padding-bottom:12px">
+            <span style="font-size:28px;font-weight:800;color:var(--muted);line-height:1;margin-right:16px;flex-shrink:0">1</span>
+            <div><div style="font-size:14px;font-weight:700;margin-bottom:2px">AI readability</div><div style="font-size:13px;color:var(--muted)">AI cannot parse your credentials or services clearly from the current structure.</div></div>
+          </div>
+          <div class="stat-row" style="border-bottom:1px solid var(--border);padding-bottom:12px">
+            <span style="font-size:28px;font-weight:800;color:var(--muted);line-height:1;margin-right:16px;flex-shrink:0">2</span>
+            <div><div style="font-size:14px;font-weight:700;margin-bottom:2px">Content depth</div><div style="font-size:13px;color:var(--muted)">Not enough structured answers to questions patients actually ask AI first.</div></div>
+          </div>
+          <div class="stat-row" style="padding-bottom:4px">
+            <span style="font-size:28px;font-weight:800;color:var(--muted);line-height:1;margin-right:16px;flex-shrink:0">3</span>
+            <div><div style="font-size:14px;font-weight:700;margin-bottom:2px">Positioning clarity</div><div style="font-size:13px;color:var(--muted)">Your unique strengths are not being communicated in a way AI can act on.</div></div>
+          </div>
+        </div>
+        <div class="insight" style="margin-top:14px"><strong>What this means:</strong> the quickest gains come from making the site more convincing, not from rebuilding it.</div>
       </div>
     </div>
   </div>
 
   <div class="section">
     <p class="section-sm">The gaps</p>
-    <h2>1 things holding Carlton Dental back from AI recommendation.</h2>
+    <h2>3 things holding Carlton Dental back from AI recommendation.</h2>
     <p class="section-lead">These are clarity problems, not technical ones. The site is not doing enough to prove expertise, answer likely questions, or tell AI what matters most about Carlton Dental.</p>
     <div class="problem-list">
       <div class="problem-item">
@@ -379,7 +413,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 52});
 
     <!-- Stat card -->
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 28px;margin-bottom:20px">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center">
+      <div class="review-stat-grid" style="text-align:center">
         <div style="padding:16px 12px;border-right:1px solid var(--border)">
           <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">47</div>
           <div class="stat-label" style="margin-top:6px">Total reviews</div>
@@ -429,19 +463,6 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 52});
     })();
     </script>
 
-    <!-- Review Reply Management CTA -->
-    <div style="margin-top:28px;max-width:540px">
-      <div class="offer-main" style="padding:28px">
-        <div class="offer-tag">Review Reply Management</div>
-        <h3 style="font-size:22px;margin-bottom:10px;line-height:1.15">We reply to every Google review.</h3>
-        <p>We reply to every Google review mentioning your service and location — the exact signals Gemini Maps uses to recommend your business.</p>
-        <div style="margin:16px 0 6px">
-          <span style="font-size:48px;font-weight:800;letter-spacing:-3px;line-height:1">$188</span><span style="font-size:15px;color:var(--ctaMuted);margin-left:6px">/month</span>
-        </div>
-        <div class="price-note" style="margin-bottom:18px">AI-generated, human-reviewed. Cancel anytime.</div>
-        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="display:inline-block">Add Review Replies →</a>
-      </div>
-    </div>
   </div>
 
   <div class="section">
@@ -482,6 +503,21 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 52});
           <div class="offer-item-check">✓</div>
           <div><b>Why the short call matters</b><span>It keeps the decision simple: is this a real opportunity for the practice, and do you want to act on it now?</span></div>
         </div>
+      </div>
+    </div>
+    <!-- Review Reply Management CTA — placed between offer-grid and process-steps -->
+    <div class="offer-main" style="margin-top:20px;padding:28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center">
+      <div>
+        <div class="offer-tag">Not ready for full implementation? Start here.</div>
+        <h3 style="font-size:22px;margin-bottom:10px;line-height:1.15">We reply to every Google review.</h3>
+        <p style="margin-bottom:0">We reply to every Google review mentioning your service and location — the exact signals Gemini Maps uses to recommend your business. Written for your practice, reviewed by our team.</p>
+      </div>
+      <div style="text-align:center;flex-shrink:0">
+        <div style="margin-bottom:8px">
+          <span style="font-size:48px;font-weight:800;letter-spacing:-3px;line-height:1">$188</span><span style="font-size:15px;color:var(--ctaMuted);margin-left:6px">/month</span>
+        </div>
+        <div class="price-note" style="margin-bottom:14px">Written for your practice, reviewed by our team. Cancel anytime.</div>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="display:inline-block;white-space:nowrap">Add Review Replies →</a>
       </div>
     </div>
     <div class="process-steps">
@@ -664,12 +700,10 @@ function getThemeColors() {
     tooltipBg: dark ? 'rgba(20,20,22,0.96)' : 'rgba(17,17,17,0.94)',
     gridColor: dark ? 'rgba(255,255,255,0.06)' : 'rgba(229,231,235,0.8)',
     angleLines: dark ? 'rgba(255,255,255,0.1)' : 'rgba(148,163,184,0.35)',
-    radarFill: dark ? 'rgba(96,165,250,0.18)' : 'rgba(37,99,235,0.12)',
-    radarBorder: dark ? '#60a5fa' : '#2563eb',
   };
 }
 
-let benchmarkChart, radarChart;
+let benchmarkChart;
 
 function buildCharts() {
   const c = getThemeColors();
@@ -680,7 +714,7 @@ function buildCharts() {
     data: {
       labels: ['Target score', 'Competing practices', 'Carlton Dental'],
       datasets: [{
-        data: [90, 40, 52],
+        data: [90, 40, 78],
         backgroundColor: [c.gold, c.muted, c.barFill],
         borderRadius: 12, borderSkipped: false, barThickness: 28,
       }]
@@ -699,56 +733,29 @@ function buildCharts() {
       animation: { duration: 900, easing: 'easeOutQuart' }
     }
   });
-
-  const radarCtx = document.getElementById('radarChart').getContext('2d');
-  radarChart = new Chart(radarCtx, {
-    type: 'radar',
-    data: {
-      labels: ['Expertise', 'Visibility', 'Trust', 'Q&A depth', 'Positioning'],
-      datasets: [
-        {
-          label: 'Target',
-          data: [87, 95, 95, 85, 90],
-          borderColor: c.muted, backgroundColor: 'rgba(148,163,184,0.06)',
-          borderWidth: 2, pointRadius: 3, pointBackgroundColor: c.muted,
-        },
-        {
-          label: 'Today',
-          data: [47, 80, 60, 35, 30],
-          borderColor: c.radarBorder, backgroundColor: c.radarFill,
-          borderWidth: 3, pointRadius: 5, pointHoverRadius: 8,
-          pointBackgroundColor: '#fff', pointBorderColor: c.radarBorder, pointBorderWidth: 2.5,
-        }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      layout: { padding: { top: 16, right: 16, bottom: 8, left: 16 } },
-      plugins: {
-        legend: { position: 'bottom', labels: { boxWidth: 10, color: c.muted, padding: 14 } },
-        tooltip: { backgroundColor: c.tooltipBg, padding: 12, callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}` } }
-      },
-      scales: {
-        r: {
-          min: 0, max: 100,
-          ticks: { stepSize: 25, showLabelBackdrop: false, color: c.muted, font: { size: 10 } },
-          grid: { color: c.gridColor },
-          angleLines: { color: c.angleLines },
-          pointLabels: { color: c.text, font: { weight: '700', size: 11 } }
-        }
-      },
-      animation: { duration: 1000, easing: 'easeOutCubic' }
-    }
-  });
 }
 
 function updateChartColors() {
   if (benchmarkChart) benchmarkChart.destroy();
-  if (radarChart) radarChart.destroy();
   buildCharts();
 }
 
 buildCharts();
+</script>
+
+<div class="sticky-cta" id="stickyCta">
+  <span class="sticky-cta-text">AI visibility gaps found — book your free walkthrough</span>
+  <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="sticky-cta-btn" target="_blank">Book 10-min call →</a>
+</div>
+
+<script>
+(function(){
+  var bar = document.getElementById("stickyCta");
+  window.addEventListener("scroll", function(){
+    if(window.scrollY > 400){ bar.classList.add("visible"); }
+    else { bar.classList.remove("visible"); }
+  }, {passive:true});
+})();
 </script>
 </body>
 </html>
