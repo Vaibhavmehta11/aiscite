@@ -19,7 +19,7 @@
     --bg3: #f0f0f2;
     --text: #111111;
     --muted: #666870;
-    --border: #e7e7ea;
+    --border: #c2c5cc;
     --soft: #fafafb;
     --btnText: #ffffff;
     --btnBg: #111111;
@@ -104,6 +104,10 @@
     text-decoration: none; color: var(--text); border: 1px solid var(--border); background: transparent; padding: 14px 24px; border-radius: 12px; font-size: 15px; font-weight: 600; display: inline-block;
   }
   .btn-ghost:hover { background: var(--bg2); }
+  html[data-theme="dark"] .btn-ghost {
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.04);
+  }
   .hero {
     max-width: 860px; margin: 0 auto; padding: 162px 28px 118px; text-align: center;
   }
@@ -179,8 +183,33 @@
   .cta-block p { color: var(--ctaMuted); max-width: 480px; margin: 0 auto 30px; font-size: 17px; line-height: 1.7; }
   .btn-white { background: var(--invBg); color: var(--invText); padding: 14px 28px; font-size: 15px; }
   .cta-note { margin-top: 14px; font-size: 13px; color: var(--ctaMuted); }
-  .cta-input { color: #ffffff !important; }
-  .cta-input::placeholder { color: rgba(255,255,255,0.5) !important; }
+  .cta-input {
+    padding: 13px 16px; border-radius: 10px; font-size: 15px; font-family: inherit;
+    outline: none; width: 100%;
+  }
+  html[data-theme="light"] .cta-input {
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: #ffffff;
+  }
+  html[data-theme="light"] .cta-input::placeholder { color: rgba(255,255,255,0.45); }
+  html[data-theme="dark"] .cta-input {
+    border: 1px solid rgba(0,0,0,0.25);
+    background: rgba(0,0,0,0.07);
+    color: #101010;
+  }
+  html[data-theme="dark"] .cta-input::placeholder { color: rgba(0,0,0,0.4); }
+  .cta-submit {
+    padding: 14px 24px; border-radius: 10px; font-weight: 700; font-size: 15px;
+    border: none; cursor: pointer; font-family: inherit; width: 100%;
+    background: var(--ctaText); color: var(--ctaBg);
+    transition: opacity 0.15s;
+  }
+  .cta-submit:hover { opacity: 0.85; }
+  .cta-input option {
+    background: var(--bg);
+    color: var(--text);
+  }
   footer { border-top: 1px solid var(--border); padding: 30px 28px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   .footer-logo { font-size: 15px; font-weight: 800; }
   footer p { font-size: 13px; color: var(--muted); }
@@ -309,7 +338,7 @@
   <p class="lead">No tiers. No subscriptions to figure out. One audit, one price, delivered in 48 hours.</p>
   <div class="pricing-card">
     <div style="margin-bottom:6px">
-      <span class="pricing-price">$288</span><span class="pricing-period">one-time</span>
+      <span class="pricing-price">$388</span><span class="pricing-period">one-time</span>
     </div>
     <p style="color:var(--muted);font-size:15px;margin-top:8px">GEO Audit — delivered within 48 hours of kickoff.</p>
     <ul class="pricing-includes">
@@ -346,16 +375,11 @@
       <input type="hidden" name="_subject" value="Aiscite inquiry">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://aiscite.com/?thanks=1">
-      <input type="text" name="name" placeholder="Your name" required class="cta-input"
-        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); font-size:15px; outline:none; font-family:inherit;">
-      <input type="text" name="business" placeholder="Business name" required class="cta-input"
-        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); font-size:15px; outline:none; font-family:inherit;">
-      <input type="url" name="website" placeholder="Website URL" required class="cta-input"
-        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); font-size:15px; outline:none; font-family:inherit;">
-      <input type="email" name="email" placeholder="Your email" required class="cta-input"
-        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); font-size:15px; outline:none; font-family:inherit;">
-      <button type="submit"
-        style="padding:14px 24px; border-radius:10px; background:#ffffff; color:#101010; font-weight:700; font-size:15px; border:none; cursor:pointer; font-family:inherit;">Send message</button>
+      <input type="text" name="name" placeholder="Your name" required class="cta-input">
+      <input type="text" name="business" placeholder="Business name" required class="cta-input">
+      <input type="url" name="website" placeholder="Website URL" required class="cta-input">
+      <input type="email" name="email" placeholder="Your email" required class="cta-input">
+      <button type="submit" class="cta-submit">Send message</button>
       <p id="formSuccess" style="display:none; color:#6ee7b7; font-size:14px; text-align:center; margin:4px 0 0;">Message sent. We will be in touch within 24 hours.</p>
     </form>
     <script>
