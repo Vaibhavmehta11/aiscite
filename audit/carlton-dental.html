@@ -383,6 +383,11 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 </div>
 
 <div class="wrap">
+  <div style="padding-top:36px">
+    <div class="insight">
+      <strong>Note:</strong> This audit covers your primary location. If your practice has multiple locations, each location has its own AI visibility profile — contact us to audit additional locations.
+    </div>
+  </div>
   <div class="section">
     <p class="section-sm">Where you stand</p>
     <h2>Strong — but not untouchable — room to improve.</h2>
@@ -514,7 +519,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
         <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px">
           <div class="price-row-muted">
             <span style="font-size:14px;font-weight:700">Audit</span>
-            <span style="font-size:18px;font-weight:800">$288</span>
+            <span style="font-size:18px;font-weight:800">$388</span>
           </div>
           <div class="price-row-muted">
             <span style="font-size:14px;font-weight:700">Full Implementation</span>
@@ -751,13 +756,13 @@ function getThemeColors() {
   const dark = document.documentElement.getAttribute('data-theme') === 'dark';
   return {
     text: dark ? '#f4f4f5' : '#111111',
-    muted: dark ? '#a1a1aa' : '#6b7280',
-    border: dark ? 'rgba(255,255,255,0.08)' : 'rgba(229,231,235,0.9)',
+    muted: dark ? '#a1a1aa' : '#666870',
+    border: dark ? 'rgba(255,255,255,0.08)' : '#d1d5db',
     barFill: dark ? '#93c5fd' : '#2563eb',
     barEmpty: dark ? 'rgba(255,255,255,0.06)' : '#e5e7eb',
     gold: dark ? '#fcd34d' : '#d97706',
     tooltipBg: dark ? 'rgba(20,20,22,0.96)' : 'rgba(17,17,17,0.94)',
-    gridColor: dark ? 'rgba(255,255,255,0.06)' : 'rgba(229,231,235,0.8)',
+    gridColor: dark ? 'rgba(255,255,255,0.06)' : '#d1d5db',
     angleLines: dark ? 'rgba(255,255,255,0.1)' : 'rgba(148,163,184,0.35)',
   };
 }
