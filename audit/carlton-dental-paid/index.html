@@ -2,9 +2,8 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8" />
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aiscite — Carlton Dental Full AI Visibility Audit ($288)</title>
+<title>Aiscite — Carlton Dental Full AI Visibility Audit ($388)</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,13 +12,13 @@
 :root { --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 html[data-theme="light"] {
   --bg: #ffffff; --bg2: #f6f6f7; --bg3: #f0f0f2;
-  --text: #111111; --muted: #666870; --border: #d1d5db;
+  --text: #111111; --muted: #666870; --border: #c2c5cc;
   --soft: #fafafb; --btnBg: #111111; --btnText: #ffffff;
   --ctaBg: #101010; --ctaText: #ffffff; --ctaMuted: #8d9098;
   --barTrack: #e2e4e8; --navBg: rgba(255,255,255,0.86);
   --scoreBg: #f0f4ff; --scoreText: #2563eb;
-  --tagRedBg: #fee2e2; --tagRedText: #cc2222;
-  --tagGoldBg: #fef3c7; --tagGoldText: #b45309;
+  --tagRedBg: #fff0f0; --tagRedText: #cc2222;
+  --tagGoldBg: #fff8ed; --tagGoldText: #b45309;
   --tagGreenBg: #f0fdf4; --tagGreenText: #15803d;
   --insightBg: #f0f4ff; --insightBorder: #c7d7fe;
   --warnBg: #fffbeb; --warnBorder: #fcd34d;
@@ -42,10 +41,32 @@ html[data-theme="dark"] {
 html { scroll-behavior: smooth; }
 body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; transition: background 0.2s, color 0.2s; }
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; background: var(--navBg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.nav-left { display: flex; align-items: center; gap: 10px; }
 .nav-logo { color: var(--text); text-decoration: none; font-weight: 800; font-size: 16px; letter-spacing: -0.4px; }
-.paid-badge { background: #111; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; letter-spacing: 0.4px; margin-left: 10px; }
+.nav-practice { color: var(--text); font-size: 16px; font-weight: 800; }
+.paid-badge {
+  display: inline-flex; align-items: center;
+  background: var(--scoreBg); color: var(--scoreText);
+  font-size: 11px; font-weight: 800; padding: 3px 10px;
+  border-radius: 999px; letter-spacing: 0.6px; text-transform: uppercase;
+  border: 1px solid var(--insightBorder);
+}
 .nav-right { display: flex; align-items: center; gap: 12px; }
-.theme-toggle { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 13px; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: var(--font); }
+.nav-link { cursor: pointer; }
+.nav-btn {
+  text-decoration: none; background: var(--btnBg); color: var(--btnText);
+  padding: 8px 16px; border-radius: 12px; font-weight: 700; font-size: 13px;
+  transition: opacity 0.15s; cursor: pointer;
+}
+.nav-btn:hover { opacity: 0.88; }
+.theme-toggle {
+  display: inline-flex; align-items: center; gap: 5px;
+  border: 1.5px solid var(--border); background: var(--bg); color: var(--text);
+  height: 34px; padding: 0 14px; border-radius: 999px; font-size: 13px;
+  font-weight: 600; cursor: pointer; font-family: var(--font);
+  transition: border-color 0.15s, background 0.15s;
+}
+.theme-toggle:hover { background: var(--bg2); }
 .wrap { max-width: 900px; margin: 0 auto; padding: 0 28px; }
 .hero { padding: 120px 28px 60px; max-width: 900px; margin: 0 auto; }
 .hero-eyebrow { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
@@ -67,7 +88,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 60px; di
 
 /* SCORE */
 .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 32px 0; }
-.score-main { background: var(--scoreBg); border: 1px solid var(--border); border-radius: 20px; padding: 32px; }
+.score-main { background: var(--scoreBg); border-radius: 20px; padding: 32px; }
 .score-number { font-size: 72px; font-weight: 800; letter-spacing: -3px; color: var(--scoreText); line-height: 1; }
 .score-label { font-size: 14px; color: var(--muted); margin-top: 4px; }
 .score-badge { display: inline-block; background: var(--text); color: var(--bg); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-top: 12px; }
@@ -140,37 +161,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 60px; di
 .cta-block p { font-size: 17px; color: var(--ctaMuted); max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
 .btn-white { display: inline-block; background: #fff; color: #101010; font-weight: 700; font-size: 16px; padding: 15px 32px; border-radius: 12px; text-decoration: none; transition: opacity 0.15s, transform 0.15s; }
 .btn-white:hover { opacity: 0.92; transform: translateY(-1px); }
-.cta-input {
-  padding: 13px 16px; border-radius: 10px; font-size: 15px; font-family: inherit;
-  outline: none; width: 100%;
-}
-/* light mode site = CTA block is dark (#101010) → inputs need white text + white border */
-html[data-theme="light"] .cta-input {
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1);
-  color: #ffffff;
-}
-html[data-theme="light"] .cta-input::placeholder { color: rgba(255,255,255,0.45); }
-/* dark mode site = CTA block is light (#f4f4f5) → inputs need dark text + dark border */
-html[data-theme="dark"] .cta-input {
-  border: 1px solid rgba(0,0,0,0.25);
-  background: rgba(0,0,0,0.07);
-  color: #101010;
-}
-html[data-theme="dark"] .cta-input::placeholder { color: rgba(0,0,0,0.4); }
-/* Submit button — contrasts against CTA block: light=white btn, dark=dark btn */
-.cta-submit {
-  padding: 14px 24px; border-radius: 10px; font-weight: 700; font-size: 15px;
-  border: none; cursor: pointer; font-family: inherit; width: 100%;
-  background: var(--ctaText); color: var(--ctaBg);
-  transition: opacity 0.15s;
-}
-.cta-submit:hover { opacity: 0.85; }
-/* Select option bg — must match page bg so options are readable in dropdown */
-.cta-input option {
-  background: var(--bg);
-  color: var(--text);
-}
 .cta-note { margin-top: 16px; font-size: 13px; color: var(--ctaMuted); }
 .cta-or { margin: 20px 0 0; font-size: 14px; color: var(--ctaMuted); }
 
@@ -183,20 +173,26 @@ footer p { font-size: 13px; color: var(--muted); }
   .bar-row { grid-template-columns: 1fr; gap: 4px; }
   .hero { padding-top: 90px; }
   .cta-block { padding: 48px 24px; }
+  .review-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
+.review-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; }
 </style>
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https://us.i.posthog.com",person_profiles:"identified_only"});
-posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, report_type: "full_audit_288"});
+posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, report_type: "full_audit_388"});
 </script>
 </head>
 <body>
 <nav>
-  <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px">· Carlton Dental</span><span class="paid-badge" style="margin-left:8px">FULL AUDIT</span>
+  <div class="nav-left">
+    <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a>
+    <span class="nav-practice">· Carlton Dental</span>
+    <span class="paid-badge">FULL AUDIT</span>
+  </div>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle">Dark mode</button>
-    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book walkthrough</a>
+    <button class="theme-toggle" id="themeToggle"><span id="themeIcon">🌙</span><span id="themeLabel"> Dark</span></button>
+    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
   </div>
 </nav>
 
@@ -208,7 +204,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   <div class="paid-header">
     <div class="paid-header-icon">🔒</div>
     <div class="paid-header-text">
-      <h3>Full Audit — $288 Report</h3>
+      <h3>Full AI Visibility Audit — $388</h3>
       <p>This report includes AI query evidence, competitor analysis, specific fix instructions with copy examples, and a 2-week implementation roadmap. The free report shows you the score. This report shows you exactly what to do.</p>
     </div>
   </div>
@@ -222,6 +218,8 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
       <a href="#issues" class="toc-item"><span class="toc-num">04</span> Each gap with specific fixes</a>
       <a href="#copy" class="toc-item"><span class="toc-num">05</span> Ready-to-use copy examples</a>
       <a href="#roadmap" class="toc-item"><span class="toc-num">06</span> 2-week priority roadmap</a>
+      <a href="#review-replies" class="toc-item"><span class="toc-num">07</span> Google Reviews &amp; AI signals</a>
+      <a href="#next-steps" class="toc-item"><span class="toc-num">08</span> What to do next</a>
     </div>
   </div>
 </div>
@@ -245,7 +243,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
           <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">60</span></div>
         </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:14px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:32px;">
+      <div style="display:flex;flex-direction:column;gap:14px">
         <div class="evidence-block">
           <div class="evidence-label">What each dimension measures</div>
           <div style="font-size:14px;line-height:1.8">
@@ -259,6 +257,41 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
       </div>
     </div>
   </div>
+</div>
+
+<!-- SCORING EXPLANATION -->
+<div class="wrap" id="scoring">
+  <div class="section-sm" style="margin-top:60px">How your score is calculated</div>
+  <h2>Five dimensions. Weighted by what AI systems actually use to decide who to recommend.</h2>
+  <p style="color:var(--muted);font-size:15px;margin-bottom:28px;max-width:680px">Your overall score is not an average — each dimension is weighted by how much it influences AI recommendation decisions today.</p>
+  <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden">
+    <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border);background:var(--bg2)">
+      <div><div style="font-size:15px;font-weight:700;margin-bottom:3px">AI Readability</div><div style="font-size:13px;color:var(--muted)">Can AI cleanly extract your key facts — name, location, services, specialties?</div></div>
+      <div style="font-size:22px;font-weight:800;color:var(--scoreText);text-align:center;align-self:center">25%</div>
+      <div style="font-size:13px;color:var(--muted);align-self:center">Thin or unstructured content means AI fills gaps with guesses — often wrong.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border)">
+      <div><div style="font-size:15px;font-weight:700;margin-bottom:3px">Citation Signals</div><div style="font-size:13px;color:var(--muted)">Do authoritative sources reference your business? Reviews, directories, press, associations.</div></div>
+      <div style="font-size:22px;font-weight:800;color:var(--scoreText);text-align:center;align-self:center">25%</div>
+      <div style="font-size:13px;color:var(--muted);align-self:center">AI treats third-party references as trust signals — the more consistent and authoritative, the better.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border);background:var(--bg2)">
+      <div><div style="font-size:15px;font-weight:700;margin-bottom:3px">Trust and Authority</div><div style="font-size:13px;color:var(--muted)">Does your digital presence signal credibility? Ratings, verified profiles, consistent identity.</div></div>
+      <div style="font-size:22px;font-weight:800;color:var(--scoreText);text-align:center;align-self:center">20%</div>
+      <div style="font-size:13px;color:var(--muted);align-self:center">AI systems are trained to favour businesses with consistent, verifiable identity across platforms.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border)">
+      <div><div style="font-size:15px;font-weight:700;margin-bottom:3px">Content Depth</div><div style="font-size:13px;color:var(--muted)">Do you answer the questions patients actually ask AI? FAQs, service pages, condition coverage.</div></div>
+      <div style="font-size:22px;font-weight:800;color:var(--scoreText);text-align:center;align-self:center">20%</div>
+      <div style="font-size:13px;color:var(--muted);align-self:center">The more your content matches what AI is asked about, the more often it gets retrieved and cited.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;background:var(--bg2)">
+      <div><div style="font-size:15px;font-weight:700;margin-bottom:3px">Local and Review Signals</div><div style="font-size:13px;color:var(--muted)">Google Business Profile completeness, review volume, reply rate, location signals.</div></div>
+      <div style="font-size:22px;font-weight:800;color:var(--scoreText);text-align:center;align-self:center">10%</div>
+      <div style="font-size:13px;color:var(--muted);align-self:center">Gemini Maps and local AI features weight this heavily for local discovery queries.</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-top:16px">Scores below 70 indicate meaningful gaps that affect how often AI recommends your business. 70-85 is functional but not citation-optimized. 85+ consistently earns AI recommendations.</p>
 </div>
 
 <!-- 02: EVIDENCE -->
@@ -490,6 +523,119 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   </div>
 </div>
 
+<div class="wrap" id="review-replies">
+  <div class="section-sm" style="margin-top:60px">Ongoing AI signals</div>
+  <h2>Your review replies are a ranking signal — most businesses ignore this completely.</h2>
+
+  <div style="background:var(--insightBg);border:1px solid var(--insightBorder);border-radius:14px;padding:20px 24px;margin:20px 0">
+    <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--insightText);margin-bottom:10px">Why unanswered reviews cost you patients</div>
+    <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:12px">Google Maps AI reads your reply <strong>content</strong> — not just whether you replied. A reply that says "Thank you!" scores zero AI signal. A reply that says "Thank you for choosing Carlton Dental for your teeth cleaning in downtown Toronto — we look forward to seeing you again" gives Gemini Maps three strong signals: your practice name, your service, and your location.</p>
+    <p style="font-size:14px;color:var(--text);line-height:1.7;margin:0">Every unanswered review is a missed recommendation. When someone asks AI for a dentist in Toronto, Gemini Maps surfaces practices that have replied with service and location context — and skips the ones that have not.</p>
+  </div>
+
+  <!-- Review analytics stat card -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 28px;margin:24px 0 20px">
+    <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Carlton Dental — Google review signals</div>
+    <div class="review-stat-grid" style="text-align:center">
+      <div style="padding:16px 12px;border-right:1px solid var(--border)">
+        <div style="font-size:36px;font-weight:800;letter-spacing:-2px;line-height:1;color:var(--text)">47</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-top:6px">Total reviews</div>
+      </div>
+      <div style="padding:16px 12px;border-right:1px solid var(--border)">
+        <div style="font-size:36px;font-weight:800;letter-spacing:-2px;line-height:1;color:var(--text)">4.6</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-top:6px">Avg. rating</div>
+      </div>
+      <div style="padding:16px 12px;border-right:1px solid var(--border)">
+        <div style="font-size:36px;font-weight:800;letter-spacing:-2px;line-height:1;color:var(--tagRedText)">8%</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-top:6px">Reply rate</div>
+      </div>
+      <div style="padding:16px 12px">
+        <div style="font-size:36px;font-weight:800;letter-spacing:-2px;line-height:1;color:var(--tagRedText)">43</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-top:6px">Unanswered</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic status tag -->
+  <div id="paid-review-data" data-reply-rate="8" data-unanswered="43" style="display:none"></div>
+  <div id="paid-review-status-tag" style="margin-top:20px"></div>
+  <script>
+  (function () {
+    var el = document.getElementById("paid-review-data");
+    var replyRate = parseFloat(el.getAttribute("data-reply-rate")) || 0;
+    var unanswered = parseInt(el.getAttribute("data-unanswered")) || 0;
+    var tag = document.getElementById("paid-review-status-tag");
+    if (replyRate < 50) {
+      tag.innerHTML =
+        "<div style=\"display:inline-block;background:var(--tagRedBg);color:var(--tagRedText);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:10px\">CRITICAL GAP</div>" +
+        "<p style=\"font-size:14px;color:var(--tagRedText);margin-top:4px\">" +
+        "<strong>" + unanswered + " reviews have no reply.</strong> Each unanswered review is a missed AI visibility signal — Gemini Maps skips practices with low reply rates when generating recommendations.</p>";
+    } else if (replyRate <= 80) {
+      tag.innerHTML =
+        "<div style=\"display:inline-block;background:var(--tagGoldBg);color:var(--tagGoldText);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:10px\">NEEDS ATTENTION</div>" +
+        "<p style=\"font-size:14px;color:var(--tagGoldText);margin-top:4px\">" +
+        unanswered + " unanswered reviews. Reply rate above 80% is needed for strong AI signal.</p>";
+    } else {
+      tag.innerHTML =
+        "<div style=\"display:inline-block;background:rgba(22,163,74,0.12);color:#15803d;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:10px\">GOOD SIGNAL</div>" +
+        "<p style=\"font-size:14px;color:#15803d;margin-top:4px\">Reply rate is strong. Focus on reply quality — use service and location keywords in every response.</p>";
+    }
+  })();
+  </script>
+
+  <p style="color:var(--muted);font-size:15px;margin-bottom:24px;max-width:680px">Google Maps now uses Gemini AI to decide which businesses to surface in response to natural language queries. It reads your reviews AND your reply quality — businesses that reply with service and location context get surfaced more consistently.</p>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px 32px;margin-bottom:20px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap">
+      <div style="flex:1;min-width:240px">
+        <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">What we do</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+          <li style="display:flex;gap:10px;font-size:14px"><span style="font-weight:800;color:var(--scoreText)">✓</span> Reply to every new Google review within 48 hours</li>
+          <li style="display:flex;gap:10px;font-size:14px"><span style="font-weight:800;color:var(--scoreText)">✓</span> Each reply includes your service type and location — the exact signals Gemini Maps reads</li>
+          <li style="display:flex;gap:10px;font-size:14px"><span style="font-weight:800;color:var(--scoreText)">✓</span> Quarterly GEO re-audit included — track your score improving over time</li>
+          <li style="display:flex;gap:10px;font-size:14px"><span style="font-weight:800;color:var(--scoreText)">✓</span> Unlimited replies. Cancel anytime with 30 days notice.</li>
+        </ul>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-size:13px;color:var(--muted);margin-bottom:4px">Monthly plan</div>
+        <div style="font-size:48px;font-weight:800;letter-spacing:-3px;line-height:1;color:var(--text)">$288</div>
+        <div style="font-size:14px;color:var(--muted);margin-bottom:20px">/month</div>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" style="display:inline-block;background:var(--btnBg);color:var(--btnText);padding:11px 22px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none" target="_blank">Ask about this plan</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="next-steps">
+  <div class="section-sm" style="margin-top:60px">What to do next</div>
+  <h2>Three ways to move forward — pick what fits.</h2>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:28px">
+    <div style="display:flex;align-items:flex-start;gap:20px;padding:20px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:16px">
+      <div style="background:rgba(22,163,74,0.12);color:#15803d;font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 12px;border-radius:999px;white-space:nowrap;margin-top:2px">TALK IT THROUGH</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px">Book a free walkthrough</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.6">10 minutes. We walk through your score, confirm the priority fixes, and answer any questions. No commitment.</div>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" style="display:inline-block;margin-top:12px;background:var(--btnBg);color:var(--btnText);padding:9px 20px;border-radius:999px;font-weight:700;font-size:13px;text-decoration:none" target="_blank">Book free walkthrough →</a>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:20px;padding:20px 24px;background:var(--scoreBg);border:1px solid var(--insightBorder);border-radius:16px">
+      <div style="background:var(--scoreText);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 12px;border-radius:999px;white-space:nowrap;margin-top:2px">RECOMMENDED</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px">Request GEO Build — $688</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.6">We implement every fix from this report. Schema, content structure, service pages, location signals — done for you, once. Delivered in 2 weeks.</div>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" style="display:inline-block;margin-top:12px;background:var(--btnBg);color:var(--btnText);padding:9px 20px;border-radius:999px;font-weight:700;font-size:13px;text-decoration:none" target="_blank">Request GEO Build →</a>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:20px;padding:20px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:16px">
+      <div style="background:var(--bg3);color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 12px;border-radius:999px;white-space:nowrap;margin-top:2px">ONGOING</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px">Add AI Management — $288/month</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.6">Quarterly re-audit to track your score + unlimited AI-optimized Google review replies written with your service and location keywords. Cancel anytime.</div>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" style="display:inline-block;margin-top:12px;background:var(--btnBg);color:var(--btnText);padding:9px 20px;border-radius:999px;font-weight:700;font-size:13px;text-decoration:none" target="_blank">Add AI Management →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="wrap">
   <div class="cta-block">
     <h2>Want us to implement all of this for you?</h2>
@@ -498,18 +644,19 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
       <form action="https://formsubmit.co/45dd78cff8c41d02d6531ec326703c63" method="POST" id="paidForm" style="display:flex;flex-direction:column;gap:12px">
         <input type="hidden" name="_subject" value="Full Implementation inquiry — Carlton Dental (paid report)">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="report_source" value="paid_audit_288_carlton-dental">
+        <input type="hidden" name="report_source" value="paid_audit_388_carlton-dental">
         <input type="hidden" name="source" value="paid_report_carlton-dental">
         <input type="hidden" name="_next" value="https://aiscite.com/?thanks=1&source=paid">
-        <input type="text" name="name" placeholder="Your name" required class="cta-input">
-        <input type="email" name="email" placeholder="Your email" required class="cta-input">
-        <select name="service" class="cta-input" style="-webkit-appearance:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=''http://www.w3.org/2000/svg'' width=''12'' height=''12'' viewBox=''0 0 12 12''%3E%3Cpath fill=''%23888888'' d=''M6 8L1 3h10z''/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 16px center">
+        <input type="text" name="name" placeholder="Your name" required style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:15px;font-family:inherit;outline:none">
+        <input type="email" name="email" placeholder="Your email" required style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:15px;font-family:inherit;outline:none">
+        <select name="service" style="padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(20,20,22,0.95);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' viewBox=\'0 0 12 12\'%3E%3Cpath fill=\'%23ffffff\' d=\'M6 8L1 3h10z\'/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 16px center">
           <option value="">I want to...</option>
-          <option value="Full Implementation ($688)">Get it implemented for me ($688)</option>
-          <option value="Full Bundle ($888)">Full Bundle — implementation + 30-day re-scan ($888)</option>
+          <option value="GEO Build ($688)">GEO Build — we implement everything ($688)</option>
+          <option value="GEO Audit + GEO Build Bundle ($888)">GEO Audit + GEO Build — save $188 ($888)</option>
+          <option value="AI Management ($288/month)">AI Management — quarterly re-audit + review replies ($288/month)</option>
           <option value="Questions first">Ask a question first</option>
         </select>
-        <button type="submit" onclick="posthog.capture('paid_report_cta_clicked',{business:'carlton-dental'})" class="cta-submit">Request implementation</button>
+        <button type="submit" onclick="posthog.capture('paid_report_cta_clicked',{business:'carlton-dental'})" style="padding:14px 24px;border-radius:10px;background:#fff;color:#101010;font-weight:700;font-size:15px;border:none;cursor:pointer;font-family:inherit">Request implementation</button>
       </form>
       <p style="margin-top:14px;font-size:13px;opacity:0.5;text-align:center">We will be in touch within 24 hours.</p>
     </div>
@@ -517,9 +664,8 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
 </div>
 
 <footer>
-  <div class="footer-logo"><a href="https://aiscite.com" style="color:inherit;text-decoration:none">Aiscite</a></div>
+  <div class="footer-logo">Aiscite</div>
   <p>Full Audit — Prepared privately for Carlton Dental · March 2026</p>
-  <p><a href="mailto:hello@aiscite.com" style="color:inherit">hello@aiscite.com</a></p>
   <p>© 2026 Aiscite</p>
 </footer>
 
@@ -529,7 +675,11 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   const root = document.documentElement;
   const saved = localStorage.getItem('aiscite-theme');
   root.setAttribute('data-theme', saved || 'light');
-  function sync() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light mode' : 'Dark mode'; }
+  function sync() {
+    const dark = root.getAttribute('data-theme') === 'dark';
+    document.getElementById('themeIcon').textContent = dark ? '☀️' : '🌙';
+    document.getElementById('themeLabel').textContent = dark ? ' Light' : ' Dark';
+  }
   btn.addEventListener('click', function () {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
