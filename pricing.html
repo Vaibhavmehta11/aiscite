@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Aiscite AI Visibility Audits</title>
+<meta name="description" content="Clear pricing for AI visibility audits. GEO Audit $388 one-time, AI Signal Management $188/month, GEO Build $688 one-time. No hidden fees.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+  html[data-theme="light"] {
+    --bg: #ffffff;
+    --bg2: #f6f6f7;
+    --bg3: #f0f0f2;
+    --text: #111111;
+    --muted: #666870;
+    --border: #c2c5cc;
+    --soft: #fafafb;
+    --btnText: #ffffff;
+    --btnBg: #111111;
+    --ctaBg: #101010;
+    --ctaText: #ffffff;
+    --ctaMuted: #8d9098;
+    --invBg: #ffffff;
+    --invText: #101010;
+    --navBg: rgba(255,255,255,0.86);
+    --tagGoldBg: #fef3c7;
+    --tagGoldText: #92400e;
+    --insightBg: #eff6ff;
+    --insightBorder: #bfdbfe;
+    --insightText: #1e40af;
+  }
+  html[data-theme="dark"] {
+    --bg: #0d0d0f;
+    --bg2: #141416;
+    --bg3: #1b1b1f;
+    --text: #f4f4f5;
+    --muted: #a1a1aa;
+    --border: #27272a;
+    --soft: #141416;
+    --btnText: #101010;
+    --btnBg: #f4f4f5;
+    --ctaBg: #f4f4f5;
+    --ctaText: #101010;
+    --ctaMuted: #5f636b;
+    --invBg: #101010;
+    --invText: #ffffff;
+    --navBg: rgba(13,13,15,0.84);
+    --tagGoldBg: rgba(180,83,9,0.18);
+    --tagGoldText: #fcd34d;
+    --insightBg: rgba(96,165,250,0.08);
+    --insightBorder: rgba(96,165,250,0.2);
+    --insightText: #93c5fd;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.2s, color 0.2s;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 60px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px; background: var(--navBg); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { color: var(--text); text-decoration: none; font-weight: 800; font-size: 16px; letter-spacing: -0.4px; }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-link { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .nav-link:hover { color: var(--text); }
+  .theme-toggle {
+    border: 1px solid var(--border); background: var(--bg); color: var(--text);
+    height: 40px; padding: 0 10px; border-radius: 10px; font-size: 14px;
+    font-weight: 600; cursor: pointer; font-family: var(--font);
+  }
+  .nav-btn {
+    text-decoration: none; background: var(--btnBg); color: var(--btnText);
+    padding: 9px 16px; border-radius: 12px; font-weight: 700; font-size: 14px;
+    transition: opacity 0.15s, transform 0.15s; display: inline-block;
+  }
+  .nav-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+  /* HERO */
+  .hero {
+    max-width: 860px; margin: 0 auto; padding: 148px 28px 72px; text-align: center;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px;
+    border: 1px solid var(--border); border-radius: 999px; color: var(--muted);
+    font-size: 13px; font-weight: 600; margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 5.5vw, 64px); line-height: 1.0; letter-spacing: -3px;
+    font-weight: 800; margin-bottom: 20px;
+  }
+  .hero p {
+    max-width: 620px; margin: 0 auto; color: var(--muted); font-size: 18px; line-height: 1.72;
+  }
+  /* PRICING GRID */
+  .pricing-wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px 100px; }
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px;
+  }
+  .pricing-card {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 24px;
+    padding: 36px 32px; display: flex; flex-direction: column;
+  }
+  .pricing-card.highlight {
+    background: var(--btnBg); color: var(--btnText); border-color: var(--btnBg);
+  }
+  .pricing-card.highlight .pricing-muted { color: rgba(255,255,255,0.55); }
+  html[data-theme="dark"] .pricing-card.highlight .pricing-muted { color: rgba(0,0,0,0.45); }
+  .pricing-tag {
+    display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 11px;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;
+    background: var(--tagGoldBg); color: var(--tagGoldText); margin-bottom: 20px;
+    align-self: flex-start;
+  }
+  .pricing-card.highlight .pricing-tag {
+    background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9);
+  }
+  html[data-theme="dark"] .pricing-card.highlight .pricing-tag {
+    background: rgba(0,0,0,0.12); color: rgba(0,0,0,0.7);
+  }
+  .pricing-name { font-size: 18px; font-weight: 800; letter-spacing: -0.4px; margin-bottom: 6px; }
+  .pricing-muted { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+  .pricing-price-row { margin-bottom: 28px; }
+  .pricing-amount {
+    font-size: 58px; font-weight: 800; letter-spacing: -3px; line-height: 1;
+    display: inline;
+  }
+  .pricing-period { font-size: 16px; color: var(--muted); font-weight: 500; margin-left: 4px; }
+  .pricing-card.highlight .pricing-period { color: rgba(255,255,255,0.55); }
+  html[data-theme="dark"] .pricing-card.highlight .pricing-period { color: rgba(0,0,0,0.45); }
+  .pricing-includes { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .pricing-includes li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.55; }
+  .pricing-includes li::before { content: "✓"; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+  .pricing-excludes { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 8px; }
+  .pricing-excludes li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .pricing-excludes li::before { content: "✕"; flex-shrink: 0; margin-top: 1px; opacity: 0.6; }
+  .pricing-cta-btn {
+    display: block; text-align: center; background: var(--btnBg); color: var(--btnText);
+    padding: 14px 24px; border-radius: 14px; font-weight: 700; font-size: 15px;
+    text-decoration: none; transition: opacity 0.15s, transform 0.15s; margin-top: auto;
+  }
+  .pricing-card.highlight .pricing-cta-btn {
+    background: var(--invBg); color: var(--invText);
+  }
+  .pricing-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .pricing-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 10px; }
+  .pricing-card.highlight .pricing-note { color: rgba(255,255,255,0.45); }
+  html[data-theme="dark"] .pricing-card.highlight .pricing-note { color: rgba(0,0,0,0.4); }
+  /* DIVIDER */
+  .pricing-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 72px; }
+  /* FAQ */
+  .faq-wrap { max-width: 860px; margin: 0 auto; padding: 0 28px 100px; }
+  .section-sm { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .faq-wrap h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -1.6px; margin-bottom: 44px; }
+  .faq-list { border-top: 1px solid var(--border); }
+  .faq-item { padding: 26px 0; border-bottom: 1px solid var(--border); }
+  .faq-item h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.2px; }
+  .faq-item p { color: var(--muted); font-size: 15px; max-width: 720px; line-height: 1.7; }
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border); padding: 30px 28px;
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .footer-logo { font-size: 15px; font-weight: 800; }
+  footer p { font-size: 13px; color: var(--muted); }
+  /* RESPONSIVE */
+  @media (max-width: 860px) {
+    .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+  }
+  @media (max-width: 560px) {
+    .hero { padding-top: 116px; }
+    .hero h1 { letter-spacing: -2.2px; }
+    .nav-right .nav-link { display: none; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a>
+  <div class="nav-right">
+    <a href="https://aiscite.com" class="nav-link">Home</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">Dark mode</span></button>
+    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Pricing</div>
+  <h1>Clear pricing.<br>No subscriptions to figure out.</h1>
+  <p>Start with an audit, add implementation if you want the work done for you, or keep AI signals strong month-to-month. All three are independent — pick what fits.</p>
+</div>
+
+<div class="pricing-wrap">
+  <div class="pricing-grid">
+
+    <!-- Tier 1: GEO Audit -->
+    <div class="pricing-card">
+      <span class="pricing-name">GEO Audit</span>
+      <p class="pricing-muted">Know exactly where you stand and what to fix — delivered in 48 hours.</p>
+      <div class="pricing-price-row">
+        <span class="pricing-amount">$388</span><span class="pricing-period">one-time</span>
+      </div>
+      <ul class="pricing-includes">
+        <li>AI Visibility Score across five core dimensions</li>
+        <li>Issue breakdown — what is helping, what is weak, where the gaps are</li>
+        <li>Priority fix list — clear, actionable, no developer needed</li>
+        <li>Cross-platform review across leading AI assistants and answer engines</li>
+        <li>Delivered within 48 hours of kickoff</li>
+        <li>Sample report preview before you commit</li>
+      </ul>
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="pricing-cta-btn" target="_blank">Book free walkthrough</a>
+      <p class="pricing-note">10-min call to confirm scope, then we run the audit.</p>
+    </div>
+
+    <!-- Tier 2: AI Signal Management -->
+    <div class="pricing-card highlight">
+      <div class="pricing-tag">Most accessible</div>
+      <span class="pricing-name">AI Signal Management</span>
+      <p class="pricing-muted">We write AI-optimized Google review replies every month — the exact signals Gemini Maps reads to recommend your business.</p>
+      <div class="pricing-price-row">
+        <span class="pricing-amount">$188</span><span class="pricing-period">/month</span>
+      </div>
+      <ul class="pricing-includes">
+        <li>Unlimited AI-optimized Google review replies</li>
+        <li>Service and location keyword targeting in every reply</li>
+        <li>Gemini Maps signal optimization</li>
+        <li>Cancel anytime — no contract</li>
+      </ul>
+      <ul class="pricing-excludes">
+        <li>Website changes</li>
+        <li>SEO or content creation</li>
+        <li>Social media management</li>
+      </ul>
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="pricing-cta-btn" target="_blank">Book free walkthrough to discuss</a>
+      <p class="pricing-note">No minimum term. Cancel with 30 days notice.</p>
+    </div>
+
+    <!-- Tier 3: GEO Build -->
+    <div class="pricing-card">
+      <span class="pricing-name">GEO Build</span>
+      <p class="pricing-muted">Everything in the audit, plus we implement all the fixes for you over two weeks.</p>
+      <div class="pricing-price-row">
+        <span class="pricing-amount">$688</span><span class="pricing-period">one-time</span>
+      </div>
+      <ul class="pricing-includes">
+        <li>Everything in the GEO Audit</li>
+        <li>Schema markup implementation</li>
+        <li>Content optimization across key pages</li>
+        <li>Full GEO build — we do the work, not you</li>
+        <li>30-day re-scan to confirm improvements</li>
+        <li>Delivered within two weeks of kickoff</li>
+      </ul>
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="pricing-cta-btn" target="_blank">Book free walkthrough</a>
+      <p class="pricing-note">Audit + GEO Build together: $888 bundle.</p>
+    </div>
+
+  </div>
+</div>
+
+<hr class="pricing-divider" style="max-width:1040px;margin:0 auto 72px;border:none;border-top:1px solid var(--border)">
+
+<div class="faq-wrap" id="faq">
+  <p class="section-sm">FAQ</p>
+  <h2>Questions about pricing and what is included.</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <h3>Can I start with just the audit?</h3>
+      <p>Yes. The GEO Audit is fully standalone. You get the full score, issue breakdown, and priority fix list. Many clients run the audit first to confirm the opportunity is real before deciding on implementation.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is the monthly service a contract?</h3>
+      <p>No. AI Signal Management is month-to-month with no minimum term. Cancel with 30 days notice. You are not locked in.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What if I have multiple locations?</h3>
+      <p>Each location has its own AI visibility profile — a shared website does not mean shared AI signals. Each location is audited and billed separately. Contact us if you have more than two locations and we will scope it together.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is included in the free walkthrough?</h3>
+      <p>A 10-minute call where we confirm your business type, scope, and whether the audit makes sense for your situation. No pitch. If it is not a good fit, we will tell you.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How is this different from SEO?</h3>
+      <p>Traditional SEO focuses on search rankings. Aiscite focuses on how AI assistants understand, describe, and recommend your business when someone asks them a question. It is a different problem that needs a different approach.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do I need a developer to implement the fixes?</h3>
+      <p>For the audit, no — you get prioritized fixes in plain English. For the GEO Build, we handle all implementation. If you are doing it yourself, most fixes are copy and content changes, not code.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Aiscite</div>
+  <p>AI visibility audits for trust-driven businesses</p>
+  <p>© 2026 Aiscite</p>
+</footer>
+
+<script>
+(function () {
+  const root = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('aiscite-theme');
+  root.setAttribute('data-theme', saved || 'light');
+  function sync() {
+    document.getElementById('themeIcon').textContent = root.getAttribute('data-theme') === 'dark' ? 'Light mode' : 'Dark mode';
+  }
+  btn.addEventListener('click', function () {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('aiscite-theme', next);
+    sync();
+  });
+  sync();
+})();
+</script>
+</body>
+</html>
