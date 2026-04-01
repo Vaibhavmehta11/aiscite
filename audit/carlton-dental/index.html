@@ -385,6 +385,8 @@ html[data-theme="light"] .qual-pill:not(.selected) {
   .chart-card { padding: 20px; }
   .review-offer-block { grid-template-columns: 1fr !important; }
   .review-offer-block > div:last-child { text-align: left; }
+  .score-context { padding: 24px 20px; }
+  .stat-row { padding: 10px 0; }
 }
 
 @media (max-width: 640px) {
@@ -452,6 +454,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   <a href="/#faq">FAQ</a>
   <a href="/pricing.html">Pricing</a>
   <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" target="_blank">Book free walkthrough →</a>
+  <a href="#" id="mobileThemeToggle" onclick="return false;">Dark mode</a>
 </div>
 
 <div class="hero">
@@ -958,6 +961,22 @@ buildCharts();
   menu.querySelectorAll("a").forEach(function(a) {
     a.addEventListener("click", function() { menu.classList.remove("open"); });
   });
+  // Mobile theme toggle
+  var mobileTheme = document.getElementById("mobileThemeToggle");
+  if (mobileTheme) {
+    function syncMobileTheme() {
+      mobileTheme.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "Light mode" : "Dark mode";
+    }
+    syncMobileTheme();
+    mobileTheme.addEventListener("click", function(e) {
+      e.preventDefault();
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("aiscite-theme", next);
+      document.getElementById("themeIcon").textContent = next === "dark" ? "Light" : "Dark";
+      syncMobileTheme();
+    });
+  }
 })();
 </script>
 </body>
