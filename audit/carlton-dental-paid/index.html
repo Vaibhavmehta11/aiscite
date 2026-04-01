@@ -189,8 +189,12 @@ html[data-theme="dark"] .cta-input::placeholder { color: rgba(0,0,0,0.4); }
 }
 .cta-submit:hover { opacity: 0.85; }
 .cta-input option { background: var(--bg); color: var(--text); }
-/* CTA SELECT — native browser arrow */
-.cta-select { background-image: none; }
+/* CTA SELECT — restore native browser arrow */
+select.cta-input {
+  appearance: auto;
+  -webkit-appearance: auto;
+  padding-right: 16px;
+}
 footer { border-top: 1px solid var(--border); padding: 28px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .footer-logo { font-size: 15px; font-weight: 800; }
 footer p { font-size: 13px; color: var(--muted); }
@@ -217,8 +221,63 @@ footer p { font-size: 13px; color: var(--muted); }
   .roadmap-item { flex-wrap: wrap; }
   .roadmap-time { margin-left: 0; margin-top: 6px; }
 }
-select.cta-input { padding-right: 36px; }
 .review-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; }
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: var(--navBg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  z-index: 99;
+  flex-direction: column;
+  gap: 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--muted); }
+
+@media (max-width: 760px) {
+  .hamburger { display: flex; }
+  .nav-right .nav-link { display: none !important; }
+  .theme-toggle { display: none !important; }
+  .nav-btn { display: none !important; }
+}
+
+@media (max-width: 640px) {
+  .review-stat-grid > div:nth-child(2n) { border-right: none !important; }
+  .review-stat-grid > div:nth-child(3), .review-stat-grid > div:nth-child(4) { border-top: 1px solid var(--border); }
+}
 </style>
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -236,8 +295,21 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle"><span id="themeIcon">Dark</span></button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/">Home</a>
+  <a href="/pricing.html">Pricing</a>
+  <a href="#score">Full score</a>
+  <a href="#evidence">AI evidence</a>
+  <a href="#issues">Gaps and fixes</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#next-steps">What to do next</a>
+  <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" target="_blank">Book free walkthrough →</a>
+</div>
 
 <div class="hero">
   <div class="hero-eyebrow"><span></span> Full AI Visibility Audit · Confidential · March 2026</div>
@@ -745,6 +817,26 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
           form.innerHTML = '<p style="color:#6ee7b7;font-size:16px;font-weight:600;text-align:center;padding:20px 0">✓ Sent. We will be in touch within 24 hours.</p>';
         }
       });
+  });
+})();
+</script>
+<script>
+// Hamburger menu
+(function() {
+  var btn = document.getElementById("hamburgerBtn");
+  var menu = document.getElementById("mobileMenu");
+  if (!btn || !menu) return;
+  btn.addEventListener("click", function() {
+    menu.classList.toggle("open");
+  });
+  document.addEventListener("click", function(e) {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove("open");
+    }
+  });
+  // Close on nav link click
+  menu.querySelectorAll("a").forEach(function(a) {
+    a.addEventListener("click", function() { menu.classList.remove("open"); });
   });
 })();
 </script>
