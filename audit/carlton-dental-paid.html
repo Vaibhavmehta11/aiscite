@@ -44,6 +44,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 60px; di
 .nav-logo { color: var(--text); text-decoration: none; font-weight: 800; font-size: 16px; letter-spacing: -0.4px; }
 .paid-badge { background: #111; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; letter-spacing: 0.4px; margin-left: 10px; }
 .nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-link { cursor: pointer; }
+.nav-btn { cursor: pointer; }
 .theme-toggle { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 13px; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: var(--font); }
 .wrap { max-width: 900px; margin: 0 auto; padding: 0 28px; }
 .hero { padding: 120px 28px 60px; max-width: 900px; margin: 0 auto; }
@@ -189,6 +191,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
       <a href="#issues" class="toc-item"><span class="toc-num">04</span> Each gap with specific fixes</a>
       <a href="#copy" class="toc-item"><span class="toc-num">05</span> Ready-to-use copy examples</a>
       <a href="#roadmap" class="toc-item"><span class="toc-num">06</span> 2-week priority roadmap</a>
+      <a href="#next-steps" class="toc-item"><span class="toc-num">07</span> What to do next</a>
     </div>
   </div>
 </div>
@@ -495,6 +498,13 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
 <div class="wrap" id="review-replies">
   <div class="section-sm" style="margin-top:60px">Ongoing AI signals</div>
   <h2>Your review replies are a ranking signal — most businesses ignore this completely.</h2>
+
+  <div style="background:var(--insightBg);border:1px solid var(--insightBorder);border-radius:14px;padding:20px 24px;margin:20px 0">
+    <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--insightText);margin-bottom:10px">Why unanswered reviews cost you patients</div>
+    <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:12px">Google Maps AI reads your reply <strong>content</strong> — not just whether you replied. A reply that says "Thank you!" scores zero AI signal. A reply that says "Thank you for choosing Carlton Dental for your teeth cleaning in downtown Toronto — we look forward to seeing you again" gives Gemini Maps three strong signals: your practice name, your service, and your location.</p>
+    <p style="font-size:14px;color:var(--text);line-height:1.7;margin:0">Every unanswered review is a missed recommendation. When someone asks AI for a dentist in Toronto, Gemini Maps surfaces practices that have replied with service and location context — and skips the ones that have not.</p>
+  </div>
+
   <p style="color:var(--muted);font-size:15px;margin-bottom:24px;max-width:680px">Google Maps now uses Gemini AI to decide which businesses to surface in response to natural language queries. It reads your reviews AND your reply quality — businesses that reply with service and location context get surfaced more consistently.</p>
   <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px 32px;margin-bottom:20px">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap">
@@ -512,6 +522,37 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
         <div style="font-size:48px;font-weight:800;letter-spacing:-3px;line-height:1;color:var(--text)">$288</div>
         <div style="font-size:14px;color:var(--muted);margin-bottom:20px">/month</div>
         <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" style="display:inline-block;background:var(--btnBg);color:var(--btnText);padding:11px 22px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none" target="_blank">Ask about this plan</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="next-steps">
+  <div class="section-sm" style="margin-top:60px">What to do next</div>
+  <h2>Three ways to move forward — pick what fits.</h2>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:28px">
+    <div style="display:flex;align-items:flex-start;gap:20px;padding:20px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:16px">
+      <div style="background:rgba(22,163,74,0.12);color:#15803d;font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 12px;border-radius:20px;white-space:nowrap;margin-top:2px">TALK IT THROUGH</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px">Book a free walkthrough</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.6">10 minutes. We walk through your score, confirm the priority fixes, and answer any questions. No commitment.</div>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" style="display:inline-block;margin-top:12px;background:var(--btnBg);color:var(--btnText);padding:9px 18px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none" target="_blank">Book free walkthrough →</a>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:20px;padding:20px 24px;background:var(--scoreBg);border:1px solid var(--insightBorder);border-radius:16px">
+      <div style="background:var(--scoreText);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 12px;border-radius:20px;white-space:nowrap;margin-top:2px">RECOMMENDED</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px">Request GEO Build — $688</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.6">We implement every fix from this report. Schema, content structure, service pages, location signals — done for you, once. Delivered in 2 weeks.</div>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" style="display:inline-block;margin-top:12px;background:var(--btnBg);color:var(--btnText);padding:9px 18px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none" target="_blank">Request GEO Build →</a>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:20px;padding:20px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:16px">
+      <div style="background:var(--bg3);color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 12px;border-radius:20px;white-space:nowrap;margin-top:2px">ONGOING</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px">Add AI Management — $288/month</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.6">Quarterly re-audit to track your score + unlimited AI-optimized Google review replies written with your service and location keywords. Cancel anytime.</div>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" style="display:inline-block;margin-top:12px;background:var(--btnBg);color:var(--btnText);padding:9px 18px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none" target="_blank">Ask about this plan →</a>
       </div>
     </div>
   </div>
