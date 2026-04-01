@@ -167,7 +167,7 @@ nav {
 }
 .chart-card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 6px; }
 .chart-card p { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
-.chart-shell { border: 1px solid var(--border); border-radius: 14px; background: var(--bg); padding: 12px; }
+.chart-shell { border: 1px solid var(--border); border-radius: 14px; background: var(--bg2); padding: 12px; }
 .chart-frame { position: relative; height: 280px; }
 .chart-frame.tall { height: 310px; }
 .chart-frame canvas { width: 100% !important; height: 100% !important; display: block; }
@@ -265,6 +265,7 @@ footer p { font-size: 13px; color: var(--muted); }
 }
 .sticky-cta.visible { transform: translateY(0); }
 .sticky-cta-text { font-size: 14px; font-weight: 600; }
+.sticky-short { display: none; }
 .sticky-cta-btn {
   text-decoration: none; background: var(--ctaText); color: var(--ctaBg);
   padding: 10px 20px; border-radius: 10px; font-weight: 700; font-size: 13px; white-space: nowrap;
@@ -318,7 +319,6 @@ html[data-theme="light"] .qual-pill:not(.selected) {
   .offer-item { padding: 12px; }
   .cta-block { padding: 40px 20px; margin: 40px 0; }
   #qual-block { padding: 24px 20px; }
-  .theme-toggle { display: none; }
   .nav-right .nav-link { display: none; }
 }
 @media (max-width: 640px) {
@@ -379,7 +379,6 @@ html[data-theme="light"] .qual-pill:not(.selected) {
 @media (max-width: 760px) {
   .hamburger { display: flex; }
   .nav-right .nav-link { display: none !important; }
-  .theme-toggle { display: none !important; }
   .nav-btn { display: none !important; }
   .chart-frame { height: 220px; }
   .chart-card { padding: 20px; }
@@ -395,8 +394,12 @@ html[data-theme="light"] .qual-pill:not(.selected) {
 }
 
 @media (max-width: 560px) {
-  .chart-frame { height: 180px; }
+  .chart-frame { height: 220px; }
   .chart-grid { grid-template-columns: 1fr; }
+  .sticky-cta { padding: 12px 16px; gap: 10px; }
+  .sticky-cta-text { font-size: 13px; }
+  .sticky-full { display: none; }
+  .sticky-short { display: inline; }
 }
 </style>
 <script>
@@ -433,7 +436,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 </head>
 <body>
 <nav>
-  <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Carlton Dental</span>
+  <a href="/" class="nav-logo">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Carlton Dental</span>
   <div class="nav-right">
     <a href="/" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none">Home</a>
     <a href="/#how" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none">How it works</a>
@@ -454,7 +457,6 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   <a href="/#faq">FAQ</a>
   <a href="/pricing.html">Pricing</a>
   <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" target="_blank">Book free walkthrough →</a>
-  <a href="#" id="mobileThemeToggle" onclick="return false;">Dark mode</a>
 </div>
 
 <div class="hero">
@@ -930,7 +932,7 @@ buildCharts();
 </script>
 
 <div class="sticky-cta" id="stickyCta">
-  <span class="sticky-cta-text">AI visibility gaps found — Book free walkthrough</span>
+  <span class="sticky-cta-text"><span class="sticky-full">AI visibility gaps found — Book free walkthrough</span><span class="sticky-short">Gaps found in your AI visibility</span></span>
   <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="sticky-cta-btn" target="_blank">Book 10-min call →</a>
 </div>
 
@@ -961,22 +963,6 @@ buildCharts();
   menu.querySelectorAll("a").forEach(function(a) {
     a.addEventListener("click", function() { menu.classList.remove("open"); });
   });
-  // Mobile theme toggle
-  var mobileTheme = document.getElementById("mobileThemeToggle");
-  if (mobileTheme) {
-    function syncMobileTheme() {
-      mobileTheme.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "Light mode" : "Dark mode";
-    }
-    syncMobileTheme();
-    mobileTheme.addEventListener("click", function(e) {
-      e.preventDefault();
-      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
-      localStorage.setItem("aiscite-theme", next);
-      document.getElementById("themeIcon").textContent = next === "dark" ? "Light" : "Dark";
-      syncMobileTheme();
-    });
-  }
 })();
 </script>
 </body>
