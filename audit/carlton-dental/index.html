@@ -311,13 +311,25 @@ html[data-theme="light"] .qual-pill:not(.selected) {
   .score-hero, .chart-grid, .offer-grid, .process-steps, .next-steps-grid { grid-template-columns: 1fr; }
   .bar-row { grid-template-columns: 1fr; gap: 6px; }
   .bar-val { text-align: left; }
-  .hero { padding-top: 100px; }
-  .cta-block { padding: 48px 24px; margin: 48px 0; }
+  .hero { padding: 80px 20px 40px; }
+  .section { padding: 48px 0; }
+  .wrap { padding-left: 20px; padding-right: 20px; }
+  .offer-main { padding: 24px 20px; }
+  .offer-item { padding: 12px; }
+  .cta-block { padding: 40px 20px; margin: 40px 0; }
+  #qual-block { padding: 24px 20px; }
   .theme-toggle { display: none; }
   .nav-right .nav-link { display: none; }
 }
 @media (max-width: 640px) {
   .review-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 560px) {
+  .nav-right .nav-link { display: none; }
+  .hero h1 { font-size: clamp(28px, 8vw, 48px); letter-spacing: -1.6px; }
+  .score-number { font-size: 64px; }
+  .review-stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .next-steps-grid { grid-template-columns: 1fr; }
 }
 </style>
 <script>
