@@ -288,6 +288,7 @@ html[data-theme="light"] .qual-pill:not(.selected) {
 }
 .next-step-badge.included { background: rgba(22,163,74,0.12); color: #15803d; }
 .next-step-badge.optional { background: var(--bg3); color: var(--muted); }
+.next-step-badge.recommended { background: var(--scoreBg); color: var(--scoreText); }
 .next-step-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
 .next-step-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 /* RESPONSIVE */
@@ -340,6 +341,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Carlton Dental</span>
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle">Dark mode</button>
+    <a href="https://aiscite.com/pricing.html" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;margin-right:8px" target="_blank">Pricing</a>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
   </div>
 </nav>
@@ -550,13 +552,13 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
     <div class="offer-main" style="margin-top:20px;padding:28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center">
       <div>
         <div class="offer-tag">Not ready for full implementation? Start here.</div>
-        <h3 style="font-size:22px;margin-bottom:10px;line-height:1.15">Monthly AI signal management — $188/month</h3>
-        <p style="margin-bottom:12px">We write AI-optimized replies to every Google review — using your service and location keywords as the exact signals Gemini Maps reads to recommend your business. Unlimited replies. Cancel anytime.</p>
-        <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);font-size:12px;font-weight:700;color:var(--ctaText)">$188/month · Unlimited replies · Cancel anytime</div>
+        <h3 style="font-size:22px;margin-bottom:10px;line-height:1.15">AI Management — $288/month</h3>
+        <p style="margin-bottom:12px">Quarterly re-audit + unlimited AI-optimized review replies. Track your score improving over time.</p>
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);font-size:12px;font-weight:700;color:var(--ctaText)">$288/month · Quarterly re-audit + unlimited replies · Cancel anytime</div>
       </div>
       <div style="text-align:center;flex-shrink:0">
         <div style="margin-bottom:8px">
-          <span style="font-size:48px;font-weight:800;letter-spacing:-3px;line-height:1">$188</span><span style="font-size:15px;color:var(--ctaMuted);margin-left:6px">/month</span>
+          <span style="font-size:48px;font-weight:800;letter-spacing:-3px;line-height:1">$288</span><span style="font-size:15px;color:var(--ctaMuted);margin-left:6px">/month</span>
         </div>
         <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="display:inline-block;white-space:nowrap">Add Review Replies →</a>
       </div>
@@ -577,19 +579,19 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
     <p class="section-lead">The audit is step one. Here is the full picture of where you can go from here.</p>
     <div class="next-steps-grid">
       <div class="next-step-card done">
-        <div class="next-step-badge included">✓ Included</div>
+        <div class="next-step-badge included">✓ Done</div>
         <h3>GEO Audit</h3>
-        <p>Your AI Visibility Score, issue breakdown, and priority fixes — this report. Delivered within 48 hours.</p>
+        <p>Your AI visibility score, issue breakdown, and priority fixes. This is your report.</p>
+      </div>
+      <div class="next-step-card">
+        <div class="next-step-badge recommended">Recommended</div>
+        <h3>GEO Build — $688</h3>
+        <p>We implement every fix from your audit. Schema, content, structure — done for you, once.</p>
       </div>
       <div class="next-step-card">
         <div class="next-step-badge optional">Optional</div>
-        <h3>Monthly Review Reply — $188/month</h3>
-        <p>AI-optimized Google review replies using your service and location keywords — the exact signals Gemini Maps reads for recommendations. Unlimited replies. Cancel anytime.</p>
-      </div>
-      <div class="next-step-card">
-        <div class="next-step-badge optional">Optional</div>
-        <h3>Full Implementation — $688</h3>
-        <p>One-time. We fix everything identified in the audit for you over two weeks. No technical work on your end.</p>
+        <h3>AI Management — $288/month</h3>
+        <p>Quarterly re-audit to track progress + unlimited AI-optimized review replies. Cancel anytime.</p>
       </div>
     </div>
   </div>
@@ -721,7 +723,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
     <p>The foundation is strong. Two targeted fixes and Carlton Dental becomes the obvious AI recommendation in Toronto.</p>
     <div style="max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
       <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="text-align:center">Book free walkthrough →</a>
-      <a href="https://aiscite.com/pricing/" style="color:rgba(255,255,255,0.75);font-size:13px;text-align:center;text-decoration:none;font-weight:600">See full pricing → aiscite.com/pricing</a>
+      <a href="https://aiscite.com/pricing.html" style="color:rgba(255,255,255,0.75);font-size:13px;text-align:center;text-decoration:none;font-weight:600">See full pricing → aiscite.com/pricing</a>
       <a href="mailto:hello@aiscite.com?subject=Carlton Dental — GEO Audit Follow-up" class="btn-ghost-cta">Or reply by email</a>
     </div>
     <div class="cta-note">No obligation. 10 minutes. We confirm whether the opportunity is real.</div>
