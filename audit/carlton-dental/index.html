@@ -355,8 +355,8 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 <nav>
   <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Carlton Dental</span>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle"><span id="themeIcon">🌙</span><span id="themeLabel"> Dark</span></button>
-    <a href="https://aiscite.com/pricing.html" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;margin-right:8px" target="_blank">Pricing</a>
+    <a href="/pricing.html" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none">Pricing</a>
+    <button class="theme-toggle" id="themeToggle"><span id="themeIcon">Dark</span></button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
   </div>
 </nav>
@@ -766,8 +766,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   root.setAttribute('data-theme', saved || 'light');
   function sync() {
     const dark = root.getAttribute('data-theme') === 'dark';
-    document.getElementById('themeIcon').textContent = dark ? '☀️' : '🌙';
-    document.getElementById('themeLabel').textContent = dark ? ' Light' : ' Dark';
+    document.getElementById('themeIcon').textContent = dark ? 'Light' : 'Dark';
   }
   btn.addEventListener('click', function () {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
