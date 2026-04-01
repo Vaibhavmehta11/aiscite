@@ -172,9 +172,37 @@
   }
   .footer-logo { font-size: 15px; font-weight: 800; }
   footer p { font-size: 13px; color: var(--muted); }
+  /* BUNDLE CALLOUT */
+  .bundle-callout {
+    display: flex; align-items: center; justify-content: space-between; gap: 32px;
+    background: var(--bg2); border: 1.5px solid var(--border); border-radius: 20px;
+    padding: 32px 36px; margin: 0 0 28px;
+  }
+  .bundle-label {
+    font-size: 11px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--scoreText, #2563eb); background: var(--scoreBg, #eff6ff); padding: 3px 10px;
+    border-radius: 20px; display: inline-block; margin-bottom: 10px;
+  }
+  html[data-theme="dark"] .bundle-label { color: #93c5fd; background: rgba(96,165,250,0.12); }
+  .bundle-callout h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.4px; margin-bottom: 6px; }
+  .bundle-callout p { font-size: 14px; color: var(--muted); max-width: 480px; line-height: 1.6; }
+  .bundle-right { text-align: right; flex-shrink: 0; }
+  .bundle-crossed { font-size: 14px; color: var(--muted); text-decoration: line-through; margin-bottom: 4px; }
+  .bundle-price { font-size: 36px; font-weight: 800; letter-spacing: -1.5px; line-height: 1; margin-bottom: 16px; }
+  .bundle-price span { font-size: 14px; font-weight: 600; color: #15803d; background: rgba(22,163,74,0.12); padding: 2px 8px; border-radius: 20px; margin-left: 6px; vertical-align: middle; }
+  .bundle-cta {
+    display: inline-block; background: var(--btnBg); color: var(--btnText);
+    padding: 11px 22px; border-radius: 12px; font-weight: 700; font-size: 14px;
+    text-decoration: none; transition: opacity 0.15s;
+  }
+  .bundle-cta:hover { opacity: 0.88; }
   /* RESPONSIVE */
   @media (max-width: 860px) {
     .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+  }
+  @media (max-width: 640px) {
+    .bundle-callout { flex-direction: column; align-items: flex-start; }
+    .bundle-right { text-align: left; }
   }
   @media (max-width: 560px) {
     .hero { padding-top: 116px; }
@@ -188,7 +216,7 @@
   <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a>
   <div class="nav-right">
     <a href="#" id="backToReport" class="nav-link" style="display:none;font-size:14px;font-weight:600;color:var(--muted);text-decoration:none" onclick="history.back();return false;">← Back</a>
-    <a href="https://aiscite.com" class="nav-link">Home</a>
+    <a href="https://aiscite.com" class="nav-link" id="homeLink">Home</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">Dark mode</span></button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
   </div>
@@ -262,9 +290,22 @@
         <li>Delivered within two weeks of kickoff</li>
       </ul>
       <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="pricing-cta-btn" target="_blank">Book free walkthrough</a>
-      <p class="pricing-note">Audit + GEO Build together: $888 — save $88.</p>
+      <p class="pricing-note">10-min call to confirm scope, then we build everything.</p>
     </div>
 
+  </div>
+
+  <div class="bundle-callout">
+    <div class="bundle-left">
+      <span class="bundle-label">MOST COMPLETE</span>
+      <h3>GEO Audit + GEO Build</h3>
+      <p>Start with the audit to see exactly what needs fixing — then have us implement everything. The full path from diagnosis to done.</p>
+    </div>
+    <div class="bundle-right">
+      <div class="bundle-crossed">$1,076</div>
+      <div class="bundle-price">$888 <span>save $188</span></div>
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="bundle-cta" target="_blank">Book free walkthrough</a>
+    </div>
   </div>
 </div>
 
@@ -308,8 +349,21 @@
 </footer>
 
 <script>
-if (document.referrer && document.referrer.includes("/audit/")) {
-  document.getElementById("backToReport").style.display = "inline";
+var ref = document.referrer;
+var backLink = document.getElementById("backToReport");
+if (ref && ref.includes("/audit/")) {
+  sessionStorage.setItem("reportReferrer", ref);
+}
+var stored = sessionStorage.getItem("reportReferrer");
+if (stored) {
+  backLink.style.display = "inline";
+  backLink.onclick = function(e) { e.preventDefault(); window.location.href = stored; };
+  backLink.removeAttribute("href");
+}
+var homeLink = document.getElementById("homeLink");
+if (stored) {
+  homeLink.style.display = "none";
+  backLink.style.display = "inline";
 }
 (function () {
   const root = document.documentElement;
