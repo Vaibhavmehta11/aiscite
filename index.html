@@ -19,7 +19,7 @@
     --bg3: #f0f0f2;
     --text: #111111;
     --muted: #666870;
-    --border: #c2c5cc;
+    --border: #e7e7ea;
     --soft: #fafafb;
     --btnText: #ffffff;
     --btnBg: #111111;
@@ -104,12 +104,6 @@
     text-decoration: none; color: var(--text); border: 1px solid var(--border); background: transparent; padding: 14px 24px; border-radius: 12px; font-size: 15px; font-weight: 600; display: inline-block;
   }
   .btn-ghost:hover { background: var(--bg2); }
-  html[data-theme="dark"] .btn-ghost {
-    color: var(--text);
-    border-color: rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.04);
-  }
-  html[data-theme="dark"] .btn-ghost:hover { background: rgba(255,255,255,0.08); }
   .hero {
     max-width: 860px; margin: 0 auto; padding: 162px 28px 118px; text-align: center;
   }
@@ -190,6 +184,24 @@
   footer p { font-size: 13px; color: var(--muted); }
 
 
+  /* PRICING SECTION */
+  .pricing-card {
+    background: var(--bg2); border: 2px solid var(--border); border-radius: 24px;
+    padding: 44px; max-width: 540px; margin: 0 auto;
+  }
+  .pricing-price { font-size: 72px; font-weight: 800; letter-spacing: -4px; line-height: 1; display: inline; }
+  .pricing-period { font-size: 17px; color: var(--muted); font-weight: 500; margin-left: 6px; }
+  .pricing-includes { list-style: none; margin: 28px 0 32px; display: flex; flex-direction: column; gap: 11px; }
+  .pricing-includes li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; }
+  .pricing-includes li::before { content: "✓"; font-weight: 800; flex-shrink: 0; }
+  .pricing-cta-btn {
+    display: block; text-align: center; background: var(--btnBg); color: var(--btnText);
+    padding: 15px 28px; border-radius: 14px; font-weight: 700; font-size: 15px;
+    text-decoration: none; transition: opacity 0.15s, transform 0.15s;
+  }
+  .pricing-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .pricing-footnote { margin-top: 16px; font-size: 13px; color: var(--muted); text-align: center; }
+
   @media (max-width: 720px) {
     .industries, .proof-grid { grid-template-columns: 1fr 1fr; }
     .bar-row { grid-template-columns: 1fr; gap: 8px; }
@@ -204,21 +216,6 @@
     .score-card { padding: 28px; }
     .cta-block { margin: 0 16px 60px; padding: 58px 22px; }
   }
-
-  .btn-send-message {
-    padding: 14px 24px;
-    border-radius: 10px;
-    background: var(--ctaText);
-    color: var(--ctaBg);
-    font-weight: 700;
-    font-size: 15px;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    width: 100%;
-    transition: opacity 0.15s;
-  }
-  .btn-send-message:hover { opacity: 0.88; }
 </style>
 </head>
 <body>
@@ -228,7 +225,6 @@
     <a href="#how" class="nav-link">How it works</a>
     <a href="#proof" class="nav-link">What you get</a>
     <a href="#faq" class="nav-link">FAQ</a>
-    <a href="/pricing/" class="nav-link">Pricing</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">Dark mode</span></button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Free walkthrough</a>
   </div>
@@ -239,10 +235,9 @@
   <p>Aiscite helps you understand how leading AI assistants see your business and what needs to change if you want to be found, trusted, and cited in AI search.</p>
   <div class="hero-actions">
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-dark" target="_blank">Book your free walkthrough</a>
-    <a href="#proof" class="btn-ghost">See what you get</a>
+    <a href="https://aiscite.com/audit/carlton-dental" class="btn-ghost" target="_blank">View a sample report</a>
   </div>
   <div class="hero-micro">Free 10-minute walkthrough. Audit delivery within 48 hours.</div>
-  <a href="/pricing/" style="font-size:14px;color:var(--muted);text-decoration:underline;text-align:center;display:block;margin-top:8px">See pricing &#8594;</a>
 </div>
 <div class="platforms">
   <p>We audit your visibility across major AI assistants</p>
@@ -303,6 +298,27 @@
     <div class="proof-card"><h3>Issue breakdown</h3><p>A clear view of what is helping, what is weak, and where your biggest visibility gaps sit.</p></div>
     <div class="proof-card"><h3>Priority fixes</h3><p>A clear action list covering what to change, what to improve, and what to add so AI can understand and recommend your business.</p></div>
     <div class="proof-card"><h3>Cross-platform review</h3><p>Visibility analysis across leading AI assistants, answer engines, and generative search platforms.</p></div>
+    <div class="proof-card" style="grid-column: 1 / -1"><h3>Monthly AI signal management</h3><p>After your audit, we write AI-optimized Google review replies — written with service and location context that Gemini Maps uses for recommendations. Available as an add-on from $188/month.</p></div>
+  </div>
+</div>
+<div class="section" id="pricing" style="padding-top:0;border-top:1px solid var(--border)">
+  <p class="section-sm" style="margin-top:104px">Pricing</p>
+  <h2>One clear offer.</h2>
+  <p class="lead">No tiers. No subscriptions to figure out. One audit, one price, delivered in 48 hours.</p>
+  <div class="pricing-card">
+    <div style="margin-bottom:6px">
+      <span class="pricing-price">$288</span><span class="pricing-period">one-time</span>
+    </div>
+    <p style="color:var(--muted);font-size:15px;margin-top:8px">GEO Audit — delivered within 48 hours of kickoff.</p>
+    <ul class="pricing-includes">
+      <li>AI Visibility Score across five core dimensions</li>
+      <li>Issue breakdown — what is helping, what is weak, where the gaps are</li>
+      <li>Priority fix list — clear, actionable, no developer needed</li>
+      <li>Cross-platform review across leading AI assistants and answer engines</li>
+      <li>Delivered within 48 hours</li>
+    </ul>
+    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="pricing-cta-btn" target="_blank">Book your free walkthrough to get started</a>
+    <p class="pricing-footnote">Ongoing AI signal management available after audit delivery — from $188/month.</p>
   </div>
 </div>
 <div class="section" id="faq" style="padding-top:0;border-top:1px solid var(--border)">
@@ -329,15 +345,15 @@
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://aiscite.com/?thanks=1">
       <input type="text" name="name" placeholder="Your name" required
-        style="padding:13px 16px; border-radius:10px; border:1.5px solid color-mix(in srgb, var(--ctaText) 30%, transparent); background:color-mix(in srgb, var(--ctaText) 8%, transparent); color:var(--ctaText); font-size:15px; outline:none; font-family:inherit;">
+        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:inherit; font-size:15px; outline:none; font-family:inherit;">
       <input type="text" name="business" placeholder="Business name" required
-        style="padding:13px 16px; border-radius:10px; border:1.5px solid color-mix(in srgb, var(--ctaText) 30%, transparent); background:color-mix(in srgb, var(--ctaText) 8%, transparent); color:var(--ctaText); font-size:15px; outline:none; font-family:inherit;">
+        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:inherit; font-size:15px; outline:none; font-family:inherit;">
       <input type="url" name="website" placeholder="Website URL" required
-        style="padding:13px 16px; border-radius:10px; border:1.5px solid color-mix(in srgb, var(--ctaText) 30%, transparent); background:color-mix(in srgb, var(--ctaText) 8%, transparent); color:var(--ctaText); font-size:15px; outline:none; font-family:inherit;">
+        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:inherit; font-size:15px; outline:none; font-family:inherit;">
       <input type="email" name="email" placeholder="Your email" required
-        style="padding:13px 16px; border-radius:10px; border:1.5px solid color-mix(in srgb, var(--ctaText) 30%, transparent); background:color-mix(in srgb, var(--ctaText) 8%, transparent); color:var(--ctaText); font-size:15px; outline:none; font-family:inherit;">
+        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:inherit; font-size:15px; outline:none; font-family:inherit;">
       <button type="submit"
-        class="btn-send-message">Send message</button>
+        style="padding:14px 24px; border-radius:10px; background:#ffffff; color:#101010; font-weight:700; font-size:15px; border:none; cursor:pointer; font-family:inherit;">Send message</button>
       <p id="formSuccess" style="display:none; color:#6ee7b7; font-size:14px; text-align:center; margin:4px 0 0;">Message sent. We will be in touch within 24 hours.</p>
     </form>
     <script>
