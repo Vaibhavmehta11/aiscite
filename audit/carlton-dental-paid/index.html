@@ -191,9 +191,10 @@ html[data-theme="dark"] .cta-input::placeholder { color: rgba(0,0,0,0.4); }
 .cta-input option { background: var(--bg); color: var(--text); }
 /* CTA SELECT — restore native browser arrow */
 select.cta-input {
-  appearance: auto;
-  -webkit-appearance: auto;
+  appearance: none;
+  -webkit-appearance: none;
   padding-right: 16px;
+  background-image: none;
 }
 footer { border-top: 1px solid var(--border); padding: 28px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .footer-logo { font-size: 15px; font-weight: 800; }
@@ -309,6 +310,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   <a href="#roadmap">Roadmap</a>
   <a href="#next-steps">What to do next</a>
   <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" target="_blank">Book free walkthrough →</a>
+  <a href="#" id="mobileThemeToggle" onclick="return false;">Dark mode</a>
 </div>
 
 <div class="hero">
@@ -838,6 +840,22 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   menu.querySelectorAll("a").forEach(function(a) {
     a.addEventListener("click", function() { menu.classList.remove("open"); });
   });
+  // Mobile theme toggle
+  var mobileTheme = document.getElementById("mobileThemeToggle");
+  if (mobileTheme) {
+    function syncMobileTheme() {
+      mobileTheme.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "Light mode" : "Dark mode";
+    }
+    syncMobileTheme();
+    mobileTheme.addEventListener("click", function(e) {
+      e.preventDefault();
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("aiscite-theme", next);
+      document.getElementById("themeIcon").textContent = next === "dark" ? "Light" : "Dark";
+      syncMobileTheme();
+    });
+  }
 })();
 </script>
 </body>
