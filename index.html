@@ -76,23 +76,13 @@
   .nav-link { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
   .nav-link:hover { color: var(--text); }
   .theme-toggle {
-    border: 1px solid var(--border);
-    background: var(--bg);
-    color: var(--text);
-    height: 40px;
-    width: auto;
-    display:flex; align-items:center; justify-content:center;
-    padding: 0;
-    font-size: 13px;
-    margin-left: -4px;
-    width: auto;
-    padding: 0 10px;
-    filter: none;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
+    display: inline-flex; align-items: center;
+    border: 1.5px solid var(--border); background: var(--bg); color: var(--text);
+    height: 34px; padding: 0 14px; border-radius: 999px;
+    font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--font);
+    transition: border-color 0.15s, background 0.15s;
   }
+  .theme-toggle:hover { background: var(--bg2); }
   .nav-btn, .btn-dark, .btn-white {
     text-decoration: none; border-radius: 12px; font-weight: 700; transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s; display: inline-block;
   }
@@ -257,7 +247,7 @@
     <a href="#proof" class="nav-link">What you get</a>
     <a href="#faq" class="nav-link">FAQ</a>
     <a href="/pricing.html" class="nav-link" style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:none">Pricing</a>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">Dark mode</span></button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">Dark</span></button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
   </div>
 </nav>
@@ -267,7 +257,7 @@
   <p>Aiscite helps you understand how leading AI assistants see your business and what needs to change if you want to be found, trusted, and cited in AI search.</p>
   <div class="hero-actions">
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-dark" target="_blank">Book free walkthrough</a>
-    <a href="https://aiscite.com/audit/carlton-dental" class="btn-ghost" target="_blank">View a sample report</a>
+    <a href="/audit/carlton-dental/" class="btn-ghost">View a sample report</a>
   </div>
   <div class="hero-micro">Free 10-minute walkthrough. Audit delivery within 48 hours.</div>
 </div>
@@ -393,6 +383,8 @@
     </script>
   </div>
 </div>
+
+<div id="thanks-toast">✓ Message sent — we will be in touch within 24 hours.</div>
 <footer><div class="footer-logo">Aiscite</div><p>AI visibility audits for trust-driven businesses</p><p>© 2026 Aiscite</p></footer>
 <script>
 (function () {
@@ -402,7 +394,7 @@
   root.setAttribute('data-theme', saved || 'light');
   function sync() {
     const dark = root.getAttribute('data-theme') === 'dark';
-    document.getElementById('themeIcon').textContent = dark ? 'Light mode' : 'Dark mode';
+    document.getElementById('themeIcon').textContent = dark ? 'Light' : 'Dark';
 
   }
   function toggleTheme() {
@@ -415,5 +407,13 @@
   sync();
 })();
 </script>
+// Thanks toast
+(function() {
+  if (new URLSearchParams(window.location.search).get('thanks') === '1') {
+    var t = document.getElementById('thanks-toast');
+    if (t) { t.style.display = 'block'; setTimeout(function(){ t.style.opacity='0'; t.style.transition='opacity 0.5s'; setTimeout(function(){ t.style.display='none'; }, 500); }, 5000); }
+    history.replaceState(null,'','/');
+  }
+})();
 </body>
 </html>
