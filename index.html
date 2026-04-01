@@ -223,19 +223,21 @@
   .pricing-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
   .pricing-footnote { margin-top: 16px; font-size: 13px; color: var(--muted); text-align: center; }
 
-  @media (max-width: 720px) {
-    .industries, .proof-grid { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 760px) {
+    .industries, .proof-grid { grid-template-columns: 1fr; }
     .bar-row { grid-template-columns: 1fr; gap: 8px; }
     .bar-val { text-align: left; }
+    .section { padding: 60px 20px; }
+    .score-card { padding: 24px 20px; }
+    .cta-block { margin: 0 16px 60px; padding: 48px 20px; }
   }
   @media (max-width: 560px) {
     .nav-right .nav-link { display: none; }
-    .hero { padding-top: 132px; }
-    .hero h1 { letter-spacing: -2.4px; }
-    .hero p, .lead { font-size: 17px; }
+    .hero { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
+    .hero h1 { letter-spacing: -2px; font-size: clamp(32px, 8vw, 48px); }
+    .hero p, .lead { font-size: 16px; }
     .industries, .proof-grid { grid-template-columns: 1fr; }
-    .score-card { padding: 28px; }
-    .cta-block { margin: 0 16px 60px; padding: 58px 22px; }
+    .cta-block { margin: 0 12px 48px; padding: 40px 16px; }
   }
 </style>
 </head>
