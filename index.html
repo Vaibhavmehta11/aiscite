@@ -179,6 +179,8 @@
   .cta-block p { color: var(--ctaMuted); max-width: 480px; margin: 0 auto 30px; font-size: 17px; line-height: 1.7; }
   .btn-white { background: var(--invBg); color: var(--invText); padding: 14px 28px; font-size: 15px; }
   .cta-note { margin-top: 14px; font-size: 13px; color: var(--ctaMuted); }
+  .cta-input { color: #ffffff !important; }
+  .cta-input::placeholder { color: rgba(255,255,255,0.5) !important; }
   footer { border-top: 1px solid var(--border); padding: 30px 28px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   .footer-logo { font-size: 15px; font-weight: 800; }
   footer p { font-size: 13px; color: var(--muted); }
@@ -226,7 +228,7 @@
     <a href="#proof" class="nav-link">What you get</a>
     <a href="#faq" class="nav-link">FAQ</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">Dark mode</span></button>
-    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Free walkthrough</a>
+    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
   </div>
 </nav>
 <div class="hero">
@@ -234,7 +236,7 @@
   <h1>If AI cannot find you, clients will not find you.</h1>
   <p>Aiscite helps you understand how leading AI assistants see your business and what needs to change if you want to be found, trusted, and cited in AI search.</p>
   <div class="hero-actions">
-    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-dark" target="_blank">Book your free walkthrough</a>
+    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-dark" target="_blank">Book free walkthrough</a>
     <a href="https://aiscite.com/audit/carlton-dental" class="btn-ghost" target="_blank">View a sample report</a>
   </div>
   <div class="hero-micro">Free 10-minute walkthrough. Audit delivery within 48 hours.</div>
@@ -317,7 +319,7 @@
       <li>Cross-platform review across leading AI assistants and answer engines</li>
       <li>Delivered within 48 hours</li>
     </ul>
-    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="pricing-cta-btn" target="_blank">Book your free walkthrough to get started</a>
+    <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="pricing-cta-btn" target="_blank">Book free walkthrough</a>
     <p class="pricing-footnote">Ongoing AI signal management available after audit delivery — from $188/month.</p>
   </div>
 </div>
@@ -336,7 +338,7 @@
 <div class="cta-block">
   <h2>See how AI sees your business.</h2>
   <p>Free walkthrough. No setup. No technical work. Just a clear view of how AI understands, trusts, and cites you today.</p>
-  <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank">Book your free walkthrough</a>
+  <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank">Book free walkthrough</a>
   <div class="cta-note">Free 10-minute walkthrough. Audit delivery within 48 hours.</div>
   <div style="margin-top:40px; border-top:1px solid rgba(255,255,255,0.15); padding-top:32px;">
     <p style="font-size:15px; margin-bottom:20px; color:inherit; opacity:0.8;">Prefer to reach out directly? Send us a note.</p>
@@ -344,14 +346,14 @@
       <input type="hidden" name="_subject" value="Aiscite inquiry">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://aiscite.com/?thanks=1">
-      <input type="text" name="name" placeholder="Your name" required
-        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:inherit; font-size:15px; outline:none; font-family:inherit;">
-      <input type="text" name="business" placeholder="Business name" required
-        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:inherit; font-size:15px; outline:none; font-family:inherit;">
-      <input type="url" name="website" placeholder="Website URL" required
-        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:inherit; font-size:15px; outline:none; font-family:inherit;">
-      <input type="email" name="email" placeholder="Your email" required
-        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:inherit; font-size:15px; outline:none; font-family:inherit;">
+      <input type="text" name="name" placeholder="Your name" required class="cta-input"
+        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); font-size:15px; outline:none; font-family:inherit;">
+      <input type="text" name="business" placeholder="Business name" required class="cta-input"
+        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); font-size:15px; outline:none; font-family:inherit;">
+      <input type="url" name="website" placeholder="Website URL" required class="cta-input"
+        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); font-size:15px; outline:none; font-family:inherit;">
+      <input type="email" name="email" placeholder="Your email" required class="cta-input"
+        style="padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); font-size:15px; outline:none; font-family:inherit;">
       <button type="submit"
         style="padding:14px 24px; border-radius:10px; background:#ffffff; color:#101010; font-weight:700; font-size:15px; border:none; cursor:pointer; font-family:inherit;">Send message</button>
       <p id="formSuccess" style="display:none; color:#6ee7b7; font-size:14px; text-align:center; margin:4px 0 0;">Message sent. We will be in touch within 24 hours.</p>
