@@ -198,10 +198,26 @@ footer p { font-size: 13px; color: var(--muted); }
 @media (max-width: 760px) {
   .score-grid, .competitor-grid, .toc-grid { grid-template-columns: 1fr; }
   .bar-row { grid-template-columns: 1fr; gap: 4px; }
-  .hero { padding-top: 90px; }
-  .cta-block { padding: 48px 24px; }
+  .hero { padding: 80px 20px 40px; }
+  .wrap { padding-left: 20px; padding-right: 20px; }
+  .paid-header { flex-direction: column; gap: 10px; }
+  .cta-block { padding: 40px 20px; margin: 40px 0; }
+  section { padding: 40px 0; }
+  .issue-card { padding: 20px; }
   .review-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .scoring-row { grid-template-columns: 1fr !important; }
+  .scoring-row > div:nth-child(2) { text-align: left; font-size: 18px; }
+  .ai-mgmt-offer { flex-direction: column !important; }
+  .ai-mgmt-offer > div:last-child { text-align: left !important; }
 }
+@media (max-width: 560px) {
+  .nav-right .nav-link { display: none; }
+  .nav-left .nav-practice { display: none; }
+  .hero h1 { font-size: clamp(24px, 7vw, 36px); letter-spacing: -1px; }
+  .roadmap-item { flex-wrap: wrap; }
+  .roadmap-time { margin-left: 0; margin-top: 6px; }
+}
+select.cta-input { padding-right: 36px; }
 .review-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; }
 </style>
 <script>
@@ -292,27 +308,27 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   <h2>Five dimensions. Weighted by what AI systems actually use to decide who to recommend.</h2>
   <p style="color:var(--muted);font-size:15px;margin-bottom:28px;max-width:680px">Your overall score is not an average — each dimension is weighted by how much it influences AI recommendation decisions today.</p>
   <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden">
-    <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border);background:var(--bg2)">
+    <div class="scoring-row" style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border);background:var(--bg2)">
       <div><div style="font-size:15px;font-weight:700;margin-bottom:3px">AI Readability</div><div style="font-size:13px;color:var(--muted)">Can AI cleanly extract your key facts — name, location, services, specialties?</div></div>
       <div style="font-size:22px;font-weight:800;color:var(--scoreText);text-align:center;align-self:center">25%</div>
       <div style="font-size:13px;color:var(--muted);align-self:center">Thin or unstructured content means AI fills gaps with guesses — often wrong.</div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border)">
+    <div class="scoring-row" style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border)">
       <div><div style="font-size:15px;font-weight:700;margin-bottom:3px">Citation Signals</div><div style="font-size:13px;color:var(--muted)">Do authoritative sources reference your business? Reviews, directories, press, associations.</div></div>
       <div style="font-size:22px;font-weight:800;color:var(--scoreText);text-align:center;align-self:center">25%</div>
       <div style="font-size:13px;color:var(--muted);align-self:center">AI treats third-party references as trust signals — the more consistent and authoritative, the better.</div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border);background:var(--bg2)">
+    <div class="scoring-row" style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border);background:var(--bg2)">
       <div><div style="font-size:15px;font-weight:700;margin-bottom:3px">Trust and Authority</div><div style="font-size:13px;color:var(--muted)">Does your digital presence signal credibility? Ratings, verified profiles, consistent identity.</div></div>
       <div style="font-size:22px;font-weight:800;color:var(--scoreText);text-align:center;align-self:center">20%</div>
       <div style="font-size:13px;color:var(--muted);align-self:center">AI systems are trained to favour businesses with consistent, verifiable identity across platforms.</div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border)">
+    <div class="scoring-row" style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;border-bottom:1px solid var(--border)">
       <div><div style="font-size:15px;font-weight:700;margin-bottom:3px">Content Depth</div><div style="font-size:13px;color:var(--muted)">Do you answer the questions patients actually ask AI? FAQs, service pages, condition coverage.</div></div>
       <div style="font-size:22px;font-weight:800;color:var(--scoreText);text-align:center;align-self:center">20%</div>
       <div style="font-size:13px;color:var(--muted);align-self:center">The more your content matches what AI is asked about, the more often it gets retrieved and cited.</div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;background:var(--bg2)">
+    <div class="scoring-row" style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;padding:18px 24px;background:var(--bg2)">
       <div><div style="font-size:15px;font-weight:700;margin-bottom:3px">Local and Review Signals</div><div style="font-size:13px;color:var(--muted)">Google Business Profile completeness, review volume, reply rate, location signals.</div></div>
       <div style="font-size:22px;font-weight:800;color:var(--scoreText);text-align:center;align-self:center">10%</div>
       <div style="font-size:13px;color:var(--muted);align-self:center">Gemini Maps and local AI features weight this heavily for local discovery queries.</div>
@@ -612,7 +628,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
 
   <p style="color:var(--muted);font-size:15px;margin-bottom:24px;max-width:680px">Google Maps now uses Gemini AI to decide which businesses to surface in response to natural language queries. It reads your reviews AND your reply quality — businesses that reply with service and location context get surfaced more consistently.</p>
   <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px 32px;margin-bottom:20px">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap">
+    <div class="ai-mgmt-offer" style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap">
       <div style="flex:1;min-width:240px">
         <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">What we do</div>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
