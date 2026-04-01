@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — Aiscite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html[data-theme="light"] { --bg: #ffffff; --text: #111111; --muted: #666870; --border: #c2c5cc; --btnBg: #111111; --btnText: #ffffff; --bg2: #f6f6f7; }
+html[data-theme="dark"] { --bg: #0d0d0f; --text: #f4f4f5; --muted: #a1a1aa; --border: #27272a; --btnBg: #f4f4f5; --btnText: #101010; --bg2: #141416; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 28px; -webkit-font-smoothing: antialiased; }
+.logo { font-size: 16px; font-weight: 800; margin-bottom: 48px; text-decoration: none; color: var(--text); }
+.code { font-size: 96px; font-weight: 800; letter-spacing: -6px; line-height: 1; color: var(--muted); margin-bottom: 16px; }
+h1 { font-size: clamp(24px, 4vw, 36px); font-weight: 800; letter-spacing: -1.2px; margin-bottom: 12px; }
+p { font-size: 16px; color: var(--muted); max-width: 420px; text-align: center; line-height: 1.7; margin-bottom: 36px; }
+.btn { display: inline-block; background: var(--btnBg); color: var(--btnText); padding: 13px 28px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: opacity 0.15s; margin: 0 6px 10px; }
+.btn:hover { opacity: 0.88; }
+.btn-ghost { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
+</style>
+</head>
+<body>
+<a href="https://aiscite.com" class="logo">Aiscite</a>
+<div class="code">404</div>
+<h1>This page does not exist.</h1>
+<p>The link may be broken or the page may have been moved. Start from the homepage or view a sample audit.</p>
+<div>
+  <a href="/" class="btn">Back to home</a>
+  <a href="/audit/carlton-dental/" class="btn btn-ghost">View sample report</a>
+</div>
+<script>
+(function(){
+  var s = localStorage.getItem('aiscite-theme');
+  if (s) document.documentElement.setAttribute('data-theme', s);
+})();
+</script>
+</body>
+</html>
