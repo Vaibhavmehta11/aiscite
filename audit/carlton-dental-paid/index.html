@@ -189,15 +189,8 @@ html[data-theme="dark"] .cta-input::placeholder { color: rgba(0,0,0,0.4); }
 }
 .cta-submit:hover { opacity: 0.85; }
 .cta-input option { background: var(--bg); color: var(--text); }
-/* CTA SELECT custom arrow */
-.cta-select {
-  -webkit-appearance: none; appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 16px center;
-}
-html[data-theme="dark"] .cta-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23101010' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-}
+/* CTA SELECT — native browser arrow */
+.cta-select { background-image: none; }
 footer { border-top: 1px solid var(--border); padding: 28px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .footer-logo { font-size: 15px; font-weight: 800; }
 footer p { font-size: 13px; color: var(--muted); }
@@ -681,7 +674,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
         <input type="hidden" name="_next" value="https://aiscite.com/?thanks=1&source=paid">
         <input type="text" name="name" placeholder="Your name" required class="cta-input">
         <input type="email" name="email" placeholder="Your email" required class="cta-input">
-        <select name="service" class="cta-input cta-select">
+        <select name="service" class="cta-input">
           <option value="">I want to...</option>
           <option value="GEO Build ($688)">GEO Build — we implement everything ($688)</option>
           <option value="GEO Audit + GEO Build Bundle ($888)">GEO Audit + GEO Build — save $188 ($888)</option>
