@@ -271,7 +271,6 @@ footer p { font-size: 13px; color: var(--muted); }
 @media (max-width: 760px) {
   .hamburger { display: flex; }
   .nav-right .nav-link { display: none !important; }
-  .theme-toggle { display: none !important; }
   .nav-btn { display: none !important; }
 }
 
@@ -289,7 +288,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
 <body>
 <nav>
   <div class="nav-left">
-    <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a>
+    <a href="/" class="nav-logo">Aiscite</a>
     <span class="nav-practice">· Carlton Dental</span>
     <span class="paid-badge">FULL AUDIT</span>
   </div>
@@ -310,7 +309,6 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   <a href="#roadmap">Roadmap</a>
   <a href="#next-steps">What to do next</a>
   <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" target="_blank">Book free walkthrough →</a>
-  <a href="#" id="mobileThemeToggle" onclick="return false;">Dark mode</a>
 </div>
 
 <div class="hero">
@@ -840,22 +838,6 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   menu.querySelectorAll("a").forEach(function(a) {
     a.addEventListener("click", function() { menu.classList.remove("open"); });
   });
-  // Mobile theme toggle
-  var mobileTheme = document.getElementById("mobileThemeToggle");
-  if (mobileTheme) {
-    function syncMobileTheme() {
-      mobileTheme.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "Light mode" : "Dark mode";
-    }
-    syncMobileTheme();
-    mobileTheme.addEventListener("click", function(e) {
-      e.preventDefault();
-      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
-      localStorage.setItem("aiscite-theme", next);
-      document.getElementById("themeIcon").textContent = next === "dark" ? "Light" : "Dark";
-      syncMobileTheme();
-    });
-  }
 })();
 </script>
 </body>
