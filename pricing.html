@@ -72,8 +72,9 @@
   }
   .nav-logo { color: var(--text); text-decoration: none; font-weight: 800; font-size: 16px; letter-spacing: -0.4px; }
   .nav-right { display: flex; align-items: center; gap: 14px; }
-  .nav-link { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .nav-link { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; cursor: pointer; }
   .nav-link:hover { color: var(--text); }
+  #backToReport { cursor: pointer; }
   .theme-toggle {
     border: 1px solid var(--border); background: var(--bg); color: var(--text);
     height: 40px; padding: 0 10px; border-radius: 10px; font-size: 14px;
@@ -176,7 +177,7 @@
   .bundle-callout {
     display: flex; align-items: center; justify-content: space-between; gap: 32px;
     background: var(--bg2); border: 1.5px solid var(--border); border-radius: 20px;
-    padding: 32px 36px; margin: 0 0 28px;
+    padding: 32px 36px; margin: 40px 0 28px;
   }
   .bundle-label {
     font-size: 11px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;
@@ -295,6 +296,7 @@
 
   </div>
 
+  <hr style="border:none;border-top:2px solid var(--border);margin:0">
   <div class="bundle-callout">
     <div class="bundle-left">
       <span class="bundle-label">MOST COMPLETE</span>
