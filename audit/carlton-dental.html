@@ -56,10 +56,11 @@ nav {
   height: 36px; padding: 0 12px; border-radius: 10px; font-size: 13px;
   font-weight: 600; cursor: pointer; font-family: var(--font);
 }
+.nav-link { cursor: pointer; }
 .nav-btn {
   text-decoration: none; background: var(--btnBg); color: var(--btnText);
   padding: 9px 16px; border-radius: 12px; font-weight: 700; font-size: 13px;
-  transition: opacity 0.15s, transform 0.15s;
+  transition: opacity 0.15s, transform 0.15s; cursor: pointer;
 }
 .nav-btn:hover { opacity: 0.88; transform: translateY(-1px); }
 /* HERO */
@@ -450,65 +451,6 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   </div>
 
   <div class="section">
-    <p class="section-sm">New: Google Maps AI signal</p>
-    <h2>Google Reviews & AI Visibility</h2>
-    <p class="section-lead">Google Maps now uses Gemini AI to recommend local businesses. It reads your reviews AND your reply quality to decide who to surface — unanswered reviews are invisible to AI recommendations.</p>
-
-    <!-- Stat card -->
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 28px;margin-bottom:20px">
-      <div class="review-stat-grid" style="text-align:center">
-        <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">47</div>
-          <div class="stat-label" style="margin-top:6px">Total reviews</div>
-        </div>
-        <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">4.6</div>
-          <div class="stat-label" style="margin-top:6px">Avg. rating</div>
-        </div>
-        <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">8%</div>
-          <div class="stat-label" style="margin-top:6px">Reply rate</div>
-        </div>
-        <div style="padding:16px 12px">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">43</div>
-          <div class="stat-label" style="margin-top:6px">Unanswered</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Insight box -->
-    <div class="insight">
-      <strong>Why this matters now:</strong> Google Maps just launched "Ask Maps" powered by Gemini AI. It reads your reviews AND your reply quality to decide who to recommend. Unanswered reviews equal missed GEO signals — businesses that reply with service + location context rank higher in AI recommendations. Reply rate is now a ranking factor, not just a reputation metric.
-    </div>
-
-    <!-- Status tag — rendered by JS from data attributes -->
-    <div id="review-data"
-      data-reply-rate="8"
-      data-unanswered="43"
-      style="display:none"></div>
-    <div id="review-status-tag" style="margin-top:20px"></div>
-    <script>
-    (function () {
-      var el = document.getElementById('review-data');
-      var replyRate = parseFloat(el.getAttribute('data-reply-rate')) || 0;
-      var unanswered = parseInt(el.getAttribute('data-unanswered')) || 0;
-      var tag = document.getElementById('review-status-tag');
-      if (replyRate < 50) {
-        tag.innerHTML =
-          '<div class="tag red">CRITICAL GAP</div>' +
-          '<p style="font-size:14px;color:var(--tagRedText);margin-top:10px">' +
-          '<strong>' + unanswered + ' reviews have no reply.</strong> Each unanswered review is a missed AI visibility signal.</p>';
-      } else if (replyRate <= 80) {
-        tag.innerHTML = '<div class="tag gold">NEEDS ATTENTION</div>';
-      } else {
-        tag.innerHTML = '<div class="tag" style="background:rgba(22,163,74,0.12);color:#15803d">STRONG</div>';
-      }
-    })();
-    </script>
-
-  </div>
-
-  <div class="section">
     <p class="section-sm">Next step</p>
     <h2>A premium, low-risk way to fix it.</h2>
     <p class="section-lead">The right first step is not a long proposal. It is a short conversation to confirm the opportunity is real, the scope is right, and the implementation is worth doing.</p>
@@ -568,6 +510,71 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
       <div class="process-step"><div class="step-num">Step 02</div><p>Confirm what would change over the next two weeks.</p></div>
       <div class="process-step"><div class="step-num">Step 03</div><p>Decide whether to move forward. No pressure either way.</p></div>
     </div>
+  </div>
+
+  <div class="section">
+    <p class="section-sm">New: Google Maps AI signal</p>
+    <h2>Google Reviews & AI Visibility</h2>
+    <p class="section-lead">Google Maps now uses Gemini AI to recommend local businesses. It reads your reviews AND your reply quality to decide who to surface — unanswered reviews are invisible to AI recommendations.</p>
+
+    <div style="background:var(--insightBg);border:1px solid var(--insightBorder);border-radius:14px;padding:20px 24px;margin:20px 0">
+      <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--insightText);margin-bottom:10px">Why unanswered reviews cost you patients</div>
+      <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:12px">Google Maps AI reads your reply <strong>content</strong> — not just whether you replied. A reply that says "Thank you!" scores zero AI signal. A reply that says "Thank you for choosing Carlton Dental for your teeth cleaning in downtown Toronto — we look forward to seeing you again" gives Gemini Maps three strong signals: your practice name, your service, and your location.</p>
+      <p style="font-size:14px;color:var(--text);line-height:1.7;margin:0">Every unanswered review is a missed recommendation. When someone asks AI for a dentist in Toronto, Gemini Maps surfaces practices that have replied with service and location context — and skips the ones that have not.</p>
+    </div>
+
+    <!-- Stat card -->
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 28px;margin-bottom:20px">
+      <div class="review-stat-grid" style="text-align:center">
+        <div style="padding:16px 12px;border-right:1px solid var(--border)">
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">47</div>
+          <div class="stat-label" style="margin-top:6px">Total reviews</div>
+        </div>
+        <div style="padding:16px 12px;border-right:1px solid var(--border)">
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">4.6</div>
+          <div class="stat-label" style="margin-top:6px">Avg. rating</div>
+        </div>
+        <div style="padding:16px 12px;border-right:1px solid var(--border)">
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">8%</div>
+          <div class="stat-label" style="margin-top:6px">Reply rate</div>
+        </div>
+        <div style="padding:16px 12px">
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">43</div>
+          <div class="stat-label" style="margin-top:6px">Unanswered</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insight box -->
+    <div class="insight">
+      <strong>Why this matters now:</strong> Google Maps just launched "Ask Maps" powered by Gemini AI. It reads your reviews AND your reply quality to decide who to recommend. Unanswered reviews equal missed GEO signals — businesses that reply with service + location context rank higher in AI recommendations. Reply rate is now a ranking factor, not just a reputation metric.
+    </div>
+
+    <!-- Status tag — rendered by JS from data attributes -->
+    <div id="review-data"
+      data-reply-rate="8"
+      data-unanswered="43"
+      style="display:none"></div>
+    <div id="review-status-tag" style="margin-top:20px"></div>
+    <script>
+    (function () {
+      var el = document.getElementById('review-data');
+      var replyRate = parseFloat(el.getAttribute('data-reply-rate')) || 0;
+      var unanswered = parseInt(el.getAttribute('data-unanswered')) || 0;
+      var tag = document.getElementById('review-status-tag');
+      if (replyRate < 50) {
+        tag.innerHTML =
+          '<div class="tag red">CRITICAL GAP</div>' +
+          '<p style="font-size:14px;color:var(--tagRedText);margin-top:10px">' +
+          '<strong>' + unanswered + ' reviews have no reply.</strong> Each unanswered review is a missed AI visibility signal.</p>';
+      } else if (replyRate <= 80) {
+        tag.innerHTML = '<div class="tag gold">NEEDS ATTENTION</div>';
+      } else {
+        tag.innerHTML = '<div class="tag" style="background:rgba(22,163,74,0.12);color:#15803d">STRONG</div>';
+      }
+    })();
+    </script>
+
   </div>
 </div>
 
