@@ -212,14 +212,23 @@
   @media (max-width: 860px) {
     .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
   }
+  @media (max-width: 760px) {
+    .bundle-callout { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .bundle-right { text-align: left; width: 100%; }
+    .hero { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
+    .hero h1 { font-size: clamp(28px, 7vw, 48px); letter-spacing: -2px; }
+    .pricing-wrap { padding-left: 16px; padding-right: 16px; }
+  }
   @media (max-width: 640px) {
     .bundle-callout { flex-direction: column; align-items: flex-start; }
     .bundle-right { text-align: left; }
   }
   @media (max-width: 560px) {
-    .hero { padding-top: 116px; }
-    .hero h1 { letter-spacing: -2.2px; }
     .nav-right .nav-link { display: none; }
+    .hero { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
+    .hero h1 { letter-spacing: -1.6px; }
+    .faq-wrap { padding-left: 16px; padding-right: 16px; }
+    .pricing-card { padding: 24px 20px; }
   }
 </style>
 </head>
