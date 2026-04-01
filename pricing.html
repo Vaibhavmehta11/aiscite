@@ -226,11 +226,15 @@
 <body>
 <nav>
   <div class="nav-left">
-    <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a>
+    <a href="/" class="nav-logo">Aiscite</a>
     <a href="#" id="backToReport" class="back-pill" style="display:none">← Back to report</a>
   </div>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">🌙</span><span id="themeLabel"> Dark</span></button>
+    <a href="/" class="nav-link">Home</a>
+    <a href="/#how" class="nav-link">How it works</a>
+    <a href="/#proof" class="nav-link">What you get</a>
+    <a href="/#faq" class="nav-link">FAQ</a>
+    <button class="theme-toggle" id="themeToggle"><span id="themeIcon">Dark</span></button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book free walkthrough</a>
   </div>
 </nav>
@@ -380,8 +384,7 @@ if (stored) {
   root.setAttribute('data-theme', saved || 'light');
   function sync() {
     const dark = root.getAttribute('data-theme') === 'dark';
-    document.getElementById('themeIcon').textContent = dark ? '☀️' : '🌙';
-    document.getElementById('themeLabel').textContent = dark ? ' Light' : ' Dark';
+    document.getElementById('themeIcon').textContent = dark ? 'Light' : 'Dark';
   }
   btn.addEventListener('click', function () {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
