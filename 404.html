@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page not found — Aiscite</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🔍</text></svg>">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html[data-theme="light"] { --bg: #ffffff; --text: #111111; --muted: #666870; --border: #c2c5cc; --btnBg: #111111; --btnText: #ffffff; --bg2: #f6f6f7; }
@@ -27,8 +29,12 @@ p { font-size: 16px; color: var(--muted); max-width: 420px; text-align: center; 
 <p>The link may be broken or the page may have been moved. Start from the homepage or view a sample audit.</p>
 <div>
   <a href="/" class="btn">Back to home</a>
+<a href="/privacy.html" style="font-size:13px;color:var(--muted);text-decoration:none;margin-top:16px;display:inline-block">Privacy Policy</a>
   <a href="/audit/carlton-dental/" class="btn btn-ghost">View sample report</a>
 </div>
+<footer style="border-top:1px solid var(--border);padding:20px 28px;text-align:center;margin-top:48px">
+  <a href="/privacy.html" style="font-size:13px;color:var(--muted);text-decoration:none">Privacy Policy</a>
+</footer>
 <script>
 (function(){
   var s = localStorage.getItem('aiscite-theme');
