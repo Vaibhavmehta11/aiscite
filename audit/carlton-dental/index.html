@@ -47,8 +47,9 @@ nav {
   padding: 0 28px; background: var(--navBg); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
-.nav-logo { color: var(--text); text-decoration: none; font-weight: 800; font-size: 16px; letter-spacing: -0.4px; }
-.nav-logo span { color: var(--muted); font-weight: 500; font-size: 14px; margin-left: 10px; }
+/* NAV LOGO — no target="_blank", navigates same tab to homepage */
+.nav-logo { color: var(--text); text-decoration: none; font-weight: 800; font-size: 16px; letter-spacing: -0.4px; cursor: pointer; }
+.nav-logo:hover { opacity: 0.8; }
 .nav-right { display: flex; align-items: center; gap: 12px; }
 .theme-toggle {
   border: 1px solid var(--border); background: var(--bg); color: var(--text);
@@ -103,7 +104,7 @@ nav {
   font-weight: 600; text-align: center; display: block;
 }
 .btn-ghost:hover { background: var(--bg2); }
-/* btn-ghost-cta: fully theme-aware, readable in light and dark */
+/* btn-ghost-cta: fully theme-aware */
 .btn-ghost-cta {
   text-decoration: none; color: var(--ctaMuted); border: 1px solid var(--ctaMuted);
   background: transparent; padding: 11px 20px; border-radius: 14px; font-size: 13px;
@@ -190,25 +191,29 @@ html[data-theme="dark"] .price-row-muted {
 }
 .cta-block h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; letter-spacing: -2px; line-height: 1.08; margin-bottom: 12px; }
 .cta-block p { color: var(--ctaMuted); max-width: 460px; margin: 0 auto 28px; font-size: 16px; line-height: 1.72; }
-.btn-white {
-  text-decoration: none; background: var(--invBg); color: var(--invText);
-  padding: 14px 28px; border-radius: 14px; font-weight: 700; font-size: 15px;
+/* btn-white INSIDE cta-block — always white pill regardless of theme */
+.cta-block .btn-white, .offer-main .btn-white {
+  background: #ffffff !important; color: #101010 !important;
+  text-decoration: none; padding: 14px 28px; border-radius: 14px; font-weight: 700; font-size: 15px;
   display: inline-block; transition: opacity 0.15s, transform 0.15s;
 }
-.btn-white:hover { opacity: 0.9; transform: translateY(-1px); }
+.cta-block .btn-white:hover, .offer-main .btn-white:hover { opacity: 0.9; transform: translateY(-1px); }
 .cta-note { margin-top: 12px; font-size: 13px; color: var(--ctaMuted); }
-/* cta-pricing-link: theme-aware, no hardcoded colors */
+/* cta-pricing-link: theme-aware */
 .cta-pricing-link {
   color: var(--ctaMuted); font-size: 13px; text-align: center;
   text-decoration: none; font-weight: 600; display: block;
 }
 .cta-pricing-link:hover { opacity: 0.8; }
+/* FOOTER — consistent across all pages */
 footer {
-  border-top: 1px solid var(--border); padding: 28px;
-  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  border-top: 1px solid var(--border); padding: 32px 28px;
+  text-align: center;
 }
-.footer-logo { font-size: 15px; font-weight: 800; }
-footer p { font-size: 13px; color: var(--muted); }
+footer .footer-logo { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+footer p { font-size: 13px; color: var(--muted); line-height: 1.8; }
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--text); }
 .review-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; }
 .sticky-cta {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
@@ -254,8 +259,9 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 </script>
 </head>
 <body>
+<!-- NAV: logo navigates same tab to homepage, no target="_blank" -->
 <nav>
-  <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Carlton Dental</span>
+  <a href="https://aiscite.com" class="nav-logo">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Carlton Dental</span>
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle">Dark mode</button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Free walkthrough</a>
@@ -416,15 +422,15 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
       </div>
       <div class="offer-items">
         <div class="offer-item">
-          <div class="offer-item-check">✓</div>
+          <div class="offer-item-check">&#10003;</div>
           <div><b>What changes for Carlton Dental</b><span>A clearer website presentation, structured answers to the questions clients are asking AI, and a stronger brand signal that AI can cite with confidence.</span></div>
         </div>
         <div class="offer-item">
-          <div class="offer-item-check">✓</div>
+          <div class="offer-item-check">&#10003;</div>
           <div><b>What does not change</b><span>The site is not rebuilt. There is no complicated handoff. The work is done around the existing content — the goal is to make what is already strong more visible to AI.</span></div>
         </div>
         <div class="offer-item">
-          <div class="offer-item-check">✓</div>
+          <div class="offer-item-check">&#10003;</div>
           <div><b>Why the call matters</b><span>It confirms whether the opportunity is real for Carlton Dental specifically — not a generic pitch, a 10-minute review of the actual findings.</span></div>
         </div>
       </div>
@@ -440,7 +446,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
           <span style="font-size:48px;font-weight:800;letter-spacing:-3px;line-height:1">$288</span><span style="font-size:15px;color:var(--ctaMuted);margin-left:6px">/month</span>
         </div>
         <div class="price-note" style="margin-bottom:14px">Quarterly re-audit + unlimited review replies. No contract. Cancel anytime.</div>
-        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="display:inline-block;white-space:nowrap">Add Review Replies →</a>
+        <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="display:inline-block;white-space:nowrap">Add Review Replies &#8594;</a>
       </div>
     </div>
     <div class="process-steps">
@@ -489,18 +495,24 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
     <h2>If this were my business, I would take the call.</h2>
     <p>The quality is already in Carlton Dental. The website is just not helping AI understand it well enough yet. A 10-minute call is the fastest way to decide if that is worth fixing now.</p>
     <div style="max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
-      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="text-align:center">Book the 10-minute call →</a>
-      <a href="https://aiscite.com/pricing/" class="cta-pricing-link">See full pricing → aiscite.com/pricing</a>
+      <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-white" target="_blank" style="text-align:center">Book the 10-minute call &#8594;</a>
+      <a href="https://aiscite.com/pricing/" class="cta-pricing-link">See full pricing &#8594; aiscite.com/pricing</a>
       <a href="mailto:hello@aiscite.com?subject=Carlton Dental — Visibility Review" class="btn-ghost-cta">Or reply by email</a>
     </div>
     <div class="cta-note">No obligation. 10 minutes. We confirm whether the opportunity is real for Carlton Dental.</div>
   </div>
 </div>
 
+<!-- FOOTER: consistent across all report pages -->
 <footer>
   <div class="footer-logo">Aiscite</div>
-  <p>Prepared privately for Carlton Dental · April 2026</p>
-  <p>© 2026 Aiscite</p>
+  <p>Prepared privately for Carlton Dental &middot; March 2026</p>
+  <p style="margin-top:6px">
+    <a href="https://aiscite.com">Home</a> &nbsp;&middot;&nbsp;
+    <a href="https://aiscite.com/pricing">Pricing</a> &nbsp;&middot;&nbsp;
+    <a href="mailto:hello@aiscite.com">hello@aiscite.com</a>
+  </p>
+  <p style="margin-top:6px">&copy; 2026 Aiscite</p>
 </footer>
 
 <script>
@@ -563,7 +575,7 @@ buildCharts();
 
 <div class="sticky-cta" id="stickyCta">
   <span class="sticky-cta-text">AI visibility gaps found — see how you compare to competitors</span>
-  <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="sticky-cta-btn" target="_blank">Book 10-min call →</a>
+  <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="sticky-cta-btn" target="_blank">Book 10-min call &#8594;</a>
 </div>
 <script>
 (function(){ var bar=document.getElementById("stickyCta"); window.addEventListener("scroll",function(){ if(window.scrollY>400){bar.classList.add("visible");}else{bar.classList.remove("visible");}},{passive:true}); })();
