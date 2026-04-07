@@ -206,14 +206,11 @@ html[data-theme="dark"] .price-row-muted {
 }
 .cta-pricing-link:hover { opacity: 0.8; }
 /* FOOTER — consistent across all pages */
-footer {
-  border-top: 1px solid var(--border); padding: 32px 28px;
-  text-align: center;
-}
-footer .footer-logo { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
-footer p { font-size: 13px; color: var(--muted); line-height: 1.8; }
-footer a { color: var(--muted); text-decoration: none; }
-footer a:hover { color: var(--text); }
+
+
+
+
+
 .review-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; }
 .sticky-cta {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
@@ -239,6 +236,11 @@ footer a:hover { color: var(--text); }
 @media (max-width: 640px) {
   .review-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
+footer{border-top:1px solid var(--border);padding:40px 28px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+.footer-logo{font-weight:800;font-size:16px;letter-spacing:-0.4px}
+footer p{font-size:13px;color:var(--muted);line-height:1.8;display:block;margin:0}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--text)}
 </style>
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -505,10 +507,10 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 
 <!-- FOOTER: consistent across all report pages -->
 <footer>
-  <div class="footer-logo">Aiscite</div>
-  <p>Prepared privately for Carlton Dental &middot; March 2026</p>
-  <p><a href="https://aiscite.com">Home</a> &nbsp;&middot;&nbsp; <a href="https://aiscite.com/pricing">Pricing</a> &nbsp;&middot;&nbsp; <a href="mailto:hello@aiscite.com">hello@aiscite.com</a></p>
-  <p>&copy; 2026 Aiscite</p>
+<div class="footer-logo">Aiscite</div>
+<p>Prepared privately for Carlton Dental</p>
+<p><a href="https://aiscite.com">Home</a> &nbsp;&middot;&nbsp; <a href="https://aiscite.com/pricing">Pricing</a> &nbsp;&middot;&nbsp; <a href="mailto:hello@aiscite.com">hello@aiscite.com</a></p>
+<p>&copy; 2026 Aiscite</p>
 </footer>
 
 <script>
