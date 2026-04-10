@@ -356,7 +356,24 @@ posthog.capture("free_report_view", {business: "phillips-barristers", score: 49}
     <h2>3 things holding Phillips Barristers back from AI recommendation.</h2>
     <p class="section-lead">These are business clarity problems, not technical ones. The site is not doing enough to prove expertise, answer likely questions, or tell AI what makes Phillips Barristers the right choice in this market.</p>
     <div class="problem-list">
-      <!-- PROBLEMS_PLACEHOLDER -->
+      <div class="problem-item">
+        <div class="tag red">Priority</div>
+        <h3>Your expertise is not being shown clearly enough</h3>
+        <p>Someone landing on the site can feel that the practice is strong. AI cannot feel that as easily. The proof is too buried and too weakly presented.</p>
+        <div class="fix-row"><b>Fix:</b> Bring your qualifications, specialties, and clinical strengths to the front in a way AI can read immediately.</div>
+      </div>
+      <div class="problem-item">
+        <div class="tag gold">Important</div>
+        <h3>AI has no clear answers to pull from</h3>
+        <p>When someone asks AI about Phillips Barristers, there are not enough clear, structured answers on the site for AI to extract and repeat with confidence.</p>
+        <div class="fix-row"><b>Fix:</b> Add FAQ-style content that directly answers the questions clients ask — written for AI to understand and cite.</div>
+      </div>
+      <div class="problem-item">
+        <div class="tag gold">Important</div>
+        <h3>What makes you different is not expressed in AI-ready language</h3>
+        <p>The site does not clearly tell AI what makes Phillips Barristers the right choice. Competitors with weaker actual credentials may rank higher simply because they explain themselves better.</p>
+        <div class="fix-row"><b>Fix:</b> Rewrite positioning content to emphasize unique strengths in language AI can act on and recommend.</div>
+      </div>
     </div>
   </div>
 
@@ -375,11 +392,11 @@ posthog.capture("free_report_view", {business: "phillips-barristers", score: 49}
           <div class="stat-label" style="margin-top:6px">Avg. rating</div>
         </div>
         <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">45%</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">0%</div>
           <div class="stat-label" style="margin-top:6px">Reply rate</div>
         </div>
         <div style="padding:16px 12px">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">70</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">4</div>
           <div class="stat-label" style="margin-top:6px">Unanswered</div>
         </div>
       </div>
@@ -387,7 +404,7 @@ posthog.capture("free_report_view", {business: "phillips-barristers", score: 49}
     <div class="insight">
       <strong>Why this matters now:</strong> Google Maps just launched "Ask Maps" powered by Gemini AI. It reads your reviews AND your reply quality to decide who to recommend. Unanswered reviews equal missed GEO signals — businesses that reply with service + location context rank higher in AI recommendations. Reply rate is now a ranking factor, not just a reputation metric.
     </div>
-    <div id="review-data" data-reply-rate="45" data-unanswered="70" style="display:none"></div>
+    <div id="review-data" data-reply-rate="0" data-unanswered="4" style="display:none"></div>
     <div id="review-status-tag" style="margin-top:20px"></div>
     <script>
     (function () {
