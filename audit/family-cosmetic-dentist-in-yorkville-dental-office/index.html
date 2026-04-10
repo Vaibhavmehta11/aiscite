@@ -230,7 +230,7 @@ footer p { font-size: 13px; color: var(--muted); }
 <nav>
   <a href="https://aiscite.com" class="nav-logo">Aiscite <span>· Family & Cosmetic Dentist in Yorkville, Dental Office</span></a>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle">Dark mode</button>
+    <button class="theme-toggle" id="themeToggle">Dark</button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book walkthrough</a>
   </div>
 </nav>
@@ -376,7 +376,7 @@ footer p { font-size: 13px; color: var(--muted); }
   const btn = document.getElementById('themeToggle');
   const saved = localStorage.getItem('aiscite-theme');
   root.setAttribute('data-theme', saved || 'light');
-  function sync() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light mode' : 'Dark mode'; }
+  function sync() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light' : 'Dark'; }
   btn.addEventListener('click', function () {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);

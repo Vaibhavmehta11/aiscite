@@ -199,6 +199,7 @@ html[data-theme="dark"] .price-row-muted {
   display: inline-block; transition: opacity 0.15s, transform 0.15s;
 }
 .cta-block .btn-white:hover, .offer-main .btn-white:hover { opacity: 0.9; transform: translateY(-1px); }
+html[data-theme="dark"] .cta-block .btn-white, html[data-theme="dark"] .offer-main .btn-white { background: var(--invBg) !important; color: var(--invText) !important; }
 .cta-note { margin-top: 12px; font-size: 13px; color: var(--ctaMuted); }
 /* cta-pricing-link: theme-aware */
 .cta-pricing-link {
@@ -275,7 +276,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
 <nav>
   <a href="https://aiscite.com" class="nav-logo">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Carlton Dental</span>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle">Dark mode</button>
+    <button class="theme-toggle" id="themeToggle">Dark</button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Free walkthrough</a>
   </div>
 </nav>
@@ -529,7 +530,7 @@ posthog.capture("free_report_view", {business: "carlton-dental", score: 78});
   const btn = document.getElementById('themeToggle');
   const saved = localStorage.getItem('aiscite-theme');
   root.setAttribute('data-theme', saved || 'light');
-  function sync() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light mode' : 'Dark mode'; }
+  function sync() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light' : 'Dark'; }
   btn.addEventListener('click', function () {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);

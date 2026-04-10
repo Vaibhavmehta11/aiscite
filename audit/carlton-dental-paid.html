@@ -177,7 +177,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
 <nav>
   <span class="nav-logo" style="cursor:default">Aiscite <span class="paid-badge">FULL AUDIT</span></span>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle">Dark mode</button>
+    <button class="theme-toggle" id="themeToggle">Dark</button>
   </div>
 </nav>
 
@@ -658,7 +658,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   const root = document.documentElement;
   const saved = localStorage.getItem('aiscite-theme');
   root.setAttribute('data-theme', saved || 'light');
-  function sync() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light mode' : 'Dark mode'; }
+  function sync() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light' : 'Dark'; }
   btn.addEventListener('click', function () {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);

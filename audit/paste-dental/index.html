@@ -250,7 +250,7 @@ posthog.capture("free_report_view", {business: "paste-dental", score: 78});
 <nav>
   <a href="https://aiscite.com" class="nav-logo" target="_blank">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Paste Dental</span>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle">Dark mode</button>
+    <button class="theme-toggle" id="themeToggle">Dark</button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Book walkthrough</a>
   </div>
 </nav>
@@ -411,7 +411,7 @@ posthog.capture("free_report_view", {business: "paste-dental", score: 78});
   const btn = document.getElementById('themeToggle');
   const saved = localStorage.getItem('aiscite-theme');
   root.setAttribute('data-theme', saved || 'light');
-  function sync() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light mode' : 'Dark mode'; }
+  function sync() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light' : 'Dark'; }
   btn.addEventListener('click', function () {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
