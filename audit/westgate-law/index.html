@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="canonical" href="https://aiscite.com/audit/carlton-law_firm/">
+<link rel="canonical" href="https://aiscite.com/audit/westgate-law/">
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 <title>Aiscite — Westgate Law AI Visibility Audit</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -257,7 +257,7 @@ posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https:
     posthog.register({ is_internal: false, utm_source: utmSource || null, utm_medium: utmMedium || null, utm_campaign: params.get('utm_campaign') || null, utm_content: params.get('utm_content') || null });
   }
 })();
-posthog.capture("free_report_view", {business: "carlton-law_firm", score: 78});
+posthog.capture("free_report_view", {business: "westgate-law", score: 51});
 </script>
 
 <meta property="og:title" content="Aiscite — Westgate Law AI Visibility Audit">
@@ -321,11 +321,11 @@ posthog.capture("free_report_view", {business: "carlton-law_firm", score: 78});
   <div class="section">
     <p class="section-sm">Where you stand</p>
     <h2>Strong — but not untouchable — room to improve.</h2>
-    <p class="section-lead">Westgate Law sits at 78/100. Most local law_firm businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
+    <p class="section-lead">Westgate Law sits at 51/100. Most local law_firm businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
     <div class="chart-grid" style="grid-template-columns:1fr 1fr">
       <div class="chart-card">
         <h3>Position in the market</h3>
-        <p>Westgate Law scores 78/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
+        <p>Westgate Law scores 51/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
         <div class="chart-shell"><div class="chart-frame"><canvas id="benchmarkChart"></canvas></div></div>
         <div class="insight" id="benchmarkInsight"><strong>What this means:</strong>Westgate Law is one of the stronger law_firm practices in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
       </div>
@@ -556,7 +556,7 @@ function buildCharts() {
     type: 'bar',
     data: {
       labels: ['Target score', 'Competing practices', 'Westgate Law'],
-      datasets: [{ data: [90, 40, 78], backgroundColor: [c.gold, c.muted, c.barFill], borderRadius: 12, borderSkipped: false, barThickness: 28 }]
+      datasets: [{ data: [90, 40, 51], backgroundColor: [c.gold, c.muted, c.barFill], borderRadius: 12, borderSkipped: false, barThickness: 28 }]
     },
     options: {
       indexAxis: 'y', responsive: true, maintainAspectRatio: false,
