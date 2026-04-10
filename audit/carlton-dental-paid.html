@@ -43,11 +43,11 @@ html { scroll-behavior: smooth; }
 body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; transition: background 0.2s, color 0.2s; }
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; background: var(--navBg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
 .nav-logo { color: var(--text); text-decoration: none; font-weight: 800; font-size: 16px; letter-spacing: -0.4px; }
-.paid-badge { background: #111; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; letter-spacing: 0.4px; margin-left: 10px; }
+.paid-badge { background: var(--text); color: var(--bg); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; letter-spacing: 0.4px; margin-left: 10px; }
 .nav-right { display: flex; align-items: center; gap: 12px; }
 .nav-link { cursor: pointer; }
 .nav-btn { cursor: pointer; }
-.theme-toggle { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 13px; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: var(--font); }
+.theme-toggle { border: 1px solid var(--border); background: var(--bg); color: var(--text); height: 36px; padding: 0 12px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--font); }
 .wrap { max-width: 900px; margin: 0 auto; padding: 0 28px; }
 .hero { padding: 120px 28px 60px; max-width: 900px; margin: 0 auto; }
 .hero-eyebrow { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
@@ -145,9 +145,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 60px; di
 .cta-note { margin-top: 16px; font-size: 13px; color: var(--ctaMuted); }
 .cta-or { margin: 20px 0 0; font-size: 14px; color: var(--ctaMuted); }
 
-footer { border-top: 1px solid var(--border); padding: 28px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.footer-logo { font-size: 15px; font-weight: 800; }
-footer p { font-size: 13px; color: var(--muted); }
+
 
 @media (max-width: 760px) {
   .score-grid, .competitor-grid, .toc-grid { grid-template-columns: 1fr; }
@@ -175,7 +173,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
 </head>
 <body>
 <nav>
-  <span class="nav-logo" style="cursor:default">Aiscite <span class="paid-badge">FULL AUDIT</span></span>
+  <a href="https://aiscite.com" class="nav-logo">Aiscite</a><span style="color:var(--text);font-size:17px;font-weight:800;margin-left:10px;text-align:center">· Carlton Dental</span><span class="paid-badge" style="margin-left:8px">FULL AUDIT</span>
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle">Dark</button>
   </div>
@@ -646,7 +644,7 @@ posthog.capture("paid_report_view", {business: "carlton-dental", score: 78, repo
   </div>
 </div>
 
-<footer style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;padding:32px 28px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)"><span style="font-weight:800;font-size:14px;color:var(--text)">Aiscite</span><span> &middot; </span><span>Prepared privately for C</span><span> &middot; </span><span>&copy; 2026 Aiscite</span></footer>
+<footer style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;padding:32px 28px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)"><span style="font-weight:800;font-size:14px;color:var(--text)">Aiscite</span><span> &middot; </span><span>Prepared privately for Carlton Dental</span><span> &middot; </span><a href="https://aiscite.com" style="color:var(--muted);text-decoration:none">Home</a><span> &middot; </span><a href="https://aiscite.com/pricing" style="color:var(--muted);text-decoration:none">Pricing</a><span> &middot; </span><a href="mailto:info@aiscite.com" style="color:var(--muted);text-decoration:none">info@aiscite.com</a><span> &middot; </span><span>&copy; 2026 Aiscite</span></footer>
 
 <script>
 (function () {
