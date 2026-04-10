@@ -32,8 +32,8 @@
       "google_place_id": "ChIJ_wwRXtI0K4gR5V7NmdzaTtU",
       "rating": 4.7,
       "reviews": 15,
-      "status": "contact_verified",
-      "audit_url": null,
+      "status": "email_sent",
+      "audit_url": "https://aiscite.com/audit/weirfoulds-llp/",
       "contact_email": "gackerley@weirfoulds.com",
       "backup_emails": ["cabela@weirfoulds.com", "zahmed@weirfoulds.com"],
       "contacts": [
@@ -68,12 +68,14 @@
       "google_place_id": "ChIJq6qq3dI0K4gRFKm-a79XZgc",
       "rating": 4.6,
       "reviews": 38,
-      "status": "needs_research",
-      "audit_url": null,
-      "contact_email": null,
+      "status": "email_sent",
+      "audit_url": "https://aiscite.com/audit/dentons/",
+      "contact_email": "blair.mccreadie@dentons.com",
       "backup_emails": [],
-      "contacts": [],
-      "notes": "Verified via Google Places API. Large firm (170+ lawyers in Toronto). Need named partner email - Blair McCreadie is Office Managing Partner."
+      "contacts": [
+        {"name": "Blair McCreadie", "title": "Office Managing Partner", "email": "blair.mccreadie@dentons.com", "phone": null}
+      ],
+      "notes": "Verified via Google Places API. Large firm (170+ lawyers in Toronto). Blair McCreadie is Office Managing Partner."
     }
   ],
   "outreach_log": [
@@ -84,6 +86,28 @@
       "contact": "john@phillipsbarristers.ca",
       "method": "email",
       "subject": "Phillips Barristers — AI visibility gaps (49/100 score)",
+      "from": "vm@aiscite.com",
+      "status": "sent",
+      "next_followup": "2026-04-17"
+    },
+    {
+      "date": "2026-04-10",
+      "lead_id": "002",
+      "lead_name": "WeirFoulds LLP",
+      "contact": "gackerley@weirfoulds.com",
+      "method": "email",
+      "subject": "WeirFoulds LLP — AI visibility gaps (62/100 score)",
+      "from": "vm@aiscite.com",
+      "status": "sent",
+      "next_followup": "2026-04-17"
+    },
+    {
+      "date": "2026-04-10",
+      "lead_id": "004",
+      "lead_name": "Dentons",
+      "contact": "blair.mccreadie@dentons.com",
+      "method": "email",
+      "subject": "Dentons Toronto — AI visibility gaps (55/100 score)",
       "from": "vm@aiscite.com",
       "status": "sent",
       "next_followup": "2026-04-17"
