@@ -1,0 +1,93 @@
+{
+  "pipeline": "aiscite-outreach",
+  "updated": "2026-04-12",
+  "value_prop": "review_count_vulnerability",
+  "leads": [
+    {
+      "id": "001",
+      "name": "Phillips Barristers",
+      "type": "law_firm",
+      "city": "Toronto",
+      "domain": "phillipsbarristers.ca",
+      "google_place_id": "ChIJn-LbTjLL1IkR21ZTkExM5Os",
+      "rating": 4.3,
+      "reviews": 4,
+      "status": "email_sent",
+      "audit_url": "https://aiscite.com/audit/phillips-barristers/",
+      "contact_email": "john@phillipsbarristers.ca",
+      "backup_emails": ["julia@phillipsbarristers.ca", "cory@phillipsbarristers.ca"],
+      "contacts": [
+        {"name": "John Kingman Phillips, K.C.", "title": "Founder & Senior Partner", "email": "john@phillipsbarristers.ca", "phone": "647-220-7420"},
+        {"name": "A. Julia P. Tremain", "title": "Partner / Family Lawyer", "email": "julia@phillipsbarristers.ca", "phone": "416-745-4974"},
+        {"name": "W. Cory Wanless", "title": "Partner / Litigation Lawyer", "email": "cory@phillipsbarristers.ca", "phone": "647-874-2555"}
+      ],
+      "notes": "Verified via Google Places API. Review count is critical vulnerability (4 vs 15-234 competitors). 3 named contacts found via Brave API + firm website."
+    },
+    {
+      "id": "002",
+      "name": "WeirFoulds LLP",
+      "type": "law_firm",
+      "city": "Toronto",
+      "domain": "weirfoulds.com",
+      "google_place_id": "ChIJ_wwRXtI0K4gR5V7NmdzaTtU",
+      "rating": 4.7,
+      "reviews": 15,
+      "status": "contact_verified",
+      "audit_url": null,
+      "contact_email": "gackerley@weirfoulds.com",
+      "backup_emails": ["cabela@weirfoulds.com", "zahmed@weirfoulds.com"],
+      "contacts": [
+        {"name": "Glenn Ackerley", "title": "Partner", "email": "gackerley@weirfoulds.com", "phone": "416.947.5008"},
+        {"name": "Caroline Abela", "title": "Partner", "email": "cabela@weirfoulds.com", "phone": "416.947.5068"},
+        {"name": "Zohaib Ahmed", "title": "Associate", "email": "zahmed@weirfoulds.com", "phone": "416.619.6280"}
+      ],
+      "notes": "Verified via Google Places API + Chambers.com. Moderate review count (15)."
+    },
+    {
+      "id": "003",
+      "name": "Korman & Company",
+      "type": "law_firm",
+      "city": "Toronto",
+      "domain": "kormancompany.com",
+      "google_place_id": "ChIJi-EftW3L1IkRfCXvYD3r28g",
+      "rating": 4.7,
+      "reviews": 234,
+      "status": "needs_research",
+      "audit_url": null,
+      "contact_email": "info@kormancompany.com",
+      "backup_emails": [],
+      "contacts": [],
+      "notes": "Verified via Google Places API. Strong review count (234) - lower priority. Only generic info@ found, need named partner email."
+    },
+    {
+      "id": "004",
+      "name": "Dentons",
+      "type": "law_firm",
+      "city": "Toronto",
+      "domain": "dentons.com",
+      "google_place_id": "ChIJq6qq3dI0K4gRFKm-a79XZgc",
+      "rating": 4.6,
+      "reviews": 38,
+      "status": "needs_research",
+      "audit_url": null,
+      "contact_email": null,
+      "backup_emails": [],
+      "contacts": [],
+      "notes": "Verified via Google Places API. Large firm (170+ lawyers in Toronto). Need named partner email - Blair McCreadie is Office Managing Partner."
+    }
+  ],
+  "outreach_log": [
+    {
+      "date": "2026-04-10",
+      "lead_id": "001",
+      "lead_name": "Phillips Barristers",
+      "contact": "john@phillipsbarristers.ca",
+      "method": "email",
+      "subject": "Phillips Barristers — AI visibility gaps (49/100 score)",
+      "from": "vm@aiscite.com",
+      "status": "sent",
+      "next_followup": "2026-04-17"
+    }
+  ],
+  "wave": 1
+}
