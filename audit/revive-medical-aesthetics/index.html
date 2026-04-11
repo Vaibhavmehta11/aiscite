@@ -208,12 +208,11 @@ html[data-theme="dark"] .cta-block .btn-white, html[data-theme="dark"] .offer-ma
 }
 .cta-pricing-link:hover { opacity: 0.8; }
 /* FOOTER — consistent across all pages */
-footer {
-  border-top: 1px solid var(--border); padding: 32px 28px;
-  text-align: center;
-}
-footer footer a { color: var(--muted); text-decoration: none; }
-footer a:hover { color: var(--text); }
+
+
+
+
+
 .review-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; }
 .sticky-cta {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
@@ -239,6 +238,9 @@ footer a:hover { color: var(--text); }
 @media (max-width: 640px) {
   .review-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
+footer{border-top:1px solid var(--border);padding:40px 28px;display:flex;flex-wrap:wrap;flex-direction:row;justify-content:center;align-items:center;text-align:center;gap:6px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--text)}
 </style>
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -255,7 +257,7 @@ posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https:
     posthog.register({ is_internal: false, utm_source: utmSource || null, utm_medium: utmMedium || null, utm_campaign: params.get('utm_campaign') || null, utm_content: params.get('utm_content') || null });
   }
 })();
-posthog.capture("free_report_view", {business: "revive-medical-aesthetics", score: 48});
+posthog.capture("free_report_view", {business: "carlton-med spa", score: 78});
 </script>
 
 <meta property="og:title" content="Aiscite — Revive Medical Aesthetics AI Visibility Audit">
@@ -279,14 +281,14 @@ posthog.capture("free_report_view", {business: "revive-medical-aesthetics", scor
 
 <div class="hero">
   <div class="hero-eyebrow"><span></span> Private AI visibility review · April 2026</div>
-  <h1>Revive Medical Aesthetics shows up for people. It barely exists for AI.</h1>
-  <p>When someone asks AI for a spa in Toronto, Revive Medical Aesthetics should be in that conversation. Right now, the site gives AI too little confidence, too few clear answers, and too little context about what makes this business special.</p>
+  <h1>Revive Medical Aesthetics shows up for patients. It barely exists for AI.</h1>
+  <p>When someone asks AI for a med spa in Toronto, Revive Medical Aesthetics should be in that conversation. Right now, the site gives AI too little confidence, too few clear answers, and too little context about what makes this business special.</p>
   <div class="score-hero">
     <div class="score-main">
       <div>
         <div class="score-number">48</div>
         <div class="score-label">AI Visibility Score · out of 100</div>
-        <div class="score-badge" style="margin-top:12px">Below average — significant gaps</div>
+        <div class="score-badge" style="margin-top:12px">Average — below the noise</div>
       </div>
       <div class="score-bars">
         <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:35%"></div></div><span class="bar-val">35</span></div>
@@ -307,7 +309,7 @@ posthog.capture("free_report_view", {business: "revive-medical-aesthetics", scor
       <div class="context-stats">
         <div class="stat-row"><span class="stat-label">Competing practices</span><span class="stat-val">~40 / 100</span></div>
         <div class="stat-row"><span class="stat-label">Target score</span><span class="stat-val">90+ / 100</span></div>
-        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+40 to +47 points</span></div>
+        <div class="stat-row"><span class="stat-label">Likely upside from this work</span><span class="stat-val">+10 to +17 points</span></div>
         <div class="stat-row"><span class="stat-label">Implementation window</span><span class="stat-val">2 weeks</span></div>
         <div class="stat-row"><span class="stat-label">Best next step</span><span class="stat-val">10-min private walkthrough</span></div>
       </div>
@@ -318,14 +320,14 @@ posthog.capture("free_report_view", {business: "revive-medical-aesthetics", scor
 <div class="wrap">
   <div class="section">
     <p class="section-sm">Where you stand</p>
-    <h2>Below average — significant gaps — room to improve.</h2>
-    <p class="section-lead">Revive Medical Aesthetics sits at 48/100. Most local medspa businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
+    <h2>Strong — but not untouchable — room to improve.</h2>
+    <p class="section-lead">Revive Medical Aesthetics sits at 48/100. Most local med spa businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
     <div class="chart-grid" style="grid-template-columns:1fr 1fr">
       <div class="chart-card">
         <h3>Position in the market</h3>
         <p>Revive Medical Aesthetics scores 48/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
         <div class="chart-shell"><div class="chart-frame"><canvas id="benchmarkChart"></canvas></div></div>
-        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong>Revive Medical Aesthetics is one of the stronger spas in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
+        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong>Revive Medical Aesthetics is one of the stronger med spas in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
       </div>
       <div class="chart-card">
         <h3>Where Revive Medical Aesthetics is losing ground</h3>
@@ -365,19 +367,19 @@ posthog.capture("free_report_view", {business: "revive-medical-aesthetics", scor
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 28px;margin-bottom:20px">
       <div class="review-stat-grid" style="text-align:center">
         <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">67</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">127</div>
           <div class="stat-label" style="margin-top:6px">Total reviews</div>
         </div>
         <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">4.5</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">4.7</div>
           <div class="stat-label" style="margin-top:6px">Avg. rating</div>
         </div>
         <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">30%</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">45%</div>
           <div class="stat-label" style="margin-top:6px">Reply rate</div>
         </div>
         <div style="padding:16px 12px">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">47</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">70</div>
           <div class="stat-label" style="margin-top:6px">Unanswered</div>
         </div>
       </div>
@@ -385,7 +387,7 @@ posthog.capture("free_report_view", {business: "revive-medical-aesthetics", scor
     <div class="insight">
       <strong>Why this matters now:</strong> Google Maps just launched "Ask Maps" powered by Gemini AI. It reads your reviews AND your reply quality to decide who to recommend. Unanswered reviews equal missed GEO signals — businesses that reply with service + location context rank higher in AI recommendations. Reply rate is now a ranking factor, not just a reputation metric.
     </div>
-    <div id="review-data" data-reply-rate="30" data-unanswered="47" style="display:none"></div>
+    <div id="review-data" data-reply-rate="45" data-unanswered="70" style="display:none"></div>
     <div id="review-status-tag" style="margin-top:20px"></div>
     <script>
     (function () {
@@ -476,8 +478,9 @@ posthog.capture("free_report_view", {business: "revive-medical-aesthetics", scor
 </div>
 <script>
 (function () {
-  var Q = {"q1": {"text": "Are you the owner or decision maker?", "options": [{"val": "yes", "label": "Yes"}, {"val": "no", "label": "No"}]}, "q2": {"text": "Is this a priority for you in the next 30 days?", "options": [{"val": "yes", "label": "Yes"}, {"val": "no", "label": "No"}, {"val": "not-yet", "label": "Not yet"}]}, "q3": {"text": "What is your rough scale of need?", "options": [{"val": "small", "label": "Small"}, {"val": "medium", "label": "Medium"}, {"val": "large", "label": "Large"}]}};
-  var bizType = "medspa";
+  var Q = {"q1": {"text": "Are you the owner or practice manager?", "options": [{"val": "yes", "label": "Yes"}, {"val": "no", "label": "No"}]}, "q2": {"text": "Is growing new patients a priority for you right now?", "options": [{"val": "yes", "label": "Yes"}, {"val": "no", "label": "No"}, {"val": "not-yet", "label": "Not yet"}]}, "q3": {"text": "How many new patients are you looking to add per month?", "options": [{"val": "1-5", "label": "1–5"}, {"val": "5-15", "label": "5–15"}, {"val": "15+", "label": "15+"}]}};
+  var bizType = "med spa"
+  var bizCity = "Toronto";
   var bizName = "Revive Medical Aesthetics";
   var answers = {};
   var form = document.getElementById('qual-form');
@@ -513,7 +516,7 @@ posthog.capture("free_report_view", {business: "revive-medical-aesthetics", scor
 </div>
 
 <!-- FOOTER: consistent across all report pages -->
-<footer style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;padding:32px 28px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)"><span style="font-weight:800;font-size:14px;color:var(--text)">Aiscite</span><span> &middot; </span><span>Prepared privately for R</span><span> &middot; </span><a href="https://aiscite.com" style="color:var(--muted);text-decoration:none">Home</a><span> &middot; </span><a href="https://aiscite.com/pricing" style="color:var(--muted);text-decoration:none">Pricing</a><span> &middot; </span><a href="mailto:info@aiscite.com" style="color:var(--muted);text-decoration:none">info@aiscite.com</a><span> &middot; </span><span>&copy; 2026 Aiscite</span></footer>
+<footer style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;padding:32px 28px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)"><span style="font-weight:800;font-size:14px;color:var(--text)">Aiscite</span><span> &middot; </span><span>Prepared privately for Revive Medical Aesthetics</span><span> &middot; </span><a href="https://aiscite.com" style="color:var(--muted);text-decoration:none">Home</a><span> &middot; </span><a href="https://aiscite.com/pricing" style="color:var(--muted);text-decoration:none">Pricing</a><span> &middot; </span><a href="mailto:info@aiscite.com" style="color:var(--muted);text-decoration:none">info@aiscite.com</a><span> &middot; </span><span>&copy; 2026 Aiscite</span></footer>
 
 <script>
 (function () {
