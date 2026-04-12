@@ -3,3 +3,5 @@ __pycache__/
 audit_*.json
 targets_*.csv
 pipeline_results_*.json
+LEADS_TRACKER.json
+LEADS_SUMMARY.txt
