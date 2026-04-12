@@ -9,11 +9,46 @@ Usage:
   python3 run_pipeline.py --csv targets_2026-04-11.csv
   python3 run_pipeline.py --audit audit_some-biz.json --push
 """
-import argparse, csv, json, os, sys, subprocess, time
+import argparse, csv, json, os, re, sys, subprocess, time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 SCORE_GATE = 65
+
+# --- Email validation ---
+_FILE_EXT_RE = re.compile(r"\.(png|jpg|jpeg|gif|svg|webp|ico|pdf|zip|mp4|mp3|woff|woff2|ttf|eot|css|js|html?)$", re.IGNORECASE)
+_GENERIC_PREFIXES = ["info","contact","hello","hi","support","help","admin","noreply","no-reply","donotreply","do-not-reply","sales","marketing","billing","accounts","enquiries","enquiry","reception","office","mail","general","team","service","feedback","news","media","pr","jobs","careers","hr","privacy","legal","webmaster","postmaster","abuse","your","name","email","user","test","demo"]
+_JUNK_DOMAINS = ["example.com","example.org","test.com","domain.com","schema.org","w3.org","sentry.io","wixpress.com","squarespace.com","wordpress.com","shopify.com","googleapis.com","gstatic.com","amazonaws.com","error-tracking.reddit.com"]
+_AGGREGATOR_DOMAINS = ["yelp.com","yelp.ca","reddit.com","ratehub.ca","thebesttoronto.com","designrush.com","clearlyrated.com"]
+
+def is_valid_named_email(email):
+    """Reject image filenames, generic prefixes, aggregator domains, junk."""
+    if not email or " " in email or "/" in email or "\\" in email:
+        return False
+    if not re.match(r"^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$", email):
+        return False
+    local, domain = email.rsplit("@", 1)
+    local_lower, domain_lower = local.lower(), domain.lower()
+    if _FILE_EXT_RE.search(email.lower()):
+        return False
+    if _FILE_EXT_RE.search(local_lower):
+        return False
+    if re.search(r"@\d+x\b|_\d+x\d+|^\d+x\d+", local_lower):
+        return False
+    if _FILE_EXT_RE.search(domain_lower):
+        return False
+    if len(local_lower) < 2:
+        return False
+    for p in _GENERIC_PREFIXES:
+        if local_lower == p:
+            return False
+    for j in _JUNK_DOMAINS:
+        if j in domain_lower:
+            return False
+    for a in _AGGREGATOR_DOMAINS:
+        if a in domain_lower:
+            return False
+    return True
 
 def run(cmd, cwd=None, timeout=60):
     """Run a subprocess, return (exit_code, stdout, stderr)."""
@@ -178,6 +213,7 @@ def main():
     p.add_argument("--type", help="Business type for scouting")
     p.add_argument("--count", type=int, default=30, help="Number of targets to scout")
     p.add_argument("--push", action="store_true", help="Push generated reports to GitHub")
+    p.add_argument("--no-email", action="store_true", help="Skip email finding (dry run mode)")
     p.add_argument("--max-workers", type=int, default=5, help="Parallel audit workers")
     args = p.parse_args()
 

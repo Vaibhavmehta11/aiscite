@@ -51,7 +51,16 @@ def scout(city, biz_type, count=30):
             skip_patterns = ["yelp.", "google.", "facebook.", "instagram.", "linkedin.",
                              "yellowpages.", "tripadvisor.", "gmb.", "maps.google",
                              "foursquare.", "healthgrades.", "zocdoc.", "ratemds.",
-                             "threebestrated.", "nearme.", "homestars.", "canadabusiness."]
+                             "threebestrated.", "nearme.", "homestars.", "canadabusiness.",
+                             "reddit.", "ratehub.", "thebesttoronto.", "designrush.",
+                             "wowa.", "clearlyrated.", "provenexpert.", "g2.", "capterra.",
+                             "trustpilot.", "sitejabber.", "angi.", "homeadvisor.",
+                             "thumbtack.", "porch.", "bbb.org", "wikidata.", "wikipedia.",
+                             "mapquest.", "citysearch.", "superpages.", "hotfrog.",
+                             "foursquare.", "manta.", "chamberofcommerce.", "cybo.",
+                             "tuugo.", "hotels.", "booking.", "expedia.", "airbnb.",
+                             "opentable.", "grubhub.", "ubereats.", "doordash.",
+                             "yelp.ca", "yelp.co", "yelp.com"]
             if any(p in domain for p in skip_patterns):
                 continue
             if domain in seen_domains:
