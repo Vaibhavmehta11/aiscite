@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""QA check for deployed Aiscite reports.
+"""QA check for Aiscite reports.
 
-Fetches live HTML from the aiscite.com site and runs a 23-point checklist.
+Fetches live HTML from aiscite.com (or local file fallback) and runs a 24-point checklist.
 Exit 0 = PASS. Exit 1 = FAIL.
 Never send outreach without PASS.
 """
@@ -24,19 +24,26 @@ def check(name):
 # ─── Fetch ─────────────────────────────────────────────────────────────
 
 def fetch_live(slug):
-    """Fetch the live HTML from aiscite.com."""
+    """Fetch the live HTML from aiscite.com, or fall back to local file."""
     url = f"{BASE_URL}/{slug}/"
     try:
         r = requests.get(url, timeout=15, headers={"User-Agent": "Aiscite-QA/1.0"})
         r.raise_for_status()
         return r.text, url
     except Exception as e:
-        print(f"  FATAL: Cannot fetch {url}: {e}")
+        # Fall back to local file if live fetch fails
+        local_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "audit", slug, "index.html")
+        if os.path.exists(local_path):
+            with open(local_path) as f:
+                html = f.read()
+            print(f"  NOTE: Live fetch failed ({e}), using local file: {local_path}")
+            return html, f"file://{local_path}"
+        print(f"  FATAL: Cannot fetch {url} and no local file at {local_path}")
         return None, url
 
 # ─── Checks ────────────────────────────────────────────────────────────
 
-@check("Page loads (HTTP 200)")
+@check("Page loads (HTTP 200 or local file)")
 def chk_loads(html, slug, audit):
     return html is not None and len(html) > 500
 

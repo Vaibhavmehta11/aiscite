@@ -8,7 +8,7 @@ from datetime import date
 from urllib.parse import quote_plus
 import requests
 
-BRAVE_API_KEY = os.environ.get("BRAVE_SEARCH_API_KEY", "")
+BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY", "") or os.environ.get("BRAVE_SEARCH_API_KEY", "")
 BRAVE_URL = "https://api.search.brave.com/res/v1/web/search"
 
 def slugify(name):
@@ -17,7 +17,7 @@ def slugify(name):
 def search_brave(query, count=10, offset=0):
     """Search Brave API. Returns list of result dicts."""
     if not BRAVE_API_KEY:
-        print("ERROR: BRAVE_SEARCH_API_KEY not set", file=sys.stderr)
+        print("ERROR: BRAVE_API_KEY or BRAVE_SEARCH_API_KEY not set", file=sys.stderr)
         sys.exit(1)
     headers = {"Accept": "application/json", "X-Subscription-Token": BRAVE_API_KEY}
     params = {"q": query, "count": min(count, 20), "offset": offset}
@@ -57,9 +57,14 @@ def scout(city, biz_type, count=30):
             if domain in seen_domains:
                 continue
             seen_domains.add(domain)
-            # Clean title - remove common suffixes
+            # Clean title - remove common suffixes and pipe/dash separators
             for suffix in [" - Home", " | Home", " - Yelp", " | Facebook", " - Instagram"]:
                 title = title.replace(suffix, "")
+            # Take only the first segment before pipe or em-dash (Brave often returns "Name | Tagline | Location")
+            for sep in [" | ", " – ", " - ", " |", "–"]:
+                if sep in title:
+                    title = title.split(sep)[0].strip()
+                    break
             targets.append({
                 "name": title,
                 "domain": domain,

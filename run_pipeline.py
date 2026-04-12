@@ -15,7 +15,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 SCORE_GATE = 65
 
-def run(cmd, cwd=None, timeout=30):
+def run(cmd, cwd=None, timeout=60):
     """Run a subprocess, return (exit_code, stdout, stderr)."""
     try:
         r = subprocess.run(
@@ -29,7 +29,7 @@ def run(cmd, cwd=None, timeout=30):
 def audit_one(name, url, city, biz_type):
     """Run audit.py on a single target. Returns audit dict or None."""
     cmd = f'python3 audit.py --name "{name}" --url "{url}" --city "{city}" --type "{biz_type}"'
-    code, out, err = run(cmd, timeout=30)
+    code, out, err = run(cmd, timeout=90)
     if code != 0:
         print(f"  AUDIT FAIL: {name} (exit {code}): {err}")
         return None
@@ -49,7 +49,7 @@ def generate_and_qa(audit_file, push=False):
     cmd = f'python3 generate_report.py --audit "{audit_file}"'
     if push:
         cmd += " --push"
-    code, out, err = run(cmd, timeout=30)
+    code, out, err = run(cmd, timeout=60)
     if code != 0:
         print(f"  GEN FAIL: {audit_file} (exit {code}): {err}")
         return None, False
@@ -189,7 +189,7 @@ def main():
         today = date.today().isoformat()
         csv_path = os.path.join(SCRIPT_DIR, f"targets_{today}.csv")
         cmd = f'python3 scout.py --city "{args.city}" --type "{args.type}" --count {args.count}'
-        code, out, err = run(cmd, timeout=120)
+        code, out, err = run(cmd, timeout=180)
         if code != 0:
             print(f"Scout failed: {err}")
             sys.exit(1)
