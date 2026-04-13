@@ -11,13 +11,13 @@ Checks:
 4. Content depth - pages, blog, FAQs, service detail
 5. Positioning clarity - unique value prop, local signals
 """
-import argparse, json, os, sys, time
+import argparse, json, os, sys, time, re
 from urllib.parse import urlparse
 import requests
 
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 HEADERS = {"User-Agent": USER_AGENT}
-BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY", "") or os.environ.get("BRAVE_SEARCH_API_KEY", "")
+BRAVE_API_KEY=os.environ.get("BRAVE_SEARCH_API_KEY", "")
 
 def slugify(name):
     return name.lower().replace(" ", "-").replace("&", "").replace("'", "").replace(".", "").replace(",", "").replace(" llp", "").replace(" llc", "")
@@ -37,21 +37,17 @@ def score_ai_readability(html):
     if not html:
         return 0
     score = 0
-    # Has proper heading structure
-    if "<h1" in html.lower():
+    html_low = html.lower()
+    if "<h1" in html_low:
         score += 3
-    if "<h2" in html.lower():
+    if "<h2" in html_low:
         score += 2
-    # Has meta description
-    if 'meta name="description"' in html.lower():
+    if 'meta name="description"' in html_low:
         score += 2
-    # Has structured headings for services
-    h_count = html.lower().count("<h2") + html.lower().count("<h3")
+    h_count = html_low.count("<h2") + html_low.count("<h3")
     score += min(5, h_count)
-    # Has lists (services, features)
-    score += min(3, html.lower().count("<li"))
-    # Has paragraphs with actual content
-    p_count = html.lower().count("<p")
+    score += min(3, html_low.count("<li"))
+    p_count = html_low.count("<p")
     score += min(5, p_count // 2)
     return min(20, score)
 
@@ -61,47 +57,37 @@ def score_citation_signals(html, url):
         return 0
     score = 0
     html_low = html.lower()
-    # Schema.org / JSON-LD
     if "application/ld+json" in html_low:
         score += 5
-        # Check for LocalBusiness or specific schema
         if "localbusiness" in html_low or "dentist" in html_low or "medicalbusiness" in html_low or "legalservice" in html_low or "accountingservice" in html_low:
             score += 3
-    # OG tags
     if "og:title" in html_low:
         score += 2
     if "og:description" in html_low:
         score += 1
     if "og:image" in html_low:
         score += 1
-    # Canonical
     if 'rel="canonical"' in html_low:
         score += 1
-    # NAP info (Name, Address, Phone) structured
-    import re
     phone = re.search(r'\(\d{3}\)\s*\d{3}-\d{4}|\+\d{1,2}\s*\d{3}[\s.-]\d{3}[\s.-]\d{4}', html)
     if phone:
         score += 2
-    # Address pattern
     addr = re.search(r'\d+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\s+(Street|St|Avenue|Ave|Boulevard|Blvd|Road|Rd|Drive|Dr)', html)
     if addr:
         score += 2
-    # hreflang or multilingual
     if "hreflang" in html_low:
         score += 1
     return min(20, score)
 
-def score_authority_trust(domain):
+def score_authority_trust(domain, api_key=None):
     """0-20: HTTPS, domain signals from search results."""
     score = 0
-    # HTTPS
     try:
         r = requests.head(f"https://{domain}", headers=HEADERS, timeout=5, allow_redirects=True)
         if r.status_code < 400:
             score += 5
     except:
         pass
-    # Check if site has privacy/terms
     for path in ["/privacy", "/privacy-policy", "/terms"]:
         try:
             r = requests.head(f"https://{domain}{path}", headers=HEADERS, timeout=5, allow_redirects=True)
@@ -111,9 +97,9 @@ def score_authority_trust(domain):
         except:
             pass
     # Check search result presence (Brave)
-    if BRAVE_API_KEY:
+    if api_key or BRAVE_API_KEY:
         try:
-            headers = {"Accept": "application/json", "X-Subscription-Token": BRAVE_API_KEY}
+            headers = {"Accept": "application/json", "X-Subscription-Token": (api_key or BRAVE_API_KEY)}
             params = {"q": f'"{domain}"', "count": 5}
             r = requests.get("https://api.search.brave.com/res/v1/web/search", headers=headers, params=params, timeout=10)
             data = r.json()
@@ -134,27 +120,19 @@ def score_content_depth(html):
         return 0
     score = 0
     html_low = html.lower()
-    # Internal links suggest multiple pages
-    import re
     links = re.findall(r'href=["\'](/[^"\']+)["\']', html)
     unique_paths = set(l.split("?")[0].split("#")[0] for l in links)
     score += min(5, len(unique_paths) // 3)
-    # Blog
     if "blog" in html_low or "/blog" in html_low:
         score += 3
-    # FAQ
     if "faq" in html_low or "frequently asked" in html_low:
         score += 3
-    # Services detail
     if "services" in html_low or "our-services" in html_low:
         score += 2
-    # Testimonials/reviews
     if "testimonial" in html_low or "review" in html_low:
         score += 2
-    # About page link
     if "/about" in html_low:
         score += 2
-    # Content length
     text_len = len(re.sub(r'<[^>]+>', '', html).strip())
     if text_len > 5000:
         score += 3
@@ -168,42 +146,34 @@ def score_positioning_clarity(html, name, biz_type, city):
         return 0
     score = 0
     html_low = html.lower()
-    # Business name in title/h1
-    import re
-    title = re.search(r'<title[^>]*>(.*?)</title>', html_low, re.DOTALL)
-    if title and name.lower() in title.group(1):
+    title_match = re.search(r'<title[^>]*>(.*?)</title>', html_low, re.DOTALL)
+    if title_match and name.lower() in title_match.group(1):
         score += 3
-    # City/location mentioned
     if city.lower() in html_low:
         score += 3
-    # Biz type keywords
     type_words = biz_type.lower().split()
     for w in type_words:
         if w in html_low:
             score += 1
             break
-    # Unique value proposition signals
     uvp_words = ["award", "certified", "specialist", "expert", "leading", "trusted", "premier",
                   "top-rated", "best", "exclusive", "unique", "proven", "guaranteed"]
     for w in uvp_words:
         if w in html_low:
             score += 1
             break
-    # Clear CTA
     cta_words = ["book", "schedule", "call", "contact", "appointment", "consultation", "get started"]
     for w in cta_words:
         if w in html_low:
             score += 2
             break
-    # Multiple locations or service areas
     if "locations" in html_low or "service area" in html_low or "serving" in html_low:
         score += 2
-    # Professional design indicators
     if "font-awesome" in html_low or "fontawesome" in html_low or "cdn.jsdelivr.net" in html_low:
         score += 2
     return min(20, score)
 
-def audit(name, url, city, biz_type):
+def audit(name, url, city, biz_type, api_key=None):
     """Run full audit. Returns dict with scores."""
     domain = url.replace("https://", "").replace("http://", "").split("/")[0].split(":")[0].lower()
     if not url.startswith("http"):
@@ -214,7 +184,7 @@ def audit(name, url, city, biz_type):
 
     ai_readability = score_ai_readability(html)
     citation_signals = score_citation_signals(html, url)
-    authority_trust = score_authority_trust(domain)
+    authority_trust = score_authority_trust(domain, api_key=api_key)
     content_depth = score_content_depth(html)
     positioning_clarity = score_positioning_clarity(html, name, biz_type, city)
 
@@ -249,9 +219,10 @@ def main():
     p.add_argument("--url", required=True)
     p.add_argument("--city", required=True)
     p.add_argument("--type", required=True)
+    p.add_argument("--api-key", default=None, help="Brave Search API key (overrides BRAVE_API_KEY env)")
     args = p.parse_args()
 
-    result = audit(args.name, args.url, args.city, args.type)
+    result = audit(args.name, args.url, args.city, args.type, api_key=args.api_key)
     if result["overall_score"] <= 65:
         print(f"  PASS: Score {result['overall_score']} <= 65, good target for outreach")
     else:

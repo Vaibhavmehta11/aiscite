@@ -8,18 +8,19 @@ from datetime import date
 from urllib.parse import quote_plus
 import requests
 
-BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY", "") or os.environ.get("BRAVE_SEARCH_API_KEY", "")
+BRAVE_API_KEY=os.environ.get("BRAVE_SEARCH_API_KEY", "")
 BRAVE_URL = "https://api.search.brave.com/res/v1/web/search"
 
 def slugify(name):
     return name.lower().replace(" ", "-").replace("&", "").replace("'", "").replace(".", "").replace(",", "")
 
-def search_brave(query, count=10, offset=0):
+def search_brave(query, count=10, offset=0, api_key=None):
     """Search Brave API. Returns list of result dicts."""
-    if not BRAVE_API_KEY:
-        print("ERROR: BRAVE_API_KEY or BRAVE_SEARCH_API_KEY not set", file=sys.stderr)
+    if not api_key and not BRAVE_API_KEY:
+        print("ERROR: BRAVE_API_KEY (BRAVE_SEARCH_API_KEY) not set", file=sys.stderr)
         sys.exit(1)
-    headers = {"Accept": "application/json", "X-Subscription-Token": BRAVE_API_KEY}
+    key = api_key or BRAVE_API_KEY
+    headers = {"Accept": "application/json", "X-Subscription-Token": key}
     params = {"q": query, "count": min(count, 20), "offset": offset}
     r = requests.get(BRAVE_URL, headers=headers, params=params, timeout=15)
     r.raise_for_status()
@@ -27,88 +28,40 @@ def search_brave(query, count=10, offset=0):
 
 def extract_domain(url):
     """Strip protocol and path, return bare domain."""
-    return url.replace("https://", "").replace("http://", "").split("/")[0].split(":")[0].lower()
+    url = url.replace("https://", "").replace("http://", "")
+    return url.split("/")[0].split(":")[0].lower()
 
-def scout(city, biz_type, count=30):
-    """Find businesses. Returns list of dicts with name, domain, city, type."""
-    query = f'{biz_type} in {city}'
-    targets = []
-    seen_domains = set()
-    offset = 0
-
-    while len(targets) < count:
-        batch = min(20, count - len(targets))
-        results = search_brave(query, count=batch, offset=offset)
-        if not results:
-            break
-        for r in results:
-            url = r.get("url", "")
-            title = r.get("title", "").strip()
-            if not url or not title:
-                continue
-            domain = extract_domain(url)
-            # Skip directories, aggregators, generic pages
-            skip_patterns = ["yelp.", "google.", "facebook.", "instagram.", "linkedin.",
-                             "yellowpages.", "tripadvisor.", "gmb.", "maps.google",
-                             "foursquare.", "healthgrades.", "zocdoc.", "ratemds.",
-                             "threebestrated.", "nearme.", "homestars.", "canadabusiness.",
-                             "reddit.", "ratehub.", "thebesttoronto.", "designrush.",
-                             "wowa.", "clearlyrated.", "provenexpert.", "g2.", "capterra.",
-                             "trustpilot.", "sitejabber.", "angi.", "homeadvisor.",
-                             "thumbtack.", "porch.", "bbb.org", "wikidata.", "wikipedia.",
-                             "mapquest.", "citysearch.", "superpages.", "hotfrog.",
-                             "foursquare.", "manta.", "chamberofcommerce.", "cybo.",
-                             "tuugo.", "hotels.", "booking.", "expedia.", "airbnb.",
-                             "opentable.", "grubhub.", "ubereats.", "doordash.",
-                             "yelp.ca", "yelp.co", "yelp.com"]
-            if any(p in domain for p in skip_patterns):
-                continue
-            if domain in seen_domains:
-                continue
-            seen_domains.add(domain)
-            # Clean title - remove common suffixes and pipe/dash separators
-            for suffix in [" - Home", " | Home", " - Yelp", " | Facebook", " - Instagram"]:
-                title = title.replace(suffix, "")
-            # Take only the first segment before pipe or em-dash (Brave often returns "Name | Tagline | Location")
-            for sep in [" | ", " – ", " - ", " |", "–"]:
-                if sep in title:
-                    title = title.split(sep)[0].strip()
-                    break
-            targets.append({
-                "name": title,
-                "domain": domain,
-                "city": city,
-                "type": biz_type,
-            })
-            if len(targets) >= count:
-                break
-        offset += batch
-        time.sleep(1)  # Rate limit
-
-    return targets
+def scout(city, biz_type, count=30, api_key=None):
+    """Find businesses by city + type, return list of (name, url, city, biz_type)."""
+    query = f"{biz_type} in {city}"
+    results = search_brave(query, count=count, api_key=api_key)
+    
+    businesses = []
+    for r in results:
+        name = r.get("title", "").replace(f" - {city}", "").replace(f"- {city}", "")
+        url = r.get("url", "")
+        if name and url:
+            businesses.append((name, url, city, biz_type))
+    
+    return businesses
 
 def main():
     p = argparse.ArgumentParser(description="Scout local businesses")
     p.add_argument("--city", required=True)
-    p.add_argument("--type", required=True, help="Business type: dentist, lawyer, etc.")
-    p.add_argument("--count", type=int, default=30)
+    p.add_argument("--type", required=True, dest="biz_type")
+    p.add_argument("--count", default=30, type=int)
+    p.add_argument("--api-key", default=None, help="Brave Search API key (overrides BRAVE_API_KEY env)")
     args = p.parse_args()
-
-    targets = scout(args.city, args.type, args.count)
-    if not targets:
-        print("No targets found.")
-        sys.exit(0)
-
-    today = date.today().isoformat()
-    outfile = f"targets_{today}.csv"
-    with open(outfile, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["name", "domain", "city", "type"])
-        w.writeheader()
-        w.writerows(targets)
-
-    print(f"Found {len(targets)} targets -> {outfile}")
-    for t in targets:
-        print(f"  {t['name']}  ({t['domain']})")
-
-if __name__ == "__main__":
-    main()
+    
+    businesses = scout(args.city, args.biz_type, args.count, args.api_key)
+    print(f"Found {len(businesses)} businesses")
+    
+    # Write to CSV
+    filename = f"targets_{date.today().strftime('%Y-%m-%d')}.csv"
+    with open(filename, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["name", "domain", "city", "biz_type"])
+        for name, url, city, biz_type in businesses:
+            writer.writerow([name, extract_domain(url), city, biz_type])
+    
+    print(f"Written to {filename}")

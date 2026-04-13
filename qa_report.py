@@ -10,7 +10,7 @@ import requests
 
 BASE_URL = "https://aiscite.com/audit"
 GITHUB_REPO = "Vaibhavmehta11/aiscite"
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
+GITHUB_TOKEN=os.environ.get("GITHUB_TOKEN", "")
 
 CHECKS = []
 
