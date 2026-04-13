@@ -264,7 +264,7 @@ posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https:
     posthog.register({ is_internal: false, utm_source: utmSource || null, utm_medium: utmMedium || null, utm_campaign: params.get('utm_campaign') || null, utm_content: params.get('utm_content') || null });
   }
 })();
-posthog.capture("free_report_view", {business: "north-medical-spa", score: 53});
+posthog.capture("free_report_view", {business: "carlton-med spa", score: 2});
 </script>
 
 <meta property="og:title" content="Aiscite — North Medical Spa AI Visibility Audit">
@@ -293,16 +293,16 @@ posthog.capture("free_report_view", {business: "north-medical-spa", score: 53});
   <div class="score-hero">
     <div class="score-main">
       <div>
-        <div class="score-number">53</div>
+        <div class="score-number">2</div>
         <div class="score-label">AI Visibility Score · out of 100</div>
         <div class="score-badge" style="margin-top:12px">Significant gaps -- clear opportunity</div>
       </div>
       <div class="score-bars">
-        <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div><span class="bar-val">65</span></div>
-        <div class="bar-row"><span class="bar-label">Citation signals</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">10</span></div>
-        <div class="bar-row"><span class="bar-label">Authority and trust</span><div class="bar-track"><div class="bar-fill" style="width:45%"></div></div><span class="bar-val">45</span></div>
-        <div class="bar-row"><span class="bar-label">Content depth</span><div class="bar-track"><div class="bar-fill" style="width:85%"></div></div><span class="bar-val">85</span></div>
-        <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">60</span></div>
+        <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100</span></div>
+        <div class="bar-row"><span class="bar-label">Citation signals</span><div class="bar-track"><div class="bar-fill" style="width:70%"></div></div><span class="bar-val">70</span></div>
+        <div class="bar-row"><span class="bar-label">Authority and trust</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">60</span></div>
+        <div class="bar-row"><span class="bar-label">Content depth</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100</span></div>
+        <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:35%"></div></div><span class="bar-val">35</span></div>
       </div>
       <div class="score-actions">
         <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-primary" target="_blank">See how to fix this</a>
@@ -328,11 +328,11 @@ posthog.capture("free_report_view", {business: "north-medical-spa", score: 53});
   <div class="section">
     <p class="section-sm">Where you stand</p>
     <h2>Strong — but not untouchable — room to improve.</h2>
-    <p class="section-lead">North Medical Spa sits at 53/100. Most local med spa businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
+    <p class="section-lead">North Medical Spa sits at 73/100. Most local med spa businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
     <div class="chart-grid" style="grid-template-columns:1fr 1fr">
       <div class="chart-card">
         <h3>Position in the market</h3>
-        <p>North Medical Spa scores 53/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
+        <p>North Medical Spa scores 73/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
         <div class="chart-shell"><div class="chart-frame"><canvas id="benchmarkChart"></canvas></div></div>
         <div class="insight" id="benchmarkInsight"><strong>What this means:</strong>North Medical Spa is one of the stronger med spas in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
       </div>
@@ -564,7 +564,7 @@ function buildCharts() {
     type: 'bar',
     data: {
       labels: ['Target score', 'Competing practices', 'North Medical Spa'],
-      datasets: [{ data: [90, 40, 53], backgroundColor: [c.gold, c.muted, c.barFill], borderRadius: 12, borderSkipped: false, barThickness: 28 }]
+      datasets: [{ data: [90, 40, 73], backgroundColor: [c.gold, c.muted, c.barFill], borderRadius: 12, borderSkipped: false, barThickness: 28 }]
     },
     options: {
       indexAxis: 'y', responsive: true, maintainAspectRatio: false,
