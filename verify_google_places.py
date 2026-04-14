@@ -7,8 +7,19 @@ Usage:
     python3 verify_google_places.py [--input LEADS_TRACKER.json] [--output verified_leads.json]
 
 Requires:
-    - GOOGLE_PLACES_API_KEY environment variable
-    - Leads with 'domain' and 'city' fields
+    - GOOGLE_PLACES_API_KEY environment variable (from Google Cloud Console)
+    - Leads with 'name' and 'city' fields
+
+To set the key (one-time setup):
+    export GOOGLE_PLACES_API_KEY="AIzaSy...your-key-here"
+
+Or source from your project env file:
+    source ~/.hermes/.env  # if GOOGLE_PLACES_API_KEY is defined there
+
+Pre-requisites:
+    - Enable Google Places API in Google Cloud Console
+    - Create an API key with Places API permission
+    - The free tier gives 200 requests/month
 """
 import json
 import os
@@ -16,41 +27,71 @@ import sys
 import time
 import argparse
 from pathlib import Path
-from urllib.parse import quote
 import requests
 
-GOOGLE_PLACES_API_KEY = os.environ.get("GOOGLE_PLACES_API_KEY")
-if not GOOGLE_PLACES_API_KEY:
-    print("ERROR: GOOGLE_PLACES_API_KEY environment variable not set")
-    print("Get it from: https://console.cloud.google.com/apis/credentials")
-    sys.exit(1)
-
-PLACES_API_URL = "https://places.googleapis.com/places/v1/places:searchText"
-
-HEADERS = {
-    "Content-Type": "application/json",
-    "X-Goog-Api-Key": GOOGLE_PLACES_API_KEY,
-    "X-Goog-FieldMask": "places.displayName,places.rating,places.userRatingCount,places.placeId,places.formattedAddress"
-}
+from config import TRACKER_FILE
 
 
-def search_place(business_name: str, city: str) -> dict | None:
+def get_api_key():
+    """Get API key from environment, with helpful error if missing."""
+    api_key = os.environ.get("GOOGLE_PLACES_API_KEY")
+    if not api_key:
+        print("=" * 60)
+        print("ERROR: GOOGLE_PLACES_API_KEY not set")
+        print("=" * 60)
+        print("Google Places API requires an API key. To set it up:")
+        print("")
+        print("1. Go to https://console.cloud.google.com/apis/credentials")
+        print("2. Create a new API key")
+        print("3. Enable 'Places API' for your project")
+        print("4. Set the environment variable:")
+        print("   export GOOGLE_PLACES_API_KEY='AIzaSy...your-key-here'")
+        print("")
+        print("You can add this to your ~/.bashrc or ~/.profile to persist it.")
+        print("=" * 60)
+        sys.exit(1)
+    
+    # Warn if key looks placeholder-ish
+    if api_key == "***" or len(api_key) < 39:
+        print("WARNING: GOOGLE_PLACES_API_KEY appears to be a placeholder or truncated value")
+        print("Ensure you have the full 39+ character key from Google Cloud Console.")
+        sys.exit(1)
+    
+    return api_key
+
+
+def get_places_session():
+    """Initialize and return places API session with verified key."""
+    api_key = get_api_key()
+    
+    return {
+        "api_key": api_key,
+        "url": "https://places.googleapis.com/v1/places:searchText",
+        "headers": {
+            "Content-Type": "application/json",
+            "X-Goog-Api-Key": api_key,
+            "X-Goog-FieldMask": "places.displayName.text,places.rating,places.userRatingCount,places.placeId,places.formattedAddress",
+        }
+    }
+
+
+def search_place(business_name: str, city: str, session: dict) -> dict | None:
     """Search for a business using Google Places API."""
-    query = f"{business_name} {city}"
+    url = session["url"]
+    headers = session["headers"]
     payload = {
-        "textQuery": query,
+        "textQuery": f"{business_name} {city}",
         "maxResultCount": 3
     }
     
     try:
-        response = requests.post(PLACES_API_URL, headers=HEADERS, json=payload, timeout=10)
+        response = requests.post(url, headers=headers, json=payload, timeout=10)
         response.raise_for_status()
         data = response.json()
         
         if not data.get("places"):
             return None
         
-        # Return the first result (most relevant)
         place = data["places"][0]
         return {
             "name": place.get("displayName", {}).get("text", ""),
@@ -65,7 +106,7 @@ def search_place(business_name: str, city: str) -> dict | None:
         return None
 
 
-def verify_lead(lead: dict, verbose: bool = True) -> dict:
+def verify_lead(lead: dict, session: dict, verbose: bool = True) -> dict:
     """Verify a single lead's Google Places data."""
     name = lead.get("name", "")
     city = lead.get("city", "")
@@ -73,16 +114,15 @@ def verify_lead(lead: dict, verbose: bool = True) -> dict:
     if verbose:
         print(f"Verifying: {name} in {city}...")
     
-    result = search_place(name, city)
+    result = search_place(name, city, session)
     
     if result:
         if verbose:
-            print(f"  ✓ Found: {result['rating']}★ ({result['reviews']} reviews)")
+            print(f"  Found: {result['rating']} star ({result['reviews']} reviews)")
         
-        # Check for significant discrepancies
         existing_reviews = lead.get("reviews", 0)
         if existing_reviews and abs(result["reviews"] - existing_reviews) > 5:
-            print(f"  ⚠ WARNING: Review count mismatch! API says {result['reviews']}, tracker says {existing_reviews}")
+            print(f"  WARNING: Review count mismatch! API says {result['reviews']}, tracker says {existing_reviews}")
         
         return {
             **lead,
@@ -95,80 +135,67 @@ def verify_lead(lead: dict, verbose: bool = True) -> dict:
         }
     else:
         if verbose:
-            print(f"  ✗ Not found in Google Places")
+            print(f"  Not found in Google Places")
+        
         return {
             **lead,
             "google_verified": False,
             "google_rating": None,
-            "google_reviews": None,
+            "google_reviews": 0,
             "google_place_id": None,
-            "verification_confidence": "failed"
+            "google_address": None,
+            "verification_confidence": "none"
         }
+
+
+def batch_verify(input_file: str, output_file: str, quiet: bool = False) -> dict:
+    """Process all leads in input file and write to output."""
+    session = get_places_session()
+    
+    try:
+        with open(input_file, 'r') as f:
+            leads = json.load(f)
+    except FileNotFoundError:
+        print(f"ERROR: Input file not found: {input_file}")
+        sys.exit(1)
+    except json.JSONDecodeError as e:
+        print(f"ERROR: Invalid JSON in input file: {e}")
+        sys.exit(1)
+    
+    # Handle both direct array and object with leads key
+    if isinstance(leads, dict):
+        leads = leads.get("leads", [])
+    
+    if not isinstance(leads, list):
+        print("ERROR: Input file must contain a JSON array of leads or an object with a 'leads' array")
+        sys.exit(1)
+    
+    verified = []
+    for i, lead in enumerate(leads, 1):
+        verbose = not quiet
+        result = verify_lead(lead, session, verbose=verbose)
+        verified.append(result)
+        
+        if i < len(leads):
+            time.sleep(1)  # Rate limit: 1 req/sec
+    
+    with open(output_file, 'w') as f:
+        json.dump(verified, f, indent=2)
+    
+    if not quiet:
+        print(f"Processed {len(verified)} leads. Output saved to {output_file}")
+    
+    return {"verified": verified, "count": len(verified)}
 
 
 def main():
     parser = argparse.ArgumentParser(description="Batch verify leads via Google Places API")
-    parser.add_argument("--input", default="LEADS_TRACKER.json", help="Input JSON file")
+    parser.add_argument("--input", default=str(TRACKER_FILE), help="Input JSON file")
     parser.add_argument("--output", default="verified_leads.json", help="Output JSON file")
     parser.add_argument("--quiet", action="store_true", help="Suppress verbose output")
     args = parser.parse_args()
     
-    input_path = Path(args.input)
-    if not input_path.exists():
-        print(f"ERROR: Input file not found: {input_path}")
-        sys.exit(1)
-    
-    # Load leads
-    with open(input_path) as f:
-        data = json.load(f)
-    
-    leads = data.get("leads", [])
-    if not leads:
-        print("ERROR: No leads found in input file")
-        sys.exit(1)
-    
-    print(f"Loaded {len(leads)} leads from {input_path}")
-    print(f"Google Places API quota: 200 requests/month (free tier)")
-    print(f"This run will consume {len(leads)} requests")
-    print("-" * 60)
-    
-    # Verify each lead
-    verified_leads = []
-    for i, lead in enumerate(leads, 1):
-        if not args.quiet:
-            print(f"\n[{i}/{len(leads)}]", end=" ")
-        
-        verified = verify_lead(lead, verbose=not args.quiet)
-        verified_leads.append(verified)
-        
-        # Rate limiting: 1 request per second to be safe
-        if i < len(leads):
-            time.sleep(1.0)
-    
-    # Save results
-    output_data = {
-        "pipeline": data.get("pipeline", "aiscite-outreach"),
-        "verified_at": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "api_quota_used": len(leads),
-        "leads": verified_leads
-    }
-    
-    output_path = Path(args.output)
-    with open(output_path, "w") as f:
-        json.dump(output_data, f, indent=2)
-    
-    print("\n" + "=" * 60)
-    print(f"Verification complete!")
-    print(f"Output: {output_path}")
-    print(f"Verified: {sum(1 for l in verified_leads if l.get('google_verified'))}/{len(verified_leads)}")
-    
-    # Summary
-    print("\nSummary:")
-    for lead in verified_leads:
-        status = "✓" if lead.get("google_verified") else "✗"
-        reviews = lead.get("google_reviews", "N/A")
-        rating = lead.get("google_rating", "N/A")
-        print(f"  {status} {lead['name']}: {rating}★ ({reviews} reviews)")
+    batch_verify(args.input, args.output, args.quiet)
 
 
 if __name__ == "__main__":

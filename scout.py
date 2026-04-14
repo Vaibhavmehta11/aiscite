@@ -33,7 +33,9 @@ def extract_domain(url):
 
 def scout(city, biz_type, count=30, api_key=None):
     """Find businesses by city + type, return list of (name, url, city, biz_type)."""
-    query = f"{biz_type} in {city}"
+    query = f"best {biz_type} in {city} -medical -spa"
+    if biz_type == "law firm":
+        query = f"top law firm in {city} -divorce -criminal -paralegal"
     results = search_brave(query, count=count, api_key=api_key)
     
     businesses = []
