@@ -70,7 +70,7 @@ def get_places_session():
         "headers": {
             "Content-Type": "application/json",
             "X-Goog-Api-Key": api_key,
-            "X-Goog-FieldMask": "places.displayName.text,places.rating,places.userRatingCount,places.placeId,places.formattedAddress",
+            "X-Goog-FieldMask": "*",
         }
     }
 
@@ -93,13 +93,22 @@ def search_place(business_name: str, city: str, session: dict) -> dict | None:
             return None
         
         place = data["places"][0]
+        # Extract reviews array and count owner responses
+        reviewed_sample = place.get("reviews", [])
+        replied = sum(1 for r in reviewed_sample if r.get("ownerResponse"))
+        sample_size = len(reviewed_sample)
+        reply_rate = round(replied / sample_size * 100) if sample_size > 0 else 40
+        
+        unanswered = sample_size - replied if sample_size > 0 else 0
         return {
             "name": place.get("displayName", {}).get("text", ""),
             "rating": place.get("rating"),
             "reviews": place.get("userRatingCount", 0),
             "place_id": place.get("placeId", ""),
             "address": place.get("formattedAddress", ""),
-            "confidence": "high" if len(data["places"]) == 1 else "medium"
+            "confidence": "high" if len(data["places"]) == 1 else "medium",
+            "reply_rate": reply_rate,
+            "unanswered": unanswered
         }
     except requests.exceptions.RequestException as e:
         print(f"API error: {e}")
@@ -124,10 +133,17 @@ def verify_lead(lead: dict, session: dict, verbose: bool = True) -> dict:
         if existing_reviews and abs(result["reviews"] - existing_reviews) > 5:
             print(f"  WARNING: Review count mismatch! API says {result['reviews']}, tracker says {existing_reviews}")
         
-        # Calculate unanswered as 60% of total reviews (Google doesn't provide this directly)
+        # Use real reply_rate and unanswered from API results
         total_reviews = result["reviews"]
-        reply_rate = lead.get("reply_rate", 40)  # Default to 40% if not specified
-        unanswered = round(total_reviews * (1 - reply_rate / 100)) if total_reviews > 0 else 0
+        # API already calculated these: replied_count = total_reviews - unanswered
+        reply_rate = result.get("reply_rate", 40)  # API provides this based on ownerResponse sample
+        unanswered = result.get("unanswered", 0)   # Count of reviews without ownerResponse in the sample
+        
+        # Fallback if API returned invalid values (shouldn't happen if code is correct)
+        if reply_rate < 0 or reply_rate > 100:
+            reply_rate = 40
+        if unanswered < 0 or unanswered > total_reviews:
+            unanswered = round(total_reviews * 0.6)  # Default 60% unanswered if invalid
         
         return {
             **lead,
@@ -136,6 +152,7 @@ def verify_lead(lead: dict, session: dict, verbose: bool = True) -> dict:
             "google_reviews": total_reviews,
             "google_place_id": result["place_id"],
             "google_address": result["address"],
+            "reply_rate": reply_rate,
             "unanswered": unanswered,
             "verification_confidence": result["confidence"]
         }
