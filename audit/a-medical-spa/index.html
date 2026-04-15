@@ -293,14 +293,14 @@ posthog.capture("free_report_view", {business: "carlton-med spa", score: 2});
   <div class="score-hero">
     <div class="score-main">
       <div>
-        <div class="score-number">2</div>
+        <div class="score-number">67</div>
         <div class="score-label">AI Visibility Score · out of 100</div>
         <div class="score-badge" style="margin-top:12px">Significant gaps -- clear opportunity</div>
       </div>
       <div class="score-bars">
         <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">90</span></div>
         <div class="bar-row"><span class="bar-label">Citation signals</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">80</span></div>
-        <div class="bar-row"><span class="bar-label">Authority and trust</span><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><span class="bar-val">25</span></div>
+        <div class="bar-row"><span class="bar-label">Authority and trust</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">40</span></div>
         <div class="bar-row"><span class="bar-label">Content depth</span><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div><span class="bar-val">65</span></div>
         <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">60</span></div>
       </div>
@@ -328,11 +328,11 @@ posthog.capture("free_report_view", {business: "carlton-med spa", score: 2});
   <div class="section">
     <p class="section-sm">Where you stand</p>
     <h2>Strong — but not untouchable — room to improve.</h2>
-    <p class="section-lead">A Medical Spa sits at 64/100. Most local med spa businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
+    <p class="section-lead">A Medical Spa sits at 67/100. Most local med spa businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
     <div class="chart-grid" style="grid-template-columns:1fr 1fr">
       <div class="chart-card">
         <h3>Position in the market</h3>
-        <p>A Medical Spa scores 64/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
+        <p>A Medical Spa scores 67/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
         <div class="chart-shell"><div class="chart-frame"><canvas id="benchmarkChart"></canvas></div></div>
         <div class="insight" id="benchmarkInsight"><strong>What this means:</strong>A Medical Spa is one of the stronger med spas in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
       </div>
@@ -367,26 +367,26 @@ posthog.capture("free_report_view", {business: "carlton-med spa", score: 2});
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" style="display:none">
     <p class="section-sm">New: Google Maps AI signal</p>
     <h2>Google Reviews &amp; AI Visibility</h2>
     <p class="section-lead">Google Maps now uses Gemini AI to recommend local businesses. It reads your reviews AND your reply quality to decide who to surface — unanswered reviews are invisible to AI recommendations.</p>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 28px;margin-bottom:20px">
       <div class="review-stat-grid" style="text-align:center">
         <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">127</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">0</div>
           <div class="stat-label" style="margin-top:6px">Total reviews</div>
         </div>
         <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">4.7</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">N/A</div>
           <div class="stat-label" style="margin-top:6px">Avg. rating</div>
         </div>
         <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">45%</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">0%%</div>
           <div class="stat-label" style="margin-top:6px">Reply rate</div>
         </div>
         <div style="padding:16px 12px">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">70</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">N/A</div>
           <div class="stat-label" style="margin-top:6px">Unanswered</div>
         </div>
       </div>
@@ -394,7 +394,7 @@ posthog.capture("free_report_view", {business: "carlton-med spa", score: 2});
     <div class="insight">
       <strong>Why this matters now:</strong> Google Maps just launched "Ask Maps" powered by Gemini AI. It reads your reviews AND your reply quality to decide who to recommend. Unanswered reviews equal missed GEO signals — businesses that reply with service + location context rank higher in AI recommendations. Reply rate is now a ranking factor, not just a reputation metric.
     </div>
-    <div id="review-data" data-reply-rate="45" data-unanswered="70" style="display:none"></div>
+    <div id="review-data" data-reply-rate="0" data-unanswered="0" style="display:none"></div>
     <div id="review-status-tag" style="margin-top:20px"></div>
     <script>
     (function () {
@@ -564,7 +564,7 @@ function buildCharts() {
     type: 'bar',
     data: {
       labels: ['Target score', 'Competing practices', 'A Medical Spa'],
-      datasets: [{ data: [90, 40, 64], backgroundColor: [c.gold, c.muted, c.barFill], borderRadius: 12, borderSkipped: false, barThickness: 28 }]
+      datasets: [{ data: [90, 40, 67], backgroundColor: [c.gold, c.muted, c.barFill], borderRadius: 12, borderSkipped: false, barThickness: 28 }]
     },
     options: {
       indexAxis: 'y', responsive: true, maintainAspectRatio: false,
