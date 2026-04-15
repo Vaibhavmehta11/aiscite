@@ -201,6 +201,37 @@ def chk_js_vars(html, slug, audit):
         return False
     return "var bizName" in html and "var bizType" in html
 
+
+# ─── NEW QA ASSERTIONS FOR BUGFIX VALIDATION ───────────────────────────
+
+@check("If google_verified and google_reviews>0 and reply_rate<100 then unanswered>0")
+def chk_unanswered_logic(html, slug, audit):
+    if not html or not audit:
+        return True  # Skip if no audit data
+    gv = audit.get("google_verified", False)
+    grc = audit.get("google_reviews", 0)
+    reply_rate = audit.get("reply_rate", 100)
+    unanswered = audit.get("unanswered", 0)
+    if gv and grc > 0 and reply_rate < 100:
+        # If google data exists and reply_rate<100, unanswered must be >0
+        return unanswered > 0
+    return True  # No.google data or complete reply rate is valid
+
+@check("Score != 2 unless audit overall_score is 2")
+def chk_score_match(html, slug, audit):
+    if not html or not audit:
+        return True
+    # Extract rendered score from HTML
+    score_match = re.search(r'class="score-number">(\d+)</div>', html)
+    if not score_match:
+        return False
+    rendered_score = int(score_match.group(1))
+    audit_score = audit.get("overall_score", 0)
+    # If score is 2, audit must also be 2
+    if rendered_score == 2:
+        return audit_score == 2
+    return True  # Non-2 scores can exist for any reason (they're valid)
+
 # ─── Runner ────────────────────────────────────────────────────────────
 
 def qa(slug, audit_file=None):

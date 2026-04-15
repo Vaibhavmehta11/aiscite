@@ -247,6 +247,24 @@
     color: var(--text);
   }
 
+  /* FAQ ACCORDION */
+  .faq-list { border-top: 1px solid var(--border); }
+  .faq-item { padding: 26px 0; border-bottom: 1px solid var(--border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { width: 100%; background: none; border: none; text-align: left; padding: 22px 24px; font-family: var(--font); font-size: 15px; font-weight: 700; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .faq-q:hover { background: var(--soft); }
+  .faq-icon { font-size: 18px; flex-shrink: 0; transition: transform 0.2s; color: var(--muted); }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 14px; color: var(--muted); line-height: 1.75; padding: 0 24px; }
+  .faq-item.open .faq-a { max-height: 300px; padding: 4px 24px 22px; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 40px 28px; display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center; align-items: center; text-align: center; gap: 6px; }
+  .footer-logo { font-weight: 800; font-size: 16px; letter-spacing: -0.4px; }
+  footer p { font-size: 13px; color: var(--muted); line-height: 1.8; display: block; margin: 0; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
   /* PRICING SECTION */
   .pricing-card {
     background: var(--bg2); border: 2px solid var(--border); border-radius: 24px;
@@ -264,14 +282,38 @@
   }
   .pricing-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
   .pricing-footnote { margin-top: 16px; font-size: 13px; color: var(--muted); text-align: center; }
-
-  @media (max-width: 760px) {
+  /* TABLET (max-width: 900px) — fixes 768px–900px gaps */
+  @media (max-width: 900px) {
+    .hero { padding: 110px 24px 80px; }
+    .section { padding: 80px 24px; }
+    .industries { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .industry-box { padding: 16px 12px; font-size: 13px; }
+    .industry-box span { font-size: 11px; }
+    .bar-row { grid-template-columns: 1fr 48px; gap: 8px; }
+    .bar-label, .bar-val { display: none; }
+    .bar-track { grid-column: 1 / -1; margin-top: 8px; }
+    .proof-grid { grid-template-columns: 1fr; }
+    .proof-card { padding: 20px; }
+    .cta-block { margin: 0 24px 64px; padding: 64px 24px; }
+    .pricing-card { max-width: 100%; }
+    nav { padding: 0 20px; }
+    .hero h1 { font-size: clamp(28px, 7vw, 42px); }
+    .score-card { padding: 24px 16px; }
+  }
+  @media (max-width: 768px) {
     .industries, .proof-grid { grid-template-columns: 1fr; }
     .bar-row { grid-template-columns: 1fr; gap: 8px; }
     .bar-val { text-align: left; }
     .section { padding: 60px 20px; }
-    .score-card { padding: 24px 20px; }
-    .cta-block { margin: 0 16px 60px; padding: 48px 20px; }
+    .score-card { padding: 20px 16px; }
+    .cta-block { margin: 0 16px 60px; padding: 48px 16px; }
+    .hero { padding-top: 110px; }
+    .hero h1 { font-size: clamp(30px, 8vw, 44px); }
+    .industries { gap: 12px; }
+    .industry-box { padding: 14px 10px; font-size: 12px; }
+    .industry-box span { font-size: 11px; }
+    .cta-block h2 { font-size: clamp(24px, 5vw, 36px); }
+    footer { padding: 20px 16px; }
   }
   @media (max-width: 560px) {
     .nav-right .nav-link { display: none; }
@@ -280,6 +322,16 @@
     .hero p, .lead { font-size: 16px; }
     .industries, .proof-grid { grid-template-columns: 1fr; }
     .cta-block { margin: 0 12px 48px; padding: 40px 16px; }
+    .bar-row { display: flex; flex-direction: column; }
+    .bar-label { margin-bottom: 4px; }
+    .bar-val { text-align: left; }
+    .bar-track { height: 8px; }
+    .score-card { padding: 20px 16px; }
+    .cta-input { font-size: 14px; }
+    .cta-submit { padding: 12px 20px; font-size: 14px; }
+    .faq-q { font-size: 14px; padding: 18px 20px; }
+    .faq-a { font-size: 14px; }
+    footer { padding: 20px 16px; }
   }
 
 /* HAMBURGER */
@@ -308,7 +360,7 @@
   text-decoration: none; padding: 13px 0; border-bottom: 1px solid var(--border);
 }
 .mobile-menu a:last-child { border-bottom: none; }
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .hamburger { display: flex; }
   .nav-right .nav-link { display: none !important; }
   .nav-btn { display: none !important; }
@@ -334,6 +386,7 @@ footer a:hover{color:var(--text)}
 <body>
 <nav>
   <a href="/" class="nav-logo">Aiscite</a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-right">
     <a href="#how" class="nav-link">How it works</a>
     <a href="#proof" class="nav-link">What you get</a>
@@ -341,7 +394,6 @@ footer a:hover{color:var(--text)}
     <a href="/pricing" class="nav-link">Pricing</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">Dark</span></button>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Free walkthrough</a>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
@@ -349,7 +401,7 @@ footer a:hover{color:var(--text)}
   <a href="#proof">What you get</a>
   <a href="#faq">FAQ</a>
   <a href="/pricing">Pricing</a>
-  <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" target="_blank">Book free walkthrough ’</a>
+  <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" target="_blank">Book free walkthrough</a>
 </div>
 <div class="hero">
   <div class="hero-tag"><span></span> AI visibility audits for trust-driven businesses</div>

@@ -76,13 +76,21 @@ html[data-theme="dark"] .bundle-badge{background:rgba(0,0,0,0.15)}
 .bundle-cta{display:inline-block;text-decoration:none;background:#ffffff!important;color:#101010!important;padding:13px 24px;border-radius:12px;font-weight:700;font-size:14px;transition:opacity 0.15s,transform 0.15s}
 .bundle-cta:hover{opacity:0.9;transform:translateY(-1px)}
 /* TRUST BAR — fixed alignment */
-.trust-bar{max-width:900px;margin:0 auto 72px;padding:0 28px}
+/* TRUST BAR — fixed alignment */
 .trust-bar-inner{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:nowrap}
 .trust-item{text-align:center;flex:1;min-width:0}
 .trust-item-num{font-size:28px;font-weight:800;letter-spacing:-1.5px;white-space:nowrap}
 .trust-item-label{font-size:13px;color:var(--muted);margin-top:2px;white-space:nowrap}
 .trust-divider{width:1px;height:40px;background:var(--border);flex-shrink:0}
 .trust-last{flex:2;font-size:14px;font-weight:600;line-height:1.5;text-align:center}
+
+/* FOOTER STYLES */
+.site-footer{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;padding:32px 28px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)}
+.site-footer span{font-weight:800;font-size:14px;color:var(--text)}
+.site-footer a{color:var(--muted);text-decoration:none}
+.site-footer a:hover{color:var(--text)}
+/* END FOOTER STYLES */
+
 /* FAQ — accordion */
 .faq-wrap{max-width:720px;margin:0 auto;padding:0 28px 80px}
 .faq-wrap h2{font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-1.6px;line-height:1.1;margin-bottom:8px}
@@ -109,7 +117,7 @@ html[data-theme="dark"] .bundle-badge{background:rgba(0,0,0,0.15)}
 
 
 /* MOBILE */
-@media(max-width:700px){
+@media(max-width:768px){
   nav{padding:0 16px}
   .hero{padding:96px 20px 56px}
   .pricing-wrap,.trust-bar,.faq-wrap,.cta-block{padding-left:20px;padding-right:20px}
@@ -122,6 +130,72 @@ html[data-theme="dark"] .bundle-badge{background:rgba(0,0,0,0.15)}
   .plan-card{padding:28px 24px}
   .cta-inner{padding:48px 28px}
   .plan-price-amount{font-size:44px}
+  .site-footer{padding:24px 20px;flex-direction:column;gap:12px}
+}
+
+/* TABLET (max-width: 900px) — fixes 768px–900px gaps */
+@media(max-width:900px){
+  .hero{padding:110px 24px 80px}
+  .nav{padding:0 20px}
+  .pricing-wrap,.trust-bar,.faq-wrap,.cta-block{padding-left:24px;padding-right:24px}
+  .pricing-grid{grid-template-columns:1fr 1fr}
+  .bundle-row{grid-template-columns:1fr auto;gap:16px}
+  .trust-bar-inner{flex-wrap:wrap;justify-content:center;gap:16px}
+  .trust-item{flex:100%;min-width:0}
+  .trust-divider{width:1px;height:32px;display:block}
+  .trust-last{flex:100%;text-align:center}
+  .plan-card{padding:24px 20px}
+  .cta-inner{padding:56px 24px}
+  .plan-price-amount{font-size:48px}
+  .trust-item-num{font-size:32px}
+  .trust-item-label{font-size:13px}
+  .site-footer{padding:24px 20px;flex-direction:column;gap:12px}
+}
+
+@media(max-width:560px){
+  .plan-price-amount{font-size:36px}
+  .trust-item-num{font-size:24px}
+  .trust-item-label{font-size:12px}
+  .plan-price{gap:2px}
+  .plan-price-suffix{font-size:14px}
+  .plan-desc{font-size:13px}
+  .plan-features li{font-size:13px}
+  .btn-plan{padding:12px 16px;font-size:14px}
+  .btn-pill-cta{padding:12px 16px;font-size:14px}
+  .bundle-cta{padding:10px 16px;font-size:13px}
+  .site-footer{padding:20px 16px}
+}
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text); border-radius: 2px; transition: all 0.2s;
+}
+.mobile-menu {
+  display: none; position: fixed; top: 60px; left: 0; right: 0;
+  background: var(--navBg); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px; z-index: 101; flex-direction: column; gap: 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 15px; font-weight: 600; color: var(--text);
+  text-decoration: none; padding: 13px 0; border-bottom: 1px solid var(--border);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+@media (max-width: 700px) {
+  .hamburger { display: flex; }
+  .nav-right .nav-link { display: none !important; }
+  .nav-btn { display: none !important; }
 }
 footer{border-top:1px solid var(--border);padding:40px 28px;display:flex;flex-wrap:wrap;flex-direction:row;justify-content:center;align-items:center;text-align:center;gap:6px}
 .footer-logo{font-weight:800;font-size:16px;letter-spacing:-0.4px}
@@ -142,12 +216,19 @@ footer a:hover{color:var(--text)}
 <body>
 <nav>
   <a href="https://aiscite.com" class="nav-logo">Aiscite</a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-right">
-    <a href="https://aiscite.com" style="color:var(--muted);text-decoration:none;font-size:14px;font-weight:500">Home</a>
+    <a href="https://aiscite.com" class="nav-link" style="color:var(--muted);text-decoration:none;font-size:14px;font-weight:500">Home</a>
     <button class="theme-toggle" id="themeToggle">Dark</button>
+    <a href="/pricing" class="nav-link">Pricing</a>
     <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="nav-btn" target="_blank">Free walkthrough</a>
   </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://aiscite.com">Home</a>
+  <a href="/pricing">Pricing</a>
+  <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" target="_blank">Book free walkthrough</a>
+</div>
 
 <div class="hero">
   <div class="eyebrow"><span class="eyebrow-dot"></span> Clear pricing. No contracts.</div>
@@ -281,10 +362,10 @@ footer a:hover{color:var(--text)}
   </div>
 </div>
 
-<footer style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;padding:32px 28px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)"><span style="font-weight:800;font-size:14px;color:var(--text)">Aiscite</span><span> &middot; </span><a href="https://aiscite.com" style="color:var(--muted);text-decoration:none">Home</a><span> &middot; </span><a href="https://aiscite.com/pricing" style="color:var(--muted);text-decoration:none">Pricing</a><span> &middot; </span><a href="mailto:info@aiscite.com" style="color:var(--muted);text-decoration:none">info@aiscite.com</a><span> &middot; </span><a href="https://aiscite.com/privacy.html" style="color:var(--muted);text-decoration:none">Privacy</a><span> &middot; </span><span>&copy; 2026 Aiscite</span></footer>
+<footer class=\"site-footer\"><span>Aiscite</span><span> &middot; </span><a href=\"https://aiscite.com\">Home</a><span> &middot; </span><a href=\"https://aiscite.com/pricing\">Pricing</a><span> &middot; </span><a href=\"mailto:info@aiscite.com\">info@aiscite.com</a><span> &middot; </span><a href=\"https://aiscite.com/privacy.html\">Privacy</a><span> &middot; </span><span>&copy; 2026 Aiscite</span></footer>
 
 <script>
-(function(){var root=document.documentElement;var btn=document.getElementById('themeToggle');var saved=localStorage.getItem('aiscite-theme');root.setAttribute('data-theme',saved||'light');function sync(){btn.textContent=root.getAttribute('data-theme')==='dark'?'Light':'Dark'}btn.addEventListener('click',function(){var next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);localStorage.setItem('aiscite-theme',next);sync()});sync()})();
+(function(){var root=document.documentElement;var btn=document.getElementById('themeToggle');var saved=localStorage.getItem('aiscite-theme');root.setAttribute('data-theme',saved||'light');function sync(){btn.textContent=root.getAttribute('data-theme')==='dark'?'Light':'Dark'}btn.addEventListener('click',function(){var next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);localStorage.setItem('aiscite-theme',next);sync()});sync();var hamburgerBtn=document.getElementById('hamburgerBtn');var mobileMenu=document.getElementById('mobileMenu');hamburgerBtn.addEventListener('click',function(){mobileMenu.classList.toggle('open')})})();
 function toggleFaq(btn){var item=btn.closest('.faq-item');var isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(el){el.classList.remove('open')});if(!isOpen)item.classList.add('open')}
 </script>
 </body>

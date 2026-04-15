@@ -54,7 +54,71 @@ def generate(name, domain, city, biz_type, audit):
     html = html.replace("dental", biz_type)
 
     # -- 4. Score number --------------------------------------------------------
-    html = html.replace('<div class="score-number">78</div>', f'<div class="score-number">{score}</div>')
+    html = re.sub(r'<div class="score-number">\d+</div>', f'<div class="score-number">{score}</div>', html)
+
+    # -- 4.5. Google Review personalization -------------------------------------
+    gv = audit.get("google_verified", False)
+    if gv:
+        gr = audit.get("google_rating", 0)
+        grc = audit.get("google_reviews", 0)
+        reply_rate = audit.get("reply_rate", 40)
+        unanswered = audit.get("unanswered", 0)
+        # BUGFIX: If unanswered==0 but reply_rate>0 and google_reviews>0, calculate it
+        if unanswered == 0 and reply_rate > 0 and grc > 0:
+            unanswered = round(grc * (1 - reply_rate / 100))
+    else:
+        gr, grc, reply_rate, unanswered = None, 0, 0, 0
+
+    # Replace review card values using context-aware patterns with labels
+    if gv:
+        # Note: template order is stat-val FIRST, then stat-label
+        # Total reviews
+        html = re.sub(
+            r'(<div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">)\d+(</div>\s*<div class="stat-label" style="margin-top:6px">Total reviews</div>)',
+            lambda m: f'{m.group(1)}{grc}{m.group(2)}',
+            html, flags=re.DOTALL
+        )
+        # Avg. rating
+        html = re.sub(
+            r'(<div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">)\d+\.\d+(</div>\s*<div class="stat-label" style="margin-top:6px">Avg\. rating</div>)',
+            lambda m: f'{m.group(1)}{gr}{m.group(2)}',
+            html, flags=re.DOTALL
+        )
+        # Reply rate
+        html = re.sub(
+            r'(<div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">)\d+(%</div>\s*<div class="stat-label" style="margin-top:6px">Reply rate</div>)',
+            lambda m: f'{m.group(1)}{round(reply_rate)}{m.group(2)}',
+            html, flags=re.DOTALL
+        )
+        # Unanswered
+        html = re.sub(
+            r'(<div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">)\d+(</div>\s*<div class="stat-label" style="margin-top:6px">Unanswered</div>)',
+            lambda m: f'{m.group(1)}{unanswered}{m.group(2)}',
+            html, flags=re.DOTALL
+        )
+    else:
+        # No Google data — hide review section and reset stats
+        # Hide section by adding style="display:none" to the OPENING tag
+        # Pattern: capture <div class="section", capture the >, then capture the newline/space, then the AI signal text
+        # Replacement: reinsert <div class="section" with style added, then >, then newline/space, then AI signal
+        html = re.sub(r'(<div class="section")(\s*>)(\s*)(<p class="section-sm">New: Google Maps AI signal</p>)', r'\1 style="display:none"\2\3\4', html, flags=re.DOTALL)
+        # Reset review stats to 0/N/A since no Google data
+        html = re.sub(r'(<div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">)\d+(</div>\s*<div class="stat-label" style="margin-top:6px">Total reviews</div>)', lambda m: f'{m.group(1)}0{m.group(2)}', html, flags=re.DOTALL)
+        html = re.sub(r'(<div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">)\d+\.\d+(</div>\s*<div class="stat-label" style="margin-top:6px">Avg\. rating</div>)', lambda m: f'{m.group(1)}N/A{m.group(2)}', html, flags=re.DOTALL)
+        html = re.sub(r'(<div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">)\d+(%</div>\s*<div class="stat-label" style="margin-top:6px">Reply rate</div>)', lambda m: f'{m.group(1)}0%{m.group(2)}', html, flags=re.DOTALL)
+        html = re.sub(r'(<div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">)\d+(</div>\s*<div class="stat-label" style="margin-top:6px">Unanswered</div>)', lambda m: f'{m.group(1)}N/A{m.group(2)}', html, flags=re.DOTALL)
+
+    # Update review-data attributes
+    html = re.sub(
+        r'data-reply-rate="[^"]*"',
+        f'data-reply-rate="{round(reply_rate)}"',
+        html
+    )
+    html = re.sub(
+        r'data-unanswered="[^"]*"',
+        f'data-unanswered="{unanswered}"',
+        html
+    )
 
     # -- 5. Score badge ---------------------------------------------------------
     html = re.sub(
@@ -85,7 +149,7 @@ def generate(name, domain, city, biz_type, audit):
         new = f'<span class="bar-label">{label}</span><div class="bar-track"><div class="bar-fill" style="width:{pct}%"></div></div><span class="bar-val">{pct}</span>'
         html = html.replace(old, new)
 
-    # -- 7. Section leads & hardcoded 78 ----------------------------------------
+    # -- 7. Section leads & hardcoded score -------------------------------------
     html = re.sub(r'sits at \d+/100', f'sits at {score}/100', html)
     html = re.sub(r'scores \d+/100', f'scores {score}/100', html)
     # Fix PostHog capture

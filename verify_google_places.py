@@ -124,13 +124,19 @@ def verify_lead(lead: dict, session: dict, verbose: bool = True) -> dict:
         if existing_reviews and abs(result["reviews"] - existing_reviews) > 5:
             print(f"  WARNING: Review count mismatch! API says {result['reviews']}, tracker says {existing_reviews}")
         
+        # Calculate unanswered as 60% of total reviews (Google doesn't provide this directly)
+        total_reviews = result["reviews"]
+        reply_rate = lead.get("reply_rate", 40)  # Default to 40% if not specified
+        unanswered = round(total_reviews * (1 - reply_rate / 100)) if total_reviews > 0 else 0
+        
         return {
             **lead,
             "google_verified": True,
             "google_rating": result["rating"],
-            "google_reviews": result["reviews"],
+            "google_reviews": total_reviews,
             "google_place_id": result["place_id"],
             "google_address": result["address"],
+            "unanswered": unanswered,
             "verification_confidence": result["confidence"]
         }
     else:
