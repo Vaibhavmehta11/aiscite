@@ -1,0 +1,60 @@
+name: Aiscite Auto-Build Pipeline
+
+on:
+  schedule:
+    # Run every 4 hours
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
+    inputs:
+      wave_type:
+        description: 'Business type to target'
+        required: false
+        default: 'med spa'
+      city:
+        description: 'City to target'
+        required: false
+        default: 'Toronto'
+      count:
+        description: 'Number of leads to process'
+        required: false
+        default: '5'
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          playwright install chromium
+          pip install pandas
+
+      - name: Configure environment
+        run: |
+          echo "BRAVE_SEARCH_API_KEY=${{ secrets.BRAVE_SEARCH_API_KEY }}" >> $GITHUB_ENV
+          echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Run Aiscite pipeline
+        run: |
+          cd /home/nikunj19/Projects/aiscite
+          python3 run_pipeline.py wave --type "${{ github.event.inputs.wave_type || 'med spa' }}" --city "${{ github.event.inputs.city || 'Toronto' }}" --count "${{ github.event.inputs.count || 5 }}"
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          cd /home/nikunj19/Projects/aiscite
+          git config --global user.name "aiscite-github-actions[bot]"
+          git config --global user.email "bot@aiscite.com"
+          git add -A
+          git commit -m "Auto-build: $(date -Iseconds)" || echo "No changes to commit"
+          git push origin main

@@ -1,0 +1,12 @@
+{
+  "lead_id": "",
+  "business_name": "A Medical Spa",
+  "vertical": "med_spa",
+  "city": "Toronto",
+  "domain": "www.a-medical-spa.com",
+  "current_stage": "audit_complete",
+  "notes": [
+    "Aiscite wave audit score: 64/100"
+  ],
+  "score": 64
+}

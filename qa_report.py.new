@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+"""QA check for Aiscite reports.
+
+Fetches live HTML from aiscite.com (or local file fallback) and runs a 24-point checklist.
+Exit 0 = PASS. Exit 1 = FAIL.
+Never send outreach without PASS.
+"""
+import argparse, json, os, sys, re
+import requests
+
+BASE_URL = "https://aiscite.com/audit"
+GITHUB_REPO = "Vaibhavmehta11/aiscite"
+GITHUB_TOKEN=os.environ.get("GITHUB_TOKEN", "")
+
+CHECKS = []
