@@ -1,7 +1,67 @@
+# Python cache
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual Environments
+venv/
+.venv/
+env/
+.venv.bak
+
+# Environment files
+.env.local
+.env
+.env.*
+
+# Audit outputs and temp files
 audit_*.json
-targets_*.csv
-pipeline_results_*.json
-LEADS_SUMMARY.txt
+audit_*.log
+audit/*.db
+target*.csv
+pipeline_results*.json
+_LEADS_SUMMARY.txt
 LEADS_TRACKER.json
+
+# Generated test files
+verify_*.json
+test_*.json
+*_test.json
+test_benchmark_outputs.py
+test_pipeline.py
+
+# Logs and backups
+*.log
+*.bak
+*.backup*
+*.log.*
+backup*.py
+*.backup
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+job_tracker.db
+
+# Large/derived data
+leads/
+content/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/

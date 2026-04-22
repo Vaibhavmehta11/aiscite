@@ -101,6 +101,12 @@ def analyze_issue(issue_id: str):
     # Fetch issue details
     issue = paperclip_get(f"/api/issues/{issue_id}")
     title = issue.get("title", "")
+    
+    # FIRST-PRINCIPLES GUARD: never postmortem a postmortem
+    if title.startswith("Postmortem:"):
+        print(f"[ Wheeljack ] Skipping postmortem postmortem: {title}")
+        return None
+    
     identifier = issue.get("identifier", issue_id)
     completedAt = issue.get("completedAt")
     
@@ -302,6 +308,9 @@ def main():
                 identifier = item.get("identifier", item.get("id"))
                 try:
                     post = analyze_issue(identifier)
+                    if post is None:
+                        print(f"[ Wheeljack ] Skipped (postmortem of postmortem): {identifier}")
+                        continue
                     md = postmortem_md(post)
                     paperclip_comment(identifier, f"**Postmortem analysis:**\n\n{md[:2000]}...")
                     print(f"[ Wheeljack ] Commented on {identifier}")
@@ -312,6 +321,9 @@ def main():
         issue_id = sys.argv[1]
         print(f"[ Wheeljack ] Analyzing {issue_id}...")
         post = analyze_issue(issue_id)
+        if post is None:
+            print(f"[ Wheeljack ] Skipped (postmortem of postmortem): {issue_id}")
+            sys.exit(0)
         md = postmortem_md(post)
         print(md)
         
