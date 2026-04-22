@@ -205,17 +205,29 @@ def generate(name, domain, city, biz_type, audit):
 
 
 def push_to_github(slug):
-    """Commit and push to aiscite GitHub Pages repo."""
+    """Commit and push to aiscite GitHub Pages repo. Always stage and push changes."""
     os.chdir(REPO_DIR)
-    subprocess.run(["git", "add", f"audit/{slug}/"], check=True)
-    result = subprocess.run(["git", "diff", "--staged", "--name-only"], capture_output=True, text=True)
-    if not result.stdout.strip():
-        print(f"  No changes to commit for {slug}")
+    
+    # Stage all changes in the audit directory
+    result = subprocess.run(["git", "add", f"audit/{slug}/"], capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"  [ERROR] Git add failed: {result.stderr}")
         return False
-    subprocess.run(["git", "commit", "-m", f"audit: add {slug} report"], check=True)
-    subprocess.run(["git", "push", "origin", "main"], check=True)
-    print(f"  Pushed to https://aiscite.com/audit/{slug}/")
-    return True
+    
+    # Check if there are any staged changes
+    result = subprocess.run(["git", "diff", "--staged", "--name-only"], capture_output=True, text=True)
+    staged_files = result.stdout.strip().split('\n') if result.stdout.strip() else []
+    
+    # If there are changes, commit and push
+    if staged_files and any(staged_files):
+        subprocess.run(["git", "commit", "-m", f"audit: add {slug} report"], check=True, capture_output=True)
+        subprocess.run(["git", "push", "origin", "main"], check=True, capture_output=True)
+        print(f"  Pushed to https://aiscite.com/audit/{slug}/")
+        return True
+    else:
+        # No new changes, but file exists - just verify deployment
+        print(f"  Report already up-to-date at https://aiscite.com/audit/{slug}/")
+        return False
 
 
 # --- main ----------------------------------------------------------------------
