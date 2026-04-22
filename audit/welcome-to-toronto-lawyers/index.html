@@ -238,6 +238,13 @@ html[data-theme="dark"] .cta-block .btn-white, html[data-theme="dark"] .offer-ma
 @media (max-width: 640px) {
   .review-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
+@media (max-width: 480px) {
+  .hero { padding: 60px 20px 48px; }
+  .wrap { padding: 0 18px; }
+  .review-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .qual-block { padding: 24px 18px; }
+  canvas { max-width: 100%; }
+}
 footer{border-top:1px solid var(--border);padding:40px 28px;display:flex;flex-wrap:wrap;flex-direction:row;justify-content:center;align-items:center;text-align:center;gap:6px}
 footer a{color:var(--muted);text-decoration:none}
 footer a:hover{color:var(--text)}
@@ -257,7 +264,7 @@ posthog.init("phc_Frw4mQoMsi20FRt4NUdUjMLoHUF1e5FaxjT1vjQGjtb",{api_host:"https:
     posthog.register({ is_internal: false, utm_source: utmSource || null, utm_medium: utmMedium || null, utm_campaign: params.get('utm_campaign') || null, utm_content: params.get('utm_content') || null });
   }
 })();
-posthog.capture("free_report_view", {business: "carlton-lawyer", score: 78});
+posthog.capture("free_report_view", {business: "carlton-law firm", score: 2});
 </script>
 
 <meta property="og:title" content="Aiscite — Welcome to Toronto Lawyers AI Visibility Audit">
@@ -282,20 +289,20 @@ posthog.capture("free_report_view", {business: "carlton-lawyer", score: 78});
 <div class="hero">
   <div class="hero-eyebrow"><span></span> Private AI visibility review · April 2026</div>
   <h1>Welcome to Toronto Lawyers shows up for patients. It barely exists for AI.</h1>
-  <p>When someone asks AI for a lawyer in Toronto, Welcome to Toronto Lawyers should be in that conversation. Right now, the site gives AI too little confidence, too few clear answers, and too little context about what makes this business special.</p>
+  <p>When someone asks AI for a law firm in Toronto, Welcome to Toronto Lawyers should be in that conversation. Right now, the site gives AI too little confidence, too few clear answers, and too little context about what makes this business special.</p>
   <div class="score-hero">
     <div class="score-main">
       <div>
-        <div class="score-number">2</div>
+        <div class="score-number">55</div>
         <div class="score-label">AI Visibility Score · out of 100</div>
         <div class="score-badge" style="margin-top:12px">Significant gaps -- clear opportunity</div>
       </div>
       <div class="score-bars">
-        <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-val">0</span></div>
-        <div class="bar-row"><span class="bar-label">Citation signals</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-val">0</span></div>
-        <div class="bar-row"><span class="bar-label">Authority and trust</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">10</span></div>
-        <div class="bar-row"><span class="bar-label">Content depth</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-val">0</span></div>
-        <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-val">0</span></div>
+        <div class="bar-row"><span class="bar-label">AI readability</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">75</span></div>
+        <div class="bar-row"><span class="bar-label">Citation signals</span><div class="bar-track"><div class="bar-fill" style="width:45%"></div></div><span class="bar-val">45</span></div>
+        <div class="bar-row"><span class="bar-label">Authority and trust</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><span class="bar-val">50</span></div>
+        <div class="bar-row"><span class="bar-label">Content depth</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">60</span></div>
+        <div class="bar-row"><span class="bar-label">Positioning clarity</span><div class="bar-track"><div class="bar-fill" style="width:45%"></div></div><span class="bar-val">45</span></div>
       </div>
       <div class="score-actions">
         <a href="https://calendly.com/vaibhavmeh/aiscite-introduction" class="btn-primary" target="_blank">See how to fix this</a>
@@ -321,13 +328,13 @@ posthog.capture("free_report_view", {business: "carlton-lawyer", score: 78});
   <div class="section">
     <p class="section-sm">Where you stand</p>
     <h2>Strong — but not untouchable — room to improve.</h2>
-    <p class="section-lead">Welcome to Toronto Lawyers sits at 2/100. Most local lawyer businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
+    <p class="section-lead">Welcome to Toronto Lawyers sits at 55/100. Most local law firm businesses score below 40. The gap is that the site is not yet strong enough to make AI feel certain when it needs to name one practice.</p>
     <div class="chart-grid" style="grid-template-columns:1fr 1fr">
       <div class="chart-card">
         <h3>Position in the market</h3>
-        <p>Welcome to Toronto Lawyers scores 2/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
+        <p>Welcome to Toronto Lawyers scores 55/100 — significantly above the Toronto average. One targeted fix could push it into the range where AI confidently names it first.</p>
         <div class="chart-shell"><div class="chart-frame"><canvas id="benchmarkChart"></canvas></div></div>
-        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong>Welcome to Toronto Lawyers is one of the stronger lawyers in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
+        <div class="insight" id="benchmarkInsight"><strong>What this means:</strong>Welcome to Toronto Lawyers is one of the stronger law firms in this market. A single content fix closes most of the remaining gap to the 90+ target range.</div>
       </div>
       <div class="chart-card">
         <h3>Where Welcome to Toronto Lawyers is losing ground</h3>
@@ -367,19 +374,19 @@ posthog.capture("free_report_view", {business: "carlton-lawyer", score: 78});
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 28px;margin-bottom:20px">
       <div class="review-stat-grid" style="text-align:center">
         <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">127</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">80</div>
           <div class="stat-label" style="margin-top:6px">Total reviews</div>
         </div>
         <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">4.7</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">4.2</div>
           <div class="stat-label" style="margin-top:6px">Avg. rating</div>
         </div>
         <div style="padding:16px 12px;border-right:1px solid var(--border)">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">45%</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">0%</div>
           <div class="stat-label" style="margin-top:6px">Reply rate</div>
         </div>
         <div style="padding:16px 12px">
-          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">70</div>
+          <div class="stat-val" style="font-size:36px;letter-spacing:-2px;line-height:1">5</div>
           <div class="stat-label" style="margin-top:6px">Unanswered</div>
         </div>
       </div>
@@ -387,7 +394,7 @@ posthog.capture("free_report_view", {business: "carlton-lawyer", score: 78});
     <div class="insight">
       <strong>Why this matters now:</strong> Google Maps just launched "Ask Maps" powered by Gemini AI. It reads your reviews AND your reply quality to decide who to recommend. Unanswered reviews equal missed GEO signals — businesses that reply with service + location context rank higher in AI recommendations. Reply rate is now a ranking factor, not just a reputation metric.
     </div>
-    <div id="review-data" data-reply-rate="45" data-unanswered="70" style="display:none"></div>
+    <div id="review-data" data-reply-rate="0" data-unanswered="5" style="display:none"></div>
     <div id="review-status-tag" style="margin-top:20px"></div>
     <script>
     (function () {
@@ -479,7 +486,7 @@ posthog.capture("free_report_view", {business: "carlton-lawyer", score: 78});
 <script>
 (function () {
   var Q = {"q1": {"text": "Are you the owner or practice manager?", "options": [{"val": "yes", "label": "Yes"}, {"val": "no", "label": "No"}]}, "q2": {"text": "Is growing new patients a priority for you right now?", "options": [{"val": "yes", "label": "Yes"}, {"val": "no", "label": "No"}, {"val": "not-yet", "label": "Not yet"}]}, "q3": {"text": "How many new patients are you looking to add per month?", "options": [{"val": "1-5", "label": "1–5"}, {"val": "5-15", "label": "5–15"}, {"val": "15+", "label": "15+"}]}};
-  var bizType = "lawyer"
+  var bizType = "law firm"
   var bizCity = "Toronto";
   var bizName = "Welcome to Toronto Lawyers";
   var answers = {};
@@ -557,7 +564,7 @@ function buildCharts() {
     type: 'bar',
     data: {
       labels: ['Target score', 'Competing practices', 'Welcome to Toronto Lawyers'],
-      datasets: [{ data: [90, 40, 2], backgroundColor: [c.gold, c.muted, c.barFill], borderRadius: 12, borderSkipped: false, barThickness: 28 }]
+      datasets: [{ data: [90, 40, 55], backgroundColor: [c.gold, c.muted, c.barFill], borderRadius: 12, borderSkipped: false, barThickness: 28 }]
     },
     options: {
       indexAxis: 'y', responsive: true, maintainAspectRatio: false,
