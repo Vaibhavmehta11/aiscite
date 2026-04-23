@@ -28,8 +28,9 @@ def bar_label(score):
     if score <= 85: return "Good"
     return "Strong"
 
-def generate(name, domain, city, biz_type, audit):
-    slug = slugify(name)
+def generate(name, domain, city, biz_type, audit, slug=None):
+    if slug is None:
+        slug = slugify(name)
     out_dir = os.path.join(AUDIT_DIR, slug)
     os.makedirs(out_dir, exist_ok=True)
 
@@ -242,8 +243,12 @@ def main():
     with open(args.audit) as f:
         audit = json.load(f)
 
+    # Extract slug from audit filename (e.g., audit_test-bench-co.json -> test-bench-co)
+    audit_basename = os.path.basename(args.audit)
+    slug = audit_basename.replace("audit_", "").replace(".json", "")
+
     score = audit.get("overall_score", 0)
-    name = audit["business_name"]
+    name = audit.get("name", audit.get("business_name", ""))
     domain = audit["domain"]
     city = audit["city"]
     biz_type = audit["biz_type"]
@@ -253,7 +258,7 @@ def main():
         print(f"  SKIP: {name} scores {score}/100 -- above 65 gate. Use --skip-gate to override.")
         sys.exit(0)
 
-    slug, path = generate(name, domain, city, biz_type, audit)
+    slug, path = generate(name, domain, city, biz_type, audit, slug)
 
     if args.push:
         push_to_github(slug)
