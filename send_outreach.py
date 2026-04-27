@@ -4,19 +4,48 @@ import os
 import subprocess
 import json
 import time
+import re
 from pathlib import Path
 
 PROJECT_ROOT = Path("/home/nikunj19/Projects/aiscite")
 
-BRAVE_API_KEY = os.environ.get("BRAVE_SEARCH_API_KEY", "")
+BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY", "")
 GOG_KEYRING_PASSWORD = os.environ.get("GOG_KEYRING_PASSWORD", "optimus-gog-2026")
+
+# Email validation - blocklist and aggregator domains
+AGGREGATOR_DOMAINS = {
+    "reddit.com", "yelp.com", "yelp.ca", "tripadvisor.com", "yellowpages.com",
+    "facebook.com", "instagram.com", "linkedin.com", "twitter.com",
+    "ratehub.ca", "blogto.com", "naroomi.com", "findlaw.com", "avvo.com",
+    "justia.com", "martindale.com", "healthgrades.com", "ratemds.com",
+    "realself.com", "wahanda.com", "treatwell.com",
+}
+
+ROLE_EMAIL_PREFIXES = {"info", "admin", "support", "contact", "hello", "sales", "help", "webmaster", "noreply", "no-reply"}
+LARGE_FIRM_VERTICALS = {"law_firm", "legal", "accounting", "accountant", "enterprise"}
+
+def validate_email(email, domain, biz_type):
+    if not email or "@" not in email:
+        return False, "Invalid email format"
+    local, _, domain_part = email.partition("@")
+    domain_lower = domain_part.lower()
+    local_lower = local.lower()
+    if domain_lower in AGGREGATOR_DOMAINS:
+        return False, f"Aggregator domain: {domain_lower}"
+    biz_type_lower = biz_type.lower()
+    is_large_firm = any(v in biz_type_lower for v in LARGE_FIRM_VERTICALS)
+    if is_large_firm and local_lower in ROLE_EMAIL_PREFIXES:
+        return False, f"Role email '{local_lower}@' not acceptable for {biz_type}"
+    if local_lower in {"test", "demo", "example"}:
+        return False, f"Disposable email pattern: {local}"
+    return True, "OK"
 
 def search_brave(query):
     """Search with Brave API, return results."""
     try:
         import requests
         r = requests.get(
-            "https://api.search.brade.com/res/v1/web/search",
+            "https://api.search.brave.com/res/v1/web/search",
             headers={"Accept": "application/json", "X-Subscription-Token": BRAVE_API_KEY},
             params={"q": query, "count": 5},
             timeout=10
@@ -48,7 +77,6 @@ def find_email(lead):
 
 def send_email(to, subject, body):
     """Send email via GOG CLI."""
-    # Use gog command with proper quoting
     cmd = [
         "gog", "gmail", "send",
         "--account", "vm@aiscite.com",
@@ -95,6 +123,12 @@ def main():
         email = find_email(lead)
         if not email:
             print(f"  No email found, logging for manual research")
+            continue
+        
+        # Validate email before sending
+        is_valid, reason = validate_email(email, domain, biz_type)
+        if not is_valid:
+            print(f"  SKIPPED: Email validation failed - {reason}")
             continue
         
         body = f"""

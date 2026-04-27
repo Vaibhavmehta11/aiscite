@@ -21,6 +21,50 @@ COMPETITORS = {
     }
 }
 
+# Email validation - blocklist and aggregator domains
+AGGREGATOR_DOMAINS = {
+    "reddit.com", "yelp.com", "yelp.ca", "tripadvisor.com", "yellowpages.com",
+    "facebook.com", "instagram.com", "linkedin.com", "twitter.com",
+    "ratehub.ca", "blogto.com", "naroomi.com", "findlaw.com", "avvo.com",
+    "justia.com", "martindale.com", "healthgrades.com", "ratemds.com",
+    "realself.com", "wahanda.com", "treatwell.com",
+}
+
+# Generic/role-based emails that indicate low engagement probability
+ROLE_EMAIL_PREFIXES = {"info", "admin", "support", "contact", "hello", "sales", "help", "webmaster", "noreply", "no-reply"}
+
+# For large firms, reject role emails; small firms can use info@
+LARGE_FIRM_VERTICALS = {"law_firm", "legal", "accounting", "accountant", "enterprise"}
+
+def validate_email(email, domain, biz_type):
+    """
+    Validate email before sending outreach.
+    Returns (is_valid, reason) tuple.
+    """
+    if not email or "@" not in email:
+        return False, "Invalid email format"
+    
+    local, _, domain_part = email.partition("@")
+    domain_lower = domain_part.lower()
+    local_lower = local.lower()
+    
+    # Block aggregator domains
+    if domain_lower in AGGREGATOR_DOMAINS:
+        return False, f"Aggregator domain: {domain_lower}"
+    
+    # Block role emails for large firms
+    biz_type_lower = biz_type.lower()
+    is_large_firm = any(v in biz_type_lower for v in LARGE_FIRM_VERTICALS)
+    
+    if is_large_firm and local_lower in ROLE_EMAIL_PREFIXES:
+        return False, f"Role email '{local_lower}@' not acceptable for {biz_type}"
+    
+    # Block obvious disposable patterns
+    if local_lower in {"test", "demo", "example"}:
+        return False, f"Disposable email pattern: {local}"
+    
+    return True, "OK"
+
 def verify_sender_auth():
     """Abort if vm@aiscite.com is not authorized in gog."""
     result = subprocess.run(
@@ -243,8 +287,15 @@ VM
         print("=== DRY RUN - Not sending ===")
         sys.exit(0)
     
-    print("=== Ready to send? ===")
-    print(f"Run: GOG_KEYRING_PASSWORD='***' gog gmail send --account {SENDER_ACCOUNT} --to 'contact@{domain}' --subject '{subject}' --body 'HI'")
+    # Validate email before sending
+    target_email = f"contact@{domain}"
+    is_valid, reason = validate_email(target_email, domain, biz_type)
+    if not is_valid:
+        print(f"ABORT: Email validation failed - {reason}")
+        sys.exit(1)
+    
+    print("=== Ready to send ===")
+    print(f"Run: GOG_KEYRING_PASSWORD='***' gog gmail send --account {SENDER_ACCOUNT} --to '{target_email}' --subject '{subject}' --body 'HI'")
 
 if __name__ == "__main__":
     main()
