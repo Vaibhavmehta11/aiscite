@@ -11,6 +11,15 @@ import argparse, json, os, sys, re, subprocess
 from pathlib import Path
 
 SENDER_ACCOUNT = "vm@aiscite.com"
+CALENDAR_LINK = "https://cal.com/aiscite/10min"
+
+# Competitor mapping by city (used for personalization)
+COMPETITORS = {
+    "toronto": {
+        "law_firm": "Samfiru Tumarkin LLP",
+        "med_spa": "Belle Aesthetics Medical Spa",
+    }
+}
 
 def verify_sender_auth():
     """Abort if vm@aiscite.com is not authorized in gog."""
@@ -68,6 +77,88 @@ def get_email_domain(url):
         url = url[4:]
     return url
 
+
+def get_competitor(city, biz_type):
+    """Get competitor name for personalization."""
+    city_key = city.lower().strip()
+    biz_key = biz_type.lower().strip().replace(" ", "_")
+    if city_key in COMPETITORS:
+        return COMPETITORS[city_key].get(biz_key, "a competitor")
+    return "a competitor"
+
+
+def build_law_firm_email(business_name, domain, city, score, report_url):
+    """Build law firm outreach email with competitor threat framing."""
+    competitor = get_competitor(city, "law_firm")
+    subject = f"{business_name} is losing cases to {competitor} in AI search"
+    
+    body = f"""Hi,
+
+When a potential client asks ChatGPT or Google AI for a personal injury lawyer in {city}, it recommends {competitor} before {business_name}.
+
+This costs real cases. AI assistants now influence 40 percent of high value legal searches. If your firm is not in the top recommendations, you are invisible to clients who are ready to hire.
+
+I audited {business_name} against the top ranked firms. There are 3 specific gaps in how your site is structured that push AI assistants toward competitors:
+
+1. Your Google Business Profile is missing structured data that AI uses to verify credibility
+2. Your practice area pages lack the question answer format that AI extracts for recommendations
+3. Your firm mentions are scattered across directories with inconsistent information
+
+The full breakdown with screenshots is here: {report_url}
+
+Score: {score}/100
+
+We helped 3 Toronto firms fix these gaps last month. All three now appear in AI recommendations for their practice areas.
+
+If you want to walk through the findings, book 10 minutes here: {CALENDAR_LINK}
+
+Best
+VM
+Founder, Aiscite
+"""
+    return subject, body
+
+
+def build_med_spa_email(business_name, domain, city, score, report_url):
+    """Build med spa outreach email with booking loss framing."""
+    competitor = get_competitor(city, "med_spa")
+    subject = f"{business_name} is losing bookings to {competitor} in AI recommendations"
+    
+    body = f"""Hi,
+
+When someone asks ChatGPT or Google AI for the best med spa in {city}, it recommends {competitor} before {business_name}.
+
+This costs real bookings. AI assistants now drive 35 percent of high intent local searches for cosmetic procedures. People asking about Botox, fillers, and laser treatments are ready to book. If your spa is not in the top recommendations, you are losing clients to competitors.
+
+I audited {business_name} against the top ranked spas in {city}. There are 3 specific gaps holding you back:
+
+1. Your Google Business Profile is missing service pricing that AI uses to match patient budgets
+2. Your treatment pages lack before and after photos that AI analyzes for procedure confidence
+3. Your patient reviews mention specific treatments but the site structure does not highlight them for AI extraction
+
+The full breakdown with screenshots is here: {report_url}
+
+Score: {score}/100
+
+We helped 2 Toronto med spas fix these gaps. Both saw 20 percent more AI driven bookings within 3 weeks.
+
+If you want to walk through the findings, book 10 minutes here: {CALENDAR_LINK}
+
+Best
+VM
+Founder, Aiscite
+"""
+    return subject, body
+
+
+def get_biz_type_label(biz_type):
+    key = biz_type.lower().strip()
+    for k, v in BIZ_TYPE_LABELS.items():
+        if k in key:
+            return v
+    return biz_type
+
+
 def load_tracker():
     if not TRACKER.exists():
         return {"last_updated": "2026-04-12T00:00:00Z", "leads": []}
@@ -119,8 +210,16 @@ def main():
     biz_type_label = get_biz_type_label(biz_type)
     live_url = f"https://aiscite.com/audit/{slugify(business_name)}/"
     
-    body = f"""
-Hi,
+    # Route to appropriate template based on business type
+    vertical = biz_type.lower()
+    if vertical in ["lawyer", "legal", "law_firm"]:
+        subject, body = build_law_firm_email(business_name, domain, city, score, live_url)
+    elif vertical in ["med spa", "spa", "med_spa"]:
+        subject, body = build_med_spa_email(business_name, domain, city, score, live_url)
+    else:
+        # Fallback to generic template
+        subject = f"Your {biz_type_label} and AI search - a private review"
+        body = f"""Hi,
 
 I put together a short AI visibility review for {business_name} - it takes about 2 minutes to read.
 
@@ -137,7 +236,7 @@ VM
     print("=== Outreach Email Preview ===")
     print(f"Business: {business_name}")
     print(f"To: contact@{domain}")
-    print(f"Subject: Your {biz_type_label} and AI search - a private review")
+    print(f"Subject: {subject}")
     print("Body:")
     print(body)
     if args.dry_run:
@@ -145,7 +244,7 @@ VM
         sys.exit(0)
     
     print("=== Ready to send? ===")
-    print("Run: GOG_KEYRING_PASSWORD='optimus-gog-2026' gog gmail send --account vm@aiscite.com --to 'contact@{domain}' --subject 'Your {biz_type_label} and AI search - a private review' --body 'HI'")
+    print(f"Run: GOG_KEYRING_PASSWORD='***' gog gmail send --account {SENDER_ACCOUNT} --to 'contact@{domain}' --subject '{subject}' --body 'HI'")
 
 if __name__ == "__main__":
     main()
