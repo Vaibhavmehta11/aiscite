@@ -125,13 +125,117 @@ def scrape_linkedin(job_title: str, location: str, limit: int = 20) -> list:
     Scrape LinkedIn job listings via Playwright.
     Uses persistent auth from ~/.linkedin_state.json.
     Returns list of job dicts.
+    
+    DOM structure (as of 2026-04-27):
+    - Container: div.job-search-card or div.base-card
+    - Title: h3.base-search-card__title
+    - Company: h4.base-search-card__subtitle
+    - Location: span.job-search-card__location
+    - Posted: time.job-search-card__listdate
+    - Link: a.base-card__full-link
     """
-    if not hasattr(scrape_linkedin, '_warned'):
-        scrape_linkedin._warned = True
-        print("[WARN] LinkedIn scrape disabled - DOM structure changed. Use CSV import instead.")
-
-    # TODO: Fix this - LinkedIn DOM has changed
-    return []
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        print("[WARN] Playwright not installed. LinkedIn scrape disabled.")
+        return []
+    
+    if not SESSION_PATH.exists():
+        print("[WARN] LinkedIn session not found. Login manually and save cookies.")
+        return []
+    
+    import json
+    
+    with open(SESSION_PATH) as f:
+        cookies = json.load(f).get("cookies", [])
+    
+    if not cookies:
+        print("[WARN] No LinkedIn cookies in session file.")
+        return []
+    
+    jobs = []
+    
+    try:
+        with sync_playwright() as p:
+            # Launch with anti-detection flags
+            browser = p.chromium.launch(
+                headless=True,
+                args=[
+                    "--disable-blink-features=AutomationControlled",
+                    "--no-sandbox",
+                    "--disable-dev-shm-usage",
+                ]
+            )
+            context = browser.new_context(
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                viewport={"width": 1920, "height": 1080},
+            )
+            context.add_cookies(cookies)
+            page = context.new_page()
+            
+            # Disable automation detection
+            page.add_init_script("""
+                Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+            """)
+            
+            # Build search URL
+            search_url = f"https://www.linkedin.com/jobs/search/?keywords={job_title.replace(' ', '%20')}&location={location.replace(' ', '%20')}"
+            print(f"[LINKEDIN] Searching: {search_url}")
+            
+            # Navigate with relaxed wait - LinkedIn never reaches networkidle
+            page.goto(search_url, wait_until="domcontentloaded", timeout=60000)
+            page.wait_for_timeout(8000)  # Let JS render and lazy-load jobs
+            
+            # Find job cards
+            job_cards = page.query_selector_all("div.job-search-card")
+            print(f"[LINKEDIN] Found {len(job_cards)} job cards")
+            
+            for card in job_cards[:limit]:
+                try:
+                    # Extract title
+                    title_el = card.query_selector("h3.base-search-card__title")
+                    title = title_el.inner_text().strip() if title_el else ""
+                    
+                    # Extract company
+                    company_el = card.query_selector("h4.base-search-card__subtitle")
+                    company = company_el.inner_text().strip() if company_el else ""
+                    
+                    # Extract location
+                    location_el = card.query_selector("span.job-search-card__location")
+                    job_location = location_el.inner_text().strip() if location_el else ""
+                    
+                    # Extract posted date
+                    time_el = card.query_selector("time.job-search-card__listdate")
+                    posted = time_el.get_attribute("datetime") if time_el and time_el.get_attribute("datetime") else time_el.inner_text().strip() if time_el else ""
+                    
+                    # Extract link - use the full-card-link
+                    link_el = card.query_selector("a.base-card__full-link")
+                    url = link_el.get_attribute("href") if link_el else ""
+                    
+                    # Extract full JD text (optional - requires clicking through)
+                    jd_text = ""
+                    
+                    if title and company:
+                        jobs.append({
+                            "source": "linkedin",
+                            "title": title,
+                            "company": company,
+                            "location": job_location,
+                            "posted_date": posted,
+                            "jd_text": jd_text,
+                            "url": url,
+                            "raw": {}
+                        })
+                except Exception as e:
+                    print(f"[LINKEDIN] Error parsing card: {e}")
+                    continue
+            
+            print(f"[LINKEDIN] Extracted {len(jobs)} jobs")
+            browser.close()
+    except Exception as e:
+        print(f"[LINKEDIN] Browser error: {e}")
+    
+    return jobs
 
 
 def scrape_indeed(job_title: str, location: str, limit: int = 20, dry_run: bool = False) -> list:
