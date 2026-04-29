@@ -27,4 +27,6 @@ for email, domain, biz_type, expected in tests:
 
 print("=" * 60)
 print(f"Result: {'ALL TESTS PASSED' if all_pass else 'SOME TESTS FAILED'}")
-sys.exit(0 if all_pass else 1)
+
+if __name__ == "__main__":
+    sys.exit(0 if all_pass else 1)
